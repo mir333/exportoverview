@@ -109,7 +109,7 @@ public class Clients implements Serializable {
 
     @Override
     public String toString() {
-        return "id=" + id;
+        return id +" "+ clientName;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
