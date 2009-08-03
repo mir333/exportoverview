@@ -5,6 +5,8 @@
 
 package cz.ligas.exportoverview.db;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -22,11 +25,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name="CLIENTS", schema="APP" )
 public class Clients implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID", nullable = false)
     private int id;
+    @Column(name = "C_NAME", nullable = false)
     private String clientName;
     private String clientAddress;
     private String clientPhone;
@@ -38,7 +44,9 @@ public class Clients implements Serializable {
     }
 
     public void setClientAddress(String clientAddress) {
+        String oldClientAddress = this.clientAddress;
         this.clientAddress = clientAddress;
+        changeSupport.firePropertyChange("clientAddress", oldClientAddress, clientAddress);
     }
 
     public String getClientName() {
@@ -46,7 +54,9 @@ public class Clients implements Serializable {
     }
 
     public void setClientName(String clientName) {
+        String oldClientName = this.clientName;
         this.clientName = clientName;
+        changeSupport.firePropertyChange("clientName", oldClientName, clientName);
     }
 
     public String getClientPhone() {
@@ -54,7 +64,9 @@ public class Clients implements Serializable {
     }
 
     public void setClientPhone(String clientPhone) {
+        String oldClientPhone = this.clientPhone;
         this.clientPhone = clientPhone;
+        changeSupport.firePropertyChange("clientPhone", oldClientPhone, clientPhone);
     }
 
     public List<Export> getExports() {
@@ -70,7 +82,9 @@ public class Clients implements Serializable {
     }
 
     public void setId(int id) {
+        int oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     @Override
@@ -96,6 +110,14 @@ public class Clients implements Serializable {
     @Override
     public String toString() {
         return "id=" + id;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 
 }

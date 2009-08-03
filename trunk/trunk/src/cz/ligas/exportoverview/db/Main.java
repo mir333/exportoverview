@@ -61,9 +61,9 @@ public class Main {
         el.setSent(6);
         el.setSold(3);
         el.setExport(e);
-  
-        
-        
+
+
+
 
         ExportLine el2 = new ExportLine();
         el2.setProd(pro);
