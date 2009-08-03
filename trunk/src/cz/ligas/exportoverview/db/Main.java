@@ -40,13 +40,13 @@ public class Main {
         prod.setProductCategoryId(pc);
 
 
-        Klients kl1 = new Klients();
-        kl1.setKlientName("fero");
-        kl1.setKlientAddress("fdsfs");
+        Clients kl1 = new Clients();
+        kl1.setClientName("fero");
+        kl1.setClientAddress("fdsfs");
 
-        Klients kl2 = new Klients();
-        kl2.setKlientName("jozo");
-        kl2.setKlientAddress("fdsfs");
+        Clients kl2 = new Clients();
+        kl2.setClientName("jozo");
+        kl2.setClientAddress("fdsfs");
 
 
         Export e = new Export();

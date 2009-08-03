@@ -31,7 +31,7 @@ public class Export implements Serializable {
     private int id;
     private Date editDate;
     @ManyToOne
-    private Klients klient;
+    private Clients client;
     @OneToMany(mappedBy = "export")
     private List<ExportLine> exportedProd;
 
@@ -43,12 +43,12 @@ public class Export implements Serializable {
         this.id = id;
     }
 
-    public Klients getKlient() {
-        return klient;
+    public Clients getKlient() {
+        return client;
     }
 
-    public void setKlient(Klients klient) {
-        this.klient = klient;
+    public void setKlient(Clients client) {
+        this.client = client;
     }
 
     public List<ExportLine> getExportedProd() {

@@ -4,9 +4,9 @@
     <provider>oracle.toplink.essentials.PersistenceProvider</provider>
     <class>cz.ligas.exportoverview.db.Export</class>
     <class>cz.ligas.exportoverview.db.ExportLine</class>
-    <class>cz.ligas.exportoverview.db.Klients</class>
     <class>cz.ligas.exportoverview.db.ProductCategory</class>
     <class>cz.ligas.exportoverview.db.Products</class>
+    <class>cz.ligas.exportoverview.db.Clients</class>
     <properties>
       <property name="toplink.jdbc.user" value="app"/>
       <property name="toplink.jdbc.password" value="app"/>

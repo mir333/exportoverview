@@ -20,50 +20,41 @@ import javax.persistence.Table;
  * @author xligas
  */
 @Entity
-@Table(name="KLIENTS", schema="APP" )
-public class Klients implements Serializable {
+@Table(name="CLIENTS", schema="APP" )
+public class Clients implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID", nullable = false)
     private int id;
-    private String klientName;
-    private String klientAddress;
-    private String klientPhone;
-    @OneToMany(mappedBy="klient")
+    private String clientName;
+    private String clientAddress;
+    private String clientPhone;
+    @OneToMany(mappedBy="client")
     private List<Export> exports;
 
-
-    public int getId() {
-        return id;
+    public String getClientAddress() {
+        return clientAddress;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setClientAddress(String clientAddress) {
+        this.clientAddress = clientAddress;
     }
 
-       public String getKlientAddress() {
-        return klientAddress;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setKlientAddress(String klientAddress) {
-        this.klientAddress = klientAddress;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
-    public String getKlientName() {
-        return klientName;
+    public String getClientPhone() {
+        return clientPhone;
     }
 
-    public void setKlientName(String klientName) {
-        this.klientName = klientName;
-    }
-
-    public String getKlientPhone() {
-        return klientPhone;
-    }
-
-    public void setKlientPhone(String klientPhone) {
-        this.klientPhone = klientPhone;
+    public void setClientPhone(String clientPhone) {
+        this.clientPhone = clientPhone;
     }
 
     public List<Export> getExports() {
@@ -72,6 +63,14 @@ public class Klients implements Serializable {
 
     public void setExports(List<Export> exports) {
         this.exports = exports;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -84,10 +83,10 @@ public class Klients implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Klients)) {
+        if (!(object instanceof Clients)) {
             return false;
         }
-        Klients other = (Klients) object;
+        Clients other = (Clients) object;
         if (this.id != other.id) {
             return false;
         }
