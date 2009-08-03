@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="clientSaveButton" min="-2" pref="65" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="clientNameL" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="clientAddressL" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="clientPhoneL" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="clientAddressIn" alignment="0" max="32767" attributes="1"/>
+                          <Component id="clientNameIn" alignment="0" pref="298" max="32767" attributes="1"/>
+                          <Component id="clientPhoneIn" alignment="0" max="32767" attributes="1"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="clientNameL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="clientNameIn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="clientAddressIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="clientAddressL" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="clientPhoneIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="clientPhoneL" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="clientSaveButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="clientNameL">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="clientNameL.text"/>
+        <Property name="name" type="java.lang.String" value="clientNameL" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="clientAddressL">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="clientAddressL.text"/>
+        <Property name="name" type="java.lang.String" value="clientAddressL" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="clientPhoneL">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="clientPhoneL.text"/>
+        <Property name="name" type="java.lang.String" value="clientPhoneL" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="clientNameIn">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="clientNameIn.text"/>
+        <Property name="name" type="java.lang.String" value="clientNameIn" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="clientAddressIn">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="clientAddressIn.text"/>
+        <Property name="name" type="java.lang.String" value="clientAddressIn" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="clientPhoneIn">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="clientPhoneIn.text"/>
+        <Property name="name" type="java.lang.String" value="clientPhoneIn" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="clientSaveButton">
+      <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="cz.ligas.exportoverview.gui.ClientForm" id="clientSaveAction" methodName="clientSaveAction"/>
+        </Property>
+        <Property name="text" type="java.lang.String" resourceKey="clientSaveButton.text"/>
+        <Property name="name" type="java.lang.String" value="clientSaveButton" noResource="true"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

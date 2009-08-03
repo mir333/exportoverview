@@ -1,9 +1,14 @@
 /*
  * guiView.java
  */
-
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.appli.ClientOps;
+import cz.ligas.exportoverview.db.Clients;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -11,10 +16,14 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import org.jdesktop.application.Task;
 
 /**
  * The application's main frame.
@@ -25,11 +34,13 @@ public class guiView extends FrameView {
         super(app);
 
         initComponents();
+        myInit();
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
         messageTimer = new Timer(messageTimeout, new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
                 statusMessageLabel.setText("");
             }
@@ -40,6 +51,7 @@ public class guiView extends FrameView {
             busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
         }
         busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
                 busyIconIndex = (busyIconIndex + 1) % busyIcons.length;
                 statusAnimationLabel.setIcon(busyIcons[busyIconIndex]);
@@ -52,6 +64,7 @@ public class guiView extends FrameView {
         // connecting action tasks to status bar via TaskMonitor
         TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
         taskMonitor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 String propertyName = evt.getPropertyName();
                 if ("started".equals(propertyName)) {
@@ -68,11 +81,11 @@ public class guiView extends FrameView {
                     progressBar.setVisible(false);
                     progressBar.setValue(0);
                 } else if ("message".equals(propertyName)) {
-                    String text = (String)(evt.getNewValue());
+                    String text = (String) (evt.getNewValue());
                     statusMessageLabel.setText((text == null) ? "" : text);
                     messageTimer.restart();
                 } else if ("progress".equals(propertyName)) {
-                    int value = (Integer)(evt.getNewValue());
+                    int value = (Integer) (evt.getNewValue());
                     progressBar.setVisible(true);
                     progressBar.setIndeterminate(false);
                     progressBar.setValue(value);
@@ -101,6 +114,8 @@ public class guiView extends FrameView {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        clientsSelector = new javax.swing.JComboBox();
+        createClient = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -114,24 +129,40 @@ public class guiView extends FrameView {
 
         mainPanel.setName("mainPanel"); // NOI18N
 
+        clientsSelector.setName("clientsSelector"); // NOI18N
+
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.gui.class).getContext().getActionMap(guiView.class, this);
+        createClient.setAction(actionMap.get("createClient")); // NOI18N
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.gui.class).getContext().getResourceMap(guiView.class);
+        createClient.setText(resourceMap.getString("createClient.text")); // NOI18N
+        createClient.setName("createClient"); // NOI18N
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(createClient)
+                .addContainerGap(471, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 442, Short.MAX_VALUE)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createClient))
+                .addContainerGap(403, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.gui.class).getContext().getResourceMap(guiView.class);
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.gui.class).getContext().getActionMap(guiView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
@@ -190,6 +221,8 @@ public class guiView extends FrameView {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox clientsSelector;
+    private javax.swing.JButton createClient;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
@@ -197,12 +230,68 @@ public class guiView extends FrameView {
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
     // End of variables declaration//GEN-END:variables
-
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    private List<Clients> clientsList;
     private final Timer messageTimer;
     private final Timer busyIconTimer;
     private final Icon idleIcon;
     private final Icon[] busyIcons = new Icon[15];
     private int busyIconIndex = 0;
-
     private JDialog aboutBox;
+
+    private void myInit() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+        try {
+            clientsList = (List<Clients>) (java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ClientOps.getClients());
+        } catch (Exception ex) {
+            Logger.getLogger(guiView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientsSelector);
+        bindingGroup.addBinding(jComboBoxBinding);
+        bindingGroup.bind();
+    }
+
+    @Action
+    public void createClient() {
+        ClientForm.main();
+        refresh();
+    }
+
+     @Action
+    public Task refresh() {
+        return new RefreshTask(getApplication());
+    }
+
+    private class RefreshTask extends Task {
+
+        RefreshTask(org.jdesktop.application.Application app) {
+            super(app);
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected Void doInBackground() {
+            try {
+                setProgress(0, 0, 3);
+                setMessage("Rolling back the current changes...");
+                setProgress(1, 0, 3);
+                setProgress(2, 0, 3);
+                setMessage("Fetching new data...");
+                setProgress(3, 0, 3);
+                clientsList.clear();
+                clientsList = ClientOps.getClients();
+            } catch (Exception ex) {
+               // errorMessage(ex.getMessage());
+            }
+            return null;
+        }
+
+//        @Override
+//        protected void finished() {
+//            setMessage("Done.");
+//            setSaveNeeded(false);
+//        }
+    }
+
 }
