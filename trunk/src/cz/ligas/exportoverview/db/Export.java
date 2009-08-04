@@ -89,6 +89,6 @@ public class Export implements Serializable {
 
     @Override
     public String toString() {
-        return "cz.ligas.exportoverview.db.Export[id=" + id + "]";
+        return "" + id;
     }
 }

@@ -92,6 +92,6 @@ public class ExportLine implements Serializable {
 
     @Override
     public String toString() {
-        return "test.ExportLine[id=" + id + "]";
+        return ""+ id;
     }
 }

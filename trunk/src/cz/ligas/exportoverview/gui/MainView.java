@@ -104,10 +104,14 @@ public class MainView extends FrameView {
 
         mainPanel = new javax.swing.JPanel();
         clientsSelector = new javax.swing.JComboBox();
-        createClient = new javax.swing.JButton();
+        newClientButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        clientsLable = new javax.swing.JLabel();
+        newProductButton = new javax.swing.JButton();
+        newCategoryButton = new javax.swing.JButton();
+        newExportButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -124,10 +128,10 @@ public class MainView extends FrameView {
         clientsSelector.setName("clientsSelector"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(MainView.class, this);
-        createClient.setAction(actionMap.get("createClient")); // NOI18N
+        newClientButton.setAction(actionMap.get("newClient")); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(MainView.class);
-        createClient.setText(resourceMap.getString("createClient.text")); // NOI18N
-        createClient.setName("createClient"); // NOI18N
+        newClientButton.setText(resourceMap.getString("newClientButton.text")); // NOI18N
+        newClientButton.setName("newClientButton"); // NOI18N
 
         refreshButton.setAction(actionMap.get("refresh")); // NOI18N
         refreshButton.setText(resourceMap.getString("refreshButton.text")); // NOI18N
@@ -137,17 +141,47 @@ public class MainView extends FrameView {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ProductCode", "ProductName", "Price", "Send", "SendWorth", "Sold", "Total"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jTable1.setName("jTable1"); // NOI18N
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("jTable1.columnModel.title0")); // NOI18N
+        jTable1.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("jTable1.columnModel.title1")); // NOI18N
+        jTable1.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("jTable1.columnModel.title4")); // NOI18N
+        jTable1.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("jTable1.columnModel.title2")); // NOI18N
+        jTable1.getColumnModel().getColumn(4).setHeaderValue(resourceMap.getString("jTable1.columnModel.title5")); // NOI18N
+        jTable1.getColumnModel().getColumn(5).setHeaderValue(resourceMap.getString("jTable1.columnModel.title3")); // NOI18N
+        jTable1.getColumnModel().getColumn(6).setHeaderValue(resourceMap.getString("jTable1.columnModel.title7")); // NOI18N
+
+        clientsLable.setText(resourceMap.getString("clientsLable.text")); // NOI18N
+        clientsLable.setName("clientsLable"); // NOI18N
+
+        newProductButton.setAction(actionMap.get("newProduct")); // NOI18N
+        newProductButton.setText(resourceMap.getString("newProductButton.text")); // NOI18N
+        newProductButton.setName("newProductButton"); // NOI18N
+
+        newCategoryButton.setAction(actionMap.get("newCategory")); // NOI18N
+        newCategoryButton.setText(resourceMap.getString("newCategoryButton.text")); // NOI18N
+        newCategoryButton.setName("newCategoryButton"); // NOI18N
+
+        newExportButton.setAction(actionMap.get("newExport")); // NOI18N
+        newExportButton.setText(resourceMap.getString("newExportButton.text")); // NOI18N
+        newExportButton.setName("newExportButton"); // NOI18N
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -158,10 +192,18 @@ public class MainView extends FrameView {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(clientsLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(createClient)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 419, Short.MAX_VALUE)
+                        .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(newClientButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newCategoryButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newProductButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newExportButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
                         .addComponent(refreshButton)))
                 .addContainerGap())
         );
@@ -170,12 +212,18 @@ public class MainView extends FrameView {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newClientButton)
                     .addComponent(refreshButton)
-                    .addComponent(createClient))
+                    .addComponent(newCategoryButton)
+                    .addComponent(newProductButton)
+                    .addComponent(newExportButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clientsLable))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -241,12 +289,16 @@ public class MainView extends FrameView {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel clientsLable;
     private javax.swing.JComboBox clientsSelector;
-    private javax.swing.JButton createClient;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JButton newCategoryButton;
+    private javax.swing.JButton newClientButton;
+    private javax.swing.JButton newExportButton;
+    private javax.swing.JButton newProductButton;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton refreshButton;
     private javax.swing.JLabel statusAnimationLabel;
@@ -281,20 +333,45 @@ public class MainView extends FrameView {
     }
 
     @Action
-    public void createClient() {
+    public void newClient() {
         ClientForm cf = new ClientForm();
+        cf.setLocationRelativeTo(newClientButton);
         cf.setVisible(true);
         
     }
 
     @Action
+    public void newCategory() {
+        CategoryForm cf = new CategoryForm();
+        cf.setLocationRelativeTo(newCategoryButton);
+        cf.setVisible(true);
+    }
+
+    @Action
+    public void newProduct() {
+        ProductForm pf = new ProductForm();
+        pf.setLocationRelativeTo(newProductButton);
+        pf.setVisible(true);
+    }
+
+        @Action
+    public void newExport() {
+        ExportForm ef = new ExportForm();
+        ef.setLocationRelativeTo(newExportButton);
+        ef.setVisible(true);
+    }
+        
+    @Action
     public void refresh() {
         clientsList.clear();
         try {
             clientsList.addAll(ClientOps.getClients());
+            clientsSelector.updateUI();
         } catch (Exception ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        clientsSelector.updateUI();
+        
     }
+
+
 }
