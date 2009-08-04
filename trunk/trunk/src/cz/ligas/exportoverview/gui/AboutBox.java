@@ -1,21 +1,22 @@
 /*
- * guiAboutBox.java
+ * AboutBox.java
  */
 
 package cz.ligas.exportoverview.gui;
 
+import javax.swing.JDialog;
 import org.jdesktop.application.Action;
 
-public class guiAboutBox extends javax.swing.JDialog {
+public class AboutBox extends JDialog {
 
-    public guiAboutBox(java.awt.Frame parent) {
-        super(parent);
+    public AboutBox() {
         initComponents();
         getRootPane().setDefaultButton(closeButton);
     }
 
     @Action public void closeAboutBox() {
-        dispose();
+        this.dispose();
+       
     }
 
     /** This method is called from within the constructor to
@@ -38,13 +39,13 @@ public class guiAboutBox extends javax.swing.JDialog {
         javax.swing.JLabel imageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.gui.class).getContext().getResourceMap(guiAboutBox.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(AboutBox.class);
         setTitle(resourceMap.getString("title")); // NOI18N
         setModal(true);
         setName("aboutBox"); // NOI18N
         setResizable(false);
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.gui.class).getContext().getActionMap(guiAboutBox.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(AboutBox.class, this);
         closeButton.setAction(actionMap.get("closeAboutBox")); // NOI18N
         closeButton.setName("closeButton"); // NOI18N
 

@@ -1,5 +1,5 @@
 /*
- * gui.java
+ * GuiMain.java
  */
 
 package cz.ligas.exportoverview.gui;
@@ -10,13 +10,13 @@ import org.jdesktop.application.SingleFrameApplication;
 /**
  * The main class of the application.
  */
-public class gui extends SingleFrameApplication {
+public class GuiMain extends SingleFrameApplication {
 
     /**
      * At startup create and show the main frame of the application.
      */
     @Override protected void startup() {
-        show(new guiView(this));
+        show(new MainView(this));
     }
 
     /**
@@ -29,16 +29,16 @@ public class gui extends SingleFrameApplication {
 
     /**
      * A convenient static getter for the application instance.
-     * @return the instance of gui
+     * @return the instance of GuiMain
      */
-    public static gui getApplication() {
-        return Application.getInstance(gui.class);
+    public static GuiMain getApplication() {
+        return Application.getInstance(GuiMain.class);
     }
 
     /**
      * Main method launching the application.
      */
     public static void main(String[] args) {
-        launch(gui.class, args);
+        launch(GuiMain.class, args);
     }
 }
