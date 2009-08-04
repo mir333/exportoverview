@@ -1,12 +1,10 @@
 /*
- * guiView.java
+ * MainView.java
  */
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.db.Clients;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
@@ -20,17 +18,18 @@ import java.util.List;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import org.jdesktop.application.Task;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.swingbinding.JComboBoxBinding;
+import org.jdesktop.swingbinding.SwingBindings;
 
 /**
  * The application's main frame.
  */
-public class guiView extends FrameView {
+public class MainView extends FrameView {
 
-    public guiView(SingleFrameApplication app) {
+    public MainView(SingleFrameApplication app) {
         super(app);
 
         initComponents();
@@ -94,16 +93,6 @@ public class guiView extends FrameView {
         });
     }
 
-    @Action
-    public void showAboutBox() {
-        if (aboutBox == null) {
-            JFrame mainFrame = gui.getApplication().getMainFrame();
-            aboutBox = new guiAboutBox(mainFrame);
-            aboutBox.setLocationRelativeTo(mainFrame);
-        }
-        gui.getApplication().show(aboutBox);
-    }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -116,6 +105,7 @@ public class guiView extends FrameView {
         mainPanel = new javax.swing.JPanel();
         clientsSelector = new javax.swing.JComboBox();
         createClient = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -131,11 +121,15 @@ public class guiView extends FrameView {
 
         clientsSelector.setName("clientsSelector"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.gui.class).getContext().getActionMap(guiView.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(MainView.class, this);
         createClient.setAction(actionMap.get("createClient")); // NOI18N
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.gui.class).getContext().getResourceMap(guiView.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(MainView.class);
         createClient.setText(resourceMap.getString("createClient.text")); // NOI18N
         createClient.setName("createClient"); // NOI18N
+
+        refreshButton.setAction(actionMap.get("refresh")); // NOI18N
+        refreshButton.setText(resourceMap.getString("refreshButton.text")); // NOI18N
+        refreshButton.setName("refreshButton"); // NOI18N
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -143,10 +137,12 @@ public class guiView extends FrameView {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createClient)
-                .addContainerGap(471, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                .addComponent(refreshButton)
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,6 +150,7 @@ public class guiView extends FrameView {
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refreshButton)
                     .addComponent(createClient))
                 .addContainerGap(403, Short.MAX_VALUE))
         );
@@ -226,72 +223,56 @@ public class guiView extends FrameView {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
+    private javax.swing.JButton refreshButton;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
     // End of variables declaration//GEN-END:variables
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    private BindingGroup bindingGroup;
     private List<Clients> clientsList;
     private final Timer messageTimer;
     private final Timer busyIconTimer;
     private final Icon idleIcon;
     private final Icon[] busyIcons = new Icon[15];
     private int busyIconIndex = 0;
-    private JDialog aboutBox;
 
     private void myInit() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+        bindingGroup = new BindingGroup();
         try {
-            clientsList = (List<Clients>) (java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : ClientOps.getClients());
+            clientsList = ClientOps.getClients();
         } catch (Exception ex) {
-            Logger.getLogger(guiView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientsSelector);
+        JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientsSelector);
         bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
     }
 
     @Action
+    public void showAboutBox() {
+        JDialog aboutBox = new AboutBox();
+        aboutBox.setVisible(true);
+    }
+
+    @Action
     public void createClient() {
-        ClientForm.main();
-        refresh();
+        ClientForm cf = new ClientForm();
+        cf.setVisible(true);
     }
 
-     @Action
-    public Task refresh() {
-        return new RefreshTask(getApplication());
-    }
-
-    private class RefreshTask extends Task {
-
-        RefreshTask(org.jdesktop.application.Application app) {
-            super(app);
-        }
-
-        @SuppressWarnings("unchecked")
-        @Override
-        protected Void doInBackground() {
-            try {
-                setProgress(0, 0, 3);
-                setMessage("Rolling back the current changes...");
-                setProgress(1, 0, 3);
-                setProgress(2, 0, 3);
-                setMessage("Fetching new data...");
-                setProgress(3, 0, 3);
-                clientsList.clear();
-                clientsList = ClientOps.getClients();
-            } catch (Exception ex) {
-               // errorMessage(ex.getMessage());
+    @Action
+    public void refresh() {
+        clientsList.clear();
+        try {
+            clientsList.addAll(ClientOps.getClients());
+            for (Clients c : clientsList) {
+                System.err.println(c.toString());
             }
-            return null;
+        } catch (Exception ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-//        @Override
-//        protected void finished() {
-//            setMessage("Done.");
-//            setSaveNeeded(false);
-//        }
+        clientsSelector.updateUI();
+    //GuiMain.getApplication().show(new MainView(GuiMain.getApplication()));
     }
-
 }

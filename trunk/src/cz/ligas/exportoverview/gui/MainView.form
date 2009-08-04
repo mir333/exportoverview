@@ -12,10 +12,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="clientsSelector" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="clientsSelector" min="-2" pref="246" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="createClient" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="471" max="32767" attributes="0"/>
+                  <EmptySpace pref="186" max="32767" attributes="0"/>
+                  <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -25,6 +27,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="clientsSelector" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="createClient" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="403" max="32767" attributes="0"/>
@@ -45,6 +48,15 @@
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="createClient.text"/>
             <Property name="name" type="java.lang.String" value="createClient" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="refreshButton">
+          <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="cz.ligas.exportoverview.gui.MainView" id="refresh" methodName="refresh"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="refreshButton.text"/>
+            <Property name="name" type="java.lang.String" value="refreshButton" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
