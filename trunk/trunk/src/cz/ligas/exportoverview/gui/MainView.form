@@ -10,15 +10,24 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane1" alignment="0" pref="814" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="clientsSelector" min="-2" pref="246" max="-2" attributes="0"/>
+                          <Component id="clientsLable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="createClient" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="419" max="32767" attributes="0"/>
+                          <Component id="clientsSelector" min="-2" pref="246" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="newClientButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="newCategoryButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="newProductButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="newExportButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="369" max="32767" attributes="0"/>
                           <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -31,13 +40,20 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="clientsSelector" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="newClientButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="createClient" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="newCategoryButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="newProductButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="newExportButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="clientsSelector" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="clientsLable" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="296" max="-2" attributes="0"/>
-                  <EmptySpace pref="109" max="32767" attributes="0"/>
+                  <EmptySpace pref="86" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -48,13 +64,13 @@
             <Property name="name" type="java.lang.String" value="clientsSelector" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="createClient">
+        <Component class="javax.swing.JButton" name="newClientButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action class="cz.ligas.exportoverview.gui.guiView" id="createClient" methodName="createClient"/>
+              <action class="cz.ligas.exportoverview.gui.MainView" id="newClient" methodName="newClient"/>
             </Property>
-            <Property name="text" type="java.lang.String" resourceKey="createClient.text"/>
-            <Property name="name" type="java.lang.String" value="createClient" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="newClientButton.text"/>
+            <Property name="name" type="java.lang.String" value="newClientButton" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="refreshButton">
@@ -79,18 +95,96 @@
             <Component class="javax.swing.JTable" name="jTable1">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  <Table columnCount="7" rowCount="4">
+                    <Column editable="true" title="ProductCode" type="java.lang.String"/>
+                    <Column editable="true" title="ProductName" type="java.lang.String"/>
+                    <Column editable="true" title="Price" type="java.lang.Float"/>
+                    <Column editable="true" title="Send" type="java.lang.Integer"/>
+                    <Column editable="true" title="SendWorth" type="java.lang.Float"/>
+                    <Column editable="true" title="Sold" type="java.lang.Integer"/>
+                    <Column editable="true" title="Total" type="java.lang.Float"/>
                   </Table>
                 </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title resourceKey="jTable1.columnModel.title0"/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title resourceKey="jTable1.columnModel.title1"/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title resourceKey="jTable1.columnModel.title4"/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title resourceKey="jTable1.columnModel.title2"/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title resourceKey="jTable1.columnModel.title5"/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title resourceKey="jTable1.columnModel.title3"/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title resourceKey="jTable1.columnModel.title7"/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
                 <Property name="name" type="java.lang.String" value="jTable1" noResource="true"/>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="clientsLable">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="clientsLable.text"/>
+            <Property name="name" type="java.lang.String" value="clientsLable" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="newProductButton">
+          <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="cz.ligas.exportoverview.gui.MainView" id="newProduct" methodName="newProduct"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="newProductButton.text"/>
+            <Property name="name" type="java.lang.String" value="newProductButton" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="newCategoryButton">
+          <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="cz.ligas.exportoverview.gui.MainView" id="newCategory" methodName="newCategory"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="newCategoryButton.text"/>
+            <Property name="name" type="java.lang.String" value="newCategoryButton" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="newExportButton">
+          <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="cz.ligas.exportoverview.gui.MainView" id="newExport" methodName="newExport"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="newExportButton.text"/>
+            <Property name="name" type="java.lang.String" value="newExportButton" noResource="true"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JMenuBar" name="menuBar">

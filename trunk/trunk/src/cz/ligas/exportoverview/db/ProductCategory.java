@@ -89,7 +89,7 @@ public class ProductCategory implements Serializable {
 
     @Override
     public String toString() {
-        return "id= " + id + " name= " + categoryName ;
+        return categoryCode +" "+categoryName;
     }
 
 }
