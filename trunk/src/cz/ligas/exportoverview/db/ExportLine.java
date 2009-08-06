@@ -4,6 +4,8 @@
  */
 package cz.ligas.exportoverview.db;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  *
@@ -18,6 +21,8 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class ExportLine implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -35,7 +40,9 @@ public class ExportLine implements Serializable {
     }
 
     public void setId(int id) {
+        int oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public int getSent() {
@@ -43,7 +50,9 @@ public class ExportLine implements Serializable {
     }
 
     public void setSent(int sent) {
+        int oldSent = this.sent;
         this.sent = sent;
+        changeSupport.firePropertyChange("sent", oldSent, sent);
     }
 
     public int getSold() {
@@ -51,7 +60,9 @@ public class ExportLine implements Serializable {
     }
 
     public void setSold(int sold) {
+        int oldSold = this.sold;
         this.sold = sold;
+        changeSupport.firePropertyChange("sold", oldSold, sold);
     }
 
     public Export getExport() {
@@ -59,7 +70,9 @@ public class ExportLine implements Serializable {
     }
 
     public void setExport(Export export) {
+        Export oldExport = this.export;
         this.export = export;
+        changeSupport.firePropertyChange("export", oldExport, export);
     }
 
     public Products getProd() {
@@ -67,7 +80,9 @@ public class ExportLine implements Serializable {
     }
 
     public void setProd(Products prod) {
+        Products oldProd = this.prod;
         this.prod = prod;
+        changeSupport.firePropertyChange("prod", oldProd, prod);
     }
 
     @Override
@@ -93,5 +108,13 @@ public class ExportLine implements Serializable {
     @Override
     public String toString() {
         return ""+ id;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 }

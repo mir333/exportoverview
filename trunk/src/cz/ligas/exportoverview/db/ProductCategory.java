@@ -5,6 +5,8 @@
 
 package cz.ligas.exportoverview.db;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -15,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -23,6 +26,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="PRODUCTCATEGORY", schema="APP" )
 public class ProductCategory implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -38,7 +43,9 @@ public class ProductCategory implements Serializable {
     }
 
     public void setId(int id) {
+        int oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getCategoryCode() {
@@ -46,7 +53,9 @@ public class ProductCategory implements Serializable {
     }
 
     public void setCategoryCode(String categoryCode) {
+        String oldCategoryCode = this.categoryCode;
         this.categoryCode = categoryCode;
+        changeSupport.firePropertyChange("categoryCode", oldCategoryCode, categoryCode);
     }
 
     public String getCategoryName() {
@@ -54,7 +63,9 @@ public class ProductCategory implements Serializable {
     }
 
     public void setCategoryName(String categoryName) {
+        String oldCategoryName = this.categoryName;
         this.categoryName = categoryName;
+        changeSupport.firePropertyChange("categoryName", oldCategoryName, categoryName);
     }
 
     public List<Products> getProducts() {
@@ -90,6 +101,14 @@ public class ProductCategory implements Serializable {
     @Override
     public String toString() {
         return categoryCode +" "+categoryName;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 
 }
