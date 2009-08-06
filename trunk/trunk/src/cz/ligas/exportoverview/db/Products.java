@@ -4,6 +4,8 @@
  */
 package cz.ligas.exportoverview.db;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -20,6 +23,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="PRODUCTS", schema = "APP")
 public class Products implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,7 +44,9 @@ public class Products implements Serializable {
     }
 
     public void setId(int id) {
+        int oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getProductCode() {
@@ -47,7 +54,9 @@ public class Products implements Serializable {
     }
 
     public void setProductCode(String productCode) {
+        String oldProductCode = this.productCode;
         this.productCode = productCode;
+        changeSupport.firePropertyChange("productCode", oldProductCode, productCode);
     }
 
     public String getProductDes() {
@@ -55,7 +64,9 @@ public class Products implements Serializable {
     }
 
     public void setProductDes(String productDes) {
+        String oldProductDes = this.productDes;
         this.productDes = productDes;
+        changeSupport.firePropertyChange("productDes", oldProductDes, productDes);
     }
 
     public String getProductName() {
@@ -63,7 +74,9 @@ public class Products implements Serializable {
     }
 
     public void setProductName(String productName) {
+        String oldProductName = this.productName;
         this.productName = productName;
+        changeSupport.firePropertyChange("productName", oldProductName, productName);
     }
 
     public float getProductPrice() {
@@ -71,7 +84,9 @@ public class Products implements Serializable {
     }
 
     public void setProductPrice(float productPrice) {
+        float oldProductPrice = this.productPrice;
         this.productPrice = productPrice;
+        changeSupport.firePropertyChange("productPrice", oldProductPrice, productPrice);
     }
 
     public ProductCategory getProductCategoryId() {
@@ -79,7 +94,9 @@ public class Products implements Serializable {
     }
 
     public void setProductCategoryId(ProductCategory productCategoryId) {
+        ProductCategory oldProductCategoryId = this.productCategoryId;
         this.productCategoryId = productCategoryId;
+        changeSupport.firePropertyChange("productCategoryId", oldProductCategoryId, productCategoryId);
     }
 
     @Override
@@ -105,5 +122,13 @@ public class Products implements Serializable {
     @Override
     public String toString() {
         return productCode+ " " + productName +" "+productPrice ;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 }

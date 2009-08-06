@@ -5,6 +5,7 @@ package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.db.Clients;
+import cz.ligas.exportoverview.db.Export;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
@@ -14,11 +15,12 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
-import org.jdesktop.application.Task;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JComboBoxBinding;
@@ -103,15 +105,16 @@ public class MainView extends FrameView {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
-        clientsSelector = new javax.swing.JComboBox();
+        clientsComboBox = new javax.swing.JComboBox();
         newClientButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        clientsLable = new javax.swing.JLabel();
+        clientsL = new javax.swing.JLabel();
         newProductButton = new javax.swing.JButton();
         newCategoryButton = new javax.swing.JButton();
         newExportButton = new javax.swing.JButton();
+        addProductButton = new javax.swing.JButton();
+        exportL = new javax.swing.JLabel();
+        exportComboBox = new javax.swing.JComboBox();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -125,7 +128,12 @@ public class MainView extends FrameView {
 
         mainPanel.setName("mainPanel"); // NOI18N
 
-        clientsSelector.setName("clientsSelector"); // NOI18N
+        clientsComboBox.setName("clientsComboBox"); // NOI18N
+        clientsComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientsComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(MainView.class, this);
         newClientButton.setAction(actionMap.get("newClient")); // NOI18N
@@ -137,39 +145,8 @@ public class MainView extends FrameView {
         refreshButton.setText(resourceMap.getString("refreshButton.text")); // NOI18N
         refreshButton.setName("refreshButton"); // NOI18N
 
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ProductCode", "ProductName", "Price", "Send", "SendWorth", "Sold", "Total"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Float.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable1.setName("jTable1"); // NOI18N
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("jTable1.columnModel.title0")); // NOI18N
-        jTable1.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("jTable1.columnModel.title1")); // NOI18N
-        jTable1.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("jTable1.columnModel.title4")); // NOI18N
-        jTable1.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("jTable1.columnModel.title2")); // NOI18N
-        jTable1.getColumnModel().getColumn(4).setHeaderValue(resourceMap.getString("jTable1.columnModel.title5")); // NOI18N
-        jTable1.getColumnModel().getColumn(5).setHeaderValue(resourceMap.getString("jTable1.columnModel.title3")); // NOI18N
-        jTable1.getColumnModel().getColumn(6).setHeaderValue(resourceMap.getString("jTable1.columnModel.title7")); // NOI18N
-
-        clientsLable.setText(resourceMap.getString("clientsLable.text")); // NOI18N
-        clientsLable.setName("clientsLable"); // NOI18N
+        clientsL.setText(resourceMap.getString("clientsL.text")); // NOI18N
+        clientsL.setName("clientsL"); // NOI18N
 
         newProductButton.setAction(actionMap.get("newProduct")); // NOI18N
         newProductButton.setText(resourceMap.getString("newProductButton.text")); // NOI18N
@@ -183,6 +160,15 @@ public class MainView extends FrameView {
         newExportButton.setText(resourceMap.getString("newExportButton.text")); // NOI18N
         newExportButton.setName("newExportButton"); // NOI18N
 
+        addProductButton.setAction(actionMap.get("addProduct")); // NOI18N
+        addProductButton.setText(resourceMap.getString("addProductButton.text")); // NOI18N
+        addProductButton.setName("addProductButton"); // NOI18N
+
+        exportL.setText(resourceMap.getString("exportL.text")); // NOI18N
+        exportL.setName("exportL"); // NOI18N
+
+        exportComboBox.setName("exportComboBox"); // NOI18N
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -190,40 +176,57 @@ public class MainView extends FrameView {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
+                    .addComponent(addProductButton, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(clientsLable)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(newClientButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(newCategoryButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(newProductButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(newExportButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
-                        .addComponent(refreshButton)))
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
+                                .addComponent(clientsL)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clientsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(exportL))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
+                                .addComponent(newClientButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(newCategoryButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(newProductButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(newExportButton)))
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
+                                .addComponent(refreshButton))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newClientButton)
-                    .addComponent(refreshButton)
-                    .addComponent(newCategoryButton)
-                    .addComponent(newProductButton)
-                    .addComponent(newExportButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clientsSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clientsLable))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(clientsL))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newClientButton)
+                            .addComponent(refreshButton)
+                            .addComponent(newCategoryButton)
+                            .addComponent(newProductButton)
+                            .addComponent(newExportButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(clientsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(exportL)))
+                .addGap(292, 292, 292)
+                .addComponent(addProductButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -288,11 +291,24 @@ public class MainView extends FrameView {
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void clientsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsComboBoxActionPerformed
+        Clients c = (Clients) clientsComboBox.getSelectedItem();
+        if (c != null) {
+            for (Export e : c.getExports()) {
+                System.err.println(e.toString() + "\n");
+            }
+            exportsList.clear();
+            exportsList.addAll(c.getExports());
+            exportComboBox.updateUI();
+        }
+    }//GEN-LAST:event_clientsComboBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel clientsLable;
-    private javax.swing.JComboBox clientsSelector;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton addProductButton;
+    private javax.swing.JComboBox clientsComboBox;
+    private javax.swing.JLabel clientsL;
+    private javax.swing.JComboBox exportComboBox;
+    private javax.swing.JLabel exportL;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newCategoryButton;
@@ -307,6 +323,7 @@ public class MainView extends FrameView {
     // End of variables declaration//GEN-END:variables
     private BindingGroup bindingGroup;
     private List<Clients> clientsList;
+    private List<Export> exportsList;
     private final Timer messageTimer;
     private final Timer busyIconTimer;
     private final Icon idleIcon;
@@ -317,12 +334,18 @@ public class MainView extends FrameView {
         bindingGroup = new BindingGroup();
         try {
             clientsList = ClientOps.getClients();
+            exportsList = new Vector<Export>();
         } catch (Exception ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientsSelector);
-        bindingGroup.addBinding(jComboBoxBinding);
+        JComboBoxBinding clientsComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientsComboBox);
+        bindingGroup.addBinding(clientsComboBoxBinding);
+
+        JComboBoxBinding exportComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, exportsList, exportComboBox);
+        bindingGroup.addBinding(exportComboBoxBinding);
+
+
         bindingGroup.bind();
     }
 
@@ -337,7 +360,7 @@ public class MainView extends FrameView {
         ClientForm cf = new ClientForm();
         cf.setLocationRelativeTo(newClientButton);
         cf.setVisible(true);
-        
+
     }
 
     @Action
@@ -354,24 +377,35 @@ public class MainView extends FrameView {
         pf.setVisible(true);
     }
 
-        @Action
+    @Action
     public void newExport() {
         ExportForm ef = new ExportForm();
         ef.setLocationRelativeTo(newExportButton);
         ef.setVisible(true);
     }
-        
+
+    @Action
+    public void addProduct() {
+        AddProductForm apf = new AddProductForm((Export) exportComboBox.getSelectedItem());
+//        apf.setLocationRelativeTo(mainTable);
+        apf.setVisible(true);
+    }
+
     @Action
     public void refresh() {
         clientsList.clear();
         try {
             clientsList.addAll(ClientOps.getClients());
-            clientsSelector.updateUI();
+            clientsComboBox.updateUI();
         } catch (Exception ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+        for (Clients clients : clientsList) {
+            System.err.println(clients.toString());
+            for (Export e : clients.getExports()) {
+                System.err.println("--"+e.toString());
+            }
+        }
     }
-
-
 }

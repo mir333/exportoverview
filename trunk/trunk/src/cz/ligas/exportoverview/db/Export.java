@@ -4,6 +4,8 @@
  */
 package cz.ligas.exportoverview.db;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -15,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -23,6 +26,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "EXPORT", schema = "APP")
 public class Export implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,7 +45,9 @@ public class Export implements Serializable {
     }
 
     public void setId(int id) {
+        int oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public Clients getKlient() {
@@ -64,7 +71,9 @@ public class Export implements Serializable {
     }
 
     public void setEditDate(Date editDate) {
+        Date oldEditDate = this.editDate;
         this.editDate = editDate;
+        changeSupport.firePropertyChange("editDate", oldEditDate, editDate);
     }
 
     @Override
@@ -90,5 +99,13 @@ public class Export implements Serializable {
     @Override
     public String toString() {
         return "" + id;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 }
