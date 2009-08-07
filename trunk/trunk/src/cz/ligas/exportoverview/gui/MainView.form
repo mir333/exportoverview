@@ -10,10 +10,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="addProductButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="1" pref="922" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="1">
@@ -33,16 +33,35 @@
                                   <Component id="newExportButton" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace pref="369" max="32767" attributes="0"/>
-                                  <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="exportComboBox" min="-2" pref="301" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="exportDateLable" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextField1" pref="87" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="refreshButton" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
+                      </Group>
+                      <Component id="addProductButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="sentTotalLable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="sentTotalLableOut" min="-2" pref="79" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="soldTotalLable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="soldTotalLableOut" min="-2" pref="92" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="sentPriceLable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="sentPriceOut" min="-2" pref="93" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="totalLable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="totalLableOut" min="-2" pref="103" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -61,15 +80,19 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="newClientButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="newCategoryButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="newProductButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="newExportButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="clientsComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="exportComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="exportComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="exportDateLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -77,9 +100,22 @@
                           <Component id="exportL" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="351" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="totalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="totalLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sentPriceOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sentPriceLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sentTotalLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sentTotalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="soldTotalLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="soldTotalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
                   <Component id="addProductButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -166,6 +202,103 @@
             </Property>
             <Property name="name" type="java.lang.String" value="exportComboBox" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportComboBoxActionPerformed"/>
+          </Events>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="jScrollPane1" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="mainTable">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="0" rowCount="0"/>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0"/>
+                </Property>
+                <Property name="name" type="java.lang.String" value="mainTable" noResource="true"/>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="totalLableOut">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="totalLableOut" noResource="true"/>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="text" source="exportComboBox" sourcePath="${selectedItem.total}" target="totalLableOut" targetPath="text" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="totalLable">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="totalLable.text"/>
+            <Property name="name" type="java.lang.String" value="totalLable" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="sentPriceOut">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="sentPriceOut" noResource="true"/>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="text" source="exportComboBox" sourcePath="${selectedItem.totalSendValue}" target="sentPriceOut" targetPath="text" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="sentPriceLable">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="sentPriceLable.text"/>
+            <Property name="name" type="java.lang.String" value="sentPriceLable" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="soldTotalLableOut">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="soldTotalLableOut" noResource="true"/>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="text" source="exportComboBox" sourcePath="${selectedItem.totalSold}" target="soldTotalLableOut" targetPath="text" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="soldTotalLable">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="soldTotalLable.text"/>
+            <Property name="name" type="java.lang.String" value="soldTotalLable" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="sentTotalLableOut">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="sentTotalLableOut" noResource="true"/>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="text" source="exportComboBox" sourcePath="${selectedItem.totalSent}" target="sentTotalLableOut" targetPath="text" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="sentTotalLable">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="sentTotalLable.text"/>
+            <Property name="name" type="java.lang.String" value="sentTotalLable" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="exportDateLable">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="exportDateLable.text"/>
+            <Property name="name" type="java.lang.String" value="exportDateLable" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextField1">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="name" type="java.lang.String" value="jTextField1" noResource="true"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -236,11 +369,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="statusPanelSeparator" alignment="0" pref="838" max="32767" attributes="0"/>
+              <Component id="statusPanelSeparator" alignment="0" pref="946" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="652" max="32767" attributes="0"/>
+                  <EmptySpace pref="760" max="32767" attributes="0"/>
                   <Component id="progressBar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
@@ -313,6 +446,6 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-73,0,0,3,70"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,79,0,0,3,-78"/>
   </AuxValues>
 </Form>

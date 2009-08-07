@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Clients implements Serializable {
     private String clientName;
     private String clientAddress;
     private String clientPhone;
-    @OneToMany(mappedBy="client")
+    @OneToMany(mappedBy="client",fetch=FetchType.EAGER)
     private List<Export> exports;
 
     public String getClientAddress() {
@@ -96,7 +97,6 @@ public class Clients implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Clients)) {
             return false;
         }

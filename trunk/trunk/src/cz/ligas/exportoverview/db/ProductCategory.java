@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class ProductCategory implements Serializable {
     private int id;
     private String categoryCode;
     private String categoryName;
-    @OneToMany(mappedBy = "productCategoryId",cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "productCategoryId",fetch=FetchType.EAGER)
     private List<Products> products;
 
     public int getId() {
@@ -87,7 +88,6 @@ public class ProductCategory implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof ProductCategory)) {
             return false;
         }

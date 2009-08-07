@@ -4,8 +4,11 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
+import cz.ligas.exportoverview.appli.ExportLineOps;
+import cz.ligas.exportoverview.appli.ExportOps;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Export;
+import cz.ligas.exportoverview.db.ExportLine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
@@ -15,7 +18,6 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.Timer;
@@ -23,7 +25,9 @@ import javax.swing.Icon;
 import javax.swing.JDialog;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.beansbinding.ELProperty;
 import org.jdesktop.swingbinding.JComboBoxBinding;
+import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
 /**
@@ -95,6 +99,7 @@ public class MainView extends FrameView {
         });
     }
 
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -103,6 +108,7 @@ public class MainView extends FrameView {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         mainPanel = new javax.swing.JPanel();
         clientsComboBox = new javax.swing.JComboBox();
@@ -115,6 +121,18 @@ public class MainView extends FrameView {
         addProductButton = new javax.swing.JButton();
         exportL = new javax.swing.JLabel();
         exportComboBox = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        mainTable = new javax.swing.JTable();
+        totalLableOut = new javax.swing.JLabel();
+        totalLable = new javax.swing.JLabel();
+        sentPriceOut = new javax.swing.JLabel();
+        sentPriceLable = new javax.swing.JLabel();
+        soldTotalLableOut = new javax.swing.JLabel();
+        soldTotalLable = new javax.swing.JLabel();
+        sentTotalLableOut = new javax.swing.JLabel();
+        sentTotalLable = new javax.swing.JLabel();
+        exportDateLable = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -168,15 +186,71 @@ public class MainView extends FrameView {
         exportL.setName("exportL"); // NOI18N
 
         exportComboBox.setName("exportComboBox"); // NOI18N
+        exportComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportComboBoxActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        mainTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        mainTable.setName("mainTable"); // NOI18N
+        jScrollPane1.setViewportView(mainTable);
+
+        totalLableOut.setName("totalLableOut"); // NOI18N
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, exportComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.total}"), totalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        totalLable.setText(resourceMap.getString("totalLable.text")); // NOI18N
+        totalLable.setName("totalLable"); // NOI18N
+
+        sentPriceOut.setName("sentPriceOut"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, exportComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSendValue}"), sentPriceOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        sentPriceLable.setText(resourceMap.getString("sentPriceLable.text")); // NOI18N
+        sentPriceLable.setName("sentPriceLable"); // NOI18N
+
+        soldTotalLableOut.setName("soldTotalLableOut"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, exportComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSold}"), soldTotalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        soldTotalLable.setText(resourceMap.getString("soldTotalLable.text")); // NOI18N
+        soldTotalLable.setName("soldTotalLable"); // NOI18N
+
+        sentTotalLableOut.setName("sentTotalLableOut"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, exportComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSent}"), sentTotalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        sentTotalLable.setText(resourceMap.getString("sentTotalLable.text")); // NOI18N
+        sentTotalLable.setName("sentTotalLable"); // NOI18N
+
+        exportDateLable.setText(resourceMap.getString("exportDateLable.text")); // NOI18N
+        exportDateLable.setName("exportDateLable"); // NOI18N
+
+        jTextField1.setEnabled(false);
+        jTextField1.setName("jTextField1"); // NOI18N
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addProductButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 922, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
@@ -193,13 +267,32 @@ public class MainView extends FrameView {
                                 .addComponent(newProductButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(newExportButton)))
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
-                                .addComponent(refreshButton))
-                            .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
+                                .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(exportDateLable)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                            .addComponent(refreshButton)))
+                    .addComponent(addProductButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addComponent(sentTotalLable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sentTotalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(soldTotalLable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(soldTotalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(sentPriceLable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sentPriceOut, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalLable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
@@ -213,20 +306,35 @@ public class MainView extends FrameView {
                         .addContainerGap()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(newClientButton)
-                            .addComponent(refreshButton)
                             .addComponent(newCategoryButton)
                             .addComponent(newProductButton)
-                            .addComponent(newExportButton))
+                            .addComponent(newExportButton)
+                            .addComponent(refreshButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(clientsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(exportDateLable)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(exportL)))
-                .addGap(292, 292, 292)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(totalLableOut)
+                    .addComponent(totalLable)
+                    .addComponent(sentPriceOut)
+                    .addComponent(sentPriceLable)
+                    .addComponent(sentTotalLable)
+                    .addComponent(sentTotalLableOut)
+                    .addComponent(soldTotalLable)
+                    .addComponent(soldTotalLableOut))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(addProductButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -264,11 +372,11 @@ public class MainView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 652, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 760, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -289,27 +397,60 @@ public class MainView extends FrameView {
         setComponent(mainPanel);
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
+
+        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
+
+    private String dateToString(java.sql.Date d){
+    return d.toString();
+    }
 
     private void clientsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsComboBoxActionPerformed
         Clients c = (Clients) clientsComboBox.getSelectedItem();
         if (c != null) {
-            for (Export e : c.getExports()) {
-                System.err.println(e.toString() + "\n");
-            }
             exportsList.clear();
-            exportsList.addAll(c.getExports());
+            try {
+                exportsList.addAll(ExportOps.getExportsFromClient(c));
+            } catch (Exception ex) {
+                Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            }
             exportComboBox.updateUI();
+
         }
     }//GEN-LAST:event_clientsComboBoxActionPerformed
+
+    private void exportComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportComboBoxActionPerformed
+        Export e = (Export) exportComboBox.getSelectedItem();
+        if (e != null) {
+            exportLinesList.clear();
+            try {
+                exportLinesList.addAll(ExportLineOps.getExportLinesByExport(e));
+                for (ExportLine el : exportLinesList) {
+                    System.err.println(el.toString());
+                    System.err.println("--" + el.getExport().getClient().toString());
+                    System.err.println("--" + el.getProd().toString());
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mainTable.updateUI();
+
+
+
+        }
+}//GEN-LAST:event_exportComboBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProductButton;
     private javax.swing.JComboBox clientsComboBox;
     private javax.swing.JLabel clientsL;
     private javax.swing.JComboBox exportComboBox;
+    private javax.swing.JLabel exportDateLable;
     private javax.swing.JLabel exportL;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTable mainTable;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newCategoryButton;
     private javax.swing.JButton newClientButton;
@@ -317,13 +458,23 @@ public class MainView extends FrameView {
     private javax.swing.JButton newProductButton;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JLabel sentPriceLable;
+    private javax.swing.JLabel sentPriceOut;
+    private javax.swing.JLabel sentTotalLable;
+    private javax.swing.JLabel sentTotalLableOut;
+    private javax.swing.JLabel soldTotalLable;
+    private javax.swing.JLabel soldTotalLableOut;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JLabel totalLable;
+    private javax.swing.JLabel totalLableOut;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-    private BindingGroup bindingGroup;
+   //private BindingGroup bindingGroup;
     private List<Clients> clientsList;
     private List<Export> exportsList;
+    private List<ExportLine> exportLinesList;
     private final Timer messageTimer;
     private final Timer busyIconTimer;
     private final Icon idleIcon;
@@ -345,7 +496,42 @@ public class MainView extends FrameView {
         JComboBoxBinding exportComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, exportsList, exportComboBox);
         bindingGroup.addBinding(exportComboBoxBinding);
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(MainView.class);
+        try {
+            exportLinesList = ExportLineOps.getExportLine();
+        } catch (Exception ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+// TODO: treba dorobit poriadne priavanie veci aby to nepadalo po pridani urciteho poctu ktorym sa prekroci povodny max stav v mainTabel
 
+        JTableBinding mainTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE, exportLinesList, mainTable);
+        JTableBinding.ColumnBinding columnBinding;
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productCode}"));
+        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productCode"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productName}"));
+        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productName"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
+        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productPrice"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
+        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.priceS"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sent}"));
+        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.send"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sentPrice}"));
+        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sendPrice"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sold}"));
+        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sold"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${total}"));
+        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.total"));
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(mainTableBinding);
+        mainTableBinding.bind();
         bindingGroup.bind();
     }
 
@@ -387,7 +573,7 @@ public class MainView extends FrameView {
     @Action
     public void addProduct() {
         AddProductForm apf = new AddProductForm((Export) exportComboBox.getSelectedItem());
-//        apf.setLocationRelativeTo(mainTable);
+        apf.setLocationRelativeTo(mainTable);
         apf.setVisible(true);
     }
 
@@ -400,12 +586,10 @@ public class MainView extends FrameView {
         } catch (Exception ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        for (Clients clients : clientsList) {
-            System.err.println(clients.toString());
-            for (Export e : clients.getExports()) {
-                System.err.println("--"+e.toString());
-            }
-        }
     }
 }
+// TODO: Skusit posielat nabindovane objekty do metod kde sa pridava
+// TODO: Dorobit potvrdenie na enter
+// TODO: Upravit DB aby potporovala uniqu itemy
+// TODO: overenie vstupu
+// TODO: dostat date do lablu pripadne okienka

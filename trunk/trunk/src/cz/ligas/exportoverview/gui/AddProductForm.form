@@ -27,19 +27,28 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="addExportLineButton" alignment="1" min="-2" pref="62" max="-2" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="productL" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="categoryL" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="exportLineSendL" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="exportLineSoldL" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="productL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="categoryL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="exportLineSoldL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="exportLineSendL" alignment="0" min="-2" max="-2" attributes="1"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="exportLineCustomPriceL" pref="61" max="32767" attributes="1"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="categoryComboBox" alignment="0" pref="309" max="32767" attributes="0"/>
                           <Component id="productComboBox" alignment="0" pref="309" max="32767" attributes="0"/>
                           <Component id="exportLineSendIn" alignment="0" pref="309" max="32767" attributes="0"/>
                           <Component id="exportLineSoldIn" alignment="0" pref="309" max="32767" attributes="0"/>
+                          <Component id="exportLineSpecialPriceIn" alignment="1" pref="309" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -51,30 +60,29 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="categoryL" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="categoryComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="productL" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="productComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="exportLineSendIn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="exportLineSendL" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="exportLineSoldIn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="exportLineSoldL" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="categoryL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="categoryComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="productL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="productComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="exportLineSpecialPriceIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="exportLineCustomPriceL" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="exportLineSendIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="exportLineSendL" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="exportLineSoldIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="exportLineSoldL" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="addExportLineButton" min="-2" max="-2" attributes="0"/>
@@ -156,6 +164,22 @@
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="exportLineSoldL.text"/>
         <Property name="name" type="java.lang.String" value="exportLineSoldL" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="exportLineSpecialPriceIn">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="exportLineSpecialPriceIn" noResource="true"/>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="text" source="productComboBox" sourcePath="${selectedItem.productPrice}" target="exportLineSpecialPriceIn" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+        </BindingProperty>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="exportLineCustomPriceL">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="exportLineCustomPriceL.text"/>
+        <Property name="name" type="java.lang.String" value="exportLineCustomPriceL" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,9 +36,13 @@ public class Export implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private Date editDate;
+    private int total;
+    private int totalSold;
+    private int totalSent;
+    private float totalSendValue;
     @ManyToOne
     private Clients client;
-    @OneToMany(mappedBy = "export")
+    @OneToMany(mappedBy = "export",fetch=FetchType.EAGER)
     private List<ExportLine> exportedProd;
 
     public int getId() {
@@ -50,11 +55,11 @@ public class Export implements Serializable {
         changeSupport.firePropertyChange("id", oldId, id);
     }
 
-    public Clients getKlient() {
+    public Clients getClient() {
         return client;
     }
 
-    public void setKlient(Clients client) {
+    public void setClient(Clients client) {
         this.client = client;
     }
 
@@ -76,6 +81,38 @@ public class Export implements Serializable {
         changeSupport.firePropertyChange("editDate", oldEditDate, editDate);
     }
 
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public float getTotalSendValue() {
+        return totalSendValue;
+    }
+
+    public void setTotalSendValue(float totalSendValue) {
+        this.totalSendValue = totalSendValue;
+    }
+
+    public int getTotalSent() {
+        return totalSent;
+    }
+
+    public void setTotalSent(int totalSent) {
+        this.totalSent = totalSent;
+    }
+
+    public int getTotalSold() {
+        return totalSold;
+    }
+
+    public void setTotalSold(int totalSold) {
+        this.totalSold = totalSold;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -85,7 +122,6 @@ public class Export implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Export)) {
             return false;
         }
