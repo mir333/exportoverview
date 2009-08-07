@@ -5,6 +5,7 @@
 
 package cz.ligas.exportoverview.appli;
 
+import cz.ligas.exportoverview.db.Export;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,8 @@ public class ExportLineOps {
  private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ExportOverviewPU");
 
     public static void addExportLine(ExportLine export) throws Exception {
+        export.setSentPrice(export.getPrice()*export.getSent());
+        export.setTotal(export.getSent()+export.getSold());
         try {
             EntityManager em = emFactory.createEntityManager();
 
@@ -43,6 +46,21 @@ public class ExportLineOps {
         } catch (Exception e) {
             throw new Exception(e);
         }
+    }
+
+    public static List<ExportLine> getExportLinesByExport(Export e)throws Exception{
+                try {
+            EntityManager em = emFactory.createEntityManager();
+            List<ExportLine> list = new ArrayList<ExportLine>();
+            Query q = em.createQuery("select el from ExportLine el where el.export=:ex  order by el.id asc");
+            q.setParameter("ex", e);
+            list = q.getResultList();
+            em.close();
+            return list;
+        } catch (Exception exc) {
+            throw new Exception(exc);
+        }
+
     }
 
     public static List<ExportLine> getExportLine() throws Exception {

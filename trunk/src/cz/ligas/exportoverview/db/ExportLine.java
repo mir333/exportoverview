@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 /**
@@ -30,6 +29,9 @@ public class ExportLine implements Serializable {
     private int id;
     private int sent;
     private int sold;
+    private float price;
+    private float sentPrice;
+    private int total;
     @ManyToOne
     private Export export;
     @ManyToOne
@@ -65,6 +67,30 @@ public class ExportLine implements Serializable {
         changeSupport.firePropertyChange("sold", oldSold, sold);
     }
 
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getSentPrice() {
+        return sentPrice;
+    }
+
+    public void setSentPrice(float sentPrice) {
+        this.sentPrice = sentPrice;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
     public Export getExport() {
         return export;
     }
@@ -94,7 +120,6 @@ public class ExportLine implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof ExportLine)) {
             return false;
         }

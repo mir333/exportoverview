@@ -98,9 +98,9 @@ public class ExportForm extends javax.swing.JFrame {
         Export e = new Export();
         java.util.Date today = new java.util.Date();
         e.setEditDate(new java.sql.Date(today.getTime()));
-        e.setKlient((Clients) clientComboBox.getSelectedItem());
+        e.setClient((Clients) clientComboBox.getSelectedItem());
         try {
-            ExportOps.addProduct(e);
+            ExportOps.addExport(e);
         } catch (Exception ex) {
             Logger.getLogger(ExportForm.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * AddProductForm.java
  *
  * Created on 5.8.2009, 10:30:48
@@ -12,6 +7,7 @@ package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.CategoryOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
+import cz.ligas.exportoverview.appli.ExportOps;
 import cz.ligas.exportoverview.db.Export;
 import cz.ligas.exportoverview.db.ExportLine;
 import cz.ligas.exportoverview.db.ProductCategory;
@@ -24,6 +20,7 @@ import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JComboBoxBinding;
 import org.jdesktop.swingbinding.SwingBindings;
+// TODO: refresh po pridani produktu
 
 /**
  *
@@ -57,6 +54,8 @@ public class AddProductForm extends javax.swing.JFrame {
         productL = new javax.swing.JLabel();
         exportLineSendL = new javax.swing.JLabel();
         exportLineSoldL = new javax.swing.JLabel();
+        exportLineSpecialPriceIn = new javax.swing.JTextField();
+        exportLineCustomPriceL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("Form"); // NOI18N
@@ -95,6 +94,14 @@ public class AddProductForm extends javax.swing.JFrame {
         exportLineSoldL.setText(resourceMap.getString("exportLineSoldL.text")); // NOI18N
         exportLineSoldL.setName("exportLineSoldL"); // NOI18N
 
+        exportLineSpecialPriceIn.setName("exportLineSpecialPriceIn"); // NOI18N
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.productPrice}"), exportLineSpecialPriceIn, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        exportLineCustomPriceL.setText(resourceMap.getString("exportLineCustomPriceL.text")); // NOI18N
+        exportLineCustomPriceL.setName("exportLineCustomPriceL"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,42 +110,49 @@ public class AddProductForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addExportLineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(productL)
-                            .addComponent(categoryL)
-                            .addComponent(exportLineSendL)
-                            .addComponent(exportLineSoldL))
-                        .addGap(3, 3, 3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(productL)
+                                    .addComponent(categoryL)
+                                    .addComponent(exportLineSoldL)
+                                    .addComponent(exportLineSendL))
+                                .addGap(3, 3, 3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(exportLineCustomPriceL, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(categoryComboBox, 0, 309, Short.MAX_VALUE)
                             .addComponent(productComboBox, 0, 309, Short.MAX_VALUE)
                             .addComponent(exportLineSendIn, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                            .addComponent(exportLineSoldIn, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))))
+                            .addComponent(exportLineSoldIn, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                            .addComponent(exportLineSpecialPriceIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(categoryL)
-                            .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(productL)
-                            .addComponent(productComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(exportLineSendIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(exportLineSendL))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(exportLineSoldIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(exportLineSoldL))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(categoryL)
+                    .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(productL)
+                    .addComponent(productComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(exportLineSpecialPriceIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportLineCustomPriceL))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(exportLineSendIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportLineSendL))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(exportLineSoldIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportLineSoldL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addExportLineButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -153,10 +167,12 @@ public class AddProductForm extends javax.swing.JFrame {
     private javax.swing.JButton addExportLineButton;
     private javax.swing.JComboBox categoryComboBox;
     private javax.swing.JLabel categoryL;
+    private javax.swing.JLabel exportLineCustomPriceL;
     private javax.swing.JTextField exportLineSendIn;
     private javax.swing.JLabel exportLineSendL;
     private javax.swing.JTextField exportLineSoldIn;
     private javax.swing.JLabel exportLineSoldL;
+    private javax.swing.JTextField exportLineSpecialPriceIn;
     private javax.swing.JComboBox productComboBox;
     private javax.swing.JLabel productL;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
@@ -181,6 +197,7 @@ public class AddProductForm extends javax.swing.JFrame {
         ExportLine el = new ExportLine();
         el.setProd((Products) productComboBox.getSelectedItem());
         el.setExport(export);
+        el.setPrice(Float.parseFloat(exportLineSpecialPriceIn.getText()));
         el.setSent(Integer.parseInt(exportLineSendIn.getText()));
         el.setSold(Integer.parseInt(exportLineSoldIn.getText()));
         //overenie vyplnenia
@@ -189,6 +206,7 @@ public class AddProductForm extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ExportOps.recalculateExport(export);
         this.dispose();
     }
 }

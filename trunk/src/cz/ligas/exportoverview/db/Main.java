@@ -50,11 +50,11 @@ public class Main {
 
 
         Export e = new Export();
-        e.setKlient(kl1);
+        e.setClient(kl1);
 
 
         Export e2 = new Export();
-        e2.setKlient(kl2);
+        e2.setClient(kl2);
 
         ExportLine el = new ExportLine();
         el.setProd(pro);
