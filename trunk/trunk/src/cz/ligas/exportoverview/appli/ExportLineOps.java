@@ -21,15 +21,15 @@ import javax.persistence.Query;
 public class ExportLineOps {
  private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ExportOverviewPU");
 
-    public static void addExportLine(ExportLine export) throws Exception {
-        export.setSentPrice(export.getPrice()*export.getSent());
-        export.setTotal(export.getSent()+export.getSold());
+    public static void addExportLine(ExportLine exportLine) throws Exception {
+        exportLine.setSentPrice(exportLine.getPrice()*exportLine.getSent());
+        exportLine.setTotal(exportLine.getSent()+exportLine.getSold());
         try {
             EntityManager em = emFactory.createEntityManager();
 
 
             em.getTransaction().begin();
-            em.persist(export);
+            em.persist(exportLine);
             em.getTransaction().commit();
             em.close();
         } catch (Exception e) {
@@ -71,6 +71,20 @@ public class ExportLineOps {
             list = q.getResultList();
             em.close();
             return list;
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    public static void editExportLine(ExportLine exportLine) throws Exception {
+        exportLine.setSentPrice(exportLine.getPrice()*exportLine.getSent());
+        exportLine.setTotal(exportLine.getSent()+exportLine.getSold());
+        try {
+            EntityManager em = emFactory.createEntityManager();
+            em.getTransaction().begin();
+            em.merge(exportLine);
+            em.getTransaction().commit();
+            em.close();
         } catch (Exception e) {
             throw new Exception(e);
         }

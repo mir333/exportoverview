@@ -134,7 +134,7 @@ public class Export implements Serializable {
 
     @Override
     public String toString() {
-        return "" + id;
+        return id + " " +editDate;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

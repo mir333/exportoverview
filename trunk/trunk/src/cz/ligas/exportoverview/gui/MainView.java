@@ -99,7 +99,6 @@ public class MainView extends FrameView {
         });
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -203,6 +202,12 @@ public class MainView extends FrameView {
             }
         ));
         mainTable.setName("mainTable"); // NOI18N
+        mainTable.getTableHeader().setReorderingAllowed(false);
+        mainTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(mainTable);
 
         totalLableOut.setName("totalLableOut"); // NOI18N
@@ -274,7 +279,7 @@ public class MainView extends FrameView {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(exportDateLable)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
                             .addComponent(refreshButton)))
                     .addComponent(addProductButton, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
@@ -332,7 +337,7 @@ public class MainView extends FrameView {
                     .addComponent(sentTotalLableOut)
                     .addComponent(soldTotalLable)
                     .addComponent(soldTotalLableOut))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(addProductButton)
                 .addContainerGap())
         );
@@ -401,10 +406,6 @@ public class MainView extends FrameView {
         bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
-    private String dateToString(java.sql.Date d){
-    return d.toString();
-    }
-
     private void clientsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsComboBoxActionPerformed
         Clients c = (Clients) clientsComboBox.getSelectedItem();
         if (c != null) {
@@ -425,11 +426,11 @@ public class MainView extends FrameView {
             exportLinesList.clear();
             try {
                 exportLinesList.addAll(ExportLineOps.getExportLinesByExport(e));
-                for (ExportLine el : exportLinesList) {
-                    System.err.println(el.toString());
-                    System.err.println("--" + el.getExport().getClient().toString());
-                    System.err.println("--" + el.getProd().toString());
-                }
+//                for (ExportLine el : exportLinesList) {
+//                    System.err.println(el.toString());
+//                    System.err.println("--" + el.getExport().getClient().toString());
+//                    System.err.println("--" + el.getProd().toString());
+//                }
             } catch (Exception ex) {
                 Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -440,6 +441,11 @@ public class MainView extends FrameView {
         }
 }//GEN-LAST:event_exportComboBoxActionPerformed
 
+    private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
+        EditExportLineForm eel = new EditExportLineForm(exportLinesList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow())));
+        eel.setLocationRelativeTo(newClientButton);
+        eel.setVisible(true);
+    }//GEN-LAST:event_mainTableMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProductButton;
     private javax.swing.JComboBox clientsComboBox;
@@ -471,7 +477,7 @@ public class MainView extends FrameView {
     private javax.swing.JLabel totalLableOut;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-   //private BindingGroup bindingGroup;
+    //private BindingGroup bindingGroup;
     private List<Clients> clientsList;
     private List<Export> exportsList;
     private List<ExportLine> exportLinesList;
@@ -509,27 +515,35 @@ public class MainView extends FrameView {
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productCode}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productCode"));
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productName}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productName"));
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productPrice"));
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.priceS"));
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sent}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.send"));
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sentPrice}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sendPrice"));
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sold}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sold"));
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${total}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.total"));
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(mainTableBinding);
         mainTableBinding.bind();
         bindingGroup.bind();
@@ -546,7 +560,6 @@ public class MainView extends FrameView {
         ClientForm cf = new ClientForm();
         cf.setLocationRelativeTo(newClientButton);
         cf.setVisible(true);
-
     }
 
     @Action
