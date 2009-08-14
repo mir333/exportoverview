@@ -24,8 +24,6 @@ public class CategoryOps {
     public static void addCategory(ProductCategory category) throws Exception {
         try {
             EntityManager em = emFactory.createEntityManager();
-
-
             em.getTransaction().begin();
             em.persist(category);
             em.getTransaction().commit();

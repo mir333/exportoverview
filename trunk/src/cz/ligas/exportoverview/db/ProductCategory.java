@@ -9,10 +9,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +34,7 @@ public class ProductCategory implements Serializable {
     private int id;
     private String categoryCode;
     private String categoryName;
-    @OneToMany(mappedBy = "productCategoryId",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "productCategoryId")
     private List<Products> products;
 
     public int getId() {

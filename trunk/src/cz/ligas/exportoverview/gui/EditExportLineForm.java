@@ -27,8 +27,7 @@ public class EditExportLineForm extends javax.swing.JFrame {
     public EditExportLineForm(ExportLine el) {
         this.exportLine = el;
         initComponents();
-        myInit();
-    }
+     }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -112,17 +111,12 @@ public class EditExportLineForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private ExportLine exportLine;
 
-    private void myInit() {
-        exportLineSentSpinner.setValue(exportLine.getSent());
-        exportLineSoldSpinner.setValue(exportLine.getSold());
-    }
-// TODO: dokoncit prepocitanie hodnout ked sa zmeni sold musi byt znizene sent
     @Action
     public void editExportLineSaveAction() {
-        exportLine.setSent(Integer.parseInt(exportLineSentSpinner.getValue().toString()));
-        exportLine.setSold(Integer.parseInt(exportLineSoldSpinner.getValue().toString()));
+        int send = Integer.parseInt(exportLineSentSpinner.getValue().toString());
+        int sold = Integer.parseInt(exportLineSoldSpinner.getValue().toString());
         try {
-            ExportLineOps.editExportLine(exportLine);
+            ExportLineOps.editExportLine(exportLine,send,sold);
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }

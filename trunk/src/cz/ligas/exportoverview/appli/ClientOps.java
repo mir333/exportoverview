@@ -19,23 +19,10 @@ public class ClientOps {
     public static void addClient(Clients client) throws Exception {
         try {
             EntityManager em = emFactory.createEntityManager();
-
-
             em.getTransaction().begin();
             em.persist(client);
             em.getTransaction().commit();
             em.close();
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
-    }
-
-    public static Clients getClientById(int id) throws Exception {
-        try {
-            EntityManager em = emFactory.createEntityManager();
-            Clients c = em.find(Clients.class, id);
-            em.close();
-            return c;
         } catch (Exception e) {
             throw new Exception(e);
         }

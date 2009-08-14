@@ -27,8 +27,13 @@ public class ExportOps {
     public static void addExport(Export export) throws Exception {
         try {
             EntityManager em = emFactory.createEntityManager();
+            java.util.Date today = new java.util.Date();
+            export.setEditDate(new java.sql.Date(today.getTime()));
+            Clients clients = export.getClient();
+            clients.getExports().add(export);
             em.getTransaction().begin();
             em.persist(export);
+            em.merge(clients);
             em.getTransaction().commit();
             em.close();
         } catch (Exception e) {
@@ -36,16 +41,6 @@ public class ExportOps {
         }
     }
 
-    public static Export getExportById(int id) throws Exception {
-        try {
-            EntityManager em = emFactory.createEntityManager();
-            Export c = em.find(Export.class, id);
-            em.close();
-            return c;
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
-    }
 
     public static List<Export> getExportsFromClient(Clients c) throws Exception {
         try {
@@ -92,6 +87,8 @@ public class ExportOps {
             exp.setTotalSendValue(totalSendValue);
             exp.setTotalSent(totalSent);
             exp.setTotalSold(totalSold);
+            java.util.Date today = new java.util.Date();
+            exp.setEditDate(new java.sql.Date(today.getTime()));
             EntityManager em = emFactory.createEntityManager();
             em.getTransaction().begin();
             em.merge(exp);

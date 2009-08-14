@@ -12,12 +12,16 @@ import cz.ligas.exportoverview.db.Export;
 import cz.ligas.exportoverview.db.ExportLine;
 import cz.ligas.exportoverview.db.ProductCategory;
 import cz.ligas.exportoverview.db.Products;
+import java.beans.Beans;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.observablecollections.ObservableCollections;
+import org.jdesktop.observablecollections.ObservableList;
 import org.jdesktop.swingbinding.JComboBoxBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 // TODO: refresh po pridani produktu
@@ -120,7 +124,7 @@ public class AddProductForm extends javax.swing.JFrame {
                                     .addComponent(exportLineSendL))
                                 .addGap(3, 3, 3))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(exportLineCustomPriceL, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                                .addComponent(exportLineCustomPriceL, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(categoryComboBox, 0, 309, Short.MAX_VALUE)
@@ -183,7 +187,7 @@ public class AddProductForm extends javax.swing.JFrame {
     private void myInit() {
         bindingGroup = new BindingGroup();
         try {
-            categoryList = CategoryOps.getCategories();
+            categoryList =Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList( CategoryOps.getCategories());
         } catch (Exception ex) {
             Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -191,6 +195,7 @@ public class AddProductForm extends javax.swing.JFrame {
         bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
     }
+    // TODO: manualne plnenie produktComboBoxu
 
     @Action
     public void addExportLine() {

@@ -96,8 +96,6 @@ public class ExportForm extends javax.swing.JFrame {
     @Action
     public void createExport() {
         Export e = new Export();
-        java.util.Date today = new java.util.Date();
-        e.setEditDate(new java.sql.Date(today.getTime()));
         e.setClient((Clients) clientComboBox.getSelectedItem());
         try {
             ExportOps.addExport(e);
