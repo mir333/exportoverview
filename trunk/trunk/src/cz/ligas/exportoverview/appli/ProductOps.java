@@ -5,6 +5,7 @@
 
 package cz.ligas.exportoverview.appli;
 
+import cz.ligas.exportoverview.db.ProductCategory;
 import cz.ligas.exportoverview.db.Products;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,23 +24,13 @@ public class ProductOps {
     public static void addProduct(Products product) throws Exception {
         try {
             EntityManager em = emFactory.createEntityManager();
-
-
+            ProductCategory products = product.getProductCategoryId();
+            products.getProducts().add(product);
             em.getTransaction().begin();
             em.persist(product);
+            em.merge(products);
             em.getTransaction().commit();
             em.close();
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
-    }
-
-    public static Products getProductById(int id) throws Exception {
-        try {
-            EntityManager em = emFactory.createEntityManager();
-            Products c = em.find(Products.class, id);
-            em.close();
-            return c;
         } catch (Exception e) {
             throw new Exception(e);
         }

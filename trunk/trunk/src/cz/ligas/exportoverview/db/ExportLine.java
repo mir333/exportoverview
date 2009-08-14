@@ -132,7 +132,7 @@ public class ExportLine implements Serializable {
 
     @Override
     public String toString() {
-        return ""+ id;
+        return id+" "+sent+" "+sold+" "+total;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

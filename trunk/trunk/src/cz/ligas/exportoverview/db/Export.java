@@ -11,7 +11,6 @@ import java.sql.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,13 +41,19 @@ public class Export implements Serializable {
     private float totalSendValue;
     @ManyToOne
     private Clients client;
-    @OneToMany(mappedBy = "export",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "export")
     private List<ExportLine> exportedProd;
 
     public int getId() {
         return id;
     }
 
+    public Export(){
+    this.total=0;
+    this.totalSendValue=0;
+    this.totalSold=0;
+    this.totalSent=0;
+    }
     public void setId(int id) {
         int oldId = this.id;
         this.id = id;

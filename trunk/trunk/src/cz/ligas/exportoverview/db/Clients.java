@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +36,7 @@ public class Clients implements Serializable {
     private String clientName;
     private String clientAddress;
     private String clientPhone;
-    @OneToMany(mappedBy="client",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="client")
     private List<Export> exports;
 
     public String getClientAddress() {
