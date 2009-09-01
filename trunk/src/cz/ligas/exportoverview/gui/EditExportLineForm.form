@@ -92,7 +92,7 @@
     <Component class="javax.swing.JButton" name="exportLineSaveButton">
       <Properties>
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-          <action class="cz.ligas.exportoverview.gui.EditExportLineForm" id="editExportLineSaveAction" methodName="editExportLineSaveAction"/>
+          <action/>
         </Property>
         <Property name="text" type="java.lang.String" resourceKey="exportLineSaveButton.text"/>
         <Property name="name" type="java.lang.String" value="exportLineSaveButton" noResource="true"/>

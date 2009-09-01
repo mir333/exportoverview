@@ -12,6 +12,7 @@ package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ExportLineOps;
 import cz.ligas.exportoverview.appli.ExportOps;
+import cz.ligas.exportoverview.db.Export;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +25,8 @@ import org.jdesktop.application.Action;
 public class EditExportLineForm extends javax.swing.JFrame {
 
     /** Creates new form EditExportLineForm */
-    public EditExportLineForm(ExportLine el) {
+    public EditExportLineForm(Export exp, ExportLine el) {
+        this.export = exp;
         this.exportLine = el;
         initComponents();
      }
@@ -110,17 +112,18 @@ public class EditExportLineForm extends javax.swing.JFrame {
     private javax.swing.JSpinner exportLineSoldSpinner;
     // End of variables declaration//GEN-END:variables
     private ExportLine exportLine;
+    private Export export;
 
     @Action
     public void editExportLineSaveAction() {
         int send = Integer.parseInt(exportLineSentSpinner.getValue().toString());
         int sold = Integer.parseInt(exportLineSoldSpinner.getValue().toString());
         try {
-            ExportLineOps.editExportLine(exportLine,send,sold);
+            ExportLineOps.editExportLine(export,exportLine,send,sold);
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ExportOps.recalculateExport(exportLine.getExport());
+        ExportOps.recalculateExport(export);
         this.dispose();
     }
 }

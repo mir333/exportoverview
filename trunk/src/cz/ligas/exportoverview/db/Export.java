@@ -139,7 +139,7 @@ public class Export implements Serializable {
 
     @Override
     public String toString() {
-        return "Changed " +editDate+" Send total "+totalSent+" Sent value "+ totalSendValue +" Sold total "+ totalSold+" Total "+total;
+        return id+" "+editDate;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

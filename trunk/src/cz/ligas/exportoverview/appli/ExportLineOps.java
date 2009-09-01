@@ -77,15 +77,22 @@ public class ExportLineOps {
         }
     }
 
-    public static void editExportLine(ExportLine exportLine, int sent,int sold) throws Exception {
+    public static void editExportLine(Export exp,ExportLine exportLine, int sent,int sold) throws Exception {
         exportLine.setSent(exportLine.getSent()+sent-sold);
         exportLine.setSold(exportLine.getSold()+sold);
         exportLine.setSentPrice(exportLine.getPrice()*exportLine.getSent());
         exportLine.setTotal(exportLine.getSent()+exportLine.getSold());
+        for (int i = 0; i < exp.getExportedProd().size(); i++) {
+            ExportLine el = exp.getExportedProd().get(i);
+            if(el.getId()==exportLine.getId()){
+                exp.getExportedProd().set(i, el);
+            }
+        }
         try {
             EntityManager em = emFactory.createEntityManager();
             em.getTransaction().begin();
             em.merge(exportLine);
+            em.merge(exp);
             em.getTransaction().commit();
             em.close();
         } catch (Exception e) {
