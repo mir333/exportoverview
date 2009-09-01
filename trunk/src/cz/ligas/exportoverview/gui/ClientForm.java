@@ -60,7 +60,7 @@ public class ClientForm extends JFrame {
         clientPhoneIn.setText(resourceMap.getString("clientPhoneIn.text")); // NOI18N
         clientPhoneIn.setName("clientPhoneIn"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(ClientForm.class, this);
+	javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(ClientForm.class, this);
         clientSaveButton.setAction(actionMap.get("clientSaveAction")); // NOI18N
         clientSaveButton.setText(resourceMap.getString("clientSaveButton.text")); // NOI18N
         clientSaveButton.setName("clientSaveButton"); // NOI18N
@@ -121,7 +121,7 @@ public class ClientForm extends JFrame {
        c.setClientAddress(clientAddressIn.getText());
        c.setClientPhone(clientPhoneIn.getText());
        //overenie vyplnenia
-
+       
        try {
             ClientOps.addClient(c);
         } catch (Exception ex) {
