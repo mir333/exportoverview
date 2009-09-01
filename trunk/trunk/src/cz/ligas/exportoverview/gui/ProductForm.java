@@ -55,13 +55,16 @@ public class ProductForm extends javax.swing.JFrame {
         productPriceIn = new javax.swing.JTextField();
         productDescIn = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
+        titleLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ProductForm.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
 
+        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         categoryComboBox.setName("categoryComboBox"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(ProductForm.class);
         categoryL.setText(resourceMap.getString("categoryL.text")); // NOI18N
         categoryL.setName("categoryL"); // NOI18N
 
@@ -94,6 +97,9 @@ public class ProductForm extends javax.swing.JFrame {
         saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
         saveButton.setName("saveButton"); // NOI18N
 
+        titleLabel.setText(resourceMap.getString("titleLabel.text")); // NOI18N
+        titleLabel.setName("titleLabel"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,31 +107,33 @@ public class ProductForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(productDescL)
-                    .addComponent(categoryL)
-                    .addComponent(productCodeL)
-                    .addComponent(productNameL)
-                    .addComponent(productPriceL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(categoryComboBox, 0, 249, Short.MAX_VALUE)
-                    .addComponent(productCodeIn)
-                    .addComponent(productPriceIn)
-                    .addComponent(productDescIn, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(productNameIn, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
+                    .addComponent(saveButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(productDescL)
+                            .addComponent(productCodeL)
+                            .addComponent(productNameL)
+                            .addComponent(productPriceL)
+                            .addComponent(categoryL))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(productPriceIn)
+                            .addComponent(productNameIn, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                            .addComponent(productDescIn, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(productCodeIn)
+                            .addComponent(categoryComboBox, 0, 327, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(369, Short.MAX_VALUE)
-                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(titleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categoryL))
+                    .addComponent(categoryL)
+                    .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(productCodeL)
@@ -180,6 +188,7 @@ public class ProductForm extends javax.swing.JFrame {
     private javax.swing.JTextField productPriceIn;
     private javax.swing.JLabel productPriceL;
     private javax.swing.JButton saveButton;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private List<ProductCategory> categoryList;
     private BindingGroup bindingGroup;
