@@ -82,7 +82,6 @@ public class ExportOps {
                 totalSent += el.getSent();
                 totalSold += el.getSold();
             }
-
             exp.setTotal(total);
             exp.setTotalSendValue(totalSendValue);
             exp.setTotalSent(totalSent);

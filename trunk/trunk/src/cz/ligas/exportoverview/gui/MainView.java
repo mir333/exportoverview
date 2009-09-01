@@ -5,7 +5,6 @@ package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
-import cz.ligas.exportoverview.appli.ExportOps;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Export;
 import cz.ligas.exportoverview.db.ExportLine;
@@ -25,7 +24,6 @@ import java.beans.Beans;
 import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
@@ -155,16 +153,16 @@ public class MainView extends FrameView {
 
         clientsComboBox.setName("clientsComboBox"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(MainView.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap	(MainView.class, this);
         newClientButton.setAction(actionMap.get("newClient")); // NOI18N
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(MainView.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(MainView.class);
         newClientButton.setText(resourceMap.getString("newClientButton.text")); // NOI18N
         newClientButton.setName("newClientButton"); // NOI18N
 
         clientsL.setText(resourceMap.getString("clientsL.text")); // NOI18N
         clientsL.setName("clientsL"); // NOI18N
 
-        newProductButton.setAction(actionMap.get("newProduct")); // NOI18N
+	newProductButton.setAction(actionMap.get("newProduct")); // NOI18N
         newProductButton.setText(resourceMap.getString("newProductButton.text")); // NOI18N
         newProductButton.setName("newProductButton"); // NOI18N
 
@@ -172,11 +170,11 @@ public class MainView extends FrameView {
         newCategoryButton.setText(resourceMap.getString("newCategoryButton.text")); // NOI18N
         newCategoryButton.setName("newCategoryButton"); // NOI18N
 
-        newExportButton.setAction(actionMap.get("newExport")); // NOI18N
+	newExportButton.setAction(actionMap.get("newExport")); // NOI18N
         newExportButton.setText(resourceMap.getString("newExportButton.text")); // NOI18N
         newExportButton.setName("newExportButton"); // NOI18N
 
-        addProductButton.setAction(actionMap.get("addProduct")); // NOI18N
+	addProductButton.setAction(actionMap.get("addProduct")); // NOI18N
         addProductButton.setText(resourceMap.getString("addProductButton.text")); // NOI18N
         addProductButton.setName("addProductButton"); // NOI18N
 
@@ -186,7 +184,7 @@ public class MainView extends FrameView {
         exportComboBox.setName("exportComboBox"); // NOI18N
 
         org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedItem.exports}");
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, eLProperty, exportComboBox);
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, eLProperty, exportComboBox, "expoerBinding");
         bindingGroup.addBinding(jComboBoxBinding);
 
         exportComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -331,14 +329,14 @@ public class MainView extends FrameView {
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
-        printMenuItem.setAction(actionMap.get("print")); // NOI18N
+ 	printMenuItem.setAction(actionMap.get("print")); // NOI18N
         printMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         printMenuItem.setText(resourceMap.getString("printMenuItem.text")); // NOI18N
         printMenuItem.setName("printMenuItem"); // NOI18N
         fileMenu.add(printMenuItem);
         printMenuItem.getAccessibleContext().setAccessibleName(resourceMap.getString("printMenuItem.AccessibleContext.accessibleName")); // NOI18N
 
-        exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
+	exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
 
@@ -346,8 +344,8 @@ public class MainView extends FrameView {
 
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
-
-        aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
+	
+	aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
         helpMenu.add(aboutMenuItem);
 
@@ -400,7 +398,8 @@ public class MainView extends FrameView {
     private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
         if (evt.getClickCount() > 1) {
             final int index = mainTable.convertRowIndexToModel(mainTable.getSelectedRow());
-            EditExportLineForm eel = new EditExportLineForm(exportLinesList.get(index));
+            Export e = (Export) exportComboBox.getSelectedItem();
+            EditExportLineForm eel = new EditExportLineForm(e,exportLinesList.get(index));
             eel.setLocationRelativeTo(mainTable);
             eel.addWindowListener(new WindowAdapter() {
 
@@ -410,7 +409,7 @@ public class MainView extends FrameView {
                         ExportLine exp = exportLinesList.get(index);
                         exp = ExportLineOps.getExportLineById(exp.getId());
                         exportLinesList.set(index, exp);
-                        // TODO: treba robit refresh hlavneho okna
+                        refreshTotal();
                         mainTable.updateUI();
                     } catch (Exception ex) {
                         Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
@@ -526,6 +525,14 @@ public class MainView extends FrameView {
         bindingGroup.bind();
     }
 
+    public void refreshTotal() {
+        // TODO: treba robit refresh hlavneho okna
+        
+        Export e = (Export)exportComboBox.getSelectedItem();
+        System.err.println(e.getTotalSent() + " " + e.getTotalSold());
+        totalLableOut.repaint();
+    }
+
     @Action
     public void showAboutBox() {
         JDialog aboutBox = new AboutBox();
@@ -600,6 +607,7 @@ public class MainView extends FrameView {
                 exportLinesList.clear();
                 try {
                     exportLinesList.addAll(ExportLineOps.getExportLinesByExport(e));
+                    refreshTotal();
                     mainTable.updateUI();
                 } catch (Exception ex) {
                     Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
@@ -611,24 +619,20 @@ public class MainView extends FrameView {
 
     @Action
     public void print() {
-
-
         /* Fetch printing properties from the GUI components */
-
-        MessageFormat header = new MessageFormat(clientsComboBox.getSelectedItem().toString());
-        MessageFormat footer = new MessageFormat(exportComboBox.getSelectedItem().toString());
+        Export ex = (Export) exportComboBox.getSelectedItem();
+        MessageFormat header = new MessageFormat(clientsComboBox.getSelectedItem().toString() + ", Changed: " + ex.getEditDate());
+        String s = "Send total: " + ex.getTotalSent() + ", Sent value: " + ex.getTotalSendValue() + ", Sold total: " + ex.getTotalSold() + ", Total: " + ex.getTotal();
+        MessageFormat footer = new MessageFormat(s);
         boolean showPrintDialog = true;
         boolean interactive = true;
-
         /* determine the print mode */
         JTable.PrintMode mode = JTable.PrintMode.FIT_WIDTH;
-
         try {
             /* print the table */
             boolean complete = mainTable.print(mode, header, footer,
                     showPrintDialog, null,
                     interactive, null);
-
             /* if printing completes */
             if (complete) {
                 /* show a success message */

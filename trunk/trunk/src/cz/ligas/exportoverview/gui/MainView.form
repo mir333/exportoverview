@@ -111,7 +111,7 @@
         <Component class="javax.swing.JButton" name="newClientButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action class="cz.ligas.exportoverview.gui.MainView" id="newClient" methodName="newClient"/>
+              <action/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="newClientButton.text"/>
             <Property name="name" type="java.lang.String" value="newClientButton" noResource="true"/>
@@ -126,7 +126,7 @@
         <Component class="javax.swing.JButton" name="newProductButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action class="cz.ligas.exportoverview.gui.MainView" id="newProduct" methodName="newProduct"/>
+              <action/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="newProductButton.text"/>
             <Property name="name" type="java.lang.String" value="newProductButton" noResource="true"/>
@@ -135,7 +135,7 @@
         <Component class="javax.swing.JButton" name="newCategoryButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action class="cz.ligas.exportoverview.gui.MainView" id="newCategory" methodName="newCategory"/>
+              <action/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="newCategoryButton.text"/>
             <Property name="name" type="java.lang.String" value="newCategoryButton" noResource="true"/>
@@ -144,7 +144,7 @@
         <Component class="javax.swing.JButton" name="newExportButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action class="cz.ligas.exportoverview.gui.MainView" id="newExport" methodName="newExport"/>
+              <action/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="newExportButton.text"/>
             <Property name="name" type="java.lang.String" value="newExportButton" noResource="true"/>
@@ -153,7 +153,7 @@
         <Component class="javax.swing.JButton" name="addProductButton">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action class="cz.ligas.exportoverview.gui.MainView" id="addProduct" methodName="addProduct"/>
+              <action/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="addProductButton.text"/>
             <Property name="name" type="java.lang.String" value="addProductButton" noResource="true"/>
@@ -173,7 +173,9 @@
             <Property name="name" type="java.lang.String" value="exportComboBox" noResource="true"/>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="elements" source="clientsComboBox" sourcePath="${selectedItem.exports}" target="exportComboBox" targetPath="elements" updateStrategy="0" immediately="false"/>
+            <BindingProperty name="elements" source="clientsComboBox" sourcePath="${selectedItem.exports}" target="exportComboBox" targetPath="elements" updateStrategy="0" immediately="false">
+              <Property name="name" type="java.lang.String" value="expoerBinding"/>
+            </BindingProperty>
           </BindingProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportComboBoxActionPerformed"/>
@@ -308,10 +310,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="printMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-                  <action class="cz.ligas.exportoverview.gui.MainView" id="print" methodName="print"/>
-                </Property>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+P"/>
+                  <action/>
                 </Property>
                 <Property name="text" type="java.lang.String" resourceKey="printMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="printMenuItem" noResource="true"/>
@@ -323,7 +322,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-                  <action class="org.jdesktop.application.Application" id="quit" methodName="quit"/>
+                  <action/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="exitMenuItem" noResource="true"/>
               </Properties>
@@ -347,7 +346,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-                  <action class="cz.ligas.exportoverview.gui.guiView" id="showAboutBox" methodName="showAboutBox"/>
+                  <action/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="aboutMenuItem" noResource="true"/>
               </Properties>
