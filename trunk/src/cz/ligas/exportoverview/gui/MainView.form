@@ -110,9 +110,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="newClientButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action/>
-            </Property>
             <Property name="text" type="java.lang.String" resourceKey="newClientButton.text"/>
             <Property name="name" type="java.lang.String" value="newClientButton" noResource="true"/>
           </Properties>
@@ -125,36 +122,24 @@
         </Component>
         <Component class="javax.swing.JButton" name="newProductButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action/>
-            </Property>
             <Property name="text" type="java.lang.String" resourceKey="newProductButton.text"/>
             <Property name="name" type="java.lang.String" value="newProductButton" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="newCategoryButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action/>
-            </Property>
             <Property name="text" type="java.lang.String" resourceKey="newCategoryButton.text"/>
             <Property name="name" type="java.lang.String" value="newCategoryButton" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="newExportButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action/>
-            </Property>
             <Property name="text" type="java.lang.String" resourceKey="newExportButton.text"/>
             <Property name="name" type="java.lang.String" value="newExportButton" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="addProductButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action/>
-            </Property>
             <Property name="text" type="java.lang.String" resourceKey="addProductButton.text"/>
             <Property name="name" type="java.lang.String" value="addProductButton" noResource="true"/>
           </Properties>
@@ -309,9 +294,6 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="printMenuItem">
               <Properties>
-                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-                  <action/>
-                </Property>
                 <Property name="text" type="java.lang.String" resourceKey="printMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="printMenuItem" noResource="true"/>
               </Properties>
@@ -321,9 +303,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
-                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-                  <action/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="exitMenuItem" noResource="true"/>
               </Properties>
               <AuxValues>
@@ -345,9 +324,6 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>
-                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-                  <action/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="aboutMenuItem" noResource="true"/>
               </Properties>
               <AuxValues>
