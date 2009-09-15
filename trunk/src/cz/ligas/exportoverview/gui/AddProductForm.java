@@ -192,11 +192,21 @@ public class AddProductForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private List<ProductCategory> categoryList;
     private Export export;
+    private MyInputVerifier verifier = new MyInputVerifier();
 
     private void myInit() {
         bindingGroup = new BindingGroup();
+        exportLineSendIn.setInputVerifier(verifier);
+        exportLineSendIn.addActionListener(verifier);
+        exportLineSendL.setLabelFor(exportLineSendIn);
+        exportLineSoldIn.setInputVerifier(verifier);
+        exportLineSoldIn.addActionListener(verifier);
+        exportLineSoldL.setLabelFor(exportLineSoldL);
+        exportLineSpecialPriceIn.setInputVerifier(verifier);        
+        exportLineSpecialPriceIn.addActionListener(verifier);
+        exportLineCustomPriceL.setLabelFor(exportLineSpecialPriceIn);
         try {
-            categoryList =Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList( CategoryOps.getCategories());
+            categoryList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList( CategoryOps.getCategories());
         } catch (Exception ex) {
             Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
         }
