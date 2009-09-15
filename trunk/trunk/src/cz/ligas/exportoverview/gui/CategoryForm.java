@@ -20,6 +20,7 @@ public class CategoryForm extends javax.swing.JFrame {
     /** Creates new form CategoryForm */
     public CategoryForm() {
         initComponents();
+        myInit();
     }
 
     /** This method is called from within the constructor to
@@ -116,7 +117,6 @@ public class CategoryForm extends javax.swing.JFrame {
         }
         this.dispose();
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField categoryCodeIn;
     private javax.swing.JLabel categoryCodeL;
@@ -125,4 +125,14 @@ public class CategoryForm extends javax.swing.JFrame {
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
+    private MyInputVerifier verifier = new MyInputVerifier();
+
+    private void myInit() {
+        categoryCodeIn.setInputVerifier(verifier);
+        categoryCodeIn.addActionListener(verifier);
+        categoryCodeL.setLabelFor(categoryCodeIn);
+        categoryNameIn.setInputVerifier(verifier);
+        categoryNameIn.addActionListener(verifier);
+        categoryNameL.setLabelFor(categoryNameIn);
+    }
 }
