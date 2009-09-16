@@ -35,8 +35,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="categoryCodeIn" alignment="0" pref="264" max="32767" attributes="0"/>
-                          <Component id="categoryNameIn" alignment="0" pref="264" max="32767" attributes="0"/>
+                          <Component id="tCategoryCodeIn" alignment="0" pref="264" max="32767" attributes="0"/>
+                          <Component id="tCategoryNameIn" alignment="0" pref="264" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="titleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -53,12 +53,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="categoryCodeL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="categoryCodeIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tCategoryCodeIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="categoryNameL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="categoryNameIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tCategoryNameIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="saveButton" min="-2" max="-2" attributes="0"/>
@@ -86,16 +86,16 @@
         <Property name="name" type="java.lang.String" value="saveButton" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="categoryCodeIn">
+    <Component class="javax.swing.JTextField" name="tCategoryCodeIn">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="categoryCodeIn.text"/>
-        <Property name="name" type="java.lang.String" value="categoryCodeIn" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="tCategoryCodeIn.text"/>
+        <Property name="name" type="java.lang.String" value="tCategoryCodeIn" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="categoryNameIn">
+    <Component class="javax.swing.JTextField" name="tCategoryNameIn">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="categoryNameIn.text"/>
-        <Property name="name" type="java.lang.String" value="categoryNameIn" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="tCategoryNameIn.text"/>
+        <Property name="name" type="java.lang.String" value="tCategoryNameIn" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="titleLabel">

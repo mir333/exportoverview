@@ -22,6 +22,7 @@ public class ClientForm extends JFrame {
     /** Creates new form ClientForm */
     public ClientForm() {
         initComponents();
+        myInit();
     }
 
     
@@ -31,9 +32,9 @@ public class ClientForm extends JFrame {
         clientNameL = new javax.swing.JLabel();
         clientAddressL = new javax.swing.JLabel();
         clientPhoneL = new javax.swing.JLabel();
-        clientNameIn = new javax.swing.JTextField();
-        clientAddressIn = new javax.swing.JTextField();
-        clientPhoneIn = new javax.swing.JTextField();
+        tClientNameIn = new javax.swing.JTextField();
+        tClientAddressIn = new javax.swing.JTextField();
+        tClientPhoneIn = new javax.swing.JTextField();
         clientSaveButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
 
@@ -51,18 +52,18 @@ public class ClientForm extends JFrame {
         clientPhoneL.setText(resourceMap.getString("clientPhoneL.text")); // NOI18N
         clientPhoneL.setName("clientPhoneL"); // NOI18N
 
-        clientNameIn.setText(resourceMap.getString("clientNameIn.text")); // NOI18N
-        clientNameIn.setName("clientNameIn"); // NOI18N
+        tClientNameIn.setText(resourceMap.getString("tClientNameIn.text")); // NOI18N
+        tClientNameIn.setName("tClientNameIn"); // NOI18N
 
-        clientAddressIn.setText(resourceMap.getString("clientAddressIn.text")); // NOI18N
-        clientAddressIn.setName("clientAddressIn"); // NOI18N
+        tClientAddressIn.setText(resourceMap.getString("tClientAddressIn.text")); // NOI18N
+        tClientAddressIn.setName("tClientAddressIn"); // NOI18N
 
-        clientPhoneIn.setText(resourceMap.getString("clientPhoneIn.text")); // NOI18N
-        clientPhoneIn.setName("clientPhoneIn"); // NOI18N
+        tClientPhoneIn.setText(resourceMap.getString("tClientPhoneIn.text")); // NOI18N
+        tClientPhoneIn.setName("tClientPhoneIn"); // NOI18N
 
 	javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(ClientForm.class, this);
         clientSaveButton.setAction(actionMap.get("clientSaveAction")); // NOI18N
-        clientSaveButton.setText(resourceMap.getString("clientSaveButton.text")); // NOI18N
+	clientSaveButton.setText(resourceMap.getString("clientSaveButton.text")); // NOI18N
         clientSaveButton.setName("clientSaveButton"); // NOI18N
 
         titleLabel.setText(resourceMap.getString("titleLabel.text")); // NOI18N
@@ -83,9 +84,9 @@ public class ClientForm extends JFrame {
                             .addComponent(clientPhoneL))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(clientNameIn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                            .addComponent(clientAddressIn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                            .addComponent(clientPhoneIn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)))
+                            .addComponent(tClientNameIn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                            .addComponent(tClientAddressIn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                            .addComponent(tClientPhoneIn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)))
                     .addComponent(clientSaveButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -97,14 +98,14 @@ public class ClientForm extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clientNameL)
-                    .addComponent(clientNameIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tClientNameIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clientAddressIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tClientAddressIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clientAddressL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clientPhoneIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tClientPhoneIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clientPhoneL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(clientSaveButton)
@@ -117,9 +118,9 @@ public class ClientForm extends JFrame {
     @Action
     public void clientSaveAction() {
        Clients c = new Clients();
-       c.setClientName(clientNameIn.getText());
-       c.setClientAddress(clientAddressIn.getText());
-       c.setClientPhone(clientPhoneIn.getText());
+       c.setClientName(tClientNameIn.getText());
+       c.setClientAddress(tClientAddressIn.getText());
+       c.setClientPhone(tClientPhoneIn.getText());
        //overenie vyplnenia
        
        try {
@@ -128,17 +129,29 @@ public class ClientForm extends JFrame {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
        this.dispose();
+       System.err.println("clientSaveAction executed");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField clientAddressIn;
     private javax.swing.JLabel clientAddressL;
-    private javax.swing.JTextField clientNameIn;
     private javax.swing.JLabel clientNameL;
-    private javax.swing.JTextField clientPhoneIn;
     private javax.swing.JLabel clientPhoneL;
     private javax.swing.JButton clientSaveButton;
+    private javax.swing.JTextField tClientAddressIn;
+    private javax.swing.JTextField tClientNameIn;
+    private javax.swing.JTextField tClientPhoneIn;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
-
+    MyInputVerifier verifier = new MyInputVerifier();
+        private void myInit() {
+        tClientAddressIn.setInputVerifier(verifier);
+        tClientAddressIn.addActionListener(verifier);
+        clientAddressL.setLabelFor(tClientAddressIn);
+        tClientNameIn.setInputVerifier(verifier);
+        tClientNameIn.addActionListener(verifier);
+        clientNameL.setLabelFor(tClientNameIn);
+        tClientPhoneIn.setInputVerifier(verifier);
+        tClientPhoneIn.addActionListener(verifier);
+        clientPhoneL.setLabelFor(tClientPhoneIn);
+    }
 }

@@ -36,9 +36,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="clientNameIn" alignment="0" pref="290" max="32767" attributes="1"/>
-                          <Component id="clientAddressIn" alignment="0" pref="290" max="32767" attributes="1"/>
-                          <Component id="clientPhoneIn" alignment="0" pref="290" max="32767" attributes="1"/>
+                          <Component id="tClientNameIn" alignment="0" pref="290" max="32767" attributes="1"/>
+                          <Component id="tClientAddressIn" alignment="0" pref="290" max="32767" attributes="1"/>
+                          <Component id="tClientPhoneIn" alignment="0" pref="290" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <Component id="clientSaveButton" alignment="1" min="-2" pref="65" max="-2" attributes="0"/>
@@ -55,16 +55,16 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="clientNameL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="clientNameIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tClientNameIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="clientAddressIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tClientAddressIn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="clientAddressL" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="clientPhoneIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tClientPhoneIn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="clientPhoneL" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -93,25 +93,22 @@
         <Property name="name" type="java.lang.String" value="clientPhoneL" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="clientNameIn">
+    <Component class="javax.swing.JTextField" name="tClientNameIn">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="clientNameIn.text"/>
-        <Property name="name" type="java.lang.String" value="clientNameIn" noResource="true"/>
-      </Properties>
-      <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="clientNameInFocusLost"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="clientAddressIn">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="clientAddressIn.text"/>
-        <Property name="name" type="java.lang.String" value="clientAddressIn" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="tClientNameIn.text"/>
+        <Property name="name" type="java.lang.String" value="tClientNameIn" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="clientPhoneIn">
+    <Component class="javax.swing.JTextField" name="tClientAddressIn">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="clientPhoneIn.text"/>
-        <Property name="name" type="java.lang.String" value="clientPhoneIn" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="tClientAddressIn.text"/>
+        <Property name="name" type="java.lang.String" value="tClientAddressIn" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tClientPhoneIn">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="tClientPhoneIn.text"/>
+        <Property name="name" type="java.lang.String" value="tClientPhoneIn" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="clientSaveButton">

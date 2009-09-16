@@ -80,9 +80,6 @@
     </Component>
     <Component class="javax.swing.JButton" name="createExportButton">
       <Properties>
-        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-          <action/>
-        </Property>
         <Property name="text" type="java.lang.String" resourceKey="createExportButton.text"/>
         <Property name="name" type="java.lang.String" value="createExportButton" noResource="true"/>
       </Properties>

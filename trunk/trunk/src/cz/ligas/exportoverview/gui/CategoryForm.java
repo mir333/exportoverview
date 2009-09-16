@@ -35,8 +35,8 @@ public class CategoryForm extends javax.swing.JFrame {
         categoryCodeL = new javax.swing.JLabel();
         categoryNameL = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
-        categoryCodeIn = new javax.swing.JTextField();
-        categoryNameIn = new javax.swing.JTextField();
+        tCategoryCodeIn = new javax.swing.JTextField();
+        tCategoryNameIn = new javax.swing.JTextField();
         titleLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -50,16 +50,16 @@ public class CategoryForm extends javax.swing.JFrame {
         categoryNameL.setText(resourceMap.getString("categoryNameL.text")); // NOI18N
         categoryNameL.setName("categoryNameL"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(CategoryForm.class, this);
-        saveButton.setAction(actionMap.get("saveCategory")); // NOI18N
-        saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
+	javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(CategoryForm.class, this);
+        saveButton.setAction(actionMap.get("saveCategory")); // NOI18N        
+	saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
         saveButton.setName("saveButton"); // NOI18N
 
-        categoryCodeIn.setText(resourceMap.getString("categoryCodeIn.text")); // NOI18N
-        categoryCodeIn.setName("categoryCodeIn"); // NOI18N
+        tCategoryCodeIn.setText(resourceMap.getString("tCategoryCodeIn.text")); // NOI18N
+        tCategoryCodeIn.setName("tCategoryCodeIn"); // NOI18N
 
-        categoryNameIn.setText(resourceMap.getString("categoryNameIn.text")); // NOI18N
-        categoryNameIn.setName("categoryNameIn"); // NOI18N
+        tCategoryNameIn.setText(resourceMap.getString("tCategoryNameIn.text")); // NOI18N
+        tCategoryNameIn.setName("tCategoryNameIn"); // NOI18N
 
         titleLabel.setText(resourceMap.getString("titleLabel.text")); // NOI18N
         titleLabel.setName("titleLabel"); // NOI18N
@@ -78,8 +78,8 @@ public class CategoryForm extends javax.swing.JFrame {
                             .addComponent(categoryCodeL))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(categoryCodeIn, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                            .addComponent(categoryNameIn, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)))
+                            .addComponent(tCategoryCodeIn, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                            .addComponent(tCategoryNameIn, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)))
                     .addComponent(titleLabel))
                 .addContainerGap())
         );
@@ -91,11 +91,11 @@ public class CategoryForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(categoryCodeL)
-                    .addComponent(categoryCodeIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tCategoryCodeIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(categoryNameL)
-                    .addComponent(categoryNameIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tCategoryNameIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -107,8 +107,8 @@ public class CategoryForm extends javax.swing.JFrame {
     @Action
     public void saveCategory() {
         ProductCategory pc = new ProductCategory();
-        pc.setCategoryCode(categoryCodeIn.getText());
-        pc.setCategoryName(categoryNameIn.getText());
+        pc.setCategoryCode(tCategoryCodeIn.getText());
+        pc.setCategoryName(tCategoryNameIn.getText());
         //overenie vyplnenia
         try {
             CategoryOps.addCategory(pc);
@@ -116,23 +116,24 @@ public class CategoryForm extends javax.swing.JFrame {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
+        System.err.println("saveCategory executed");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField categoryCodeIn;
     private javax.swing.JLabel categoryCodeL;
-    private javax.swing.JTextField categoryNameIn;
     private javax.swing.JLabel categoryNameL;
     private javax.swing.JButton saveButton;
+    private javax.swing.JTextField tCategoryCodeIn;
+    private javax.swing.JTextField tCategoryNameIn;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private MyInputVerifier verifier = new MyInputVerifier();
 
     private void myInit() {
-        categoryCodeIn.setInputVerifier(verifier);
-        categoryCodeIn.addActionListener(verifier);
-        categoryCodeL.setLabelFor(categoryCodeIn);
-        categoryNameIn.setInputVerifier(verifier);
-        categoryNameIn.addActionListener(verifier);
-        categoryNameL.setLabelFor(categoryNameIn);
+        tCategoryCodeIn.setInputVerifier(verifier);
+        tCategoryCodeIn.addActionListener(verifier);
+        categoryCodeL.setLabelFor(tCategoryCodeIn);
+        tCategoryNameIn.setInputVerifier(verifier);
+        tCategoryNameIn.addActionListener(verifier);
+        categoryNameL.setLabelFor(tCategoryNameIn);
     }
 }

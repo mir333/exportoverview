@@ -31,18 +31,18 @@
                   <Component id="titleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="productDescL" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="productCodeL" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="productNameL" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="productPriceL" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="categoryL" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="productDescL" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="productPriceIn" alignment="0" max="32767" attributes="1"/>
-                          <Component id="productNameIn" alignment="0" pref="336" max="32767" attributes="1"/>
-                          <Component id="productDescIn" alignment="1" max="32767" attributes="1"/>
-                          <Component id="productCodeIn" alignment="0" max="32767" attributes="1"/>
+                          <Component id="mProductPriceIn" alignment="0" max="32767" attributes="1"/>
+                          <Component id="tProductNameIn" alignment="0" pref="336" max="32767" attributes="1"/>
+                          <Component id="tProductDescIn" alignment="1" max="32767" attributes="1"/>
+                          <Component id="tProductCodeIn" alignment="0" max="32767" attributes="1"/>
                           <Component id="categoryComboBox" alignment="0" pref="327" max="32767" attributes="1"/>
                       </Group>
                   </Group>
@@ -64,22 +64,22 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="productCodeL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="productCodeIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tProductCodeIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="productNameL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="productNameIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tProductNameIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="productPriceL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="productPriceIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mProductPriceIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="productDescL" min="-2" max="-2" attributes="0"/>
-                  <Component id="productDescIn" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tProductDescIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="productDescL" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="saveButton" min="-2" max="-2" attributes="0"/>
@@ -132,35 +132,32 @@
         <Property name="name" type="java.lang.String" value="productDescL" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="productCodeIn">
+    <Component class="javax.swing.JTextField" name="tProductCodeIn">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="productCodeIn.text"/>
-        <Property name="name" type="java.lang.String" value="productCodeIn" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="tProductCodeIn.text"/>
+        <Property name="name" type="java.lang.String" value="tProductCodeIn" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="productNameIn">
+    <Component class="javax.swing.JTextField" name="tProductNameIn">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="productNameIn.text"/>
-        <Property name="name" type="java.lang.String" value="productNameIn" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="tProductNameIn.text"/>
+        <Property name="name" type="java.lang.String" value="tProductNameIn" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="productPriceIn">
+    <Component class="javax.swing.JTextField" name="mProductPriceIn">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="productPriceIn.text"/>
-        <Property name="name" type="java.lang.String" value="productPriceIn" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="mProductPriceIn.text"/>
+        <Property name="name" type="java.lang.String" value="mProductPriceIn" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="productDescIn">
+    <Component class="javax.swing.JTextField" name="tProductDescIn">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="productDescIn.text"/>
-        <Property name="name" type="java.lang.String" value="productDescIn" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="tProductDescIn.text"/>
+        <Property name="name" type="java.lang.String" value="tProductDescIn" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="saveButton">
       <Properties>
-        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-          <action/>
-        </Property>
         <Property name="text" type="java.lang.String" resourceKey="saveButton.text"/>
         <Property name="name" type="java.lang.String" value="saveButton" noResource="true"/>
       </Properties>
