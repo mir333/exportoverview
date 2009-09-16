@@ -41,7 +41,6 @@ public class EditExportLineForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
         exportLineSentL = new javax.swing.JLabel();
         exportLineSoldL = new javax.swing.JLabel();
         nExportLineSentSpinner = new javax.swing.JSpinner();
@@ -49,11 +48,8 @@ public class EditExportLineForm extends javax.swing.JFrame {
         exportLineSaveButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(EditExportLineForm.class);
-        jCheckBox1.setText(resourceMap.getString("jCheckBox1.text")); // NOI18N
-        jCheckBox1.setName("jCheckBox1"); // NOI18N
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(EditExportLineForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
 
@@ -68,9 +64,8 @@ public class EditExportLineForm extends javax.swing.JFrame {
         nExportLineSoldSpinner.setName("nExportLineSoldSpinner"); // NOI18N
 
 	javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(EditExportLineForm.class, this);
-        exportLineSaveButton.setAction(actionMap.get("editExportLineSaveAction")); // NOI18N
-        
-	exportLineSaveButton.setText(resourceMap.getString("exportLineSaveButton.text")); // NOI18N
+        exportLineSaveButton.setAction(actionMap.get("editExportLineSaveAction")); // NOI18N	
+        exportLineSaveButton.setText(resourceMap.getString("exportLineSaveButton.text")); // NOI18N
         exportLineSaveButton.setName("exportLineSaveButton"); // NOI18N
 
         titleLabel.setText(resourceMap.getString("titleLabel.text")); // NOI18N
@@ -120,7 +115,6 @@ public class EditExportLineForm extends javax.swing.JFrame {
     private javax.swing.JButton exportLineSaveButton;
     private javax.swing.JLabel exportLineSentL;
     private javax.swing.JLabel exportLineSoldL;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JSpinner nExportLineSentSpinner;
     private javax.swing.JSpinner nExportLineSoldSpinner;
     private javax.swing.JLabel titleLabel;
