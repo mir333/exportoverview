@@ -115,7 +115,7 @@ public class ExportForm extends javax.swing.JFrame {
             Logger.getLogger(ExportForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
-
+        System.err.println("createExport executed");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,18 +6,25 @@ package cz.ligas.exportoverview.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Locale;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import org.jdesktop.application.Application;
+import org.jdesktop.application.ResourceMap;
 
 /**
  *
  * @author xligas
  */
 public class MyInputVerifier extends InputVerifier implements ActionListener {
+
+    ResourceMap resourceMap = Application.getInstance().getContext().getResourceMap(MyInputVerifier.class);
     String message = null;
 
     public boolean shouldYieldFocus(JComponent input) {
@@ -30,25 +37,43 @@ public class MyInputVerifier extends InputVerifier implements ActionListener {
         return false;
     }
 
-
-
     @Override
     public boolean verify(JComponent input) {
-        System.err.println(input.getName());
-        return checkNumberField(input);
+        boolean b = true;
+        char c = input.getName().charAt(0);
+        if (c == 'n') {
+            return checkNumberField(input);
+        } else if (c == 'm') {
+            return checkMoneyField(input);
+        } else if (c == 't') {
+            return true;
+        }
+        return b;
     }
 
     public boolean checkNumberField(JComponent inp) {
-            NumberFormat moneyFormat = NumberFormat.getNumberInstance();
-            JTextField tf = (JTextField) inp;
-            try {
-                moneyFormat.parse(tf.getText()).doubleValue();
-            } catch (ParseException pe) {
-                message = "Invalid money format in Loan Amount field";
-                return false;
-            }
-            return true;
+        NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
+        JTextField tf = (JTextField) inp;
+        try {
+            tf.setText(numberFormat.format(numberFormat.parse(tf.getText()).intValue()));
+        } catch (ParseException pe) {
+            message = resourceMap.getString("validation.error.number");
+            return false;
         }
+        return true;
+    }
+
+    public boolean checkMoneyField(JComponent inp) {
+        NumberFormat moneyFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+        JTextField tf = (JTextField) inp;
+        try {
+            tf.setText(moneyFormat.format(moneyFormat.parse(tf.getText()).doubleValue()));
+        } catch (ParseException pe) {
+            message = resourceMap.getString("validation.error.money");
+            return false;
+        }
+        return true;
+    }
 
     public void actionPerformed(ActionEvent e) {
         JTextField source = (JTextField) e.getSource();
