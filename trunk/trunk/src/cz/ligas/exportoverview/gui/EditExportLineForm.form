@@ -27,19 +27,22 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="exportLineSaveButton" alignment="1" min="-2" pref="66" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="exportLineSentL" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="exportLineSoldL" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="exportLinePriceL" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="nExportLineSoldSpinner" pref="162" max="32767" attributes="1"/>
-                          <Component id="nExportLineSentSpinner" alignment="0" pref="162" max="32767" attributes="1"/>
-                      </Group>
+                      <Component id="mExportLinePriceTextfield" pref="160" max="32767" attributes="0"/>
                   </Group>
                   <Component id="titleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="exportLineSentL" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="nExportLineSentSpinner" min="-2" pref="82" max="-2" attributes="1"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="exportLineSoldL" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="nExportLineSoldSpinner" pref="78" max="32767" attributes="1"/>
+                  </Group>
+                  <Component id="exportLineSaveButton" alignment="1" min="-2" pref="66" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -52,13 +55,15 @@
               <Component id="titleLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="exportLineSentL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nExportLineSentSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mExportLinePriceTextfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="exportLinePriceL" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="exportLineSoldL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="exportLineSentL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nExportLineSentSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nExportLineSoldSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="exportLineSoldL" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="exportLineSaveButton" min="-2" max="-2" attributes="0"/>
@@ -100,6 +105,18 @@
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="titleLabel.text"/>
         <Property name="name" type="java.lang.String" value="titleLabel" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="mExportLinePriceTextfield">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="mExportLinePriceTextfield.text"/>
+        <Property name="name" type="java.lang.String" value="mExportLinePriceTextfield" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="exportLinePriceL">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="exportLinePriceL.text"/>
+        <Property name="name" type="java.lang.String" value="exportLinePriceL" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

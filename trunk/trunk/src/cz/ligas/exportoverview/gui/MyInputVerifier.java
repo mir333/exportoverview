@@ -55,7 +55,9 @@ public class MyInputVerifier extends InputVerifier implements ActionListener {
         NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
         JTextField tf = (JTextField) inp;
         try {
-            tf.setText(numberFormat.format(numberFormat.parse(tf.getText()).intValue()));
+            //TODO: prerobit pripadne na reg vyraz ale osetrit lokalizaciu
+            String s = numberFormat.format(numberFormat.parse(tf.getText()).intValue());
+            tf.setText(s);
         } catch (ParseException pe) {
             message = resourceMap.getString("validation.error.number");
             return false;

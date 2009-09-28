@@ -47,6 +47,8 @@ public class EditExportLineForm extends javax.swing.JFrame {
         nExportLineSoldSpinner = new javax.swing.JSpinner();
         exportLineSaveButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
+        mExportLinePriceTextfield = new javax.swing.JTextField();
+        exportLinePriceL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(EditExportLineForm.class);
@@ -64,12 +66,18 @@ public class EditExportLineForm extends javax.swing.JFrame {
         nExportLineSoldSpinner.setName("nExportLineSoldSpinner"); // NOI18N
 
 	javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(EditExportLineForm.class, this);
-        exportLineSaveButton.setAction(actionMap.get("editExportLineSaveAction")); // NOI18N	
-        exportLineSaveButton.setText(resourceMap.getString("exportLineSaveButton.text")); // NOI18N
+        exportLineSaveButton.setAction(actionMap.get("editExportLineSaveAction")); // NOI18N        
+	exportLineSaveButton.setText(resourceMap.getString("exportLineSaveButton.text")); // NOI18N
         exportLineSaveButton.setName("exportLineSaveButton"); // NOI18N
 
         titleLabel.setText(resourceMap.getString("titleLabel.text")); // NOI18N
         titleLabel.setName("titleLabel"); // NOI18N
+
+        mExportLinePriceTextfield.setText(resourceMap.getString("mExportLinePriceTextfield.text")); // NOI18N
+        mExportLinePriceTextfield.setName("mExportLinePriceTextfield"); // NOI18N
+
+        exportLinePriceL.setText(resourceMap.getString("exportLinePriceL.text")); // NOI18N
+        exportLinePriceL.setName("exportLinePriceL"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,16 +86,20 @@ public class EditExportLineForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(exportLineSaveButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(exportLineSentL)
-                            .addComponent(exportLineSoldL))
+                        .addComponent(exportLinePriceL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nExportLineSoldSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                            .addComponent(nExportLineSentSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)))
-                    .addComponent(titleLabel))
+                        .addComponent(mExportLinePriceTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                    .addComponent(titleLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(exportLineSentL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nExportLineSentSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(exportLineSoldL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nExportLineSoldSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                    .addComponent(exportLineSaveButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -97,12 +109,14 @@ public class EditExportLineForm extends javax.swing.JFrame {
                 .addComponent(titleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(exportLineSentL)
-                    .addComponent(nExportLineSentSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mExportLinePriceTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportLinePriceL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(exportLineSoldL)
-                    .addComponent(nExportLineSoldSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(exportLineSentL)
+                    .addComponent(nExportLineSentSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nExportLineSoldSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportLineSoldL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportLineSaveButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -112,9 +126,11 @@ public class EditExportLineForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel exportLinePriceL;
     private javax.swing.JButton exportLineSaveButton;
     private javax.swing.JLabel exportLineSentL;
     private javax.swing.JLabel exportLineSoldL;
+    private javax.swing.JTextField mExportLinePriceTextfield;
     private javax.swing.JSpinner nExportLineSentSpinner;
     private javax.swing.JSpinner nExportLineSoldSpinner;
     private javax.swing.JLabel titleLabel;
@@ -127,8 +143,9 @@ public class EditExportLineForm extends javax.swing.JFrame {
     public void editExportLineSaveAction() {
         int send = Integer.parseInt(nExportLineSentSpinner.getValue().toString());
         int sold = Integer.parseInt(nExportLineSoldSpinner.getValue().toString());
+        float price = Float.parseFloat(mExportLinePriceTextfield.getText());
         try {
-            ExportLineOps.editExportLine(export,exportLine,send,sold);
+            ExportLineOps.editExportLine(export,exportLine,send,sold,price);
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -138,6 +155,8 @@ public class EditExportLineForm extends javax.swing.JFrame {
     }
 
     private void myInit() {
+        mExportLinePriceTextfield.setInputVerifier(verifier);
+        exportLinePriceL.setLabelFor(mExportLinePriceTextfield);
         nExportLineSentSpinner.setInputVerifier(verifier);
         exportLineSentL.setLabelFor(nExportLineSentSpinner);
         nExportLineSoldSpinner.setInputVerifier(verifier);

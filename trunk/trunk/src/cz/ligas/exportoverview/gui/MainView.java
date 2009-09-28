@@ -591,7 +591,6 @@ public class MainView extends FrameView {
         ef.setVisible(true);
     }
 
-    // TODO: obnovovat sucty v hlavnom panely
     @Action
     public void addProduct() {
         final Export e = (Export) exportComboBox.getSelectedItem();
@@ -653,9 +652,6 @@ public class MainView extends FrameView {
         }
     }
 }
-// TODO: Skusit posielat nabindovane objekty do metod kde sa pridava
 // TODO: Dorobit potvrdenie na enter
 // TODO: Upravit DB aby potporovala uniqu itemy
-// TODO: overenie vstupu
-// TODO: dostat date do lablu pripadne okienka
 

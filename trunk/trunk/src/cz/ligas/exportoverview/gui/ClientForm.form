@@ -27,23 +27,52 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="titleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="clientNameL" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="clientAddressL" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="clientPhoneL" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="titleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="clientNameL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="clientAddressL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="countryL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="clientPhoneL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="tClientAddressIn" alignment="0" pref="321" max="32767" attributes="1"/>
+                                      <Component id="tClientPhoneIn" alignment="1" pref="321" max="32767" attributes="1"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="tZipCodeIn" min="-2" pref="110" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cityL" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tCityIn" pref="157" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="tCountryIn" alignment="0" pref="321" max="32767" attributes="0"/>
+                                      <Component id="tICOIn" alignment="0" pref="321" max="32767" attributes="0"/>
+                                      <Component id="tDICIn" alignment="0" pref="321" max="32767" attributes="0"/>
+                                      <Component id="tClientNameIn" alignment="1" pref="321" max="32767" attributes="1"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tClientNameIn" alignment="0" pref="290" max="32767" attributes="1"/>
-                          <Component id="tClientAddressIn" alignment="0" pref="290" max="32767" attributes="1"/>
-                          <Component id="tClientPhoneIn" alignment="0" pref="290" max="32767" attributes="1"/>
+                      <Component id="zipCodeL" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="icoL" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="380" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="dicL" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="380" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="clientSaveButton" alignment="1" min="-2" pref="65" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="clientSaveButton" min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,8 +93,30 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tClientPhoneIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="zipCodeL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tZipCodeIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cityL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tCityIn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="countryL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tCountryIn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="clientPhoneL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tClientPhoneIn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="icoL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tICOIn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="dicL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tDICIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="clientSaveButton" min="-2" max="-2" attributes="0"/>
@@ -121,6 +172,66 @@
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="titleLabel.text"/>
         <Property name="name" type="java.lang.String" value="titleLabel" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="zipCodeL">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="zipCodeL.text"/>
+        <Property name="name" type="java.lang.String" value="zipCodeL" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="countryL">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="countryL.text"/>
+        <Property name="name" type="java.lang.String" value="countryL" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="cityL">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="cityL.text"/>
+        <Property name="name" type="java.lang.String" value="cityL" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tZipCodeIn">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="tZipCodeIn.text"/>
+        <Property name="name" type="java.lang.String" value="tZipCodeIn" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tCityIn">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="tCityIn.text"/>
+        <Property name="name" type="java.lang.String" value="tCityIn" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tCountryIn">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="tCountryIn.text"/>
+        <Property name="name" type="java.lang.String" value="tCountryIn" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="icoL">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="icoL.text"/>
+        <Property name="name" type="java.lang.String" value="icoL" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dicL">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="dicL.text"/>
+        <Property name="name" type="java.lang.String" value="dicL" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tICOIn">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="tICOIn.text"/>
+        <Property name="name" type="java.lang.String" value="tICOIn" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tDICIn">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="tDICIn.text"/>
+        <Property name="name" type="java.lang.String" value="tDICIn" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>
