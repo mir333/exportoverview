@@ -77,7 +77,8 @@ public class ExportLineOps {
         }
     }
 
-    public static void editExportLine(Export exp,ExportLine exportLine, int sent,int sold) throws Exception {
+    public static void editExportLine(Export exp,ExportLine exportLine, int sent,int sold,float price) throws Exception {
+        exportLine.setPrice(price);
         exportLine.setSent(exportLine.getSent()+sent-sold);
         exportLine.setSold(exportLine.getSold()+sold);
         exportLine.setSentPrice(exportLine.getPrice()*exportLine.getSent());

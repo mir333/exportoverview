@@ -35,6 +35,11 @@ public class Clients implements Serializable {
     @Column(name = "C_NAME", nullable = false)
     private String clientName;
     private String clientAddress;
+    private String psc;
+    private String city;
+    private String country;
+    private String ico;
+    private String dic;
     private String clientPhone;
     @OneToMany(mappedBy="client")
     private List<Export> exports;
@@ -85,6 +90,46 @@ public class Clients implements Serializable {
         int oldId = this.id;
         this.id = id;
         changeSupport.firePropertyChange("id", oldId, id);
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDic() {
+        return dic;
+    }
+
+    public void setDic(String dic) {
+        this.dic = dic;
+    }
+
+    public String getIco() {
+        return ico;
+    }
+
+    public void setIco(String ico) {
+        this.ico = ico;
+    }
+
+    public String getPsc() {
+        return psc;
+    }
+
+    public void setPsc(String psc) {
+        this.psc = psc;
     }
 
     @Override

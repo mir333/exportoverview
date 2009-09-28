@@ -24,7 +24,6 @@ import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.observablecollections.ObservableList;
 import org.jdesktop.swingbinding.JComboBoxBinding;
 import org.jdesktop.swingbinding.SwingBindings;
-// TODO: refresh po pridani produktu
 
 /**
  *
@@ -214,7 +213,6 @@ public class AddProductForm extends javax.swing.JFrame {
         bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
     }
-    // TODO: manualne plnenie produktComboBoxu
 
     @Action
     public void addExportLine() {
@@ -224,7 +222,6 @@ public class AddProductForm extends javax.swing.JFrame {
         el.setPrice(Float.parseFloat(mExportLineSpecialPriceIn.getText()));
         el.setSent(Integer.parseInt(nExportLineSendIn.getText()));
         el.setSold(Integer.parseInt(nExportLineSoldIn.getText()));
-        //overenie vyplnenia
         try {
             ExportLineOps.addExportLine(el);
         } catch (Exception ex) {
