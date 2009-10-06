@@ -36,14 +36,14 @@ public class Main {
         pro.setProductName("testname");
         pro.setProductDes("das");
         pro.setProductPrice(123);
-        System.err.println("produkt "+pro.toString());
+        System.err.println("produkt " + pro.toString());
 
         Products prod = new Products();
         prod.setProductCode("A2");
         prod.setProductName("testmeno");
         prod.setProductDes("dasdas");
         prod.setProductPrice(123);
-        System.err.println("produkt "+prod.toString());
+        System.err.println("produkt " + prod.toString());
 
         pc.getProducts().add(pro);
         pro.setProductCategoryId(pc);
@@ -72,12 +72,12 @@ public class Main {
         kl1.setClientName("fero");
         kl1.setClientAddress("fdsfs");
         kl1.setClientPhone("111111");
-        System.err.println("klient "+kl1.toString());
+        System.err.println("klient " + kl1.toString());
         Clients kl2 = new Clients();
         kl2.setClientName("jozo");
         kl2.setClientAddress("fdsfs");
         kl2.setClientPhone("2222");
-        System.err.println("klient "+kl2.toString());
+        System.err.println("klient " + kl2.toString());
         em.persist(kl2);
         em.persist(kl1);
         em.getTransaction().commit();
@@ -116,17 +116,17 @@ public class Main {
         el.setSent(6);
         el.setSold(3);
         el.setProd(pro);
-        System.err.println("exp "+el.toString());
+        System.err.println("exp " + el.toString());
         ExportLine el2 = new ExportLine();
         el2.setProd(pro);
         el2.setSent(1);
         el2.setSold(2);
-        System.err.println("exp "+el2.toString());
+        System.err.println("exp " + el2.toString());
         ExportLine el3 = new ExportLine();
         el3.setProd(prod);
         el3.setSent(3);
         el3.setSold(4);
-        System.err.println("exp "+el3.toString());
+        System.err.println("exp " + el3.toString());
 
         e.getExportedProd().add(el);
         el.setExport(e);
@@ -151,11 +151,36 @@ public class Main {
         em.getTransaction().commit();
         em.close();
 
-//
+        //
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         Export exp1 = em.find(Export.class, 2);
         System.err.println(exp1.getExportedProd().size());
+        em.getTransaction().commit();
+        em.close();
+
+        //
+        em = emFactory.createEntityManager();
+        em.getTransaction().begin();
+        Warehouse wh = new Warehouse();
+        wh.setName("Sklad");
+        java.util.Date today = new java.util.Date();
+        wh.setLastUpdate(new java.sql.Date(today.getTime()));
+        em.persist(wh);
+        System.err.println(wh.toString());
+        em.getTransaction().commit();
+        em.close();
+
+        //
+        em = emFactory.createEntityManager();
+        em.getTransaction().begin();
+        WarehouseItem whi1 = new WarehouseItem();
+        whi1.setProductItem(prod);
+        whi1.setProductCount(4);
+        whi1.setWarehouse(wh);
+        wh.getStoredProducts().add(whi1);
+        em.persist(whi1);
+        System.err.println(whi1.toString());
         em.getTransaction().commit();
         em.close();
     }

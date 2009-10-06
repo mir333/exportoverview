@@ -7,12 +7,16 @@
     <class>cz.ligas.exportoverview.db.ProductCategory</class>
     <class>cz.ligas.exportoverview.db.Products</class>
     <class>cz.ligas.exportoverview.db.Clients</class>
+    <class>cz.ligas.exportoverview.db.Warehouse</class>
+    <class>cz.ligas.exportoverview.db.Invoice</class>
+    <class>cz.ligas.exportoverview.db.Delivery</class>
+    <class>cz.ligas.exportoverview.db.WarehouseItem</class>
     <properties>
       <property name="toplink.jdbc.user" value="app"/>
-      <property name="toplink.jdbc.password" value=""/>
-      <property name="toplink.jdbc.url" value="jdbc:derby:app;create=true"/>
-      <property name="toplink.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
-      <property name="toplink.ddl-generation" value="create-tables"/>
+      <property name="toplink.jdbc.password" value="app"/>
+      <property name="toplink.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
+      <property name="toplink.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="toplink.ddl-generation" value="drop-and-create-tables"/>
     </properties>
   </persistence-unit>
 </persistence>
