@@ -159,17 +159,17 @@ public class Main {
         em.getTransaction().commit();
         em.close();
 
-        //
-        em = emFactory.createEntityManager();
-        em.getTransaction().begin();
-        Warehouse wh = new Warehouse();
-        wh.setName("Sklad");
-        java.util.Date today = new java.util.Date();
-        wh.setLastUpdate(new java.sql.Date(today.getTime()));
-        em.persist(wh);
-        System.err.println(wh.toString());
-        em.getTransaction().commit();
-        em.close();
+//        //
+//        em = emFactory.createEntityManager();
+//        em.getTransaction().begin();
+//        Warehouse wh = new Warehouse();
+//        wh.setName("Sklad");
+//        java.util.Date today = new java.util.Date();
+//        wh.setLastUpdate(new java.sql.Date(today.getTime()));
+//        em.persist(wh);
+//        System.err.println(wh.toString());
+//        em.getTransaction().commit();
+//        em.close();
 
         //
         em = emFactory.createEntityManager();
@@ -177,8 +177,8 @@ public class Main {
         WarehouseItem whi1 = new WarehouseItem();
         whi1.setProductItem(prod);
         whi1.setProductCount(4);
-        whi1.setWarehouse(wh);
-        wh.getStoredProducts().add(whi1);
+//        whi1.setWarehouse(wh);
+//        wh.getStoredProducts().add(whi1);
         em.persist(whi1);
         System.err.println(whi1.toString());
         em.getTransaction().commit();

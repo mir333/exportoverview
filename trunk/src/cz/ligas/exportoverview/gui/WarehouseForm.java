@@ -44,7 +44,7 @@ public class WarehouseForm extends javax.swing.JFrame {
         warehouseTable = new javax.swing.JTable();
         warehouseTableL = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 

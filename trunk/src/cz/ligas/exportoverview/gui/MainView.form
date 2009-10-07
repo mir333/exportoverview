@@ -14,7 +14,7 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="addProductButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" alignment="0" pref="873" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="877" max="32767" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -83,7 +83,7 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="361" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="373" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="totalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -110,6 +110,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="newClientButton">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="actionMap.get(&quot;newClient&quot;)" type="code"/>
+            </Property>
             <Property name="text" type="java.lang.String" resourceKey="newClientButton.text"/>
             <Property name="name" type="java.lang.String" value="newClientButton" noResource="true"/>
           </Properties>
@@ -122,24 +125,36 @@
         </Component>
         <Component class="javax.swing.JButton" name="newProductButton">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="actionMap.get(&quot;newProduct&quot;)" type="code"/>
+            </Property>
             <Property name="text" type="java.lang.String" resourceKey="newProductButton.text"/>
             <Property name="name" type="java.lang.String" value="newProductButton" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="newCategoryButton">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="actionMap.get(&quot;newCategory&quot;)" type="code"/>
+            </Property>
             <Property name="text" type="java.lang.String" resourceKey="newCategoryButton.text"/>
             <Property name="name" type="java.lang.String" value="newCategoryButton" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="newExportButton">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="actionMap.get(&quot;newExport&quot;)" type="code"/>
+            </Property>
             <Property name="text" type="java.lang.String" resourceKey="newExportButton.text"/>
             <Property name="name" type="java.lang.String" value="newExportButton" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="addProductButton">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="actionMap.get(&quot;addProduct&quot;)" type="code"/>
+            </Property>
             <Property name="text" type="java.lang.String" resourceKey="addProductButton.text"/>
             <Property name="name" type="java.lang.String" value="addProductButton" noResource="true"/>
           </Properties>
@@ -294,6 +309,12 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="printMenuItem">
               <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="actionMap.get(&quot;print&quot;)" type="code"/>
+                </Property>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+P"/>
+                </Property>
                 <Property name="text" type="java.lang.String" resourceKey="printMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="printMenuItem" noResource="true"/>
               </Properties>
@@ -301,28 +322,30 @@
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="printMenuItem.AccessibleContext.accessibleName"/>
               </AccessibilityProperties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="openWarehouseMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="actionMap.get(&quot;openWarehouse&quot;)" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="openWarehouseMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="openWarehouseMenuItem" noResource="true"/>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" resourceKey="openWarehouseMenuItem.AccessibleContext.accessibleDescription"/>
+              </AccessibilityProperties>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="actionMap.get(&quot;quit&quot;)" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="exitMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="exitMenuItem" noResource="true"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
-          <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jMenu1.text"/>
-            <Property name="name" type="java.lang.String" value="jMenu1" noResource="true"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
-              <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="jMenuItem1.text"/>
-                <Property name="name" type="java.lang.String" value="jMenuItem1" noResource="true"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -338,6 +361,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="actionMap.get(&quot;showAboutBox&quot;)" type="code"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="aboutMenuItem" noResource="true"/>
               </Properties>
               <AuxValues>
@@ -361,7 +387,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="711" max="32767" attributes="0"/>
+                  <EmptySpace pref="723" max="32767" attributes="0"/>
                   <Component id="progressBar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
