@@ -7,6 +7,7 @@ package cz.ligas.exportoverview.appli;
 
 import cz.ligas.exportoverview.db.ProductCategory;
 import cz.ligas.exportoverview.db.Products;
+import cz.ligas.exportoverview.db.WarehouseItem;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -31,6 +32,10 @@ public class ProductOps {
             em.merge(products);
             em.getTransaction().commit();
             em.close();
+            WarehouseItem whi = new WarehouseItem();
+            whi.setProductCount(0);
+            whi.setProductItem(product);
+            WarehouseItemOps.addWarehouseItem(whi);
         } catch (Exception e) {
             throw new Exception(e);
         }

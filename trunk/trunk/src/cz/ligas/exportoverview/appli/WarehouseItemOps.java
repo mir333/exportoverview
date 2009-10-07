@@ -5,7 +5,6 @@
 
 package cz.ligas.exportoverview.appli;
 
-import cz.ligas.exportoverview.db.Warehouse;
 import cz.ligas.exportoverview.db.WarehouseItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +21,11 @@ public class WarehouseItemOps {
     private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ExportOverviewPU");
 
      public static void addWarehouseItem(WarehouseItem warhouseItem) throws Exception {
-        Warehouse wh = warhouseItem.getWarehouse();
-        wh.getStoredProducts().add(warhouseItem);
+
         try {
             EntityManager em = emFactory.createEntityManager();
             em.getTransaction().begin();
             em.persist(warhouseItem);
-            em.merge(wh);
             em.getTransaction().commit();
             em.close();
         } catch (Exception e) {
@@ -47,20 +44,20 @@ public class WarehouseItemOps {
 //        }
 //    }
 
-    public static List<WarehouseItem> getwarhouseItemByExport(Warehouse wh)throws Exception{
-                try {
-            EntityManager em = emFactory.createEntityManager();
-            List<WarehouseItem> list = new ArrayList<WarehouseItem>();
-            Query q = em.createQuery("select whi from WarehouseItem whi where whi.warehouse=:wh  order by whi.id asc");
-            q.setParameter("wh", wh);
-            list = q.getResultList();
-            em.close();
-            return list;
-        } catch (Exception exc) {
-            throw new Exception(exc);
-        }
-
-    }
+//    public static List<WarehouseItem> getwarhouseItemByExport(Warehouse wh)throws Exception{
+//                try {
+//            EntityManager em = emFactory.createEntityManager();
+//            List<WarehouseItem> list = new ArrayList<WarehouseItem>();
+//            Query q = em.createQuery("select whi from WarehouseItem whi where whi.warehouse=:wh  order by whi.id asc");
+//            q.setParameter("wh", wh);
+//            list = q.getResultList();
+//            em.close();
+//            return list;
+//        } catch (Exception exc) {
+//            throw new Exception(exc);
+//        }
+//
+//    }
 
     public static List<WarehouseItem> getWarehouseItems() throws Exception {
         try {

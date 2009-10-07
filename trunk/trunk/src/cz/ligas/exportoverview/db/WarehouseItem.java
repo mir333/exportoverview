@@ -32,8 +32,8 @@ public class WarehouseItem implements Serializable {
     private int productCount;
     @ManyToOne
     private Products productItem;
-    @ManyToOne
-    private Warehouse warehouse;
+//    @ManyToOne
+//    private Warehouse warehouse;
 
     public Long getId() {
         return id;
@@ -65,15 +65,15 @@ public class WarehouseItem implements Serializable {
         changeSupport.firePropertyChange("productItem", oldProductItem, productItem);
     }
 
-    public Warehouse getWarehouse() {
-        return warehouse;
-    }
-
-    public void setWarehouse(Warehouse warehouse) {
-        Warehouse oldWarehouse = this.warehouse;
-        this.warehouse = warehouse;
-        changeSupport.firePropertyChange("warehouse", oldWarehouse, warehouse);
-    }
+//    public Warehouse getWarehouse() {
+//        return warehouse;
+//    }
+//
+//    public void setWarehouse(Warehouse warehouse) {
+//        Warehouse oldWarehouse = this.warehouse;
+//        this.warehouse = warehouse;
+//        changeSupport.firePropertyChange("warehouse", oldWarehouse, warehouse);
+//    }
 
     @Override
     public int hashCode() {
