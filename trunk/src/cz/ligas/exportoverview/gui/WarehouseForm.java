@@ -3,6 +3,9 @@ package cz.ligas.exportoverview.gui;
 import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
 import cz.ligas.exportoverview.appli.WarehouseItemOps;
+import cz.ligas.exportoverview.db.WarehouseItem;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.beans.Beans;
 import java.util.Collections;
 import java.util.logging.Level;
@@ -49,6 +52,11 @@ public class WarehouseForm extends javax.swing.JFrame {
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         warehouseTable.setName("warehouseTable"); // NOI18N
+        warehouseTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                warehouseTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(warehouseTable);
 
         warehouseTableL.setText("Product in the warehouse:");
@@ -80,6 +88,29 @@ public class WarehouseForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void warehouseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_warehouseTableMouseClicked
+               if (evt.getClickCount() > 1) {
+            final int index = warehouseTable.convertRowIndexToModel(warehouseTable.getSelectedRow());
+            EditWarehouseItemForm whie = new EditWarehouseItemForm(warehouseItemList.get(index));
+            whie.setLocationRelativeTo(warehouseTable);
+            whie.addWindowListener(new WindowAdapter() {
+
+                @Override
+                public void windowDeactivated(WindowEvent evt) {
+                    try {
+                        WarehouseItem whi = warehouseItemList.get(index);
+//                        whi = ExportLineOps.getExportLineById(whi.getId());
+                        warehouseItemList.set(index, whi);
+                        warehouseTable.updateUI();
+                    } catch (Exception ex) {
+                        Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            whie.setVisible(true);
+        }
+    }//GEN-LAST:event_warehouseTableMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager ExportOverviewPUEntityManager;
