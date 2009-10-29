@@ -14,7 +14,7 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="addProductButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" alignment="0" pref="877" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="873" max="32767" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -83,7 +83,7 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="373" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="361" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="totalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -322,18 +322,6 @@
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="printMenuItem.AccessibleContext.accessibleName"/>
               </AccessibilityProperties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="openWarehouseMenuItem">
-              <Properties>
-                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="actionMap.get(&quot;openWarehouse&quot;)" type="code"/>
-                </Property>
-                <Property name="text" type="java.lang.String" resourceKey="openWarehouseMenuItem.text"/>
-                <Property name="name" type="java.lang.String" value="openWarehouseMenuItem" noResource="true"/>
-              </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" resourceKey="openWarehouseMenuItem.AccessibleContext.accessibleDescription"/>
-              </AccessibilityProperties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -346,6 +334,63 @@
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="openDeliveryManuItem">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="openDeliveryManuItem.text"/>
+            <Property name="name" type="java.lang.String" value="openDeliveryManuItem" noResource="true"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="actionMap.get(&quot;showDelivery&quot;)" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="jMenuItem1.text"/>
+                <Property name="name" type="java.lang.String" value="jMenuItem1" noResource="true"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="oepnInvoiceMenuItem">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="oepnInvoiceMenuItem.text"/>
+            <Property name="name" type="java.lang.String" value="oepnInvoiceMenuItem" noResource="true"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="actionMap.get(&quot;showInvoice&quot;)" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="jMenuItem2.text"/>
+                <Property name="name" type="java.lang.String" value="jMenuItem2" noResource="true"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="warehouseMenu">
+          <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="actionMap.get(&quot;openWarehouse&quot;)" type="code"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="warehouseMenu.text"/>
+            <Property name="name" type="java.lang.String" value="warehouseMenu" noResource="true"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="openWarehouseMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="actionMap.get(&quot;openWarehouse&quot;)" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="openWarehouseMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="openWarehouseMenuItem" noResource="true"/>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" resourceKey="openWarehouseMenuItem.AccessibleContext.accessibleDescription"/>
+              </AccessibilityProperties>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -387,7 +432,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="723" max="32767" attributes="0"/>
+                  <EmptySpace pref="711" max="32767" attributes="0"/>
                   <Component id="progressBar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
