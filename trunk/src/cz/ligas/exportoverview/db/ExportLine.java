@@ -36,6 +36,10 @@ public class ExportLine implements Serializable {
     private Export export;
     @ManyToOne
     private Products prod;
+    @ManyToOne
+    private Invoice invoice;
+    @ManyToOne
+    private Delivery delivery;
 
     public int getId() {
         return id;

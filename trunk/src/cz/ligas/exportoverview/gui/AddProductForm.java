@@ -1,8 +1,3 @@
-/*
- * AddProductForm.java
- *
- * Created on 5.8.2009, 10:30:48
- */
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.CategoryOps;

@@ -44,16 +44,17 @@ public class Export implements Serializable {
     @OneToMany(mappedBy = "export")
     private List<ExportLine> exportedProd;
 
-    public int getId() {
-        return id;
-    }
-
     public Export(){
     this.total=0;
     this.totalSendValue=0;
     this.totalSold=0;
     this.totalSent=0;
     }
+
+    public int getId() {
+        return id;
+    }
+
     public void setId(int id) {
         int oldId = this.id;
         this.id = id;

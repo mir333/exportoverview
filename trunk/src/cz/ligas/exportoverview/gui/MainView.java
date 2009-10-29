@@ -45,7 +45,7 @@ public class MainView extends FrameView {
 
     public MainView(SingleFrameApplication app) {
         super(app);
-
+        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap	(MainView.class, this);
         initComponents();
         myInit();
 
@@ -140,8 +140,13 @@ public class MainView extends FrameView {
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         printMenuItem = new javax.swing.JMenuItem();
-        openWarehouseMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
+        openDeliveryManuItem = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        oepnInvoiceMenuItem = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        warehouseMenu = new javax.swing.JMenu();
+        openWarehouseMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
@@ -153,7 +158,7 @@ public class MainView extends FrameView {
         mainPanel.setName("mainPanel"); // NOI18N
 
         clientsComboBox.setName("clientsComboBox"); // NOI18N
-	javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap	(MainView.class, this);
+
         newClientButton.setAction(actionMap.get("newClient"));
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(MainView.class);
         newClientButton.setText(resourceMap.getString("newClientButton.text")); // NOI18N
@@ -252,7 +257,7 @@ public class MainView extends FrameView {
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addProductButton)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(mainPanelLayout.createSequentialGroup()
                             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -308,7 +313,7 @@ public class MainView extends FrameView {
                         .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(exportL)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalLableOut)
@@ -336,18 +341,44 @@ public class MainView extends FrameView {
         fileMenu.add(printMenuItem);
         printMenuItem.getAccessibleContext().setAccessibleName(resourceMap.getString("printMenuItem.AccessibleContext.accessibleName")); // NOI18N
 
-        openWarehouseMenuItem.setAction(actionMap.get("openWarehouse"));
-        openWarehouseMenuItem.setText(resourceMap.getString("openWarehouseMenuItem.text")); // NOI18N
-        openWarehouseMenuItem.setName("openWarehouseMenuItem"); // NOI18N
-        fileMenu.add(openWarehouseMenuItem);
-        openWarehouseMenuItem.getAccessibleContext().setAccessibleDescription(resourceMap.getString("openWarehouseMenuItem.AccessibleContext.accessibleDescription")); // NOI18N
-
         exitMenuItem.setAction(actionMap.get("quit"));
         exitMenuItem.setText(resourceMap.getString("exitMenuItem.text")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
+
+        openDeliveryManuItem.setText(resourceMap.getString("openDeliveryManuItem.text")); // NOI18N
+        openDeliveryManuItem.setName("openDeliveryManuItem"); // NOI18N
+
+        jMenuItem1.setAction(actionMap.get("showDelivery"));
+        jMenuItem1.setText(resourceMap.getString("jMenuItem1.text")); // NOI18N
+        jMenuItem1.setName("jMenuItem1"); // NOI18N
+        openDeliveryManuItem.add(jMenuItem1);
+
+        menuBar.add(openDeliveryManuItem);
+
+        oepnInvoiceMenuItem.setText(resourceMap.getString("oepnInvoiceMenuItem.text")); // NOI18N
+        oepnInvoiceMenuItem.setName("oepnInvoiceMenuItem"); // NOI18N
+
+        jMenuItem2.setAction(actionMap.get("showInvoice"));
+        jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
+        jMenuItem2.setName("jMenuItem2"); // NOI18N
+        oepnInvoiceMenuItem.add(jMenuItem2);
+
+        menuBar.add(oepnInvoiceMenuItem);
+
+        warehouseMenu.setAction(actionMap.get("openWarehouse"));
+        warehouseMenu.setText(resourceMap.getString("warehouseMenu.text")); // NOI18N
+        warehouseMenu.setName("warehouseMenu"); // NOI18N
+
+        openWarehouseMenuItem.setAction(actionMap.get("openWarehouse"));
+        openWarehouseMenuItem.setText(resourceMap.getString("openWarehouseMenuItem.text")); // NOI18N
+        openWarehouseMenuItem.setName("openWarehouseMenuItem"); // NOI18N
+        warehouseMenu.add(openWarehouseMenuItem);
+        openWarehouseMenuItem.getAccessibleContext().setAccessibleDescription(resourceMap.getString("openWarehouseMenuItem.AccessibleContext.accessibleDescription")); // NOI18N
+
+        menuBar.add(warehouseMenu);
 
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
@@ -377,7 +408,7 @@ public class MainView extends FrameView {
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 723, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 711, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -446,6 +477,8 @@ public class MainView extends FrameView {
     private javax.swing.JLabel clientsL;
     private javax.swing.JComboBox exportComboBox;
     private javax.swing.JLabel exportL;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable mainTable;
@@ -454,6 +487,8 @@ public class MainView extends FrameView {
     private javax.swing.JButton newClientButton;
     private javax.swing.JButton newExportButton;
     private javax.swing.JButton newProductButton;
+    private javax.swing.JMenu oepnInvoiceMenuItem;
+    private javax.swing.JMenu openDeliveryManuItem;
     private javax.swing.JMenuItem openWarehouseMenuItem;
     private javax.swing.JMenuItem printMenuItem;
     private javax.swing.JProgressBar progressBar;
@@ -468,6 +503,7 @@ public class MainView extends FrameView {
     private javax.swing.JPanel statusPanel;
     private javax.swing.JLabel totalLable;
     private javax.swing.JLabel totalLableOut;
+    private javax.swing.JMenu warehouseMenu;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
     //private BindingGroup bindingGroup;
@@ -478,6 +514,7 @@ public class MainView extends FrameView {
     private final Icon idleIcon;
     private final Icon[] busyIcons = new Icon[15];
     private int busyIconIndex = 0;
+    private javax.swing.ActionMap actionMap;
 
     private void myInit() {
         bindingGroup = new BindingGroup();
@@ -543,6 +580,20 @@ public class MainView extends FrameView {
         JDialog aboutBox = new AboutBox();
         aboutBox.setLocationRelativeTo(mainTable);
         aboutBox.setVisible(true);
+    }
+
+    @Action
+    public void showInvoice() {
+        DeliveryForm df = new DeliveryForm();
+        df.setLocationRelativeTo(mainTable);
+        df.setVisible(true);
+    }
+
+    @Action
+    public void showDelivery() {
+        DeliveryForm df = new DeliveryForm();
+        df.setLocationRelativeTo(mainTable);
+        df.setVisible(true);
     }
 
     @Action

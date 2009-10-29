@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.ligas.exportoverview.db;
 
 import java.beans.PropertyChangeListener;
@@ -41,6 +36,10 @@ public class Clients implements Serializable {
     private String ico;
     private String dic;
     private String clientPhone;
+    @OneToMany(mappedBy = "client")
+    private List<Invoice> invoices;
+    @OneToMany(mappedBy = "client")
+    private List<Delivery> deliverys;
     @OneToMany(mappedBy="client")
     private List<Export> exports;
 

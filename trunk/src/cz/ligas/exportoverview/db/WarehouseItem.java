@@ -28,19 +28,19 @@ public class WarehouseItem implements Serializable {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private int id;
     private int productCount;
     @ManyToOne
     private Products productItem;
 //    @ManyToOne
 //    private Warehouse warehouse;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        Long oldId = this.id;
+    public void setId(int id) {
+        int oldId = this.id;
         this.id = id;
         changeSupport.firePropertyChange("id", oldId, id);
     }
@@ -75,21 +75,20 @@ public class WarehouseItem implements Serializable {
 //        changeSupport.firePropertyChange("warehouse", oldWarehouse, warehouse);
 //    }
 
-    @Override
+     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (int) id;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof WarehouseItem)) {
             return false;
         }
         WarehouseItem other = (WarehouseItem) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
