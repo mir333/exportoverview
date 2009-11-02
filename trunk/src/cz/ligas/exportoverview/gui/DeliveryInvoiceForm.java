@@ -6,6 +6,21 @@
 
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.appli.ClientOps;
+import cz.ligas.exportoverview.db.Clients;
+import java.beans.Beans;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.observablecollections.ObservableCollections;
+import org.jdesktop.observablecollections.ObservableList;
+import org.jdesktop.swingbinding.JComboBoxBinding;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.SwingBindings;
+
 /**
  *
  * @author xligas
@@ -13,8 +28,16 @@ package cz.ligas.exportoverview.gui;
 public class DeliveryInvoiceForm extends javax.swing.JFrame {
 
     /** Creates new form DeliveryInvoiceForm */
-    public DeliveryInvoiceForm() {
+//    public DeliveryInvoiceForm() {
+//        initComponents();
+//        System.err.println("test DI nonargument");
+//    }
+    public DeliveryInvoiceForm(String s) {
         initComponents();
+        dacumentL.setText(s+":");
+        setTitle(s);
+        myInit();
+
     }
 
     /** This method is called from within the constructor to
@@ -37,6 +60,7 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
         printButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("diform");
 
         delInvTableL.setText("Document:");
         delInvTableL.setName("delInvTableL"); // NOI18N
@@ -85,7 +109,7 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
                         .addComponent(clientL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(clientComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                         .addComponent(dacumentL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(docComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -115,6 +139,13 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DeliveryInvoiceForm.class);
+        delInvTableL.getAccessibleContext().setAccessibleName(resourceMap.getString("delInvTableL.AccessibleContext.accessibleName")); // NOI18N
+        clientL.getAccessibleContext().setAccessibleName(resourceMap.getString("clientL.AccessibleContext.accessibleName")); // NOI18N
+        dacumentL.getAccessibleContext().setAccessibleName(resourceMap.getString("dacumentL.AccessibleContext.accessibleName")); // NOI18N
+        addLineButton.getAccessibleContext().setAccessibleName(resourceMap.getString("addLineButton.AccessibleContext.accessibleName")); // NOI18N
+        printButton.getAccessibleContext().setAccessibleName(resourceMap.getString("printButton.AccessibleContext.accessibleName")); // NOI18N
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -129,5 +160,57 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton printButton;
     // End of variables declaration//GEN-END:variables
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    private List<Clients> clientsList;
 
+    private void myInit() {
+        bindingGroup = new BindingGroup();
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DeliveryInvoiceForm.class);
+        try {
+            clientsList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(ClientOps.getClients());
+        } catch (Exception ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        JComboBoxBinding clientsComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientComboBox);
+        bindingGroup.addBinding(clientsComboBoxBinding);
+//
+//        JTableBinding mainTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE, exportLinesList, mainTable);
+//        JTableBinding.ColumnBinding columnBinding;
+//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productCode}"));
+//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productCode"));
+//        columnBinding.setColumnClass(String.class);
+//        columnBinding.setEditable(false);
+//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productName}"));
+//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productName"));
+//        columnBinding.setColumnClass(String.class);
+//        columnBinding.setEditable(false);
+//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
+//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productPrice"));
+//        columnBinding.setColumnClass(String.class);
+//        columnBinding.setEditable(false);
+//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
+//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.priceS"));
+//        columnBinding.setColumnClass(String.class);
+//        columnBinding.setEditable(false);
+//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sent}"));
+//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.send"));
+//        columnBinding.setColumnClass(String.class);
+//        columnBinding.setEditable(false);
+//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sentPrice}"));
+//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sendPrice"));
+//        columnBinding.setColumnClass(String.class);
+//        columnBinding.setEditable(false);
+//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sold}"));
+//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sold"));
+//        columnBinding.setColumnClass(String.class);
+//        columnBinding.setEditable(false);
+//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${total}"));
+//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.total"));
+//        columnBinding.setColumnClass(String.class);
+//        columnBinding.setEditable(false);
+//        bindingGroup.addBinding(mainTableBinding);
+//        mainTableBinding.bind();
+        bindingGroup.bind();
+    }
 }

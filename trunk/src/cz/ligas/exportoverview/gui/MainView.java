@@ -584,16 +584,16 @@ public class MainView extends FrameView {
 
     @Action
     public void showInvoice() {
-        DeliveryForm df = new DeliveryForm();
-        df.setLocationRelativeTo(mainTable);
-        df.setVisible(true);
+        InvoiceForm invForm = new InvoiceForm();
+        invForm.setLocationRelativeTo(mainTable);
+        invForm.setVisible(true);
     }
 
     @Action
     public void showDelivery() {
-        DeliveryForm df = new DeliveryForm();
-        df.setLocationRelativeTo(mainTable);
-        df.setVisible(true);
+        DeliveryForm delivForm = new DeliveryForm();
+        delivForm.setLocationRelativeTo(mainTable);
+        delivForm.setVisible(true);
     }
 
     @Action
