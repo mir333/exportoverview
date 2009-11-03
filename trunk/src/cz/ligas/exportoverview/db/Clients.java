@@ -39,9 +39,25 @@ public class Clients implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<Invoice> invoices;
     @OneToMany(mappedBy = "client")
-    private List<Delivery> deliverys;
+    private List<Delivery> deliveries;
     @OneToMany(mappedBy="client")
     private List<Export> exports;
+
+    public List<Delivery> getDeliveries() {
+        return deliveries;
+    }
+
+    public void setDeliveries(List<Delivery> deliveries) {
+        this.deliveries = deliveries;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
+    }
 
     public String getClientAddress() {
         return clientAddress;

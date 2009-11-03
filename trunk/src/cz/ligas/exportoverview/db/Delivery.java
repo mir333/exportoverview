@@ -6,6 +6,7 @@
 package cz.ligas.exportoverview.db;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +27,7 @@ public class Delivery implements Serializable {
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    private Date editDate;
     @ManyToOne
     private Clients client;
     @OneToMany(mappedBy = "delivery")
@@ -37,6 +39,14 @@ public class Delivery implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Date getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(Date editDate) {
+        this.editDate = editDate;
     }
 
     public Clients getClient() {

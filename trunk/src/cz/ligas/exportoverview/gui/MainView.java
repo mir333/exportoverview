@@ -142,8 +142,10 @@ public class MainView extends FrameView {
         printMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         openDeliveryManuItem = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         oepnInvoiceMenuItem = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         warehouseMenu = new javax.swing.JMenu();
         openWarehouseMenuItem = new javax.swing.JMenuItem();
@@ -257,7 +259,7 @@ public class MainView extends FrameView {
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addProductButton)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(mainPanelLayout.createSequentialGroup()
                             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -313,7 +315,7 @@ public class MainView extends FrameView {
                         .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(exportL)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalLableOut)
@@ -351,6 +353,12 @@ public class MainView extends FrameView {
         openDeliveryManuItem.setText(resourceMap.getString("openDeliveryManuItem.text")); // NOI18N
         openDeliveryManuItem.setName("openDeliveryManuItem"); // NOI18N
 
+        jMenuItem3.setAction(actionMap.get("newDelivery"));
+        jMenuItem3.setText(resourceMap.getString("deliveryMenuItem.text")); // NOI18N
+        jMenuItem3.setName("deliveryMenuItem"); // NOI18N
+        openDeliveryManuItem.add(jMenuItem3);
+        jMenuItem3.getAccessibleContext().setAccessibleName(resourceMap.getString("jMenuItem3.AccessibleContext.accessibleName")); // NOI18N
+
         jMenuItem1.setAction(actionMap.get("showDelivery"));
         jMenuItem1.setText(resourceMap.getString("jMenuItem1.text")); // NOI18N
         jMenuItem1.setName("jMenuItem1"); // NOI18N
@@ -360,6 +368,12 @@ public class MainView extends FrameView {
 
         oepnInvoiceMenuItem.setText(resourceMap.getString("oepnInvoiceMenuItem.text")); // NOI18N
         oepnInvoiceMenuItem.setName("oepnInvoiceMenuItem"); // NOI18N
+
+        jMenuItem4.setAction(actionMap.get("newInvoice"));
+        jMenuItem4.setText(resourceMap.getString("invoiceMenuItem.text")); // NOI18N
+        jMenuItem4.setName("invoiceMenuItem"); // NOI18N
+        oepnInvoiceMenuItem.add(jMenuItem4);
+        jMenuItem4.getAccessibleContext().setAccessibleName(resourceMap.getString("invoiceMenuItem.AccessibleContext.accessibleName")); // NOI18N
 
         jMenuItem2.setAction(actionMap.get("showInvoice"));
         jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
@@ -408,7 +422,7 @@ public class MainView extends FrameView {
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 711, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 723, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -479,6 +493,8 @@ public class MainView extends FrameView {
     private javax.swing.JLabel exportL;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable mainTable;
@@ -590,8 +606,22 @@ public class MainView extends FrameView {
     }
 
     @Action
+    public void newInvoice() {
+        NewInvioceForm invForm = new NewInvioceForm();
+        invForm.setLocationRelativeTo(mainTable);
+        invForm.setVisible(true);
+    }
+
+    @Action
     public void showDelivery() {
         DeliveryForm delivForm = new DeliveryForm();
+        delivForm.setLocationRelativeTo(mainTable);
+        delivForm.setVisible(true);
+    }
+
+    @Action
+    public void newDelivery() {
+        NewDeliveryForm delivForm = new NewDeliveryForm();
         delivForm.setLocationRelativeTo(mainTable);
         delivForm.setVisible(true);
     }

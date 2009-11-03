@@ -108,7 +108,7 @@ public class ExportForm extends javax.swing.JFrame {
     @Action
     public void createExport() {
         Export e = new Export();
-        e.setClient((Clients) clientComboBox.getSelectedItem());
+        e.setClient(getClient());
         try {
             ExportOps.addExport(e);
         } catch (Exception ex) {
@@ -138,5 +138,8 @@ public class ExportForm extends javax.swing.JFrame {
         JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
+    }
+    protected Clients getClient(){
+        return (Clients) clientComboBox.getSelectedItem();
     }
 }

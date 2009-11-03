@@ -343,6 +343,18 @@
             <Property name="name" type="java.lang.String" value="openDeliveryManuItem" noResource="true"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="actionMap.get(&quot;newDelivery&quot;)" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="deliveryMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="deliveryMenuItem" noResource="true"/>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="jMenuItem3.AccessibleContext.accessibleName"/>
+              </AccessibilityProperties>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -360,6 +372,18 @@
             <Property name="name" type="java.lang.String" value="oepnInvoiceMenuItem" noResource="true"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="actionMap.get(&quot;newInvoice&quot;)" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="invoiceMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="invoiceMenuItem" noResource="true"/>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="invoiceMenuItem.AccessibleContext.accessibleName"/>
+              </AccessibilityProperties>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">

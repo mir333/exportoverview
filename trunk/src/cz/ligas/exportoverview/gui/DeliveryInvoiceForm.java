@@ -7,7 +7,9 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
+import cz.ligas.exportoverview.appli.ExportLineOps;
 import cz.ligas.exportoverview.db.Clients;
+import cz.ligas.exportoverview.db.ExportLine;
 import java.beans.Beans;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.beansbinding.ELProperty;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.observablecollections.ObservableList;
 import org.jdesktop.swingbinding.JComboBoxBinding;
@@ -32,11 +35,11 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
 //        initComponents();
 //        System.err.println("test DI nonargument");
 //    }
-    public DeliveryInvoiceForm(String s) {
+    public DeliveryInvoiceForm(String lable,String prop) {
         initComponents();
-        dacumentL.setText(s+":");
-        setTitle(s);
-        myInit();
+        myInit("${selectedItem."+prop+"}");
+        dacumentL.setText(lable+":");
+        setTitle(lable);
 
     }
 
@@ -163,54 +166,61 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     private List<Clients> clientsList;
 
-    private void myInit() {
+    private void myInit(String elPropString) {
         bindingGroup = new BindingGroup();
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DeliveryInvoiceForm.class);
         try {
             clientsList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(ClientOps.getClients());
         } catch (Exception ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         JComboBoxBinding clientsComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientComboBox);
         bindingGroup.addBinding(clientsComboBoxBinding);
-//
-//        JTableBinding mainTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE, exportLinesList, mainTable);
-//        JTableBinding.ColumnBinding columnBinding;
-//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productCode}"));
-//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productCode"));
-//        columnBinding.setColumnClass(String.class);
-//        columnBinding.setEditable(false);
-//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productName}"));
-//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productName"));
-//        columnBinding.setColumnClass(String.class);
-//        columnBinding.setEditable(false);
-//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
-//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productPrice"));
-//        columnBinding.setColumnClass(String.class);
-//        columnBinding.setEditable(false);
-//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
-//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.priceS"));
-//        columnBinding.setColumnClass(String.class);
-//        columnBinding.setEditable(false);
-//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sent}"));
-//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.send"));
-//        columnBinding.setColumnClass(String.class);
-//        columnBinding.setEditable(false);
-//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sentPrice}"));
-//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sendPrice"));
-//        columnBinding.setColumnClass(String.class);
-//        columnBinding.setEditable(false);
-//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sold}"));
-//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sold"));
-//        columnBinding.setColumnClass(String.class);
-//        columnBinding.setEditable(false);
-//        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${total}"));
-//        columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.total"));
-//        columnBinding.setColumnClass(String.class);
-//        columnBinding.setEditable(false);
-//        bindingGroup.addBinding(mainTableBinding);
-//        mainTableBinding.bind();
+
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create(elPropString);
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientComboBox, eLProperty, docComboBox);
+        bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
     }
+    protected  void fillTable(List<ExportLine> exportLinesList){
+        org.jdesktop.application.ResourceMap resourceMap1 = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(MainView.class);
+        JTableBinding mainTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE,exportLinesList , delInvTable);
+        JTableBinding.ColumnBinding columnBinding;
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productCode}"));
+        columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.productCode"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productName}"));
+        columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.productName"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
+        columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.productPrice"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
+        columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.priceS"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sent}"));
+        columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.send"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sentPrice}"));
+        columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.sendPrice"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sold}"));
+        columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.sold"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${total}"));
+        columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.total"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        bindingGroup.addBinding(mainTableBinding);
+        mainTableBinding.bind();
+        bindingGroup.bind();
+    }
+
+    //protected
 }

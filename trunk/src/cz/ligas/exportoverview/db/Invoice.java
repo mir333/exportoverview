@@ -6,6 +6,7 @@
 package cz.ligas.exportoverview.db;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,10 +25,35 @@ public class Invoice implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    private Date editDate;
     @ManyToOne
     private Clients client;
     @OneToMany(mappedBy = "invoice")
     private List<ExportLine> exportedProd;
+
+    public Clients getClient() {
+        return client;
+    }
+
+    public void setClient(Clients client) {
+        this.client = client;
+    }
+
+    public List<ExportLine> getExportedProd() {
+        return exportedProd;
+    }
+
+    public void setExportedProd(List<ExportLine> exportedProd) {
+        this.exportedProd = exportedProd;
+    }
+
+    public Date getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(Date editDate) {
+        this.editDate = editDate;
+    }
 
     public int getId() {
         return id;
