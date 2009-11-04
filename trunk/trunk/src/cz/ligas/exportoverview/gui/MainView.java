@@ -691,9 +691,9 @@ public class MainView extends FrameView {
     @Action
     public void addProduct() {
         final Export e = (Export) exportComboBox.getSelectedItem();
-        AddProductForm apf = new AddProductForm(e);
-        apf.setLocationRelativeTo(mainTable);
-        apf.addWindowListener(new WindowAdapter() {
+        AddExportLine ael = new AddExportLine(e);
+        ael.setLocationRelativeTo(mainTable);
+        ael.addWindowListener(new WindowAdapter() {
 
             @Override
             public void windowDeactivated(WindowEvent evt) {
@@ -707,7 +707,7 @@ public class MainView extends FrameView {
                 }
             }
         });
-        apf.setVisible(true);
+        ael.setVisible(true);
     }
 
     @Action
@@ -751,4 +751,4 @@ public class MainView extends FrameView {
 }
 // TODO: Dorobit potvrdenie na enter
 // TODO: Upravit DB aby potporovala uniqu itemy
-
+// TODO: include inheritance in entity classes

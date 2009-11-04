@@ -84,7 +84,7 @@ public class Invoice implements Serializable {
 
     @Override
     public String toString() {
-        return "cz.ligas.exportoverview.db.Invoice[id=" + id + "]";
+        return "No: " + id;
     }
 
 }
