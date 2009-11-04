@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextField;
 import org.jdesktop.application.Action;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -25,10 +26,8 @@ import org.jdesktop.swingbinding.SwingBindings;
  * @author xligas
  */
 public class AddProductForm extends javax.swing.JFrame {
-
     /** Creates new form AddProductForm */
-    public AddProductForm(Export ex) {
-        this.export = ex;
+    public AddProductForm() {
         initComponents();
         myInit();
     }
@@ -185,7 +184,6 @@ public class AddProductForm extends javax.swing.JFrame {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
     private List<ProductCategory> categoryList;
-    private Export export;
     private MyInputVerifier verifier = new MyInputVerifier();
 
     private void myInit() {
@@ -211,19 +209,21 @@ public class AddProductForm extends javax.swing.JFrame {
 
     @Action
     public void addExportLine() {
-        ExportLine el = new ExportLine();
-        el.setProd((Products) productComboBox.getSelectedItem());
-        el.setExport(export);
-        el.setPrice(Float.parseFloat(mExportLineSpecialPriceIn.getText()));
-        el.setSent(Integer.parseInt(nExportLineSendIn.getText()));
-        el.setSold(Integer.parseInt(nExportLineSoldIn.getText()));
-        try {
-            ExportLineOps.addExportLine(el);
-        } catch (Exception ex) {
-            Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ExportOps.recalculateExport(export);
-        this.dispose();
-        System.err.println("addExportLine executed");
+    }
+
+    protected Products getSelectedProduct(){
+        return (Products) productComboBox.getSelectedItem();
+    }
+
+    protected float getSpecialPriceIn() {
+        return Float.parseFloat(mExportLineSpecialPriceIn.getText());
+    }
+
+    protected int getSendIn() {
+        return Integer.parseInt(nExportLineSendIn.getText());
+    }
+
+    protected int getSoldIn() {
+        return Integer.parseInt(nExportLineSoldIn.getText());
     }
 }

@@ -7,7 +7,7 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
-import cz.ligas.exportoverview.appli.ExportLineOps;
+import org.jdesktop.application.Action;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.beans.Beans;
@@ -36,6 +36,7 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
 //        System.err.println("test DI nonargument");
 //    }
     public DeliveryInvoiceForm(String lable,String prop) {
+        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(DeliveryInvoiceForm.class, this);
         initComponents();
         myInit("${selectedItem."+prop+"}");
         dacumentL.setText(lable+":");
@@ -93,6 +94,7 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
         docComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         docComboBox.setName("docComboBox"); // NOI18N
 
+        addLineButton.setAction(actionMap.get("newDi"));
         addLineButton.setText("Add");
         addLineButton.setName("addLineButton"); // NOI18N
 
@@ -165,6 +167,7 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     private List<Clients> clientsList;
+    javax.swing.ActionMap actionMap;
 
     private void myInit(String elPropString) {
         bindingGroup = new BindingGroup();
@@ -222,5 +225,16 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
         bindingGroup.bind();
     }
 
-    //protected
+    @Action
+    public void newDi() {
+        System.err.println("Not Overriden");
+    }
+
+    protected void setTable(javax.swing.JTable t){
+        delInvTable = t;
+    }
+
+    protected Object getSelectedItem(){
+        return docComboBox.getSelectedItem();
+    }
 }

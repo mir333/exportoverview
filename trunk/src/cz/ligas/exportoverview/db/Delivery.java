@@ -86,7 +86,7 @@ public class Delivery implements Serializable {
 
     @Override
     public String toString() {
-        return "cz.ligas.exportoverview.db.Delivery[id=" + id + "]";
+        return "No: " + id;
     }
 
 }
