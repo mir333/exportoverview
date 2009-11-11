@@ -33,6 +33,7 @@ public class AddExportLine extends AddProductForm {
         el.setPrice(getSpecialPriceIn());
         el.setSent(getSendIn());
         el.setSold(getSoldIn());
+
         try {
             ExportLineOps.addExportLine(el);
         } catch (Exception ex) {

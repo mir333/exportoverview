@@ -56,6 +56,8 @@ public class MyInputVerifier extends InputVerifier implements ActionListener {
         JTextField tf = (JTextField) inp;
         try {
             //TODO: prerobit pripadne na reg vyraz ale osetrit lokalizaciu
+//            if(tf.getText().length()==0)
+//                return true;
             String s = numberFormat.format(numberFormat.parse(tf.getText()).intValue());
             tf.setText(s);
         } catch (ParseException pe) {
@@ -69,6 +71,8 @@ public class MyInputVerifier extends InputVerifier implements ActionListener {
         NumberFormat moneyFormat = NumberFormat.getNumberInstance(Locale.getDefault());
         JTextField tf = (JTextField) inp;
         try {
+//            if(tf.getText().length()==0)
+//                return true;
             tf.setText(moneyFormat.format(moneyFormat.parse(tf.getText()).doubleValue()));
         } catch (ParseException pe) {
             message = resourceMap.getString("validation.error.money");
