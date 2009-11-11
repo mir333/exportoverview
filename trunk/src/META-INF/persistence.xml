@@ -10,6 +10,10 @@
     <class>cz.ligas.exportoverview.db.Invoice</class>
     <class>cz.ligas.exportoverview.db.Delivery</class>
     <class>cz.ligas.exportoverview.db.WarehouseItem</class>
+    <class>cz.ligas.exportoverview.db.DeliveryLine</class>
+    <class>cz.ligas.exportoverview.db.InvoiceLine</class>
+    <class>cz.ligas.exportoverview.db.Document</class>
+    <class>cz.ligas.exportoverview.db.DocumentLine</class>
     <properties>
       <property name="toplink.jdbc.user" value="app"/>
       <property name="toplink.jdbc.password" value="app"/>
