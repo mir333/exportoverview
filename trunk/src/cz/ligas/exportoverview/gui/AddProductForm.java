@@ -219,6 +219,10 @@ public class AddProductForm extends javax.swing.JFrame {
         return Float.parseFloat(mExportLineSpecialPriceIn.getText());
     }
 
+//    protected void setSpecialPriceIn(float sp) {
+//        mExportLineSpecialPriceIn.setText(Float.toString(sp));
+//    }
+
     protected int getSendIn() {
         return Integer.parseInt(nExportLineSendIn.getText());
     }
