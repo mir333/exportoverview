@@ -6,8 +6,7 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ExportLineOps;
-import cz.ligas.exportoverview.appli.ExportOps;
-import cz.ligas.exportoverview.db.Export;
+import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,17 +18,17 @@ import java.util.logging.Logger;
  */
 public class AddExportLine extends AddProductForm {
 
-    Export export = new Export();
+    Clients clinets = new Clients();
 
-    public AddExportLine(Export e) {
-        this.export = e;
+    public AddExportLine(Clients c) {
+        this.clinets = c;
     }
 
     @Override
     public void addExportLine(){
         ExportLine el = new ExportLine();
         el.setProd(getSelectedProduct());
-        el.setExport((Export)export);
+        el.setClient(clinets);
         el.setPrice(getSpecialPriceIn());
         el.setSent(getSendIn());
         el.setSold(getSoldIn());
@@ -39,7 +38,7 @@ public class AddExportLine extends AddProductForm {
         } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ExportOps.recalculateExport(export);
+        //ExportOps.recalculateExport(clinets);
         this.dispose();
     }
 }

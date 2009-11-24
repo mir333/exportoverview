@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.ligas.exportoverview.appli;
 
 import cz.ligas.exportoverview.db.Clients;
@@ -27,7 +22,7 @@ public class InvoiceOps {
             java.util.Date today = new java.util.Date();
             invoice.setEditDate(new java.sql.Date(today.getTime()));
             Clients clients = invoice.getClient();
-            clients.getInvoices().add(invoice);
+            clients.getDocuments().add(invoice);
             em.getTransaction().begin();
             em.persist(invoice);
             em.merge(clients);

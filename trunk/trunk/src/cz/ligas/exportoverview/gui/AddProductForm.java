@@ -1,10 +1,6 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.CategoryOps;
-import cz.ligas.exportoverview.appli.ExportLineOps;
-import cz.ligas.exportoverview.appli.ExportOps;
-import cz.ligas.exportoverview.db.Export;
-import cz.ligas.exportoverview.db.ExportLine;
 import cz.ligas.exportoverview.db.ProductCategory;
 import cz.ligas.exportoverview.db.Products;
 import java.beans.Beans;
@@ -12,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTextField;
 import org.jdesktop.application.Action;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -26,6 +21,7 @@ import org.jdesktop.swingbinding.SwingBindings;
  * @author xligas
  */
 public class AddProductForm extends javax.swing.JFrame {
+
     /** Creates new form AddProductForm */
     public AddProductForm() {
         initComponents();
@@ -167,7 +163,6 @@ public class AddProductForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addExportLineButton;
     private javax.swing.JComboBox categoryComboBox;
@@ -198,7 +193,7 @@ public class AddProductForm extends javax.swing.JFrame {
         mExportLineSpecialPriceIn.addActionListener(verifier);
         exportLineCustomPriceL.setLabelFor(mExportLineSpecialPriceIn);
         try {
-            categoryList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList( CategoryOps.getCategories());
+            categoryList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(CategoryOps.getCategories());
         } catch (Exception ex) {
             Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -211,7 +206,7 @@ public class AddProductForm extends javax.swing.JFrame {
     public void addExportLine() {
     }
 
-    protected Products getSelectedProduct(){
+    protected Products getSelectedProduct() {
         return (Products) productComboBox.getSelectedItem();
     }
 
@@ -222,7 +217,6 @@ public class AddProductForm extends javax.swing.JFrame {
 //    protected void setSpecialPriceIn(float sp) {
 //        mExportLineSpecialPriceIn.setText(Float.toString(sp));
 //    }
-
     protected int getSendIn() {
         return Integer.parseInt(nExportLineSendIn.getText());
     }

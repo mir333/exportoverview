@@ -9,15 +9,15 @@ import java.util.logging.Logger;
  *
  * @author miro
  */
-public class NewDeliveryForm extends ExportForm  {
+public class NewDeliveryForm extends NewDocumentForm  {
     @Override
-    public void createExport(){
+    public void createDocument(){
          Delivery del = new Delivery();
         del.setClient(getClient());
         try {
             DeliveryOps.addDelivery(del);
         } catch (Exception ex) {
-            Logger.getLogger(ExportForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewDocumentForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }

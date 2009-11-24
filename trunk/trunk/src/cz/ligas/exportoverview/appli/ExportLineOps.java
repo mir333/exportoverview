@@ -5,7 +5,7 @@
 
 package cz.ligas.exportoverview.appli;
 
-import cz.ligas.exportoverview.db.Export;
+import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +24,13 @@ public class ExportLineOps {
     public static void addExportLine(ExportLine exportLine) throws Exception {
         exportLine.setSentPrice(exportLine.getPrice()*exportLine.getSent());
         exportLine.setTotal(exportLine.getSent()+exportLine.getSold());
-        Export exports = exportLine.getExport();
-        exports.getExportedProd().add(exportLine);
+        Clients clients = exportLine.getClient();
+        clients.getExportLines().add(exportLine);
         try {
             EntityManager em = emFactory.createEntityManager();
             em.getTransaction().begin();
             em.persist(exportLine);
-            em.merge(exports);
+            em.merge(clients);
             em.getTransaction().commit();
             em.close();
         } catch (Exception e) {
@@ -49,12 +49,12 @@ public class ExportLineOps {
         }
     }
 
-    public static List<ExportLine> getExportLinesByExport(Export e)throws Exception{
+    public static List<ExportLine> getExportLinesByClient(Clients c)throws Exception{
                 try {
             EntityManager em = emFactory.createEntityManager();
             List<ExportLine> list = new ArrayList<ExportLine>();
-            Query q = em.createQuery("select el from ExportLine el where el.export=:ex  order by el.id asc");
-            q.setParameter("ex", e);
+            Query q = em.createQuery("select el from ExportLine el where el.export=:client  order by el.id asc");
+            q.setParameter("clinet", c);
             list = q.getResultList();
             em.close();
             return list;
@@ -77,23 +77,23 @@ public class ExportLineOps {
         }
     }
 
-    public static void editExportLine(Export exp,ExportLine exportLine, int sent,int sold,float price) throws Exception {
+    public static void editExportLine(Clients client,ExportLine exportLine, int sent,int sold,float price) throws Exception {
         exportLine.setPrice(price);
         exportLine.setSent(exportLine.getSent()+sent-sold);
         exportLine.setSold(exportLine.getSold()+sold);
         exportLine.setSentPrice(exportLine.getPrice()*exportLine.getSent());
         exportLine.setTotal(exportLine.getSent()+exportLine.getSold());
-        for (int i = 0; i < exp.getExportedProd().size(); i++) {
-            ExportLine el = exp.getExportedProd().get(i);
+        for (int i = 0; i < client.getExportLines().size(); i++) {
+            ExportLine el = client.getExportLines().get(i);
             if(el.getId()==exportLine.getId()){
-                exp.getExportedProd().set(i, el);
+                client.getExportLines().set(i, el);
             }
         }
         try {
             EntityManager em = emFactory.createEntityManager();
             em.getTransaction().begin();
             em.merge(exportLine);
-            em.merge(exp);
+            em.merge(client);
             em.getTransaction().commit();
             em.close();
         } catch (Exception e) {

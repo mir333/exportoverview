@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * ExportForm.java
  *
  * Created on 5.8.2009, 0:41:28
@@ -11,9 +6,7 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
-import cz.ligas.exportoverview.appli.ExportOps;
 import cz.ligas.exportoverview.db.Clients;
-import cz.ligas.exportoverview.db.Export;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,10 +20,10 @@ import org.jdesktop.swingbinding.SwingBindings;
  *
  * @author xligas
  */
-public class ExportForm extends javax.swing.JFrame {
+public class NewDocumentForm extends javax.swing.JFrame {
 
     /** Creates new form ExportForm */
-    public ExportForm() {
+    public NewDocumentForm() {
         initComponents();
         myInit();
     }
@@ -50,14 +43,13 @@ public class ExportForm extends javax.swing.JFrame {
         titleLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ExportForm.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(NewDocumentForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
 
         clientComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         clientComboBox.setName("clientComboBox"); // NOI18N
 
-        createExportButton.setAction(???);
         createExportButton.setText(resourceMap.getString("createExportButton.text")); // NOI18N
         createExportButton.setName("createExportButton"); // NOI18N
 
@@ -105,16 +97,7 @@ public class ExportForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     @Action
-    public void createExport() {
-        Export e = new Export();
-        e.setClient((Clients) clientComboBox.getSelectedItem());
-        try {
-            ExportOps.addExport(e);
-        } catch (Exception ex) {
-            Logger.getLogger(ExportForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.dispose();
-
+    public void createDocument() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -137,5 +120,8 @@ public class ExportForm extends javax.swing.JFrame {
         JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
+    }
+    protected Clients getClient(){
+        return (Clients) clientComboBox.getSelectedItem();
     }
 }

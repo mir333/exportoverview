@@ -3,6 +3,7 @@ package cz.ligas.exportoverview.db;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,29 +37,23 @@ public class Clients implements Serializable {
     private String ico;
     private String dic;
     private String clientPhone;
+    private Date editDate;
+    private int total;
+    private int totalSold;
+    private int totalSent;
+    private float totalSendValue;
     @OneToMany(mappedBy = "client")
-    private List<Invoice> invoices;
-    @OneToMany(mappedBy = "client")
-    private List<Delivery> deliveries;
+    private List<Document> documents;
     @OneToMany(mappedBy="client")
-    private List<Export> exports;
+    private List<ExportLine> exportLines;
 
-    public List<Delivery> getDeliveries() {
-        return deliveries;
+
+    public Clients(){
+        this.total=0;
+        this.totalSendValue=0;
+        this.totalSold=0;
+        this.totalSent=0;
     }
-
-    public void setDeliveries(List<Delivery> deliveries) {
-        this.deliveries = deliveries;
-    }
-
-    public List<Invoice> getInvoices() {
-        return invoices;
-    }
-
-    public void setInvoices(List<Invoice> invoices) {
-        this.invoices = invoices;
-    }
-
     public String getClientAddress() {
         return clientAddress;
     }
@@ -79,6 +74,22 @@ public class Clients implements Serializable {
         changeSupport.firePropertyChange("clientName", oldClientName, clientName);
     }
 
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
+
+    public List<ExportLine> getExportLines() {
+        return exportLines;
+    }
+
+    public void setExportLines(List<ExportLine> exportLines) {
+        this.exportLines = exportLines;
+    }
+
     public String getClientPhone() {
         return clientPhone;
     }
@@ -87,14 +98,6 @@ public class Clients implements Serializable {
         String oldClientPhone = this.clientPhone;
         this.clientPhone = clientPhone;
         changeSupport.firePropertyChange("clientPhone", oldClientPhone, clientPhone);
-    }
-
-    public List<Export> getExports() {
-        return exports;
-    }
-
-    public void setExports(List<Export> exports) {
-        this.exports = exports;
     }
 
     public int getId() {
@@ -145,6 +148,46 @@ public class Clients implements Serializable {
 
     public void setPsc(String psc) {
         this.psc = psc;
+    }
+
+    public Date getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(Date editDate) {
+        this.editDate = editDate;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public float getTotalSendValue() {
+        return totalSendValue;
+    }
+
+    public void setTotalSendValue(float totalSendValue) {
+        this.totalSendValue = totalSendValue;
+    }
+
+    public int getTotalSent() {
+        return totalSent;
+    }
+
+    public void setTotalSent(int totalSent) {
+        this.totalSent = totalSent;
+    }
+
+    public int getTotalSold() {
+        return totalSold;
+    }
+
+    public void setTotalSold(int totalSold) {
+        this.totalSold = totalSold;
     }
 
     @Override

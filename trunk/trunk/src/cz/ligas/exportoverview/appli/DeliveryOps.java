@@ -21,7 +21,7 @@ public class DeliveryOps {
             java.util.Date today = new java.util.Date();
             delivery.setEditDate(new java.sql.Date(today.getTime()));
             Clients clients = delivery.getClient();
-            clients.getDeliveries().add(delivery);
+            clients.getDocuments().add(delivery);
             em.getTransaction().begin();
             em.persist(delivery);
             em.merge(clients);

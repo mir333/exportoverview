@@ -10,9 +10,9 @@
  */
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
-import cz.ligas.exportoverview.appli.ExportOps;
-import cz.ligas.exportoverview.db.Export;
+import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,10 +23,10 @@ import org.jdesktop.application.Action;
  * @author xligas
  */
 public class EditExportLineForm extends javax.swing.JFrame {
-
+    private Clients client;
     /** Creates new form EditExportLineForm */
-    public EditExportLineForm(Export exp, ExportLine el) {
-        this.export = exp;
+    public EditExportLineForm(Clients c, ExportLine el) {
+        this.client = c;
         this.exportLine = el;
         initComponents();
         myInit();
@@ -136,7 +136,6 @@ public class EditExportLineForm extends javax.swing.JFrame {
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private ExportLine exportLine;
-    private Export export;
     private MyInputVerifier verifier = new MyInputVerifier();
 
     @Action
@@ -145,13 +144,12 @@ public class EditExportLineForm extends javax.swing.JFrame {
         int sold = Integer.parseInt(nExportLineSoldSpinner.getValue().toString());
         float price = Float.parseFloat(mExportLinePriceTextfield.getText());
         try {
-            ExportLineOps.editExportLine(export,exportLine,send,sold,price);
+            ExportLineOps.editExportLine(client,exportLine,send,sold,price);
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ExportOps.recalculateExport(export);
+        ClientOps.recalculateExportedProducts(client);
         this.dispose();
-        System.err.println("editExportLineSaveAction executed");
     }
 
     private void myInit() {
