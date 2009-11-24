@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.ligas.exportoverview.db;
 
 import java.beans.PropertyChangeListener;
@@ -29,17 +25,13 @@ public class ExportLine implements Serializable {
     private int id;
     private int sent;
     private int sold;
-    private float price;
-    private float sentPrice;
+    private float  price;
+    private float  sentPrice;
     private int total;
     @ManyToOne
-    private Export export;
+    private Clients client;
     @ManyToOne
     private Products prod;
-    @ManyToOne
-    private Invoice invoice;
-    @ManyToOne
-    private Delivery delivery;
 
     public int getId() {
         return id;
@@ -95,16 +87,6 @@ public class ExportLine implements Serializable {
         this.total = total;
     }
 
-    public Export getExport() {
-        return export;
-    }
-
-    public void setExport(Export export) {
-        Export oldExport = this.export;
-        this.export = export;
-        changeSupport.firePropertyChange("export", oldExport, export);
-    }
-
     public Products getProd() {
         return prod;
     }
@@ -113,6 +95,14 @@ public class ExportLine implements Serializable {
         Products oldProd = this.prod;
         this.prod = prod;
         changeSupport.firePropertyChange("prod", oldProd, prod);
+    }
+
+    public Clients getClient() {
+        return client;
+    }
+
+    public void setClient(Clients client) {
+        this.client = client;
     }
 
     @Override

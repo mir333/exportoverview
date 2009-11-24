@@ -17,7 +17,7 @@ import org.jdesktop.observablecollections.ObservableList;
  *
  * @author xligas
  */
-public class DeliveryForm extends DeliveryInvoiceForm {
+public class DeliveryForm extends DocumentForm {
 
     private List<ExportLine> exportLinesList;
 

@@ -6,11 +6,14 @@
 package cz.ligas.exportoverview.db;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 /**
  *
  * @author xligas
@@ -19,8 +22,14 @@ import javax.persistence.Id;
 public class Document implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    private Date editDate;
+    private int total;
+    @ManyToOne
+    private Clients client;
+    @OneToMany(mappedBy = "document")
+    private List<DocumentLine> documentLine;
 
     public int getId() {
         return id;
@@ -30,6 +39,39 @@ public class Document implements Serializable {
         this.id = id;
     }
 
+    public Clients getClient() {
+        return client;
+    }
+
+    public void setClient(Clients client) {
+        this.client = client;
+    }
+
+    public List<DocumentLine> getDocumentLine() {
+        return documentLine;
+    }
+
+    public void setDocumentLine(List<DocumentLine> documentLine) {
+        this.documentLine = documentLine;
+    }
+
+    public Date getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(Date editDate) {
+        this.editDate = editDate;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -52,7 +94,6 @@ public class Document implements Serializable {
 
     @Override
     public String toString() {
-        return "cz.ligas.exportoverview.db.Document[id=" + id + "]";
+        return "" + id ;
     }
-
 }

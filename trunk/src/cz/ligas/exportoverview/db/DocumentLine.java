@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
 /**
  *
  * @author xligas
@@ -19,8 +19,14 @@ import javax.persistence.Id;
 public class DocumentLine implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    private int amount;
+    private float price;
+    @ManyToOne
+    private Document document;
+    @ManyToOne
+    private Products prod;
 
     public int getId() {
         return id;
@@ -28,6 +34,38 @@ public class DocumentLine implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public Products getProd() {
+        return prod;
+    }
+
+    public void setProd(Products prod) {
+        this.prod = prod;
     }
 
     @Override

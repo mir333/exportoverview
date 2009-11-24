@@ -30,7 +30,6 @@ public class ProductCategory implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "ID", nullable = false)
     private int id;
     private String categoryCode;
     private String categoryName;

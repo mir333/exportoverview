@@ -28,15 +28,15 @@ import org.jdesktop.swingbinding.SwingBindings;
  *
  * @author xligas
  */
-public class DeliveryInvoiceForm extends javax.swing.JFrame {
+public class DocumentForm extends javax.swing.JFrame {
 
-    /** Creates new form DeliveryInvoiceForm */
-//    public DeliveryInvoiceForm() {
+    /** Creates new form DocumentForm */
+//    public DocumentFormForm() {
 //        initComponents();
 //        System.err.println("test DI nonargument");
 //    }
-    public DeliveryInvoiceForm(String lable,String prop) {
-        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(DeliveryInvoiceForm.class, this);
+    public DocumentForm(String lable,String prop) {
+        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(DocumentForm.class, this);
         initComponents();
         myInit("${selectedItem."+prop+"}");
         dacumentL.setText(lable+":");
@@ -144,7 +144,7 @@ public class DeliveryInvoiceForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DeliveryInvoiceForm.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
         delInvTableL.getAccessibleContext().setAccessibleName(resourceMap.getString("delInvTableL.AccessibleContext.accessibleName")); // NOI18N
         clientL.getAccessibleContext().setAccessibleName(resourceMap.getString("clientL.AccessibleContext.accessibleName")); // NOI18N
         dacumentL.getAccessibleContext().setAccessibleName(resourceMap.getString("dacumentL.AccessibleContext.accessibleName")); // NOI18N
