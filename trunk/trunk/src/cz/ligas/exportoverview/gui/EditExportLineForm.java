@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * EditExportLineForm.java
  *
  * Created on 9.8.2009, 11:56:22
@@ -23,14 +18,16 @@ import org.jdesktop.application.Action;
  * @author xligas
  */
 public class EditExportLineForm extends javax.swing.JFrame {
+
     private Clients client;
+
     /** Creates new form EditExportLineForm */
     public EditExportLineForm(Clients c, ExportLine el) {
         this.client = c;
         this.exportLine = el;
         initComponents();
         myInit();
-     }
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -124,7 +121,6 @@ public class EditExportLineForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel exportLinePriceL;
     private javax.swing.JButton exportLineSaveButton;
@@ -140,11 +136,12 @@ public class EditExportLineForm extends javax.swing.JFrame {
 
     @Action
     public void editExportLineSaveAction() {
+        //TODO: ak to bude robit moc bordel zmenit spinre na text
         int send = Integer.parseInt(nExportLineSentSpinner.getValue().toString());
         int sold = Integer.parseInt(nExportLineSoldSpinner.getValue().toString());
         float price = Float.parseFloat(mExportLinePriceTextfield.getText());
         try {
-            ExportLineOps.editExportLine(client,exportLine,send,sold,price);
+            ExportLineOps.editExportLine(client, exportLine, send, sold, price);
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,10 +150,13 @@ public class EditExportLineForm extends javax.swing.JFrame {
     }
 
     private void myInit() {
+        mExportLinePriceTextfield.setText(exportLine.getPrice() + "");
         mExportLinePriceTextfield.setInputVerifier(verifier);
         exportLinePriceL.setLabelFor(mExportLinePriceTextfield);
+        nExportLineSentSpinner.setValue(exportLine.getSent());
         nExportLineSentSpinner.setInputVerifier(verifier);
         exportLineSentL.setLabelFor(nExportLineSentSpinner);
+        nExportLineSoldSpinner.setValue(exportLine.getSold());
         nExportLineSoldSpinner.setInputVerifier(verifier);
         exportLineSoldL.setLabelFor(nExportLineSoldSpinner);
 
