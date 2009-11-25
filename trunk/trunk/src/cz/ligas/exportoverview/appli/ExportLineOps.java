@@ -53,8 +53,8 @@ public class ExportLineOps {
                 try {
             EntityManager em = emFactory.createEntityManager();
             List<ExportLine> list = new ArrayList<ExportLine>();
-            Query q = em.createQuery("select el from ExportLine el where el.export=:client  order by el.id asc");
-            q.setParameter("clinet", c);
+            Query q = em.createQuery("select el from ExportLine el where el.client=:client  order by el.id asc");
+            q.setParameter("client", c);
             list = q.getResultList();
             em.close();
             return list;
