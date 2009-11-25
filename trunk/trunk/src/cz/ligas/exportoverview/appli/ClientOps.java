@@ -44,7 +44,18 @@ public class ClientOps {
         }
     }
 
- public static void recalculateExportedProducts(Clients client) {
+    public static Clients getClientById(int id) throws Exception {
+        try {
+            EntityManager em = emFactory.createEntityManager();
+            Clients c = em.find(Clients.class, id);
+            em.close();
+            return c;
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    public static void recalculateExportedProducts(Clients client) {
         int total = 0;
         int totalSold = 0;
         int totalSent = 0;

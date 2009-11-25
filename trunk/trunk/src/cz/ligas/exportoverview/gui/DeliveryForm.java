@@ -1,6 +1,8 @@
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.appli.DeliveryOps;
+import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Delivery;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -18,14 +20,19 @@ import org.jdesktop.observablecollections.ObservableList;
 public class DeliveryForm extends DocumentForm {
 
     public DeliveryForm() {
-        super("Delivery", "deliveries");
+        super("Delivery");
         myInit();
     }
-
+//TODO: treba to riadne spravit to get client by id,
+//TODO: a treba doriesit prizmene clienta nacitanie novych dat v doc a potom aj tabulku
+//TODO: 2 opravit gombik na pridavanie poloziek
     private void myInit() {
         try {
-            Delivery deliv = (Delivery) docComboBox.getSelectedItem();
-            documentLinesList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(DeliveryOps.getDeliveriesLinesForDelivery(deliv));
+            docList = Beans.isDesignTime() ?
+                (ObservableList) Collections.emptyList():
+                ObservableCollections.observableList(DeliveryOps.getDeliveriesFromClient(ClientOps.getClientById(1)));
+            documentLinesList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : 
+                ObservableCollections.observableList(DeliveryOps.getDeliveriesLinesForDelivery((Delivery)docList.get(1)));
         } catch (Exception ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }

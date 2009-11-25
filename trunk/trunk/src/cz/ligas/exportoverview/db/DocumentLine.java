@@ -23,6 +23,7 @@ public class DocumentLine implements Serializable {
     private int id;
     private int amount;
     private float price;
+    private float total;
     @ManyToOne
     private Document document;
     @ManyToOne
@@ -66,6 +67,14 @@ public class DocumentLine implements Serializable {
 
     public void setProd(Products prod) {
         this.prod = prod;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
     }
 
     @Override

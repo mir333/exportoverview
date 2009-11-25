@@ -25,7 +25,7 @@ public class DeliveryOpsTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-    }
+}
 
     @AfterClass
     public static void tearDownClass() throws Exception {

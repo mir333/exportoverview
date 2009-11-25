@@ -2,6 +2,7 @@ package cz.ligas.exportoverview.appli;
 
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Delivery;
+import cz.ligas.exportoverview.db.DeliveryLine;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -37,7 +38,7 @@ public class DeliveryOps {
         try {
             EntityManager em = emFactory.createEntityManager();
             List<Delivery> list = new ArrayList<Delivery>();
-            Query q = em.createQuery("select d from Delivery d where d.client= :client order by e.id asc");
+            Query q = em.createQuery("select d from Delivery d where d.client= :client order by d.id asc");
             q.setParameter("client", c);
             list = q.getResultList();
             em.close();
@@ -52,6 +53,19 @@ public class DeliveryOps {
             EntityManager em = emFactory.createEntityManager();
             List<Delivery> list = new ArrayList<Delivery>();
             Query q = em.createQuery("select d from Delivery d order by d.id asc");
+            list = q.getResultList();
+            em.close();
+            return list;
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+        public static List<DeliveryLine> getDeliveriesLinesForDelivery(Delivery deliv) throws Exception {
+        try {
+            EntityManager em = emFactory.createEntityManager();
+            List<DeliveryLine> list = new ArrayList<DeliveryLine>();
+            Query q = em.createQuery("select dl from DeliveryLine dl where dl.document= :doc order by dl.id asc");
+            q.setParameter("doc", deliv);
             list = q.getResultList();
             em.close();
             return list;
