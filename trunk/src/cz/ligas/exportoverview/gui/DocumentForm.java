@@ -31,10 +31,10 @@ import org.jdesktop.swingbinding.SwingBindings;
  */
 public class DocumentForm extends javax.swing.JFrame {
 
-    public DocumentForm(String lable,String prop) {
+    public DocumentForm(String lable) {
         actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(DocumentForm.class, this);
         initComponents();
-        myInit("${selectedItem."+prop+"}");
+        myInit();
         dacumentL.setText(lable+":");
         setTitle(lable);
 
@@ -167,27 +167,29 @@ public class DocumentForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     private List<Clients> clientsList;
+    protected List<Document> docList;
     protected List<Document> documentLinesList;
     javax.swing.ActionMap actionMap;
 
-    private void myInit(String elPropString) {
-        bindingGroup = new BindingGroup();
+    private void myInit() {
+        
         try {
             clientsList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(ClientOps.getClients());
             
         } catch (Exception ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JComboBoxBinding clientsComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientComboBox);
-        bindingGroup.addBinding(clientsComboBoxBinding);
-
-        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create(elPropString);
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientComboBox, eLProperty, docComboBox);
-        bindingGroup.addBinding(jComboBoxBinding);
-        bindingGroup.bind();
     }
 
     protected  void fillTable(){
+        bindingGroup = new BindingGroup();
+
+        JComboBoxBinding clientsComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientComboBox);
+        bindingGroup.addBinding(clientsComboBoxBinding);
+
+        JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, docList , docComboBox);
+        bindingGroup.addBinding(jComboBoxBinding);
+
         org.jdesktop.application.ResourceMap resourceMap1 = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(MainView.class);
         JTableBinding mainTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE,documentLinesList , documentTable);
         JTableBinding.ColumnBinding columnBinding;

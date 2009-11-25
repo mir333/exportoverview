@@ -18,7 +18,7 @@ import org.jdesktop.observablecollections.ObservableList;
 public class InvoiceForm extends DocumentForm {
 
     public InvoiceForm() {
-        super("Invoice", "invoices");
+        super("Invoice");
         myInit();
     }
 
