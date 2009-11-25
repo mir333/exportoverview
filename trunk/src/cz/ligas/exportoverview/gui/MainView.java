@@ -156,6 +156,11 @@ public class MainView extends FrameView {
         mainPanel.setName("mainPanel"); // NOI18N
 
         clientsComboBox.setName("clientsComboBox"); // NOI18N
+        clientsComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientsComboBoxActionPerformed(evt);
+            }
+        });
 
         newClientButton.setAction(actionMap.get("newClient"));
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(MainView.class);
@@ -198,7 +203,7 @@ public class MainView extends FrameView {
 
         totalLableOut.setName("totalLableOut"); // NOI18N
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JComboBox(), org.jdesktop.beansbinding.ELProperty.create("${selectedItem.total}"), totalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.total}"), totalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         totalLable.setText(resourceMap.getString("totalLable.text")); // NOI18N
@@ -206,7 +211,7 @@ public class MainView extends FrameView {
 
         sentPriceOut.setName("sentPriceOut"); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JComboBox(), org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSendValue}"), sentPriceOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSendValue}"), sentPriceOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         sentPriceLable.setText(resourceMap.getString("sentPriceLable.text")); // NOI18N
@@ -214,7 +219,7 @@ public class MainView extends FrameView {
 
         soldTotalLableOut.setName("soldTotalLableOut"); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JComboBox(), org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSold}"), soldTotalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSold}"), soldTotalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         soldTotalLable.setText(resourceMap.getString("soldTotalLable.text")); // NOI18N
@@ -222,7 +227,7 @@ public class MainView extends FrameView {
 
         sentTotalLableOut.setName("sentTotalLableOut"); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JComboBox(), org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSent}"), sentTotalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSent}"), sentTotalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         sentTotalLable.setText(resourceMap.getString("sentTotalLable.text")); // NOI18N
@@ -436,6 +441,21 @@ public class MainView extends FrameView {
             eel.setVisible(true);
         }
     }//GEN-LAST:event_mainTableMouseClicked
+
+    private void clientsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsComboBoxActionPerformed
+               Clients c = (Clients) clientsComboBox.getSelectedItem();
+        if (c != null) {
+            exportLinesList.clear();
+            try {
+                exportLinesList.addAll(ExportLineOps.getExportLinesByClient(c));
+
+            } catch (Exception ex) {
+                Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mainTable.updateUI();
+        }
+
+    }//GEN-LAST:event_clientsComboBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProductButton;

@@ -2,18 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cz.ligas.exportoverview.appli;
 
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
+import cz.ligas.exportoverview.db.Products;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -23,23 +22,9 @@ import static org.junit.Assert.*;
  */
 public class ExportLineOpsTest {
 
+    EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ExportOverviewPU");
+
     public ExportLineOpsTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
     }
 
     /**
@@ -48,10 +33,20 @@ public class ExportLineOpsTest {
     @Test
     public void testAddExportLine() throws Exception {
         System.out.println("addExportLine");
-        ExportLine exportLine = null;
-        ExportLineOps.addExportLine(exportLine);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        EntityManager em = emFactory.createEntityManager();
+        em.getTransaction().begin();
+        Products prod = em.find(Products.class, 1);
+        assertTrue("Product is empty", prod != null);
+        Clients kl1 = em.find(Clients.class, 1);
+        assertTrue("Client is empty", kl1 != null);
+        ExportLine el = new ExportLine();
+        el.setProd(prod);
+        el.setSent(3);
+        el.setSold(4);
+
+        kl1.getExportLines().add(el);
+        el.setClient(kl1);
+        ExportLineOps.addExportLine(el);
     }
 
     /**
@@ -60,31 +55,9 @@ public class ExportLineOpsTest {
     @Test
     public void testGetExportLineById() throws Exception {
         System.out.println("getExportLineById");
-        int id = 0;
-        ExportLine expResult = null;
+        int id = 1;
         ExportLine result = ExportLineOps.getExportLineById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getExportLinesByExport method, of class ExportLineOps.
-     */
-    @Test
-    public void testGetExportLinesByExport() {
-        System.out.println("getExportLinesByExport");
-        Clients e = null;
-        List expResult = null;
-        List result;
-        try {
-            result = ExportLineOps.getExportLinesByClient(e);
-             assertEquals(expResult, result);
-        } catch (Exception ex) {
-            Logger.getLogger(ExportLineOpsTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue("field is empty", result != null);
     }
 
     /**
@@ -93,11 +66,8 @@ public class ExportLineOpsTest {
     @Test
     public void testGetExportLine() throws Exception {
         System.out.println("getExportLine");
-        List expResult = null;
         List result = ExportLineOps.getExportLine();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue("field is empty", result != null);
     }
 
     /**
@@ -106,18 +76,39 @@ public class ExportLineOpsTest {
     @Test
     public void testEditExportLine() {
         System.out.println("editExportLine");
-        Clients exp = null;
-        ExportLine exportLine = null;
-        int sent = 0;
-        int sold = 0;
-        float price = 0.0F;
+        EntityManager em = emFactory.createEntityManager();
+        em.getTransaction().begin();
+        Clients c = em.find(Clients.class, 1);
+        assertTrue("klient is null", c != null);
+        em.getTransaction().commit();
+        em.close();
+        int sent = 4;
+        int sold = 5;
+        float price = 1000.0F;
         try {
-            ExportLineOps.editExportLine(exp, exportLine, sent, sold, price);
+            List result = ExportLineOps.getExportLinesByClient(c);
+            assertTrue("list is empty", result.size() != 0);
+            ExportLine expln = (ExportLine) result.get(0);
+            ExportLineOps.editExportLine(c, expln, sent, sold, price);
         } catch (Exception ex) {
             Logger.getLogger(ExportLineOpsTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of getExportLinesByClient method, of class ExportLineOps.
+     */
+    @Test
+    public void testGetExportLinesByClient() throws Exception {
+        System.out.println("getExportLinesByClient");
+        EntityManager em = emFactory.createEntityManager();
+        em = emFactory.createEntityManager();
+        em.getTransaction().begin();
+        Clients kl1 = em.find(Clients.class, 1);
+        assertTrue("klient is null", kl1 != null);
+        List result = ExportLineOps.getExportLinesByClient(kl1);
+        assertTrue("list is empty", result.size() != 0);
+        em.getTransaction().commit();
+        em.close();
+    }
 }
