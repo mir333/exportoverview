@@ -168,7 +168,6 @@ public class ProductForm extends javax.swing.JFrame {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
-        System.err.println("saveProduct execution");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

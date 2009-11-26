@@ -3,14 +3,13 @@
  *
  * Created on 10.10.2009, 11:51:57
  */
-
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
 import org.jdesktop.application.Action;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Document;
-import cz.ligas.exportoverview.db.ExportLine;
+import cz.ligas.exportoverview.db.DocumentLine;
 import java.beans.Beans;
 import java.util.Collections;
 import java.util.List;
@@ -35,12 +34,12 @@ public class DocumentForm extends javax.swing.JFrame {
         actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(DocumentForm.class, this);
         initComponents();
         myInit();
-        dacumentL.setText(lable+":");
+        dacumentL.setText(lable + ":");
         setTitle(lable);
 
     }
 
-     @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -82,12 +81,14 @@ public class DocumentForm extends javax.swing.JFrame {
         clientL.setName("clientL"); // NOI18N
 
         clientComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        clientComboBox.setAction(actionMap.get("fillDocComboBox"));
         clientComboBox.setName("clientComboBox"); // NOI18N
 
         dacumentL.setText("Document:");
         dacumentL.setName("dacumentL"); // NOI18N
 
         docComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        docComboBox.setAction(actionMap.get("dcoSelected"));
         docComboBox.setName("docComboBox"); // NOI18N
 
         addLineButton.setAction(actionMap.get("newDocument"));
@@ -150,10 +151,10 @@ public class DocumentForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    protected void documentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_documentTableMouseClicked
+	protected void documentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_documentTableMouseClicked
         System.err.println("Not owerriden");
     }//GEN-LAST:event_documentTableMouseClicked
-
+	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addLineButton;
     protected javax.swing.JComboBox clientComboBox;
@@ -166,32 +167,31 @@ public class DocumentForm extends javax.swing.JFrame {
     private javax.swing.JButton printButton;
     // End of variables declaration//GEN-END:variables
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
-    private List<Clients> clientsList;
+    protected List<Clients> clientsList;
     protected List<Document> docList;
-    protected List<Document> documentLinesList;
+    protected List<DocumentLine> documentLinesList;
     javax.swing.ActionMap actionMap;
 
+
     private void myInit() {
-        
+
         try {
             clientsList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(ClientOps.getClients());
-            
         } catch (Exception ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    protected  void fillTable(){
+    protected void bindingMethod() {
         bindingGroup = new BindingGroup();
-
         JComboBoxBinding clientsComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientComboBox);
         bindingGroup.addBinding(clientsComboBoxBinding);
 
-        JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, docList , docComboBox);
+        JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, docList, docComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
 
         org.jdesktop.application.ResourceMap resourceMap1 = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(MainView.class);
-        JTableBinding mainTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE,documentLinesList , documentTable);
+        JTableBinding mainTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE, documentLinesList, documentTable);
         JTableBinding.ColumnBinding columnBinding;
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productCode}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.productCode"));
@@ -224,6 +224,17 @@ public class DocumentForm extends javax.swing.JFrame {
 
     @Action
     public void newDocument() {
+     System.err.println("Not Overriden");
+    }
+    
+
+    @Action
+    public void fillDocComboBox() {
+        System.err.println("Not Overriden");
+    }
+
+    @Action
+    public void dcoSelected() {
         System.err.println("Not Overriden");
     }
 }

@@ -29,7 +29,7 @@ public class AddExportLine extends AddProductForm {
         ExportLine el = new ExportLine();
         el.setProd(getSelectedProduct());
         el.setClient(clinets);
-        el.setPrice(getSpecialPriceIn());
+        el.setSentPrice(getSpecialPriceIn());
         el.setSent(getSendIn());
         el.setSold(getSoldIn());
 

@@ -10,6 +10,7 @@ import cz.ligas.exportoverview.db.Clients;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ActionMap;
 import org.jdesktop.application.Action;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -24,6 +25,7 @@ public class NewDocumentForm extends javax.swing.JFrame {
 
     /** Creates new form ExportForm */
     public NewDocumentForm() {
+        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(NewDocumentForm.class, this);
         initComponents();
         myInit();
     }
@@ -50,6 +52,7 @@ public class NewDocumentForm extends javax.swing.JFrame {
         clientComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         clientComboBox.setName("clientComboBox"); // NOI18N
 
+        createExportButton.setAction(actionMap.get("createDocument"));
         createExportButton.setText(resourceMap.getString("createExportButton.text")); // NOI18N
         createExportButton.setName("createExportButton"); // NOI18N
 
@@ -95,11 +98,6 @@ public class NewDocumentForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    @Action
-    public void createDocument() {
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox clientComboBox;
     private javax.swing.JLabel clientL;
@@ -108,6 +106,7 @@ public class NewDocumentForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private List<Clients> clientsList;
     private BindingGroup bindingGroup;
+    private ActionMap actionMap;
 
     private void myInit() {
         bindingGroup = new BindingGroup();
@@ -121,7 +120,12 @@ public class NewDocumentForm extends javax.swing.JFrame {
         bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
     }
-    protected Clients getClient(){
+
+    @Action
+    public void createDocument() {
+    }
+
+    protected Clients getClient() {
         return (Clients) clientComboBox.getSelectedItem();
     }
 }
