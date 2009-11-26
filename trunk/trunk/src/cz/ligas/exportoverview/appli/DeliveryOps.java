@@ -73,4 +73,19 @@ public class DeliveryOps {
             throw new Exception(e);
         }
     }
+
+    public static void addDeliveryLine(DeliveryLine dl) throws Exception {
+                 try {
+            EntityManager em = emFactory.createEntityManager();
+            Delivery delivery = (Delivery) dl.getDocument();
+            delivery.getDocumentLine().add(dl);
+            em.getTransaction().begin();
+            em.persist(dl);
+            em.merge(delivery);
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
 }

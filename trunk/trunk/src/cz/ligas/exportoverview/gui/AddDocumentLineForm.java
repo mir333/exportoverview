@@ -6,7 +6,17 @@
 
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.appli.CategoryOps;
+import cz.ligas.exportoverview.db.ProductCategory;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdesktop.application.Action;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.swingbinding.JComboBoxBinding;
+import org.jdesktop.swingbinding.SwingBindings;
+
 
 /**
  *
@@ -18,6 +28,7 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
     public AddDocumentLineForm() {
         actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(AddDocumentLineForm.class, this);
         initComponents();
+        myInit();
     }
 
     /** This method is called from within the constructor to
@@ -32,9 +43,9 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
 
         addProductButton = new javax.swing.JButton();
         productCategoryComboBox = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        productComboBox = new javax.swing.JComboBox();
+        nAmountIn = new javax.swing.JTextField();
+        mPriceIn = new javax.swing.JTextField();
         productCategoryL = new javax.swing.JLabel();
         productL = new javax.swing.JLabel();
         amountL = new javax.swing.JLabel();
@@ -51,15 +62,18 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
 
         productCategoryComboBox.setName("productCategoryComboBox"); // NOI18N
 
-        jComboBox2.setName("productComboBOx"); // NOI18N
+        productComboBox.setName("productComboBOx"); // NOI18N
 
         org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedItem.products}");
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productCategoryComboBox, eLProperty, jComboBox2);
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productCategoryComboBox, eLProperty, productComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
 
-        jTextField1.setName("nAmountIn"); // NOI18N
+        nAmountIn.setName("nAmountIn"); // NOI18N
 
-        jTextField2.setName("mPriceIn"); // NOI18N
+        mPriceIn.setName("mPriceIn"); // NOI18N
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.productPrice}"), mPriceIn, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         productCategoryL.setText(resourceMap.getString("productCategoryL.text")); // NOI18N
         productCategoryL.setName("productCategoryL"); // NOI18N
@@ -92,9 +106,9 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
                             .addComponent(priceL))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
+                            .addComponent(productComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nAmountIn)
+                            .addComponent(mPriceIn)
                             .addComponent(productCategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -113,15 +127,15 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
                     .addComponent(productCategoryL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(productL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nAmountIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(amountL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mPriceIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(priceL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addProductButton)
@@ -137,20 +151,53 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
     private javax.swing.JLabel addDocumentLable;
     private javax.swing.JButton addProductButton;
     private javax.swing.JLabel amountL;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField mPriceIn;
+    private javax.swing.JTextField nAmountIn;
     private javax.swing.JLabel priceL;
     private javax.swing.JComboBox productCategoryComboBox;
     private javax.swing.JLabel productCategoryL;
+    private javax.swing.JComboBox productComboBox;
     private javax.swing.JLabel productL;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
         javax.swing.ActionMap actionMap;
+    private List<ProductCategory> categoryList;
+    private MyInputVerifier verifier = new MyInputVerifier();
+
+    private void myInit() {
+         bindingGroup = new BindingGroup();
+        nAmountIn.setInputVerifier(verifier);
+        nAmountIn.addActionListener(verifier);
+        amountL.setLabelFor(nAmountIn);
+        mPriceIn.setInputVerifier(verifier);
+        mPriceIn.addActionListener(verifier);
+        priceL.setLabelFor(mPriceIn);
+        try {
+            categoryList = CategoryOps.getCategories();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, categoryList, productCategoryComboBox);
+        bindingGroup.addBinding(jComboBoxBinding);
+        bindingGroup.bind();
+    }
 
     @Action
     public void addDocumentLine() {
         System.err.println("Not Overriden");
+    }
+
+    protected float getmPriceIn() {
+        return Float.parseFloat(mPriceIn.getText());
+    }
+
+
+    protected int getnAmountIn() {
+        return Integer.parseInt(nAmountIn.getText());
+    }
+
+    protected Object getProduct() {
+        return productComboBox.getSelectedItem();
     }
 
 }

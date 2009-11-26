@@ -75,4 +75,19 @@ public class InvoiceOps {
             throw new Exception(e);
         }
     }
+
+    public static void addInvoiceLine(InvoiceLine il) throws Exception {
+           try {
+            EntityManager em = emFactory.createEntityManager();
+            Invoice inv = (Invoice) il.getDocument();
+            inv.getDocumentLine().add(il);
+            em.getTransaction().begin();
+            em.persist(il);
+            em.merge(inv);
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
 }
