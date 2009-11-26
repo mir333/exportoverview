@@ -67,7 +67,7 @@ public class InvoiceOps {
             EntityManager em = emFactory.createEntityManager();
             List<InvoiceLine> list = new ArrayList<InvoiceLine>();
             Query q = em.createQuery("select dl from DeliveryLine dl where dl.document= :doc order by dl.id asc");
-            q.setParameter("document", inv);
+            q.setParameter("doc", inv);
             list = q.getResultList();
             em.close();
             return list;

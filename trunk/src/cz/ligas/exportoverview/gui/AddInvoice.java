@@ -1,17 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.ligas.exportoverview.gui;
 
-import cz.ligas.exportoverview.db.ExportLine;
 import cz.ligas.exportoverview.db.Invoice;
 
 /**
  *
  * @author miro
  */
-public class AddInvoice extends AddProductForm {
+public class AddInvoice extends AddDocumentLineForm {
 
     Invoice invoice;
 
@@ -20,12 +15,7 @@ public class AddInvoice extends AddProductForm {
     }
 
     @Override
-    public void addExportLine() {
-        ExportLine el = new ExportLine();
-        el.setProd(getSelectedProduct());
-        el.setPrice(getSpecialPriceIn());
-        el.setSent(getSendIn());
-        el.setSold(getSoldIn());
-        //set export
+    public void addDocumentLine() {
+        this.dispose();
     }
 }
