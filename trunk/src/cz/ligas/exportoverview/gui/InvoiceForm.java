@@ -61,8 +61,8 @@ public class InvoiceForm extends DocumentForm {
             public void windowDeactivated(WindowEvent evt) {
                 documentLinesList.clear();
                 try {
-                    documentLinesList.addAll(null);
-                    //    mainTable.updateUI();
+                    documentLinesList.addAll(InvoiceOps.getInvoiceLinesForInvoice(i));
+                    documentTable.updateUI();
                 } catch (Exception ex) {
                     Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
                 }
