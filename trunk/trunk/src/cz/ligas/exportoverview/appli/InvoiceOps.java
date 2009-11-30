@@ -119,4 +119,19 @@ public class InvoiceOps {
             throw new Exception(e);
         }
     }
+
+    public static void deleteItems(List<Integer> seletedDocs) throws Exception {
+                    try {
+            EntityManager em = emFactory.createEntityManager();
+            em.getTransaction().begin();
+                for (int id : seletedDocs) {
+                    InvoiceLine dl = em.find(InvoiceLine.class, id);
+                    em.remove(dl);
+                }
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
 }

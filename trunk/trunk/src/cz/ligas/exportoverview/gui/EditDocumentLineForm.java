@@ -98,15 +98,15 @@ public class EditDocumentLineForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+	
     // Variables declaration - do not modify                     
-    // End of variables declaration                    
     private javax.swing.JLabel amountL;
     private javax.swing.JLabel editDocumentLineL;
     protected javax.swing.JTextField mPriceIn;
     protected javax.swing.JSpinner nAmountIn;
     private javax.swing.JLabel priceL;
     private javax.swing.JButton saveButton;
- 
+    // End of variables declaration//GEN-END:variables
     javax.swing.ActionMap actionMap;
     private MyInputVerifier verifier = new MyInputVerifier();
 

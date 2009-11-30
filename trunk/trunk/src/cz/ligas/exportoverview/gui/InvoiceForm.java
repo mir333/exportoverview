@@ -98,7 +98,7 @@ public class InvoiceForm extends DocumentForm {
         }
     }
 
-     @Override
+    @Override
     public void documentTableMouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getClickCount() > 1) {
             final int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
@@ -119,6 +119,18 @@ public class InvoiceForm extends DocumentForm {
                 }
             });
             edlf.setVisible(true);
+        }
+    }
+
+    @Override
+    public void deleteSelected() {
+        if (showDialog("Do you realy want to delete selected items?") == 0) {
+            try {
+                InvoiceOps.deleteItems(getSeletedDocs());
+                dcoSelected();
+            } catch (Exception ex) {
+                Logger.getLogger(DeliveryForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

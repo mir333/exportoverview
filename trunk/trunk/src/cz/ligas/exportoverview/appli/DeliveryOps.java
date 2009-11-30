@@ -3,12 +3,14 @@ package cz.ligas.exportoverview.appli;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Delivery;
 import cz.ligas.exportoverview.db.DeliveryLine;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
 
 /**
  *
@@ -102,11 +104,10 @@ public class DeliveryOps {
         }
     }
 
-    public static void editDeliveryLine(DeliveryLine dl,int amount, float price) throws Exception {
+    public static void editDeliveryLine(DeliveryLine dl, int amount, float price) throws Exception {
         try {
-            float total = amount*price;
+            float total = amount * price;
             int id = dl.getDocument().getId();
-            System.err.println("id "+id);
             EntityManager em = emFactory.createEntityManager();
             Delivery d = em.find(Delivery.class, id);
             dl.setAmount(amount);
@@ -121,4 +122,21 @@ public class DeliveryOps {
             throw new Exception(e);
         }
     }
+
+    public static void deleteItems(List<Integer> seletedDocs) throws Exception {
+        try {
+            EntityManager em = emFactory.createEntityManager();
+            em.getTransaction().begin();
+            for (int id : seletedDocs) {
+                DeliveryLine dl = em.find(DeliveryLine.class, id);
+                em.remove(dl);
+            }
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+
 }

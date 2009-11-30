@@ -39,7 +39,9 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="printButton" min="-2" pref="70" max="-2" attributes="0"/>
-                      <EmptySpace pref="334" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="263" max="32767" attributes="0"/>
                       <Component id="addLineButton" min="-2" pref="66" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -63,8 +65,11 @@
               <Component id="jScrollPane1" pref="275" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="printButton" min="-2" max="-2" attributes="0"/>
-                  <Component id="addLineButton" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="printButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="addLineButton" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -201,12 +206,24 @@
     </Component>
     <Component class="javax.swing.JButton" name="printButton">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="actionMap.get(&quot;printDoc&quot;)" type="code"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Print"/>
         <Property name="name" type="java.lang.String" value="printButton" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="printButton.AccessibleContext.accessibleName"/>
       </AccessibilityProperties>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteButton">
+      <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="actionMap.get(&quot;deleteSelected&quot;)" type="code"/>
+        </Property>
+        <Property name="text" type="java.lang.String" resourceKey="deleteButton.text"/>
+        <Property name="name" type="java.lang.String" value="deleteButton" noResource="true"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
