@@ -63,7 +63,7 @@ public class DeliveryForm extends DocumentForm {
                 try {
                     documentLinesList.addAll(DeliveryOps.getDeliveriesLinesForDelivery(d));
                     documentTable.updateUI();
-                    } catch (Exception ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -95,6 +95,30 @@ public class DeliveryForm extends DocumentForm {
             } catch (Exception ex) {
                 Logger.getLogger(DeliveryForm.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+
+    @Override
+    public void documentTableMouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getClickCount() > 1) {
+            final int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
+            EditDeliveryLineForm edlf = new EditDeliveryLineForm((DeliveryLine) documentLinesList.get(index));
+            edlf.setLocationRelativeTo(documentTable);
+            edlf.addWindowListener(new WindowAdapter() {
+
+                @Override
+                public void windowDeactivated(WindowEvent evt) {
+                    try {
+                        DeliveryLine dl = (DeliveryLine) documentLinesList.get(index);
+                        dl = DeliveryOps.getDeliveryLineById(dl.getId());
+                        documentLinesList.set(index, dl);
+                        documentTable.updateUI();
+                    } catch (Exception ex) {
+                        Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            edlf.setVisible(true);
         }
     }
 }

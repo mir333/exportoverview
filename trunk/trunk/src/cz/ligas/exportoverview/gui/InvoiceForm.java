@@ -52,7 +52,7 @@ public class InvoiceForm extends DocumentForm {
 
     @Override
     public void newDocument() {
-        final Invoice i = (Invoice) clientComboBox.getSelectedItem();
+        final Invoice i = (Invoice) docComboBox.getSelectedItem();
         AddInvoice aiv = new AddInvoice(i);
         aiv.setLocationRelativeTo(documentTable);
         aiv.addWindowListener(new WindowAdapter() {

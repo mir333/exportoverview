@@ -66,7 +66,7 @@ public class InvoiceOps {
        try {
             EntityManager em = emFactory.createEntityManager();
             List<InvoiceLine> list = new ArrayList<InvoiceLine>();
-            Query q = em.createQuery("select dl from DeliveryLine dl where dl.document= :doc order by dl.id asc");
+            Query q = em.createQuery("select il from InvoiceLine il where il.document= :doc order by il.id asc");
             q.setParameter("doc", inv);
             list = q.getResultList();
             em.close();
@@ -84,6 +84,35 @@ public class InvoiceOps {
             em.getTransaction().begin();
             em.persist(il);
             em.merge(inv);
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+     public static InvoiceLine getDeliveryLineById(int id) throws Exception {
+        try {
+            EntityManager em = emFactory.createEntityManager();
+            InvoiceLine il = em.find(InvoiceLine.class, id);
+            em.close();
+            return il;
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    public static void editDeliveryLine(InvoiceLine il,int amount, float price) throws Exception {
+        try {
+            float total = amount*price;
+            EntityManager em = emFactory.createEntityManager();
+            Invoice i = em.find(Invoice.class, il.getDocument().getId());
+            il.setAmount(amount);
+            il.setPrice(price);
+            il.setTotal(total);
+            em.getTransaction().begin();
+            em.merge(il);
+            em.merge(i);
             em.getTransaction().commit();
             em.close();
         } catch (Exception e) {

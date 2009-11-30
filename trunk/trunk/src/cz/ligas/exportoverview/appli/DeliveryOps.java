@@ -9,12 +9,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
 /**
  *
  * @author miro
  */
 public class DeliveryOps {
-  private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ExportOverviewPU");
+
+    private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ExportOverviewPU");
 
     public static void addDelivery(Delivery delivery) throws Exception {
         try {
@@ -32,7 +34,6 @@ public class DeliveryOps {
             throw new Exception(e);
         }
     }
-
 
     public static List<Delivery> getDeliveriesFromClient(Clients c) throws Exception {
         try {
@@ -60,7 +61,8 @@ public class DeliveryOps {
             throw new Exception(e);
         }
     }
-        public static List<DeliveryLine> getDeliveriesLinesForDelivery(Delivery deliv) throws Exception {
+
+    public static List<DeliveryLine> getDeliveriesLinesForDelivery(Delivery deliv) throws Exception {
         try {
             EntityManager em = emFactory.createEntityManager();
             List<DeliveryLine> list = new ArrayList<DeliveryLine>();
@@ -75,13 +77,44 @@ public class DeliveryOps {
     }
 
     public static void addDeliveryLine(DeliveryLine dl) throws Exception {
-                 try {
+        try {
             EntityManager em = emFactory.createEntityManager();
             Delivery delivery = (Delivery) dl.getDocument();
             delivery.getDocumentLine().add(dl);
             em.getTransaction().begin();
             em.persist(dl);
             em.merge(delivery);
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    public static DeliveryLine getDeliveryLineById(int id) throws Exception {
+        try {
+            EntityManager em = emFactory.createEntityManager();
+            DeliveryLine dl = em.find(DeliveryLine.class, id);
+            em.close();
+            return dl;
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    public static void editDeliveryLine(DeliveryLine dl,int amount, float price) throws Exception {
+        try {
+            float total = amount*price;
+            int id = dl.getDocument().getId();
+            System.err.println("id "+id);
+            EntityManager em = emFactory.createEntityManager();
+            Delivery d = em.find(Delivery.class, id);
+            dl.setAmount(amount);
+            dl.setPrice(price);
+            dl.setTotal(total);
+            em.getTransaction().begin();
+            em.merge(dl);
+            em.merge(d);
             em.getTransaction().commit();
             em.close();
         } catch (Exception e) {
