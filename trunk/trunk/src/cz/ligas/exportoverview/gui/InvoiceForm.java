@@ -97,4 +97,28 @@ public class InvoiceForm extends DocumentForm {
             }
         }
     }
+
+     @Override
+    public void documentTableMouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getClickCount() > 1) {
+            final int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
+            EditInvoiceLineForm edlf = new EditInvoiceLineForm((InvoiceLine) documentLinesList.get(index));
+            edlf.setLocationRelativeTo(documentTable);
+            edlf.addWindowListener(new WindowAdapter() {
+
+                @Override
+                public void windowDeactivated(WindowEvent evt) {
+                    try {
+                        InvoiceLine invLine = (InvoiceLine) documentLinesList.get(index);
+                        invLine = InvoiceOps.getInvoiceLineById(invLine.getId());
+                        documentLinesList.set(index, invLine);
+                        documentTable.updateUI();
+                    } catch (Exception ex) {
+                        Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            edlf.setVisible(true);
+        }
+    }
 }

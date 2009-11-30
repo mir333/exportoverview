@@ -30,7 +30,7 @@ public class EditInvoiceLineForm extends EditDocumentLineForm{
         int sold = Integer.parseInt(nAmountIn.getValue().toString());
         float price = Float.parseFloat(mPriceIn.getText());
                 try {
-            InvoiceOps.editDeliveryLine(invLine,sold, price);
+            InvoiceOps.editInvoiceLine(invLine,sold, price);
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
