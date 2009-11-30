@@ -7,6 +7,7 @@ import cz.ligas.exportoverview.db.DeliveryLine;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.Beans;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
@@ -119,6 +120,18 @@ public class DeliveryForm extends DocumentForm {
                 }
             });
             edlf.setVisible(true);
+        }
+    }
+
+    @Override
+    public void deleteSelected() {
+        if (showDialog("Do you realy want to delete selected items?") == 0) {
+            try {
+                DeliveryOps.deleteItems(getSeletedDocs());
+                dcoSelected();
+            } catch (Exception ex) {
+                Logger.getLogger(DeliveryForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }
