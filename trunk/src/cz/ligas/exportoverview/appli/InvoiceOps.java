@@ -91,7 +91,7 @@ public class InvoiceOps {
         }
     }
 
-     public static InvoiceLine getDeliveryLineById(int id) throws Exception {
+     public static InvoiceLine getInvoiceLineById(int id) throws Exception {
         try {
             EntityManager em = emFactory.createEntityManager();
             InvoiceLine il = em.find(InvoiceLine.class, id);
@@ -102,7 +102,7 @@ public class InvoiceOps {
         }
     }
 
-    public static void editDeliveryLine(InvoiceLine il,int amount, float price) throws Exception {
+    public static void editInvoiceLine(InvoiceLine il,int amount, float price) throws Exception {
         try {
             float total = amount*price;
             EntityManager em = emFactory.createEntityManager();
