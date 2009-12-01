@@ -280,7 +280,8 @@ public class DocumentForm extends javax.swing.JFrame {
             Clients c = (Clients) clientComboBox.getSelectedItem();
             Document d = (Document) docComboBox.getSelectedItem();
             String path = saveFile("html.htm");
-            Source src = GenerateXml.generateXml(d, c,documentLinesList);
+            if(path==null)return;
+            Source src = GenerateXml.generateDocXml(d, c,documentLinesList);
             GenerateXml.generateHtml(path, src);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -292,6 +293,8 @@ public class DocumentForm extends javax.swing.JFrame {
         fd.setFile(fileType);
         fd.setLocationRelativeTo(documentTable);
         fd.setVisible(true);
+        if(fd.getDirectory() == null)return null;
+        if(fd.getFile() == null)return null;
         return fd.getDirectory() + fd.getFile();
-    }
+}
 }

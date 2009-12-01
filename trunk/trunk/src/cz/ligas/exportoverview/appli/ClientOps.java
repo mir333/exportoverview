@@ -1,5 +1,6 @@
 package cz.ligas.exportoverview.appli;
 
+import cz.ligas.exportoverview.db.UserInfo;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,39 +21,27 @@ public class ClientOps {
     private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ExportOverviewPU");
 
     public static void addClient(Clients client) throws Exception {
-        try {
-            EntityManager em = emFactory.createEntityManager();
-            em.getTransaction().begin();
-            em.persist(client);
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
+        EntityManager em = emFactory.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(client);
+        em.getTransaction().commit();
+        em.close();
     }
 
     public static List<Clients> getClients() throws Exception {
-        try {
-            EntityManager em = emFactory.createEntityManager();
-            List<Clients> list = new ArrayList<Clients>();
-            Query q = em.createQuery("select c from Clients c order by c.id asc");
-            list = q.getResultList();
-            em.close();
-            return list;
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
+        EntityManager em = emFactory.createEntityManager();
+        List<Clients> list = new ArrayList<Clients>();
+        Query q = em.createQuery("select c from Clients c order by c.id asc");
+        list = q.getResultList();
+        em.close();
+        return list;
     }
 
     public static Clients getClientById(int id) throws Exception {
-        try {
-            EntityManager em = emFactory.createEntityManager();
-            Clients c = em.find(Clients.class, id);
-            em.close();
-            return c;
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
+        EntityManager em = emFactory.createEntityManager();
+        Clients c = em.find(Clients.class, id);
+        em.close();
+        return c;
     }
 
     public static void recalculateExportedProducts(Clients client) {
@@ -81,6 +70,49 @@ public class ClientOps {
             em.close();
         } catch (Exception ex) {
             Logger.getLogger(ClientOps.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void addUserInfo(UserInfo userInfo) throws Exception {
+        EntityManager em = emFactory.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(userInfo);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public static List<UserInfo> getUserInfo() throws Exception {
+        EntityManager em = emFactory.createEntityManager();
+        List<UserInfo> list = new ArrayList<UserInfo>();
+        Query q = em.createQuery("select ui from UserInfo ui order by ui.id asc");
+        list = q.getResultList();
+        em.close();
+        return list;
+    }
+
+    public static void editUserInfo(UserInfo userInfo) {
+        EntityManager em = emFactory.createEntityManager();
+        userInfo.setId(1);
+        em.getTransaction().begin();
+        em.merge(userInfo);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public static boolean isUserInfoEmpty() {
+        try {
+            EntityManager em = emFactory.createEntityManager();
+            List<UserInfo> list = new ArrayList<UserInfo>();
+            Query q = em.createQuery("select ui from UserInfo ui order by ui.id asc");
+            list = q.getResultList();
+            em.close();
+            if (list.size() > 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return true;
         }
     }
 }
