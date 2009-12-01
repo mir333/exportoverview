@@ -13,6 +13,7 @@
     <class>cz.ligas.exportoverview.db.ProductCategory</class>
     <class>cz.ligas.exportoverview.db.Products</class>
     <class>cz.ligas.exportoverview.db.WarehouseItem</class>
+    <class>cz.ligas.exportoverview.db.User</class>
     <properties>
       <property name="toplink.jdbc.user" value="app"/>
       <property name="toplink.jdbc.password" value="app"/>
