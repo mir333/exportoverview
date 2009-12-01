@@ -7,6 +7,7 @@ import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
+import cz.ligas.exportoverview.db.UserInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
@@ -44,7 +45,7 @@ public class MainView extends FrameView {
 
     public MainView(SingleFrameApplication app) {
         super(app);
-        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap	(MainView.class, this);
+        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(MainView.class, this);
         initComponents();
         myInit();
 
@@ -146,6 +147,7 @@ public class MainView extends FrameView {
         warehouseMenu = new javax.swing.JMenu();
         openWarehouseMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
+        userInfoMenuitem = new javax.swing.JMenuItem();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
@@ -367,6 +369,11 @@ public class MainView extends FrameView {
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
 
+        userInfoMenuitem.setAction(actionMap.get("userInfoMangm"));
+        userInfoMenuitem.setText(resourceMap.getString("userInfoMenuitem.text")); // NOI18N
+        userInfoMenuitem.setName("userInfoMenuitem"); // NOI18N
+        helpMenu.add(userInfoMenuitem);
+
         aboutMenuItem.setAction(actionMap.get("showAboutBox"));
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
         helpMenu.add(aboutMenuItem);
@@ -421,7 +428,7 @@ public class MainView extends FrameView {
         if (evt.getClickCount() > 1) {
             final int index = mainTable.convertRowIndexToModel(mainTable.getSelectedRow());
             Clients clients = (Clients) clientsComboBox.getSelectedItem();
-            EditExportLineForm eel = new EditExportLineForm(clients,exportLinesList.get(index));
+            EditExportLineForm eel = new EditExportLineForm(clients, exportLinesList.get(index));
             eel.setLocationRelativeTo(mainTable);
             eel.addWindowListener(new WindowAdapter() {
 
@@ -443,7 +450,7 @@ public class MainView extends FrameView {
     }//GEN-LAST:event_mainTableMouseClicked
 
     private void clientsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsComboBoxActionPerformed
-               Clients c = (Clients) clientsComboBox.getSelectedItem();
+        Clients c = (Clients) clientsComboBox.getSelectedItem();
         if (c != null) {
             exportLinesList.clear();
             try {
@@ -456,7 +463,6 @@ public class MainView extends FrameView {
         }
 
     }//GEN-LAST:event_clientsComboBoxActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProductButton;
     private javax.swing.JComboBox clientsComboBox;
@@ -488,6 +494,7 @@ public class MainView extends FrameView {
     private javax.swing.JPanel statusPanel;
     private javax.swing.JLabel totalLable;
     private javax.swing.JLabel totalLableOut;
+    private javax.swing.JMenuItem userInfoMenuitem;
     private javax.swing.JMenu warehouseMenu;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
@@ -554,7 +561,7 @@ public class MainView extends FrameView {
     }
 
     public void refreshTotal() {
-        Clients e = (Clients)clientsComboBox.getSelectedItem();
+        Clients e = (Clients) clientsComboBox.getSelectedItem();
         int i = clientsComboBox.getSelectedIndex();
         clientsComboBox.setSelectedIndex(-1);
         clientsComboBox.setSelectedIndex(i);
@@ -624,7 +631,6 @@ public class MainView extends FrameView {
 
     @Action
     public void openWarehouse() {
-        System.err.println("looool");
         WarehouseForm whf = new WarehouseForm();
         whf.setLocationRelativeTo(mainTable);
         whf.setVisible(true);
@@ -680,6 +686,13 @@ public class MainView extends FrameView {
     }
 
     @Action
+    public void userInfoMangm() {
+        UserInfoForm uif = new UserInfoForm();
+        uif.setLocationRelativeTo(mainTable);
+        uif.setVisible(true);
+    }
+
+    @Action
     public void print() {
         /* Fetch printing properties from the GUI components */
         Clients client = (Clients) clientsComboBox.getSelectedItem();
@@ -708,7 +721,7 @@ public class MainView extends FrameView {
                         "Printing Cancelled",
                         "Printing Result",
                         JOptionPane.INFORMATION_MESSAGE);
-            }
+}
         } catch (PrinterException pe) {
             /* Printing failed, report to the user */
             JOptionPane.showMessageDialog(null,
