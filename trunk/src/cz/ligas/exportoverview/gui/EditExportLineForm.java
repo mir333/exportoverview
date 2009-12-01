@@ -145,7 +145,6 @@ public class EditExportLineForm extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ClientOps.recalculateExportedProducts(client);
         this.dispose();
     }
 

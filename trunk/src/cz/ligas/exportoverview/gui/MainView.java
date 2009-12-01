@@ -7,7 +7,6 @@ import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
-import cz.ligas.exportoverview.db.UserInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
@@ -155,6 +154,8 @@ public class MainView extends FrameView {
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(MainView.class);
+        mainPanel.setFont(resourceMap.getFont("mainPanel.font")); // NOI18N
         mainPanel.setName("mainPanel"); // NOI18N
 
         clientsComboBox.setName("clientsComboBox"); // NOI18N
@@ -165,7 +166,6 @@ public class MainView extends FrameView {
         });
 
         newClientButton.setAction(actionMap.get("newClient"));
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(MainView.class);
         newClientButton.setText(resourceMap.getString("newClientButton.text")); // NOI18N
         newClientButton.setName("newClientButton"); // NOI18N
 
@@ -533,27 +533,27 @@ public class MainView extends FrameView {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productPrice"));
-        columnBinding.setColumnClass(String.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.priceS"));
-        columnBinding.setColumnClass(String.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sent}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.send"));
-        columnBinding.setColumnClass(String.class);
+        columnBinding.setColumnClass(Integer.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sentPrice}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sendPrice"));
-        columnBinding.setColumnClass(String.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sold}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sold"));
-        columnBinding.setColumnClass(String.class);
+        columnBinding.setColumnClass(Integer.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${total}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.total"));
-        columnBinding.setColumnClass(String.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(mainTableBinding);
         mainTableBinding.bind();

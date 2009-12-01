@@ -33,6 +33,7 @@ public class ExportLineOps {
             em.merge(clients);
             em.getTransaction().commit();
             em.close();
+            ClientOps.recalculateExportedProducts(clients);
         } catch (Exception e) {
             throw new Exception(e);
         }

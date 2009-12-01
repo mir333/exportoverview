@@ -27,27 +27,38 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="saveButton" alignment="1" min="-2" pref="68" max="-2" attributes="0"/>
                   <Component id="titleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="productCodeL" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="productNameL" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="productPriceL" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="categoryL" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="productDescL" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="productNameL" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="mProductPriceIn" alignment="0" max="32767" attributes="1"/>
-                          <Component id="tProductNameIn" alignment="0" pref="336" max="32767" attributes="1"/>
-                          <Component id="tProductDescIn" alignment="1" max="32767" attributes="1"/>
-                          <Component id="tProductCodeIn" alignment="0" max="32767" attributes="1"/>
-                          <Component id="categoryComboBox" alignment="0" pref="327" max="32767" attributes="1"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="categoryComboBox" pref="215" max="32767" attributes="1"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="productCodeL" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tProductCodeIn" min="-2" pref="88" max="-2" attributes="1"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="tProductNameIn" min="-2" pref="149" max="-2" attributes="1"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="productPriceL" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="mProductPriceIn" pref="156" max="32767" attributes="1"/>
+                          </Group>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="productDescL" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="tProductDescIn" pref="340" max="32767" attributes="1"/>
+                  </Group>
+                  <Component id="saveButton" alignment="1" min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,19 +71,13 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="categoryL" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="categoryComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="productCodeL" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tProductCodeIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="productCodeL" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="productNameL" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tProductNameIn" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="productPriceL" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="mProductPriceIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -92,12 +97,7 @@
     <Component class="javax.swing.JComboBox" name="categoryComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
         <Property name="name" type="java.lang.String" value="categoryComboBox" noResource="true"/>
       </Properties>
@@ -137,6 +137,11 @@
         <Property name="text" type="java.lang.String" resourceKey="tProductCodeIn.text"/>
         <Property name="name" type="java.lang.String" value="tProductCodeIn" noResource="true"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="text" source="categoryComboBox" sourcePath="${selectedItem.categoryCode}" target="tProductCodeIn" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+        </BindingProperty>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="tProductNameIn">
       <Properties>
@@ -158,6 +163,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="saveButton">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="actionMap.get(&quot;saveProduct&quot;)" type="code"/>
+        </Property>
         <Property name="text" type="java.lang.String" resourceKey="saveButton.text"/>
         <Property name="name" type="java.lang.String" value="saveButton" noResource="true"/>
       </Properties>
