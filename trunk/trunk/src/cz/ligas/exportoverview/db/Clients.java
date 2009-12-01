@@ -30,6 +30,7 @@ public class Clients implements Serializable {
     private int id;
     @Column(name = "C_NAME", nullable = false)
     private String clientName;
+    private String company;
     private String clientAddress;
     private String psc;
     private String city;
@@ -88,6 +89,14 @@ public class Clients implements Serializable {
 
     public void setExportLines(List<ExportLine> exportLines) {
         this.exportLines = exportLines;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getClientPhone() {

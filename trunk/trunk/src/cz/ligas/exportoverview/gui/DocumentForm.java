@@ -6,22 +6,19 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
+import cz.ligas.exportoverview.appli.GenerateXml;
 import org.jdesktop.application.Action;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Document;
 import cz.ligas.exportoverview.db.DocumentLine;
+import java.awt.FileDialog;
 import java.beans.Beans;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableColumn;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.ELProperty;
@@ -33,13 +30,8 @@ import org.jdesktop.swingbinding.SwingBindings;
 
 
 
-import org.w3c.dom.*;
 
-import javax.xml.parsers.*;
 import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
 /**
  *
@@ -287,102 +279,19 @@ public class DocumentForm extends javax.swing.JFrame {
         try {
             Clients c = (Clients) clientComboBox.getSelectedItem();
             Document d = (Document) docComboBox.getSelectedItem();
-            //Create instance of DocumentBuilderFactory
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = factory.newDocumentBuilder();
-            org.w3c.dom.Document doc = docBuilder.newDocument();
-
-            //create the root element
-            Element root = doc.createElement("Delivery");
-            doc.appendChild(root);
-
-            Element client = doc.createElement("Client");
-            Element childElement = doc.createElement("name");
-            childElement.setTextContent(c.getClientName());
-            client.appendChild(childElement);
-            childElement = doc.createElement("street");
-            childElement.setTextContent(c.getClientAddress());
-            client.appendChild(childElement);
-            childElement = doc.createElement("zip");
-            childElement.setTextContent(c.getPsc());
-            client.appendChild(childElement);
-            childElement = doc.createElement("city");
-            childElement.setTextContent(c.getCity());
-            client.appendChild(childElement);
-            childElement = doc.createElement("country");
-            childElement.setTextContent(c.getCountry());
-            client.appendChild(childElement);
-            childElement = doc.createElement("ico");
-            childElement.setTextContent(c.getIco());
-            client.appendChild(childElement);
-            childElement = doc.createElement("dic");
-            childElement.setTextContent(c.getDic());
-            client.appendChild(childElement);
-            root.appendChild(client);
-            //create child element
-            for (DocumentLine dl : documentLinesList) {
-                Element delLine = doc.createElement("DeliveryLine");
-                childElement = doc.createElement("id");
-                childElement.setTextContent(dl.getProd().getId() + "");
-                delLine.appendChild(childElement);
-                childElement = doc.createElement("name");
-                childElement.setTextContent(dl.getProd().getProductName() + "");
-                delLine.appendChild(childElement);
-                childElement = doc.createElement("amount");
-                childElement.setTextContent(dl.getAmount() + "");
-                delLine.appendChild(childElement);
-                childElement = doc.createElement("price");
-                childElement.setTextContent(dl.getPrice() + "");
-                delLine.appendChild(childElement);
-                childElement = doc.createElement("total");
-                childElement.setTextContent(dl.getTotal() + "");
-                delLine.appendChild(childElement);
-                root.appendChild(delLine);
-            }
-            Element totals = doc.createElement("Totals");
-            childElement = doc.createElement("sum");
-            childElement.setTextContent(d.getTotal() + "");
-            totals.appendChild(childElement);
-            childElement = doc.createElement("date");
-            childElement.setTextContent(d.getEditDate() + "");
-            totals.appendChild(childElement);
-            root.appendChild(totals);
-
-            TransformerFactory tranFactory = TransformerFactory.newInstance();
-            Transformer aTransformer = tranFactory.newTransformer();
-
-            File file = new File("xml/test.xml");
-            Source src = new DOMSource(doc);
-            Result dest = new StreamResult(file);
-            aTransformer.transform(src, dest);
-
-            File xsltFile = new File("xml/delivery.xsl");
-            File fileHtml = new File("xml/test.xhtml");
-            Source xsltSource = new StreamSource(xsltFile);
-
-            TransformerFactory transFact = TransformerFactory.newInstance();
-            Transformer trans = transFact.newTransformer(xsltSource);
-
-            trans.transform(src, new StreamResult(fileHtml));
-            //open("file://xml/test.xhtml");
-
+            String path = saveFile("html.htm");
+            Source src = GenerateXml.generateXml(d, c,documentLinesList);
+            GenerateXml.generateHtml(path, src);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    public void open(String address) throws Exception {
-        if (!java.awt.Desktop.isDesktopSupported()) {
-            throw new Exception("Desktop is not supported (fatal)");
-        }
-        java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-        if (!desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
-            throw new Exception("Desktop doesn't support the browse action (fatal)");
-        }
-        try {
-            java.net.URI uri = new java.net.URI(address);
-            desktop.browse(uri);
-        } catch (Exception e) {
-             throw new Exception(e.getMessage());
-        }
+
+    public String saveFile(String fileType) {
+        FileDialog fd = new FileDialog(this, "Save as:", FileDialog.SAVE);
+        fd.setFile(fileType);
+        fd.setLocationRelativeTo(documentTable);
+        fd.setVisible(true);
+        return fd.getDirectory() + fd.getFile();
     }
 }

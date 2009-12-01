@@ -3,7 +3,6 @@
  *
  * Created on 3.8.2009, 21:35:41
  */
-
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
@@ -21,11 +20,11 @@ public class ClientForm extends JFrame {
 
     /** Creates new form ClientForm */
     public ClientForm() {
+        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(ClientForm.class, this);
         initComponents();
         myInit();
     }
 
-    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -47,6 +46,8 @@ public class ClientForm extends JFrame {
         dicL = new javax.swing.JLabel();
         tICOIn = new javax.swing.JTextField();
         tDICIn = new javax.swing.JTextField();
+        companyL = new javax.swing.JLabel();
+        tClienCompanyIn = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ClientForm.class);
@@ -71,9 +72,8 @@ public class ClientForm extends JFrame {
         tClientPhoneIn.setText(resourceMap.getString("tClientPhoneIn.text")); // NOI18N
         tClientPhoneIn.setName("tClientPhoneIn"); // NOI18N
 
-	javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(ClientForm.class, this);
-        clientSaveButton.setAction(actionMap.get("clientSaveAction")); // NOI18N        
-	clientSaveButton.setText(resourceMap.getString("clientSaveButton.text")); // NOI18N
+        clientSaveButton.setAction(actionMap.get("clientSaveAction"));
+        clientSaveButton.setText(resourceMap.getString("clientSaveButton.text")); // NOI18N
         clientSaveButton.setName("clientSaveButton"); // NOI18N
 
         titleLabel.setText(resourceMap.getString("titleLabel.text")); // NOI18N
@@ -109,6 +109,12 @@ public class ClientForm extends JFrame {
         tDICIn.setText(resourceMap.getString("tDICIn.text")); // NOI18N
         tDICIn.setName("tDICIn"); // NOI18N
 
+        companyL.setText(resourceMap.getString("companyL.text")); // NOI18N
+        companyL.setName("companyL"); // NOI18N
+
+        tClienCompanyIn.setText(resourceMap.getString("tClienCompanyIn.text")); // NOI18N
+        tClienCompanyIn.setName("tClienCompanyIn"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,23 +129,30 @@ public class ClientForm extends JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(clientNameL)
-                                        .addComponent(clientAddressL)
                                         .addComponent(countryL)
-                                        .addComponent(clientPhoneL))
+                                        .addComponent(clientPhoneL)
+                                        .addComponent(companyL))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tClientAddressIn, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                                        .addComponent(tClientPhoneIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                                        .addComponent(tClientPhoneIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                                        .addComponent(tCountryIn, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                                        .addComponent(tICOIn, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                                        .addComponent(tDICIn, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                                        .addComponent(tClientNameIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(tZipCodeIn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(tZipCodeIn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(cityL))
+                                                .addComponent(tClienCompanyIn, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(cityL)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(tCityIn, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
-                                        .addComponent(tCountryIn, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                                        .addComponent(tICOIn, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                                        .addComponent(tDICIn, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                                        .addComponent(tClientNameIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(clientAddressL)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(tClientAddressIn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                                                .addComponent(tCityIn, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))))))
                             .addContainerGap())
                         .addComponent(zipCodeL)
                         .addGroup(layout.createSequentialGroup()
@@ -147,7 +160,7 @@ public class ClientForm extends JFrame {
                             .addContainerGap(380, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(dicL)
-                            .addContainerGap(380, Short.MAX_VALUE)))
+                            .addContainerGap(381, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(clientSaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
@@ -164,7 +177,9 @@ public class ClientForm extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tClientAddressIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clientAddressL))
+                    .addComponent(clientAddressL, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(companyL)
+                    .addComponent(tClienCompanyIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(zipCodeL)
@@ -197,35 +212,36 @@ public class ClientForm extends JFrame {
 
     @Action
     public void clientSaveAction() {
-       Clients c = new Clients();
-       c.setClientName(tClientNameIn.getText());
-       c.setClientAddress(tClientAddressIn.getText());
-       c.setClientPhone(tClientPhoneIn.getText());
-       c.setPsc(tZipCodeIn.getText());
-       c.setCity(tCityIn.getText());
-       c.setCountry(tCountryIn.getText());
-       c.setIco(tICOIn.getText());
-       c.setDic(tDICIn.getText());
-               
-       try {
+        Clients c = new Clients();
+        c.setClientName(tClientNameIn.getText());
+        c.setCompany(tClienCompanyIn.getText());
+        c.setClientAddress(tClientAddressIn.getText());
+        c.setClientPhone(tClientPhoneIn.getText());
+        c.setPsc(tZipCodeIn.getText());
+        c.setCity(tCityIn.getText());
+        c.setCountry(tCountryIn.getText());
+        c.setIco(tICOIn.getText());
+        c.setDic(tDICIn.getText());
+
+        try {
             ClientOps.addClient(c);
         } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-       this.dispose();
-       System.err.println("clientSaveAction executed");
+        this.dispose();
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cityL;
     private javax.swing.JLabel clientAddressL;
     private javax.swing.JLabel clientNameL;
     private javax.swing.JLabel clientPhoneL;
     private javax.swing.JButton clientSaveButton;
+    private javax.swing.JLabel companyL;
     private javax.swing.JLabel countryL;
     private javax.swing.JLabel dicL;
     private javax.swing.JLabel icoL;
     private javax.swing.JTextField tCityIn;
+    private javax.swing.JTextField tClienCompanyIn;
     private javax.swing.JTextField tClientAddressIn;
     private javax.swing.JTextField tClientNameIn;
     private javax.swing.JTextField tClientPhoneIn;
@@ -237,13 +253,31 @@ public class ClientForm extends JFrame {
     private javax.swing.JLabel zipCodeL;
     // End of variables declaration//GEN-END:variables
     MyInputVerifier verifier = new MyInputVerifier();
-        private void myInit() {
-        tClientAddressIn.setInputVerifier(verifier);
-        tClientAddressIn.addActionListener(verifier);
-        clientAddressL.setLabelFor(tClientAddressIn);
+    javax.swing.ActionMap actionMap;
+
+    private void myInit() {
+
         tClientNameIn.setInputVerifier(verifier);
         tClientNameIn.addActionListener(verifier);
         clientNameL.setLabelFor(tClientNameIn);
+        tClientAddressIn.setInputVerifier(verifier);
+        tClientAddressIn.addActionListener(verifier);
+        clientAddressL.setLabelFor(tClientAddressIn);
+        tClienCompanyIn.setInputVerifier(verifier);
+        tClienCompanyIn.addActionListener(verifier);
+        companyL.setLabelFor(tClienCompanyIn);
+        tCountryIn.setInputVerifier(verifier);
+        tCountryIn.addActionListener(verifier);
+        countryL.setLabelFor(tCountryIn);
+        tZipCodeIn.setInputVerifier(verifier);
+        tZipCodeIn.addActionListener(verifier);
+        zipCodeL.setLabelFor(tZipCodeIn);
+        tDICIn.setInputVerifier(verifier);
+        tDICIn.addActionListener(verifier);
+        dicL.setLabelFor(tDICIn);
+        tICOIn.setInputVerifier(verifier);
+        tICOIn.addActionListener(verifier);
+        icoL.setLabelFor(tICOIn);
         tClientPhoneIn.setInputVerifier(verifier);
         tClientPhoneIn.addActionListener(verifier);
         clientPhoneL.setLabelFor(tClientPhoneIn);
