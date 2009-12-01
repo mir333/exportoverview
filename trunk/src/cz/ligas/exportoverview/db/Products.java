@@ -31,8 +31,11 @@ public class Products implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID", nullable = false)
     private int id;
+    @Column(nullable=false,unique=true)
     private String productCode;
+    @Column(nullable=false)
     private String productName;
+    @Column(nullable=false)
     private float productPrice;
     private String productDes;
     @ManyToOne

@@ -427,8 +427,7 @@ public class MainView extends FrameView {
     private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
         if (evt.getClickCount() > 1) {
             final int index = mainTable.convertRowIndexToModel(mainTable.getSelectedRow());
-            Clients clients = (Clients) clientsComboBox.getSelectedItem();
-            EditExportLineForm eel = new EditExportLineForm(clients, exportLinesList.get(index));
+            EditExportLineForm eel = new EditExportLineForm(exportLinesList.get(index));
             eel.setLocationRelativeTo(mainTable);
             eel.addWindowListener(new WindowAdapter() {
 
@@ -553,7 +552,7 @@ public class MainView extends FrameView {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${total}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.total"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Integer.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(mainTableBinding);
         mainTableBinding.bind();

@@ -3,11 +3,13 @@ package cz.ligas.exportoverview.db;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 /**
@@ -23,14 +25,19 @@ public class ExportLine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    @Column(nullable=false)
     private int sent;
+    @Column(nullable=false)
     private int sold;
+    @Column(nullable=false)
     private float  price;
+    @Column(nullable=false)
     private float  sentPrice;
+    @Column(nullable=false)
     private int total;
     @ManyToOne
     private Clients client;
-    @ManyToOne
+    @OneToOne
     private Products prod;
 
     public int getId() {

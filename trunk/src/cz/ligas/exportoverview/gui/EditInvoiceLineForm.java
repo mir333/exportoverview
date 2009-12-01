@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.InvoiceOps;
@@ -14,23 +9,27 @@ import java.util.logging.Logger;
  *
  * @author miro
  */
-public class EditInvoiceLineForm extends EditDocumentLineForm{
+public class EditInvoiceLineForm extends EditDocumentLineForm {
 
     InvoiceLine invLine;
 
-    public EditInvoiceLineForm(InvoiceLine il){
+    public EditInvoiceLineForm(InvoiceLine il) {
         this.invLine = il;
-        nAmountIn.setValue(il.getAmount());
-        mPriceIn.setText(invLine.getPrice()+"");
+        nAmountIn.setValue(0);
+        mPriceIn.setText(invLine.getPrice() + "");
 
     }
 
-       @Override
-    public void saveDocumentLine(){
-        int sold = Integer.parseInt(nAmountIn.getValue().toString());
-        float price = Float.parseFloat(mPriceIn.getText());
-                try {
-            InvoiceOps.editInvoiceLine(invLine,sold, price);
+    @Override
+    public void saveDocumentLine() {
+        int sold = 0;
+        float price = 0;
+        if(!nAmountIn.getValue().toString().equals(""))
+            sold = Integer.parseInt(nAmountIn.getValue().toString());
+        if(!mPriceIn.getText().equals(""))
+            price = Float.parseFloat(mPriceIn.getText());
+        try {
+            InvoiceOps.editInvoiceLine(invLine, sold, price);
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }

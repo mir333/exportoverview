@@ -59,7 +59,7 @@ public class MyInputVerifier extends InputVerifier implements ActionListener {
 //            if(tf.getText().length()==0)
 //                return true;
             String s = numberFormat.format(numberFormat.parse(tf.getText()).intValue());
-            tf.setText(s);
+            //tf.setText(s);
         } catch (ParseException pe) {
             message = resourceMap.getString("validation.error.number");
             return false;
@@ -73,7 +73,8 @@ public class MyInputVerifier extends InputVerifier implements ActionListener {
         try {
 //            if(tf.getText().length()==0)
 //                return true;
-            tf.setText(moneyFormat.format(moneyFormat.parse(tf.getText()).doubleValue()));
+            String s = moneyFormat.format(moneyFormat.parse(tf.getText()).doubleValue());
+            //tf.setText(s);
         } catch (ParseException pe) {
             message = resourceMap.getString("validation.error.money");
             return false;
