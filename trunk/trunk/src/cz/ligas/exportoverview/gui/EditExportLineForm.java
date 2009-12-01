@@ -19,11 +19,9 @@ import org.jdesktop.application.Action;
  */
 public class EditExportLineForm extends javax.swing.JFrame {
 
-    private Clients client;
 
     /** Creates new form EditExportLineForm */
-    public EditExportLineForm(Clients c, ExportLine el) {
-        this.client = c;
+    public EditExportLineForm(ExportLine el) {
         this.exportLine = el;
         initComponents();
         myInit();
@@ -137,11 +135,17 @@ public class EditExportLineForm extends javax.swing.JFrame {
     @Action
     public void editExportLineSaveAction() {
         //TODO: ak to bude robit moc bordel zmenit spinre na text
-        int send = Integer.parseInt(nExportLineSentSpinner.getValue().toString());
-        int sold = Integer.parseInt(nExportLineSoldSpinner.getValue().toString());
-        float price = Float.parseFloat(mExportLinePriceTextfield.getText());
+        int send =0;
+        int sold=0;
+        float price = exportLine.getPrice();
+        if(!nExportLineSentSpinner.getValue().toString().equals(""))
+             send = Integer.parseInt(nExportLineSentSpinner.getValue().toString());
+        if(!nExportLineSoldSpinner.getValue().toString().equals(""))
+            sold = Integer.parseInt(nExportLineSoldSpinner.getValue().toString());
+        if(!mExportLinePriceTextfield.getText().equals(""))
+             price = Float.parseFloat(mExportLinePriceTextfield.getText());
         try {
-            ExportLineOps.editExportLine(client, exportLine, send, sold, price);
+            ExportLineOps.editExportLine(exportLine, send, sold, price);
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -152,10 +156,10 @@ public class EditExportLineForm extends javax.swing.JFrame {
         mExportLinePriceTextfield.setText(exportLine.getPrice() + "");
         mExportLinePriceTextfield.setInputVerifier(verifier);
         exportLinePriceL.setLabelFor(mExportLinePriceTextfield);
-        nExportLineSentSpinner.setValue(exportLine.getSent());
+        nExportLineSentSpinner.setValue(0);
         nExportLineSentSpinner.setInputVerifier(verifier);
         exportLineSentL.setLabelFor(nExportLineSentSpinner);
-        nExportLineSoldSpinner.setValue(exportLine.getSold());
+        nExportLineSoldSpinner.setValue(0);
         nExportLineSoldSpinner.setInputVerifier(verifier);
         exportLineSoldL.setLabelFor(nExportLineSoldSpinner);
 

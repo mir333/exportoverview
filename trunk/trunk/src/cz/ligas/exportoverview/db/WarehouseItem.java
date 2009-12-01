@@ -29,11 +29,10 @@ public class WarehouseItem implements Serializable {
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    @Column(nullable=false)
     private int productCount;
     @ManyToOne
     private Products productItem;
-//    @ManyToOne
-//    private Warehouse warehouse;
 
     public int getId() {
         return id;
@@ -64,16 +63,6 @@ public class WarehouseItem implements Serializable {
         this.productItem = productItem;
         changeSupport.firePropertyChange("productItem", oldProductItem, productItem);
     }
-
-//    public Warehouse getWarehouse() {
-//        return warehouse;
-//    }
-//
-//    public void setWarehouse(Warehouse warehouse) {
-//        Warehouse oldWarehouse = this.warehouse;
-//        this.warehouse = warehouse;
-//        changeSupport.firePropertyChange("warehouse", oldWarehouse, warehouse);
-//    }
 
      @Override
     public int hashCode() {

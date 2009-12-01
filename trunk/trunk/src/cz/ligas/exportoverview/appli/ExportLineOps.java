@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.ligas.exportoverview.appli;
 
 import cz.ligas.exportoverview.db.Clients;
@@ -11,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -19,86 +15,81 @@ import javax.persistence.Query;
  * @author xligas
  */
 public class ExportLineOps {
- private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ExportOverviewPU");
+
+    private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("ExportOverviewPU");
 
     public static void addExportLine(ExportLine exportLine) throws Exception {
-        exportLine.setSentPrice(exportLine.getPrice()*exportLine.getSent());
-        exportLine.setTotal(exportLine.getSent()+exportLine.getSold());
+        exportLine.setSentPrice(exportLine.getPrice() * exportLine.getSent());
+        exportLine.setTotal(exportLine.getSent() + exportLine.getSold());
         Clients clients = exportLine.getClient();
         clients.getExportLines().add(exportLine);
-        try {
-            EntityManager em = emFactory.createEntityManager();
-            em.getTransaction().begin();
-            em.persist(exportLine);
-            em.merge(clients);
-            em.getTransaction().commit();
-            em.close();
-            ClientOps.recalculateExportedProducts(clients);
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
+        EntityManager em = emFactory.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(exportLine);
+        em.merge(clients);
+        em.getTransaction().commit();
+        em.close();
+        ClientOps.recalculateExportedProducts(clients);
     }
 
     public static ExportLine getExportLineById(int id) throws Exception {
-        try {
-            EntityManager em = emFactory.createEntityManager();
-            ExportLine c = em.find(ExportLine.class, id);
-            em.close();
-            return c;
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
+        EntityManager em = emFactory.createEntityManager();
+        ExportLine c = em.find(ExportLine.class, id);
+        em.close();
+        return c;
     }
 
-    public static List<ExportLine> getExportLinesByClient(Clients c)throws Exception{
-                try {
-            EntityManager em = emFactory.createEntityManager();
-            List<ExportLine> list = new ArrayList<ExportLine>();
-            Query q = em.createQuery("select el from ExportLine el where el.client=:client  order by el.id asc");
-            q.setParameter("client", c);
-            list = q.getResultList();
-            em.close();
-            return list;
-        } catch (Exception exc) {
-            throw new Exception(exc);
-        }
-
+    public static List<ExportLine> getExportLinesByClient(Clients c) throws Exception {
+        EntityManager em = emFactory.createEntityManager();
+        List<ExportLine> list = new ArrayList<ExportLine>();
+        Query q = em.createQuery("select el from ExportLine el where el.client=:client  order by el.id asc");
+        q.setParameter("client", c);
+        list = q.getResultList();
+        em.close();
+        return list;
     }
 
     public static List<ExportLine> getExportLine() throws Exception {
-        try {
-            EntityManager em = emFactory.createEntityManager();
-            List<ExportLine> list = new ArrayList<ExportLine>();
-            Query q = em.createQuery("select el from ExportLine el order by el.id asc");
-            list = q.getResultList();
-            em.close();
-            return list;
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
+        EntityManager em = emFactory.createEntityManager();
+        List<ExportLine> list = new ArrayList<ExportLine>();
+        Query q = em.createQuery("select el from ExportLine el order by el.id asc");
+        list = q.getResultList();
+        em.close();
+        return list;
     }
 
-    public static void editExportLine(Clients client,ExportLine exportLine, int sent,int sold,float price) throws Exception {
+    public static void editExportLine(ExportLine exportLine, int sent, int sold, float price) throws Exception {
+        EntityManager em = emFactory.createEntityManager();
+        Clients client = em.find(Clients.class, exportLine.getClient().getId());
         exportLine.setPrice(price);
-        exportLine.setSent(exportLine.getSent()+sent-sold);
-        exportLine.setSold(exportLine.getSold()+sold);
-        exportLine.setSentPrice(exportLine.getPrice()*exportLine.getSent());
-        exportLine.setTotal(exportLine.getSent()+exportLine.getSold());
+        exportLine.setSent(exportLine.getSent() + sent - sold);
+        exportLine.setSold(exportLine.getSold() + sold);
+        exportLine.setSentPrice(exportLine.getPrice() * exportLine.getSent());
+        exportLine.setTotal(exportLine.getSent() + exportLine.getSold());
         for (int i = 0; i < client.getExportLines().size(); i++) {
             ExportLine el = client.getExportLines().get(i);
-            if(el.getId()==exportLine.getId()){
+            if (el.getId() == exportLine.getId()) {
                 client.getExportLines().set(i, el);
             }
         }
+        em.getTransaction().begin();
+        em.merge(exportLine);
+        em.merge(client);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    static ExportLine getExportLineByProductId(int id) throws Exception {
+        EntityManager em = emFactory.createEntityManager();
         try {
-            EntityManager em = emFactory.createEntityManager();
-            em.getTransaction().begin();
-            em.merge(exportLine);
-            em.merge(client);
-            em.getTransaction().commit();
+            Query q = em.createQuery("select el from ExportLine el where el.prod.id=:productId order by el.id asc");
+            q.setParameter("productId", id);
+            ExportLine el = (ExportLine) q.getSingleResult();
+            return el;
+        } catch (NoResultException nre) {
+            return null;
+        } finally {
             em.close();
-        } catch (Exception e) {
-            throw new Exception(e);
         }
     }
 }

@@ -31,6 +31,7 @@ public class ProductCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    @Column(nullable=false)
     private String categoryCode;
     private String categoryName;
     @OneToMany(mappedBy = "productCategoryId")

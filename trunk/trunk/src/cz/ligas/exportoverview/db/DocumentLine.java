@@ -6,6 +6,7 @@
 package cz.ligas.exportoverview.db;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,8 +22,11 @@ public class DocumentLine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    @Column(nullable=false)
     private int amount;
+    @Column(nullable=false)
     private float price;
+    @Column(nullable=false)
     private float total;
     @ManyToOne
     private Document document;

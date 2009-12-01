@@ -20,14 +20,18 @@ public class EditDeliveryLineForm extends EditDocumentLineForm {
 
     public EditDeliveryLineForm(DeliveryLine dl){
         this.docLine = dl;
-        nAmountIn.setValue(dl.getAmount());
+        nAmountIn.setValue(0);
         mPriceIn.setText(dl.getPrice()+"");
     }
 
     @Override
     public void saveDocumentLine(){
-        int sold = Integer.parseInt(nAmountIn.getValue().toString());
-        float price = Float.parseFloat(mPriceIn.getText());
+        int sold = 0;
+        float price = 0;
+        if(!nAmountIn.getValue().toString().equals(""))
+            sold = Integer.parseInt(nAmountIn.getValue().toString());
+        if(!mPriceIn.getText().equals(""))
+            price = Float.parseFloat(mPriceIn.getText());
                 try {
             DeliveryOps.editDeliveryLine(docLine,sold, price);
         } catch (Exception ex) {
