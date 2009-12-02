@@ -3,6 +3,7 @@ package cz.ligas.exportoverview.appli;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Invoice;
 import cz.ligas.exportoverview.db.InvoiceLine;
+import cz.ligas.exportoverview.db.ExportLine;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -69,6 +70,19 @@ public class InvoiceOps {
         em.merge(inv);
         em.getTransaction().commit();
         em.close();
+        ExportLine exportLine = ExportLineOps.getExportLineByProductId(
+                il.getProd().getId(), il.getDocument().getClient().getId());
+        if (exportLine == null) {
+            ExportLine el = new ExportLine();
+            el.setClient(il.getDocument().getClient());
+            el.setProd(il.getProd());
+            el.setPrice(il.getPrice());
+            el.setSent(0);
+            el.setSold(il.getAmount());
+            ExportLineOps.addExportLine(el);
+        } else {
+            ExportLineOps.editExportLine(exportLine, 0, il.getAmount(), il.getPrice());
+        }
     }
 
     public static InvoiceLine getInvoiceLineById(int id) throws Exception {
@@ -91,6 +105,9 @@ public class InvoiceOps {
         em.merge(i);
         em.getTransaction().commit();
         em.close();
+        ExportLine exportLine = ExportLineOps.getExportLineByProductId(
+                il.getProd().getId(), il.getDocument().getClient().getId());
+        ExportLineOps.editExportLine(exportLine, amount, 0, il.getPrice());
     }
 
     public static void deleteItems(List<Integer> seletedDocs) throws Exception {
@@ -101,6 +118,13 @@ public class InvoiceOps {
             em.remove(dl);
         }
         em.getTransaction().commit();
-        em.close();
+       
+        for (int id : seletedDocs) {
+            InvoiceLine il = em.find(InvoiceLine.class, id);
+            ExportLine exportLine = ExportLineOps.getExportLineByProductId(
+                    il.getProd().getId(), il.getDocument().getClient().getId());
+            ExportLineOps.editExportLine(exportLine, -il.getAmount(), 0, il.getPrice());
+        }
+         em.close();
     }
 }
