@@ -71,7 +71,8 @@ public class DeliveryOps {
         em.getTransaction().commit();
         em.close();
 
-        ExportLine exportLine = ExportLineOps.getExportLineByProductId(dl.getProd().getId());
+        ExportLine exportLine = ExportLineOps.getExportLineByProductId(
+                dl.getProd().getId(), dl.getDocument().getClient().getId());
         if (exportLine == null) {
             ExportLine el = new ExportLine();
             el.setClient(dl.getDocument().getClient());
@@ -107,6 +108,9 @@ public class DeliveryOps {
         em.merge(d);
         em.getTransaction().commit();
         em.close();
+        ExportLine exportLine = ExportLineOps.getExportLineByProductId(
+                dl.getProd().getId(), dl.getDocument().getClient().getId());
+        ExportLineOps.editExportLine(exportLine, amount, 0, dl.getPrice());
     }
 
     public static void deleteItems(List<Integer> seletedDocs) throws Exception {
@@ -117,6 +121,13 @@ public class DeliveryOps {
             em.remove(dl);
         }
         em.getTransaction().commit();
+        
+        for (int id : seletedDocs) {
+            DeliveryLine dl = em.find(DeliveryLine.class, id);
+            ExportLine exportLine = ExportLineOps.getExportLineByProductId(
+                    dl.getProd().getId(), dl.getDocument().getClient().getId());
+            ExportLineOps.editExportLine(exportLine, -dl.getAmount(), 0, dl.getPrice());
+        }
         em.close();
     }
 }

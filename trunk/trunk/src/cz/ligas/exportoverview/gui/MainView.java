@@ -464,7 +464,7 @@ public class MainView extends FrameView {
     }//GEN-LAST:event_clientsComboBoxActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProductButton;
-    private javax.swing.JComboBox clientsComboBox;
+    private static javax.swing.JComboBox clientsComboBox;
     private javax.swing.JLabel clientsL;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -559,8 +559,7 @@ public class MainView extends FrameView {
         bindingGroup.bind();
     }
 
-    public void refreshTotal() {
-        Clients e = (Clients) clientsComboBox.getSelectedItem();
+    public static void refreshTotal() {
         int i = clientsComboBox.getSelectedIndex();
         clientsComboBox.setSelectedIndex(-1);
         clientsComboBox.setSelectedIndex(i);

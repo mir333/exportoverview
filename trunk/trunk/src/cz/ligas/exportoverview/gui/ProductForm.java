@@ -76,10 +76,9 @@ public class ProductForm extends javax.swing.JFrame {
         productDescL.setText(resourceMap.getString("productDescL.text")); // NOI18N
         productDescL.setName("productDescL"); // NOI18N
 
-        tProductCodeIn.setText(resourceMap.getString("tProductCodeIn.text")); // NOI18N
         tProductCodeIn.setName("tProductCodeIn"); // NOI18N
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, categoryComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.categoryCode}"), tProductCodeIn, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, categoryComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.categoryCode}"), tProductCodeIn, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         tProductNameIn.setText(resourceMap.getString("tProductNameIn.text")); // NOI18N

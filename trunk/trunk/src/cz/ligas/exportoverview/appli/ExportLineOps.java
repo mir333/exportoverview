@@ -79,15 +79,18 @@ public class ExportLineOps {
         em.close();
     }
 
-    static ExportLine getExportLineByProductId(int id) throws Exception {
+    static ExportLine getExportLineByProductId(int pid,int cid) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         try {
-            Query q = em.createQuery("select el from ExportLine el where el.prod.id=:productId order by el.id asc");
-            q.setParameter("productId", id);
+            Query q = em.createQuery("select el from ExportLine el where el.prod.id=:productId and el.client.id=:clientId order by el.id asc");
+            q.setParameter("productId", pid);
+            q.setParameter("clientId", cid);
             ExportLine el = (ExportLine) q.getSingleResult();
             return el;
         } catch (NoResultException nre) {
             return null;
+        } catch (Exception e) {
+            throw new Exception(e);
         } finally {
             em.close();
         }

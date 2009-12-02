@@ -35,6 +35,7 @@ public class AddInvoice extends AddDocumentLineForm {
         } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        MainView.refreshTotal();
         this.dispose();
     }
 }
