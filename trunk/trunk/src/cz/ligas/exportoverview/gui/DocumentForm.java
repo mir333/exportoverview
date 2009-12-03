@@ -39,18 +39,20 @@ import javax.xml.transform.*;
  */
 public class DocumentForm extends javax.swing.JFrame {
 
-    public DocumentForm(String lable) {
+    public DocumentForm(String l) {
         actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(DocumentForm.class, this);
+        this.lable=l;
         initComponents();
         myInit();
-        dacumentL.setText(lable + ":");
-        setTitle(lable);
+        dacumentL.setText(l + ":");
+        setTitle(l);
 
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         documentTableL = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -62,6 +64,8 @@ public class DocumentForm extends javax.swing.JFrame {
         addLineButton = new javax.swing.JButton();
         printButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        tatalL = new javax.swing.JLabel();
+        totalOut = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("diform");
@@ -115,6 +119,14 @@ public class DocumentForm extends javax.swing.JFrame {
         deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
         deleteButton.setName("deleteButton"); // NOI18N
 
+        tatalL.setText("Total:");
+        tatalL.setName("tatalL"); // NOI18N
+
+        totalOut.setName("totalOut"); // NOI18N
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, docComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.total}"), totalOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,7 +148,11 @@ public class DocumentForm extends javax.swing.JFrame {
                         .addComponent(printButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                        .addGap(53, 53, 53)
+                        .addComponent(tatalL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalOut)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                         .addComponent(addLineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -157,7 +173,9 @@ public class DocumentForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(printButton)
-                        .addComponent(deleteButton))
+                        .addComponent(deleteButton)
+                        .addComponent(tatalL)
+                        .addComponent(totalOut))
                     .addComponent(addLineButton))
                 .addContainerGap())
         );
@@ -167,6 +185,8 @@ public class DocumentForm extends javax.swing.JFrame {
         dacumentL.getAccessibleContext().setAccessibleName(resourceMap.getString("dacumentL.AccessibleContext.accessibleName")); // NOI18N
         addLineButton.getAccessibleContext().setAccessibleName(resourceMap.getString("addLineButton.AccessibleContext.accessibleName")); // NOI18N
         printButton.getAccessibleContext().setAccessibleName(resourceMap.getString("printButton.AccessibleContext.accessibleName")); // NOI18N
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -185,12 +205,16 @@ public class DocumentForm extends javax.swing.JFrame {
     private javax.swing.JLabel documentTableL;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton printButton;
-    // End of variables declaration//GEN-END:variables
+    private javax.swing.JLabel tatalL;
+    protected javax.swing.JLabel totalOut;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    // End of variables declaration//GEN-END:variables
+    //private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     protected List<Clients> clientsList;
     protected List<Document> docList;
     protected List<DocumentLine> documentLinesList;
     javax.swing.ActionMap actionMap;
+    private String lable;
 
     private void myInit() {
 
@@ -281,10 +305,10 @@ public class DocumentForm extends javax.swing.JFrame {
             Document d = (Document) docComboBox.getSelectedItem();
             String path = saveFile("html.htm");
             if(path==null)return;
-            Source src = GenerateXml.generateDocXml(d, c,documentLinesList);
+            Source src = GenerateXml.generateDocXml(lable,d, c,documentLinesList);
             GenerateXml.generateHtml(path, src);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+           Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

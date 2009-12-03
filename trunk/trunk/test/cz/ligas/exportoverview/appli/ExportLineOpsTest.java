@@ -89,7 +89,7 @@ public class ExportLineOpsTest {
             List result = ExportLineOps.getExportLinesByClient(c);
             assertTrue("list is empty", result.size() != 0);
             ExportLine expln = (ExportLine) result.get(0);
-            ExportLineOps.editExportLine(c, expln, sent, sold, price);
+            ExportLineOps.editExportLine(expln, sent, sold, price);
         } catch (Exception ex) {
             Logger.getLogger(ExportLineOpsTest.class.getName()).log(Level.SEVERE, null, ex);
         }

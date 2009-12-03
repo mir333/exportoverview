@@ -3,8 +3,11 @@ package cz.ligas.exportoverview.appli;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Delivery;
 import cz.ligas.exportoverview.db.DeliveryLine;
+import cz.ligas.exportoverview.db.DocumentLine;
+import cz.ligas.exportoverview.db.DocumentLine;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,11 +26,30 @@ public class DeliveryOps {
         EntityManager em = emFactory.createEntityManager();
         java.util.Date today = new java.util.Date();
         delivery.setEditDate(new java.sql.Date(today.getTime()));
+        delivery.setDocNumber(0);
         Clients clients = delivery.getClient();
         clients.getDocuments().add(delivery);
         em.getTransaction().begin();
         em.persist(delivery);
         em.merge(clients);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public static Delivery getDeliveryById(int id) throws Exception {
+        EntityManager em = emFactory.createEntityManager();
+        Delivery dl = em.find(Delivery.class, id);
+        em.close();
+        return dl;
+    }
+
+    public static void editDelivery(Delivery delivery, float total) throws Exception {
+        EntityManager em = emFactory.createEntityManager();
+        java.util.Date today = new java.util.Date();
+        delivery.setEditDate(new java.sql.Date(today.getTime()));
+        delivery.setTotal(total);
+        em.getTransaction().begin();
+        em.merge(delivery);
         em.getTransaction().commit();
         em.close();
     }
@@ -84,6 +106,7 @@ public class DeliveryOps {
         } else {
             ExportLineOps.editExportLine(exportLine, dl.getAmount(), 0, dl.getPrice());
         }
+        recalculateDelivery(delivery);
     }
 
     public static DeliveryLine getDeliveryLineById(int id) throws Exception {
@@ -111,23 +134,40 @@ public class DeliveryOps {
         ExportLine exportLine = ExportLineOps.getExportLineByProductId(
                 dl.getProd().getId(), dl.getDocument().getClient().getId());
         ExportLineOps.editExportLine(exportLine, amount, 0, dl.getPrice());
+        recalculateDelivery(d);
     }
 
-    public static void deleteItems(List<Integer> seletedDocs) throws Exception {
+    public static void deleteItems(List<Integer> seletedDocs, int did) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         em.getTransaction().begin();
-        for (int id : seletedDocs) {
-            DeliveryLine dl = em.find(DeliveryLine.class, id);
-            em.remove(dl);
+        Delivery d = em.find(Delivery.class, did);
+        for (Iterator<DocumentLine> it = d.getDocumentLine().iterator(); it.hasNext();) {
+            DocumentLine dl = it.next();
+            for (Iterator<Integer> it1 = seletedDocs.iterator(); it1.hasNext();) {
+                int i = it1.next();
+                if (dl.getId() == i) {
+                    ExportLine exportLine = ExportLineOps.getExportLineByProductId(
+                            dl.getProd().getId(), dl.getDocument().getClient().getId());
+                    ExportLineOps.editExportLine(exportLine, -dl.getAmount(), 0, dl.getPrice());
+                    em.remove(dl);
+                    it.remove();
+                    it1.remove();
+                    break;
+                }
+            }
         }
+        em.merge(d);
         em.getTransaction().commit();
-        
-        for (int id : seletedDocs) {
-            DeliveryLine dl = em.find(DeliveryLine.class, id);
-            ExportLine exportLine = ExportLineOps.getExportLineByProductId(
-                    dl.getProd().getId(), dl.getDocument().getClient().getId());
-            ExportLineOps.editExportLine(exportLine, -dl.getAmount(), 0, dl.getPrice());
-        }
         em.close();
+        recalculateDelivery(d);
+    }
+
+    public static void recalculateDelivery(Delivery del) throws Exception {
+        float total = 0L;
+        del = getDeliveryById(del.getId());
+        for (DocumentLine docl : del.getDocumentLine()) {
+            total += docl.getTotal();
+        }
+        editDelivery(del, total);
     }
 }

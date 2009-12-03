@@ -21,7 +21,10 @@ public class GenerateXml {
 
     public static void generateHtml(String path, Source src)
             throws TransformerException {
-        File xsltFile = new File("xml/delivery.xsl");
+        TransformerFactory tranFactory = TransformerFactory.newInstance();
+        Transformer aTransformer = tranFactory.newTransformer();
+        aTransformer.transform(src, new StreamResult(new File("xml/test.xml")));
+        File xsltFile = new File("xml/stylesheet.xsl");
         File fileHtml = new File(path);
         Source xsltSource = new StreamSource(xsltFile);
         TransformerFactory transFact = TransformerFactory.newInstance();
@@ -29,7 +32,7 @@ public class GenerateXml {
         trans.transform(src, new StreamResult(fileHtml));
     }
 
-    private static Element generateUserXml(org.w3c.dom.Document doc) throws Exception{
+    private static Element generateUserXml(org.w3c.dom.Document doc) throws Exception {
         UserInfo ui = ClientOps.getUserInfo().get(0);
         Element client = doc.createElement("UserInfo");
         Element childElement = doc.createElement("name");
@@ -56,14 +59,14 @@ public class GenerateXml {
         return client;
     }
 
-    public static Source generateDocXml(Document d, Clients c, List<DocumentLine> documentLinesList)
+    public static Source generateDocXml(String docType, Document d, Clients c, List<DocumentLine> documentLinesList)
             throws ParserConfigurationException, Exception {
         //Create instance of DocumentBuilderFactory
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = factory.newDocumentBuilder();
         org.w3c.dom.Document doc = docBuilder.newDocument();
         //create the root element
-        Element root = doc.createElement("Delivery");
+        Element root = doc.createElement(docType);
         doc.appendChild(root);
         root.appendChild(generateUserXml(doc));
         Element client = doc.createElement("Client");
@@ -91,9 +94,9 @@ public class GenerateXml {
         root.appendChild(client);
         //create child element
         for (DocumentLine dl : documentLinesList) {
-            Element delLine = doc.createElement("DeliveryLine");
-            childElement = doc.createElement("id");
-            childElement.setTextContent(dl.getProd().getId() + "");
+            Element delLine = doc.createElement("DocumentLine");
+            childElement = doc.createElement("code");
+            childElement.setTextContent(dl.getProd().getProductCode() + "");
             delLine.appendChild(childElement);
             childElement = doc.createElement("name");
             childElement.setTextContent(dl.getProd().getProductName() + "");
@@ -104,8 +107,11 @@ public class GenerateXml {
             childElement = doc.createElement("price");
             childElement.setTextContent(dl.getPrice() + "");
             delLine.appendChild(childElement);
+            childElement = doc.createElement("vat");
+            childElement.setTextContent("19%");
+            delLine.appendChild(childElement);
             childElement = doc.createElement("total");
-            childElement.setTextContent(dl.getTotal() + "");
+            childElement.setTextContent(dl.getTotal() * 1.19 + "");
             delLine.appendChild(childElement);
             root.appendChild(delLine);
         }
@@ -113,8 +119,17 @@ public class GenerateXml {
         childElement = doc.createElement("sum");
         childElement.setTextContent(d.getTotal() + "");
         totals.appendChild(childElement);
+        childElement = doc.createElement("vat");
+        childElement.setTextContent(d.getTotal() * 0.19 + "");
+        totals.appendChild(childElement);
+        childElement = doc.createElement("sumVat");
+        childElement.setTextContent(d.getTotal() * 1.19 + "");
+        totals.appendChild(childElement);
         childElement = doc.createElement("date");
         childElement.setTextContent(d.getEditDate() + "");
+        totals.appendChild(childElement);
+        childElement = doc.createElement("docNumber");
+        childElement.setTextContent(d.getDocNumber() + "");
         totals.appendChild(childElement);
         root.appendChild(totals);
         return new DOMSource(doc);

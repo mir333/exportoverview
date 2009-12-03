@@ -59,13 +59,7 @@ public class InvoiceForm extends DocumentForm {
 
             @Override
             public void windowDeactivated(WindowEvent evt) {
-                documentLinesList.clear();
-                try {
-                    documentLinesList.addAll(InvoiceOps.getInvoiceLinesForInvoice(i));
-                    documentTable.updateUI();
-                } catch (Exception ex) {
-                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                refresh();
             }
         });
         aiv.setVisible(true);
@@ -108,14 +102,8 @@ public class InvoiceForm extends DocumentForm {
 
                 @Override
                 public void windowDeactivated(WindowEvent evt) {
-                    try {
-                        InvoiceLine invLine = (InvoiceLine) documentLinesList.get(index);
-                        invLine = InvoiceOps.getInvoiceLineById(invLine.getId());
-                        documentLinesList.set(index, invLine);
-                        documentTable.updateUI();
-                    } catch (Exception ex) {
-                        Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    refresh();
+                    MainView.refreshTotal();
                 }
             });
             edlf.setVisible(true);
@@ -126,11 +114,27 @@ public class InvoiceForm extends DocumentForm {
     public void deleteSelected() {
         if (showDialog("Do you realy want to delete selected items?") == 0) {
             try {
-                InvoiceOps.deleteItems(getSeletedDocs());
+                Invoice i = (Invoice) docComboBox.getSelectedItem();
+                InvoiceOps.deleteItems(getSeletedDocs(),i.getId());
                 dcoSelected();
+                refresh();
+                MainView.refreshTotal();
             } catch (Exception ex) {
                 Logger.getLogger(DeliveryForm.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+        }
+    }
+
+    private void refresh() {
+        try {
+            Clients c = (Clients) clientComboBox.getSelectedItem();
+            int i = docComboBox.getSelectedIndex();
+            docList.clear();
+            docList.addAll(InvoiceOps.getInvoicesFromClient(c));
+            docComboBox.setSelectedIndex(i);
+        } catch (Exception ex) {
+            Logger.getLogger(DeliveryForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

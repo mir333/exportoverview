@@ -25,7 +25,8 @@ public class Document implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private Date editDate;
-    private int total;
+    private int docNumber;
+    private float total;
     @ManyToOne
     private Clients client;
     @OneToMany(mappedBy = "document")
@@ -63,12 +64,20 @@ public class Document implements Serializable {
         this.editDate = editDate;
     }
 
-    public int getTotal() {
+    public float getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(float total) {
         this.total = total;
+    }
+
+    public int getDocNumber() {
+        return docNumber;
+    }
+
+    public void setDocNumber(int docNumber) {
+        this.docNumber = docNumber;
     }
 
     
@@ -94,6 +103,6 @@ public class Document implements Serializable {
 
     @Override
     public String toString() {
-        return "" + id ;
+        return "Cislo:" + docNumber ;
     }
 }
