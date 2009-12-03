@@ -41,7 +41,11 @@
                       <Component id="printButton" min="-2" pref="70" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="263" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      <Component id="tatalL" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="totalOut" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="176" max="32767" attributes="0"/>
                       <Component id="addLineButton" min="-2" pref="66" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -68,6 +72,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="printButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tatalL" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="totalOut" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="addLineButton" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -224,6 +230,20 @@
         <Property name="text" type="java.lang.String" resourceKey="deleteButton.text"/>
         <Property name="name" type="java.lang.String" value="deleteButton" noResource="true"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tatalL">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total:"/>
+        <Property name="name" type="java.lang.String" value="tatalL" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="totalOut">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="totalOut" noResource="true"/>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="text" source="docComboBox" sourcePath="${selectedItem.total}" target="totalOut" targetPath="text" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
     </Component>
   </SubComponents>
 </Form>

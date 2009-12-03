@@ -7,7 +7,6 @@ import cz.ligas.exportoverview.db.DeliveryLine;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.Beans;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
@@ -60,13 +59,7 @@ public class DeliveryForm extends DocumentForm {
 
             @Override
             public void windowDeactivated(WindowEvent evt) {
-                documentLinesList.clear();
-                try {
-                    documentLinesList.addAll(DeliveryOps.getDeliveriesLinesForDelivery(d));
-                    documentTable.updateUI();
-                } catch (Exception ex) {
-                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                refresh();
             }
         });
         adf.setVisible(true);
@@ -109,14 +102,8 @@ public class DeliveryForm extends DocumentForm {
 
                 @Override
                 public void windowDeactivated(WindowEvent evt) {
-                    try {
-                        DeliveryLine dl = (DeliveryLine) documentLinesList.get(index);
-                        dl = DeliveryOps.getDeliveryLineById(dl.getId());
-                        documentLinesList.set(index, dl);
-                        documentTable.updateUI();
-                    } catch (Exception ex) {
-                        Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    refresh();
+                    MainView.refreshTotal();
                 }
             });
             edlf.setVisible(true);
@@ -127,11 +114,26 @@ public class DeliveryForm extends DocumentForm {
     public void deleteSelected() {
         if (showDialog("Do you realy want to delete selected items?") == 0) {
             try {
-                DeliveryOps.deleteItems(getSeletedDocs());
+                Delivery d = (Delivery) docComboBox.getSelectedItem();
+                DeliveryOps.deleteItems(getSeletedDocs(), d.getId());
                 dcoSelected();
+                refresh();
+                MainView.refreshTotal();
             } catch (Exception ex) {
                 Logger.getLogger(DeliveryForm.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+
+    private void refresh() {
+        try {
+            Clients c = (Clients) clientComboBox.getSelectedItem();
+            int i = docComboBox.getSelectedIndex();
+            docList.clear();
+            docList.addAll(DeliveryOps.getDeliveriesFromClient(c));
+            docComboBox.setSelectedIndex(i);
+        } catch (Exception ex) {
+            Logger.getLogger(DeliveryForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -1,10 +1,12 @@
 package cz.ligas.exportoverview.appli;
 
 import cz.ligas.exportoverview.db.Clients;
+import cz.ligas.exportoverview.db.DocumentLine;
 import cz.ligas.exportoverview.db.Invoice;
 import cz.ligas.exportoverview.db.InvoiceLine;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,6 +30,24 @@ public class InvoiceOps {
         em.getTransaction().begin();
         em.persist(invoice);
         em.merge(clients);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public static Invoice getInvoiceById(int id) {
+        EntityManager em = emFactory.createEntityManager();
+        Invoice il = em.find(Invoice.class, id);
+        em.close();
+        return il;
+    }
+
+    public static void editInvoice(Invoice invoice, float total) throws Exception {
+        EntityManager em = emFactory.createEntityManager();
+        java.util.Date today = new java.util.Date();
+        invoice.setEditDate(new java.sql.Date(today.getTime()));
+        invoice.setTotal(total);
+        em.getTransaction().begin();
+        em.merge(invoice);
         em.getTransaction().commit();
         em.close();
     }
@@ -83,6 +103,7 @@ public class InvoiceOps {
         } else {
             ExportLineOps.editExportLine(exportLine, 0, il.getAmount(), il.getPrice());
         }
+        recalculateInvoice(inv);
     }
 
     public static InvoiceLine getInvoiceLineById(int id) throws Exception {
@@ -108,23 +129,40 @@ public class InvoiceOps {
         ExportLine exportLine = ExportLineOps.getExportLineByProductId(
                 il.getProd().getId(), il.getDocument().getClient().getId());
         ExportLineOps.editExportLine(exportLine, amount, 0, il.getPrice());
+        recalculateInvoice(i);
     }
 
-    public static void deleteItems(List<Integer> seletedDocs) throws Exception {
+    public static void deleteItems(List<Integer> seletedDocs, int iid) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         em.getTransaction().begin();
-        for (int id : seletedDocs) {
-            InvoiceLine dl = em.find(InvoiceLine.class, id);
-            em.remove(dl);
+        Invoice inv = em.find(Invoice.class, iid);
+        for (Iterator<DocumentLine> it = inv.getDocumentLine().iterator(); it.hasNext();) {
+            DocumentLine dl = it.next();
+            for (Iterator<Integer> it1 = seletedDocs.iterator(); it1.hasNext();) {
+                int i = it1.next();
+                if (dl.getId() == i) {
+                    ExportLine exportLine = ExportLineOps.getExportLineByProductId(
+                            dl.getProd().getId(), dl.getDocument().getClient().getId());
+                    ExportLineOps.editExportLine(exportLine, -dl.getAmount(), 0, dl.getPrice());
+                    em.remove(dl);
+                    it.remove();
+                    it1.remove();
+                    break;
+                }
+            }
         }
+        em.merge(inv);
         em.getTransaction().commit();
-       
-        for (int id : seletedDocs) {
-            InvoiceLine il = em.find(InvoiceLine.class, id);
-            ExportLine exportLine = ExportLineOps.getExportLineByProductId(
-                    il.getProd().getId(), il.getDocument().getClient().getId());
-            ExportLineOps.editExportLine(exportLine, -il.getAmount(), 0, il.getPrice());
+        em.close();
+        recalculateInvoice(inv);
+    }
+
+    public static void recalculateInvoice(Invoice inv) throws Exception {
+        float total = 0L;
+        inv = getInvoiceById(inv.getId());
+        for (DocumentLine docl : inv.getDocumentLine()) {
+            total += docl.getTotal();
         }
-         em.close();
+        editInvoice(inv, total);
     }
 }
