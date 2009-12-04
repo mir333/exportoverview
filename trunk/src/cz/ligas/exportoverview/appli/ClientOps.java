@@ -31,7 +31,7 @@ public class ClientOps {
     public static List<Clients> getClients() throws Exception {
         EntityManager em = emFactory.createEntityManager();
         List<Clients> list = new ArrayList<Clients>();
-        Query q = em.createQuery("select c from Clients c order by c.id asc");
+        Query q = em.createQuery("select c from Clients c order by c.clientName asc");
         list = q.getResultList();
         em.close();
         return list;
@@ -75,19 +75,20 @@ public class ClientOps {
 
     public static void addUserInfo(UserInfo userInfo) throws Exception {
         EntityManager em = emFactory.createEntityManager();
+        userInfo.setDeliverCount(0);
+        userInfo.setInvoiceCount(0);
         em.getTransaction().begin();
         em.persist(userInfo);
         em.getTransaction().commit();
         em.close();
     }
 
-    public static List<UserInfo> getUserInfo() throws Exception {
+    public static UserInfo getUserInfo() throws Exception {
         EntityManager em = emFactory.createEntityManager();
-        List<UserInfo> list = new ArrayList<UserInfo>();
         Query q = em.createQuery("select ui from UserInfo ui order by ui.id asc");
-        list = q.getResultList();
+        UserInfo ui = (UserInfo) q.getSingleResult();
         em.close();
-        return list;
+        return ui;
     }
 
     public static void editUserInfo(UserInfo userInfo) {

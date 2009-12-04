@@ -231,29 +231,29 @@ public class ClientForm extends JFrame {
         this.dispose();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel cityL;
-    private javax.swing.JLabel clientAddressL;
-    private javax.swing.JLabel clientNameL;
-    private javax.swing.JLabel clientPhoneL;
-    private javax.swing.JButton clientSaveButton;
-    private javax.swing.JLabel companyL;
-    private javax.swing.JLabel countryL;
-    private javax.swing.JLabel dicL;
-    private javax.swing.JLabel icoL;
-    private javax.swing.JTextField tCityIn;
-    private javax.swing.JTextField tClienCompanyIn;
-    private javax.swing.JTextField tClientAddressIn;
-    private javax.swing.JTextField tClientNameIn;
-    private javax.swing.JTextField tClientPhoneIn;
-    private javax.swing.JTextField tCountryIn;
-    private javax.swing.JTextField tDICIn;
-    private javax.swing.JTextField tICOIn;
-    private javax.swing.JTextField tZipCodeIn;
-    private javax.swing.JLabel titleLabel;
-    private javax.swing.JLabel zipCodeL;
+    protected javax.swing.JLabel cityL;
+    protected javax.swing.JLabel clientAddressL;
+    protected javax.swing.JLabel clientNameL;
+    protected javax.swing.JLabel clientPhoneL;
+    protected javax.swing.JButton clientSaveButton;
+    protected javax.swing.JLabel companyL;
+    protected javax.swing.JLabel countryL;
+    protected javax.swing.JLabel dicL;
+    protected javax.swing.JLabel icoL;
+    protected javax.swing.JTextField tCityIn;
+    protected javax.swing.JTextField tClienCompanyIn;
+    protected javax.swing.JTextField tClientAddressIn;
+    protected javax.swing.JTextField tClientNameIn;
+    protected javax.swing.JTextField tClientPhoneIn;
+    protected javax.swing.JTextField tCountryIn;
+    protected javax.swing.JTextField tDICIn;
+    protected javax.swing.JTextField tICOIn;
+    protected javax.swing.JTextField tZipCodeIn;
+    protected javax.swing.JLabel titleLabel;
+    protected javax.swing.JLabel zipCodeL;
     // End of variables declaration//GEN-END:variables
-    MyInputVerifier verifier = new MyInputVerifier();
-    javax.swing.ActionMap actionMap;
+    protected MyInputVerifier verifier = new MyInputVerifier();
+    private javax.swing.ActionMap actionMap;
 
     private void myInit() {
 
@@ -281,31 +281,5 @@ public class ClientForm extends JFrame {
         tClientPhoneIn.setInputVerifier(verifier);
         tClientPhoneIn.addActionListener(verifier);
         clientPhoneL.setLabelFor(tClientPhoneIn);
-    }
-
-    protected UserInfo getUserInfo() {
-        UserInfo ui = new UserInfo();
-        ui.setClientName(tClientNameIn.getText());
-        ui.setCompany(tClienCompanyIn.getText());
-        ui.setClientAddress(tClientAddressIn.getText());
-        ui.setClientPhone(tClientPhoneIn.getText());
-        ui.setPsc(tZipCodeIn.getText());
-        ui.setCity(tCityIn.getText());
-        ui.setCountry(tCountryIn.getText());
-        ui.setIco(tICOIn.getText());
-        ui.setDic(tDICIn.getText());
-        return ui;
-    }
-
-     protected void setUserInfo(UserInfo ui) {
-        tClientNameIn.setText(ui.getClientName());
-        tClienCompanyIn.setText(ui.getCompany());
-        tClientAddressIn.setText(ui.getClientAddress());
-        tClientPhoneIn.setText(ui.getClientPhone());
-        tZipCodeIn.setText(ui.getPsc());
-        tCityIn.setText(ui.getCity());
-        tCountryIn.setText(ui.getCountry());
-        tICOIn.setText(ui.getIco());
-        tDICIn.setText(ui.getDic());
     }
 }

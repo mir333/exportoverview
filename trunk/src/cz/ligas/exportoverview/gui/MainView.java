@@ -5,6 +5,7 @@ package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
+import cz.ligas.exportoverview.appli.UtilityOps;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.util.logging.Level;
@@ -28,6 +29,7 @@ import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import org.apache.derby.jdbc.ClientBaseDataSource;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.ELProperty;
@@ -104,6 +106,7 @@ public class MainView extends FrameView {
                 }
             }
         });
+        testFirstRun();
     }
 
     /** This method is called from within the constructor to
@@ -728,7 +731,19 @@ public class MainView extends FrameView {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    private void testFirstRun() {
+       if(ClientOps.isUserInfoEmpty()){
+        userInfoMangm();
+       }
+
+    }
 }
 // TODO: Dorobit potvrdenie na enter
 // TODO: Upravit DB aby potporovala uniqu itemy
 // TODO: include inheritance in entity classes
+// TODO: lokalizovat nazvy v labloch documentov
+// TODO: Cesty k xsl do resource
+// TODO: pridat prvky do kategorie cisla pre produkty
+// TODO: autovytvorenie delivery a invoice ak je prazny na add
+// TODO: prepojit sklad!!!

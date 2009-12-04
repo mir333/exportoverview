@@ -36,7 +36,7 @@ public class ProductOps {
     public static List<Products> getProducts() throws Exception {
         EntityManager em = emFactory.createEntityManager();
         List<Products> list = new ArrayList<Products>();
-        Query q = em.createQuery("select p from Products p order by p.id asc");
+        Query q = em.createQuery("select p from Products p order by p.productCode asc");
         list = q.getResultList();
         em.close();
         return list;

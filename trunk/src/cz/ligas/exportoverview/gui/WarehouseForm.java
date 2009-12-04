@@ -133,10 +133,7 @@ public class WarehouseForm extends javax.swing.JFrame {
                 @Override
                 public void windowDeactivated(WindowEvent evt) {
                     try {
-                        WarehouseItem whi = warehouseItemList.get(index);
-                        whi = WarehouseItemOps.getWarehouseItemById(whi.getId());
-                        warehouseItemList.set(index, whi);
-                        warehouseTable.updateUI();
+                        refresh();
                     } catch (Exception ex) {
                         Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -216,5 +213,16 @@ public class WarehouseForm extends javax.swing.JFrame {
             Logger.getLogger(WarehouseForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         warehouseTable.updateUI();
+    }
+
+    public void refresh() {
+        try {
+            int index = categoryComboBox.getSelectedIndex();
+            categoryList.clear();
+            categoryList.addAll(CategoryOps.getCategories());
+            categoryComboBox.setSelectedIndex(index);
+        } catch (Exception ex) {
+            Logger.getLogger(WarehouseForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

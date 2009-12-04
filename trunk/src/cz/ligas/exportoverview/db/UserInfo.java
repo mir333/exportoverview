@@ -1,5 +1,6 @@
 package cz.ligas.exportoverview.db;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 
@@ -13,7 +14,9 @@ public class UserInfo extends AbstractUser {
 
     private String bank;
     private String bankNo;
+    @Column(nullable=false)
     private int deliverCount;
+    @Column(nullable=false)
     private int invoiceCount;
 
     public String getBank() {

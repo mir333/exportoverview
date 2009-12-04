@@ -195,17 +195,17 @@ public class DocumentForm extends javax.swing.JFrame {
             System.err.println("Not owerriden");
     }//GEN-LAST:event_documentTableMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addLineButton;
+    protected javax.swing.JButton addLineButton;
     protected javax.swing.JComboBox clientComboBox;
-    private javax.swing.JLabel clientL;
-    private javax.swing.JLabel dacumentL;
-    private javax.swing.JButton deleteButton;
+    protected javax.swing.JLabel clientL;
+    protected javax.swing.JLabel dacumentL;
+    protected javax.swing.JButton deleteButton;
     protected javax.swing.JComboBox docComboBox;
     protected javax.swing.JTable documentTable;
-    private javax.swing.JLabel documentTableL;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton printButton;
-    private javax.swing.JLabel tatalL;
+    protected javax.swing.JLabel documentTableL;
+    protected javax.swing.JScrollPane jScrollPane1;
+    protected javax.swing.JButton printButton;
+    protected javax.swing.JLabel tatalL;
     protected javax.swing.JLabel totalOut;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
