@@ -25,6 +25,8 @@ public class InvoiceOps {
         EntityManager em = emFactory.createEntityManager();
         java.util.Date today = new java.util.Date();
         invoice.setEditDate(new java.sql.Date(today.getTime()));
+        int number = UtilityOps.getInvoiceCount();
+        invoice.setDocNumber(number+1);
         Clients clients = invoice.getClient();
         clients.getDocuments().add(invoice);
         em.getTransaction().begin();
@@ -74,7 +76,7 @@ public class InvoiceOps {
     public static List<InvoiceLine> getInvoiceLinesForInvoice(Invoice inv) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         List<InvoiceLine> list = new ArrayList<InvoiceLine>();
-        Query q = em.createQuery("select il from InvoiceLine il where il.document= :doc order by il.id asc");
+        Query q = em.createQuery("select il from InvoiceLine il where il.document= :doc order by il.prod.productCode asc");
         q.setParameter("doc", inv);
         list = q.getResultList();
         em.close();
@@ -113,8 +115,8 @@ public class InvoiceOps {
         return il;
     }
 
-    public static void editInvoiceLine(InvoiceLine il, int amount, float price) throws Exception {
-        amount += il.getAmount();
+    public static void editInvoiceLine(InvoiceLine il, int am, float price) throws Exception {
+        int amount = am + il.getAmount();
         float total = amount * price;
         EntityManager em = emFactory.createEntityManager();
         Invoice i = em.find(Invoice.class, il.getDocument().getId());
@@ -128,7 +130,7 @@ public class InvoiceOps {
         em.close();
         ExportLine exportLine = ExportLineOps.getExportLineByProductId(
                 il.getProd().getId(), il.getDocument().getClient().getId());
-        ExportLineOps.editExportLine(exportLine, amount, 0, il.getPrice());
+        ExportLineOps.editExportLine(exportLine, am, 0, il.getPrice());
         recalculateInvoice(i);
     }
 

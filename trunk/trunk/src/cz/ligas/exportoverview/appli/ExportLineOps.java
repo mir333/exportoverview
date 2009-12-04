@@ -42,7 +42,7 @@ public class ExportLineOps {
     public static List<ExportLine> getExportLinesByClient(Clients c) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         List<ExportLine> list = new ArrayList<ExportLine>();
-        Query q = em.createQuery("select el from ExportLine el where el.client=:client  order by el.id asc");
+        Query q = em.createQuery("select el from ExportLine el where el.client=:client  order by el.prod.productCode asc");
         q.setParameter("client", c);
         list = q.getResultList();
         em.close();
@@ -52,7 +52,7 @@ public class ExportLineOps {
     public static List<ExportLine> getExportLine() throws Exception {
         EntityManager em = emFactory.createEntityManager();
         List<ExportLine> list = new ArrayList<ExportLine>();
-        Query q = em.createQuery("select el from ExportLine el order by el.id asc");
+        Query q = em.createQuery("select el from ExportLine el order by el.prod.productCode asc");
         list = q.getResultList();
         em.close();
         return list;
@@ -82,7 +82,7 @@ public class ExportLineOps {
     static ExportLine getExportLineByProductId(int pid,int cid) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         try {
-            Query q = em.createQuery("select el from ExportLine el where el.prod.id=:productId and el.client.id=:clientId order by el.id asc");
+            Query q = em.createQuery("select el from ExportLine el where el.prod.id=:productId and el.client.id=:clientId order by el.prod.productCode asc");
             q.setParameter("productId", pid);
             q.setParameter("clientId", cid);
             ExportLine el = (ExportLine) q.getSingleResult();

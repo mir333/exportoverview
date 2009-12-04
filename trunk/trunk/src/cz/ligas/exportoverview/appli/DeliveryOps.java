@@ -26,7 +26,8 @@ public class DeliveryOps {
         EntityManager em = emFactory.createEntityManager();
         java.util.Date today = new java.util.Date();
         delivery.setEditDate(new java.sql.Date(today.getTime()));
-        delivery.setDocNumber(0);
+        int number = UtilityOps.getDeliveryCount();
+        delivery.setDocNumber(number+1);
         Clients clients = delivery.getClient();
         clients.getDocuments().add(delivery);
         em.getTransaction().begin();
@@ -76,7 +77,7 @@ public class DeliveryOps {
     public static List<DeliveryLine> getDeliveriesLinesForDelivery(Delivery deliv) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         List<DeliveryLine> list = new ArrayList<DeliveryLine>();
-        Query q = em.createQuery("select dl from DeliveryLine dl where dl.document= :doc order by dl.id asc");
+        Query q = em.createQuery("select dl from DeliveryLine dl where dl.document= :doc order by dl.prod.productCode asc");
         q.setParameter("doc", deliv);
         list = q.getResultList();
         em.close();
@@ -116,8 +117,8 @@ public class DeliveryOps {
         return dl;
     }
 
-    public static void editDeliveryLine(DeliveryLine dl, int amount, float price) throws Exception {
-        amount += dl.getAmount();
+    public static void editDeliveryLine(DeliveryLine dl, int am, float price) throws Exception {
+        int amount = am + dl.getAmount();
         float total = amount * price;
         int id = dl.getDocument().getId();
         EntityManager em = emFactory.createEntityManager();
@@ -133,7 +134,7 @@ public class DeliveryOps {
         em.close();
         ExportLine exportLine = ExportLineOps.getExportLineByProductId(
                 dl.getProd().getId(), dl.getDocument().getClient().getId());
-        ExportLineOps.editExportLine(exportLine, amount, 0, dl.getPrice());
+        ExportLineOps.editExportLine(exportLine, am, 0, dl.getPrice());
         recalculateDelivery(d);
     }
 

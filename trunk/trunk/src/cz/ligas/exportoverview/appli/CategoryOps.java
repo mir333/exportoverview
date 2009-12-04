@@ -32,7 +32,7 @@ public class CategoryOps {
      public static List<ProductCategory> getCategories() throws Exception {
             EntityManager em = emFactory.createEntityManager();
             List<ProductCategory> list = new ArrayList<ProductCategory>();
-            Query q = em.createQuery("select pc from ProductCategory pc order by pc.id asc");
+            Query q = em.createQuery("select pc from ProductCategory pc order by pc.categoryCode asc");
             list = q.getResultList();
             em.close();
             return list;

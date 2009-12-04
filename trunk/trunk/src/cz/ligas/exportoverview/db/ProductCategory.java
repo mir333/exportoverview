@@ -34,6 +34,7 @@ public class ProductCategory implements Serializable {
     @Column(nullable=false)
     private String categoryCode;
     private String categoryName;
+    private int productInCat;
     @OneToMany(mappedBy = "productCategoryId")
     private List<Products> products;
 
@@ -75,7 +76,13 @@ public class ProductCategory implements Serializable {
         this.products = products;
     }
 
- 
+    public int getProductInCat() {
+        return productInCat;
+    }
+
+    public void setProductInCat(int productInCat) {
+        this.productInCat = productInCat;
+    }
 
     @Override
     public int hashCode() {

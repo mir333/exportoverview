@@ -53,7 +53,7 @@
                   <Component id="jScrollPane1" alignment="0" pref="744" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="warehouseTableL" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="284" max="32767" attributes="0"/>
+                      <EmptySpace pref="334" max="32767" attributes="0"/>
                       <Component id="categoryL" min="-2" pref="72" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="categoryComboBox" min="-2" pref="207" max="-2" attributes="0"/>

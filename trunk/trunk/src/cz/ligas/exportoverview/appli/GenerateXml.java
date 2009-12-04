@@ -33,7 +33,7 @@ public class GenerateXml {
     }
 
     private static Element generateUserXml(org.w3c.dom.Document doc) throws Exception {
-        UserInfo ui = ClientOps.getUserInfo().get(0);
+        UserInfo ui = ClientOps.getUserInfo();
         Element client = doc.createElement("UserInfo");
         Element childElement = doc.createElement("name");
         childElement.setTextContent(ui.getClientName());

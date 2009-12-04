@@ -28,7 +28,7 @@ public class WarehouseItemOps {
         em.close();
     }
 
-    public static WarehouseItem getWarehouseItemById(long id) throws Exception {
+    public static WarehouseItem jgetWarehouseItemById(int id) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         WarehouseItem c = em.find(WarehouseItem.class, id);
         em.close();
@@ -38,7 +38,7 @@ public class WarehouseItemOps {
     public static List<WarehouseItem> getWarhouseItemByCategoryId(int id) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         List<WarehouseItem> list = new ArrayList<WarehouseItem>();
-        Query q = em.createQuery("SELECT whi FROM WarehouseItem whi WHERE whi.productItem.productCategoryId.id = :wh order by whi.id asc");
+        Query q = em.createQuery("SELECT whi FROM WarehouseItem whi WHERE whi.productItem.productCategoryId.id = :wh order by whi.productItem.productCode asc");
         q.setParameter("wh", id);
         list = q.getResultList();
         em.close();
@@ -48,7 +48,7 @@ public class WarehouseItemOps {
     public static List<WarehouseItem> getWarehouseItems() throws Exception {
         EntityManager em = emFactory.createEntityManager();
         List<WarehouseItem> list = new ArrayList<WarehouseItem>();
-        Query q = em.createQuery("select whi from WarehouseItem whi order by whi.id asc");
+        Query q = em.createQuery("select whi from WarehouseItem whi order by whi.productItem.productCode asc");
         list = q.getResultList();
         em.close();
         return list;
