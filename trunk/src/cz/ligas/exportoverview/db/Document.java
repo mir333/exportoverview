@@ -27,6 +27,7 @@ public class Document implements Serializable {
     private Date editDate;
     private int docNumber;
     private float total;
+    private boolean lock;
     @ManyToOne
     private Clients client;
     @OneToMany(mappedBy = "document")
@@ -78,6 +79,14 @@ public class Document implements Serializable {
 
     public void setDocNumber(int docNumber) {
         this.docNumber = docNumber;
+    }
+
+    public boolean isLock() {
+        return lock;
+    }
+
+    public void setLock(boolean lock) {
+        this.lock = lock;
     }
 
     

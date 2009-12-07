@@ -106,7 +106,7 @@ public class MainView extends FrameView {
                 }
             }
         });
-        testFirstRun();
+//        testFirstRun();
     }
 
     /** This method is called from within the constructor to
@@ -732,12 +732,11 @@ public class MainView extends FrameView {
         }
     }
 
-    private void testFirstRun() {
-       if(ClientOps.isUserInfoEmpty()){
-        userInfoMangm();
-       }
-
-    }
+//    private void testFirstRun() {
+//       if(ClientOps.isUserInfoEmpty()){
+//        userInfoMangm();
+//       }
+//    }
 }
 // TODO: Dorobit potvrdenie na enter
 // TODO: Upravit DB aby potporovala uniqu itemy

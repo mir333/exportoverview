@@ -5,6 +5,8 @@ import cz.ligas.exportoverview.db.Document;
 import cz.ligas.exportoverview.db.DocumentLine;
 import cz.ligas.exportoverview.db.UserInfo;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
@@ -111,7 +113,7 @@ public class GenerateXml {
             childElement.setTextContent("19%");
             delLine.appendChild(childElement);
             childElement = doc.createElement("total");
-            childElement.setTextContent(dl.getTotal() * 1.19 + "");
+            childElement.setTextContent(dl.getTotal()+"");
             delLine.appendChild(childElement);
             root.appendChild(delLine);
         }
@@ -119,14 +121,10 @@ public class GenerateXml {
         childElement = doc.createElement("sum");
         childElement.setTextContent(d.getTotal() + "");
         totals.appendChild(childElement);
-        childElement = doc.createElement("vat");
-        childElement.setTextContent(d.getTotal() * 0.19 + "");
-        totals.appendChild(childElement);
-        childElement = doc.createElement("sumVat");
-        childElement.setTextContent(d.getTotal() * 1.19 + "");
-        totals.appendChild(childElement);
         childElement = doc.createElement("date");
-        childElement.setTextContent(d.getEditDate() + "");
+        java.util.Date jDate = new Date(d.getEditDate().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("d. M. y");
+        childElement.setTextContent(sdf.format(jDate));
         totals.appendChild(childElement);
         childElement = doc.createElement("docNumber");
         childElement.setTextContent(d.getDocNumber() + "");

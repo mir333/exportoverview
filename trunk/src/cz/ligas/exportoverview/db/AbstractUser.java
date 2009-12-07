@@ -143,7 +143,7 @@ public class AbstractUser implements Serializable {
 
     @Override
     public String toString() {
-        return id +" "+ clientName;
+        return clientName;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
