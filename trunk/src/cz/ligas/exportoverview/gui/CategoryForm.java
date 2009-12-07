@@ -116,7 +116,6 @@ public class CategoryForm extends javax.swing.JFrame {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
-        System.err.println("saveCategory executed");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel categoryCodeL;

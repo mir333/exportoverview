@@ -52,7 +52,11 @@ public class DeliveryForm extends DocumentForm {
 
     @Override
     public void newDocument() {
-        final Delivery d = (Delivery) docComboBox.getSelectedItem();
+        Delivery d = (Delivery) docComboBox.getSelectedItem();
+        if(d == null){
+           errorDialog("error.delivery.empty");
+           return;
+        }
         AddDelivery adf = new AddDelivery(d);
         adf.setLocationRelativeTo(documentTable);
         adf.addWindowListener(new WindowAdapter() {
@@ -112,7 +116,7 @@ public class DeliveryForm extends DocumentForm {
 
     @Override
     public void deleteSelected() {
-        if (showDialog("Do you realy want to delete selected items?") == 0) {
+        if (showDialog("question.delete") == 0) {
             try {
                 Delivery d = (Delivery) docComboBox.getSelectedItem();
                 DeliveryOps.deleteItems(getSeletedDocs(), d.getId());

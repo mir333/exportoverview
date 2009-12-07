@@ -233,7 +233,7 @@ public class DocumentForm extends javax.swing.JFrame {
         JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, docList, docComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
 
-        org.jdesktop.application.ResourceMap resourceMap1 = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(MainView.class);
+        org.jdesktop.application.ResourceMap resourceMap1 = org.jdesktop.application.Application.getInstance(GuiMain.class).getContext().getResourceMap(MainView.class);
         JTableBinding mainTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE, documentLinesList, documentTable);
         JTableBinding.ColumnBinding columnBinding;
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productCode}"));
@@ -274,10 +274,7 @@ public class DocumentForm extends javax.swing.JFrame {
         return list;
     }
 
-    protected int showDialog(String mes) {
-        return JOptionPane.showConfirmDialog(this, mes, "Delete", JOptionPane.YES_NO_OPTION);
-    }
-
+    
     @Action
     public void newDocument() {
         System.err.println("Not Overriden");
@@ -301,12 +298,13 @@ public class DocumentForm extends javax.swing.JFrame {
     @Action
     public void printDoc() {
         try {
+            org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(GuiMain.class).getContext().getResourceMap(GuiMain.class);
             Clients c = (Clients) clientComboBox.getSelectedItem();
             Document d = (Document) docComboBox.getSelectedItem();
             String path = saveFile("html.htm");
             if(path==null)return;
             Source src = GenerateXml.generateDocXml(lable,d, c,documentLinesList);
-            GenerateXml.generateHtml(path, src);
+            GenerateXml.generateHtml(path, src,resourceMap.getString("files.xslt"));
         } catch (Exception e) {
            Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -321,4 +319,13 @@ public class DocumentForm extends javax.swing.JFrame {
         if(fd.getFile() == null)return null;
         return fd.getDirectory() + fd.getFile();
 }
+
+    protected void errorDialog(String mes){
+    org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
+     JOptionPane.showMessageDialog(this,resourceMap.getString(mes),resourceMap.getString("error.title"),JOptionPane.ERROR_MESSAGE);
+    }
+    protected int showDialog(String mes) {
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
+        return JOptionPane.showConfirmDialog(this, resourceMap.getString(mes), resourceMap.getString("delete.title"), JOptionPane.YES_NO_OPTION);
+    }
 }
