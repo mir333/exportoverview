@@ -19,12 +19,12 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class GenerateXml {
 
-    public static void generateHtml(String path, Source src)
+    public static void generateHtml(String path, Source src, String xslt)
             throws TransformerException {
-        TransformerFactory tranFactory = TransformerFactory.newInstance();
-        Transformer aTransformer = tranFactory.newTransformer();
-        aTransformer.transform(src, new StreamResult(new File("xml/test.xml")));
-        File xsltFile = new File("xml/stylesheet.xsl");
+//        TransformerFactory tranFactory = TransformerFactory.newInstance();
+//        Transformer aTransformer = tranFactory.newTransformer();
+//        aTransformer.transform(src, new StreamResult(new File("xml/test.xml")));
+        File xsltFile = new File(xslt);
         File fileHtml = new File(path);
         Source xsltSource = new StreamSource(xsltFile);
         TransformerFactory transFact = TransformerFactory.newInstance();

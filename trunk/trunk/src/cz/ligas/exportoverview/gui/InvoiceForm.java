@@ -52,7 +52,11 @@ public class InvoiceForm extends DocumentForm {
 
     @Override
     public void newDocument() {
-        final Invoice i = (Invoice) docComboBox.getSelectedItem();
+        Invoice i = (Invoice) docComboBox.getSelectedItem();
+        if (i == null) {
+            errorDialog("error.invoice.empty");
+            return;
+        }
         AddInvoice aiv = new AddInvoice(i);
         aiv.setLocationRelativeTo(documentTable);
         aiv.addWindowListener(new WindowAdapter() {
@@ -112,10 +116,10 @@ public class InvoiceForm extends DocumentForm {
 
     @Override
     public void deleteSelected() {
-        if (showDialog("Do you realy want to delete selected items?") == 0) {
+        if (showDialog("question.delete") == 0) {
             try {
                 Invoice i = (Invoice) docComboBox.getSelectedItem();
-                InvoiceOps.deleteItems(getSeletedDocs(),i.getId());
+                InvoiceOps.deleteItems(getSeletedDocs(), i.getId());
                 dcoSelected();
                 refresh();
                 MainView.refreshTotal();

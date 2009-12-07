@@ -21,6 +21,8 @@ public class ProductOps {
     public static void addProduct(Products product) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         ProductCategory products = product.getProductCategoryId();
+        int i = products.getProductInCat()+1;
+        products.setProductInCat(i);
         products.getProducts().add(product);
         em.getTransaction().begin();
         em.persist(product);

@@ -155,8 +155,9 @@
                                             <th>Product Code</th>
                                             <th>Product Name</th>
                                             <th>Amount</th>
-                                            <th>Unit price</th>
-                                            <th>Total price</th>
+                                            <th>%VAT</th>
+                                            <th>Unit price without VAT</th>
+                                            <th>Total price with VAT</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -172,6 +173,9 @@
                                                     <xsl:value-of select="amount"/>
                                                 </td>
                                                 <td>
+                                                    <xsl:value-of select="vat"/>
+                                                </td>
+                                                <td>
                                                     <xsl:value-of select="price"/>
                                                 </td>
                                                 <td>
@@ -184,7 +188,12 @@
 
                                 </div>
                                 <div id="bottomDoc">
-
+                                    <div class="total" id="tot1">Total VAT:
+                                        <xsl:value-of select="Totals/vat"/>
+                                    </div>
+                                    <div class="total" id="tot2">Total without VAT:
+                                        <xsl:value-of select="Totals/sum"/>
+                                    </div>
                                     <div class="total" id="tot3">
                                         <b>Total:
                                             <xsl:value-of select="Totals/sumVat"/>
@@ -343,8 +352,9 @@
                                                         <th>Product Code</th>
                                                         <th>Product Name</th>
                                                         <th>Amount</th>
-                                                        <th>Unit price</th>
-                                                        <th>Total price</th>
+                                                        <th>%VAT</th>
+                                                        <th>Unit price without VAT</th>
+                                                        <th>Total price with VAT</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -360,6 +370,9 @@
                                                                 <xsl:value-of select="amount"/>
                                                             </td>
                                                             <td>
+                                                                <xsl:value-of select="vat"/>
+                                                            </td>
+                                                            <td>
                                                                 <xsl:value-of select="price"/>
                                                             </td>
                                                             <td>
@@ -372,6 +385,12 @@
 
                                             </div>
                                             <div id="bottomDoc">
+                                                <div class="total" id="tot1">Total VAT:
+                                                    <xsl:value-of select="Totals/vat"/>
+                                                </div>
+                                                <div class="total" id="tot2">Total without VAT:
+                                                    <xsl:value-of select="Totals/sum"/>
+                                                </div>
                                                 <div class="total" id="tot3">
                                                     <b>Total:
                                                         <xsl:value-of select="Totals/sumVat"/>
