@@ -4,6 +4,11 @@
 
 package cz.ligas.exportoverview.gui;
 
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -39,6 +44,13 @@ public class GuiMain extends SingleFrameApplication {
      * Main method launching the application.
      */
     public static void main(String[] args) {
+        Handler fh;
+        try {
+            fh = new FileHandler("log/app.log");
+             Logger.getLogger("").addHandler(fh);
+        } catch (Exception ex) {
+            Logger.getLogger(GuiMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
         launch(GuiMain.class, args);
     }
 }

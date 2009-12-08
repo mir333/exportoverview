@@ -39,13 +39,14 @@ import javax.xml.transform.*;
  */
 public class DocumentForm extends javax.swing.JFrame {
 
-    public DocumentForm(String l) {
+    public DocumentForm(String l,String title) {
         actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(DocumentForm.class, this);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
         this.lable=l;
         initComponents();
         myInit();
-        dacumentL.setText(l + ":");
-        setTitle(l);
+        dacumentL.setText(resourceMap.getString(title)+":");
+        setTitle(resourceMap.getString(title));
 
     }
 
