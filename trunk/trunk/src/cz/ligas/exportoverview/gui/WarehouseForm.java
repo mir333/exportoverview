@@ -1,11 +1,8 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.CategoryOps;
-import cz.ligas.exportoverview.appli.ClientOps;
-import cz.ligas.exportoverview.appli.ExportLineOps;
 import cz.ligas.exportoverview.appli.WarehouseItemOps;
 import cz.ligas.exportoverview.db.ProductCategory;
-import cz.ligas.exportoverview.db.WarehouseItem;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.Beans;
@@ -54,6 +51,8 @@ public class WarehouseForm extends javax.swing.JFrame {
         showAllWhitemsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(WarehouseForm.class);
+        setTitle(resourceMap.getString("title")); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
@@ -92,11 +91,13 @@ public class WarehouseForm extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(warehouseTableL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
                         .addComponent(categoryL, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(showAllWhitemsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(626, 626, 626)
+                        .addComponent(showAllWhitemsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,7 +115,6 @@ public class WarehouseForm extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(WarehouseForm.class);
         warehouseTableL.getAccessibleContext().setAccessibleName(resourceMap.getString("warehouseTableL.AccessibleContext.accessibleName")); // NOI18N
         categoryL.getAccessibleContext().setAccessibleName(resourceMap.getString("categoryL.AccessibleContext.accessibleName")); // NOI18N
         showAllWhitemsButton.getAccessibleContext().setAccessibleName(resourceMap.getString("showAllWhitemsButton.AccessibleContext.accessibleName")); // NOI18N

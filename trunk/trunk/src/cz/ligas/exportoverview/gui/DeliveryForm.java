@@ -21,7 +21,7 @@ import org.jdesktop.observablecollections.ObservableList;
 public class DeliveryForm extends DocumentForm {
 
     public DeliveryForm() {
-        super("Delivery");
+        super("Delivery","title.delivery");
         myInit();
     }
 
