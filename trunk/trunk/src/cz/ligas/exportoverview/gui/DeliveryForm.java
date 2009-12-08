@@ -53,9 +53,9 @@ public class DeliveryForm extends DocumentForm {
     @Override
     public void newDocument() {
         Delivery d = (Delivery) docComboBox.getSelectedItem();
-        if(d == null){
-           errorDialog("error.delivery.empty");
-           return;
+        if (d == null) {
+            errorDialog("error.delivery.empty");
+            return;
         }
         AddDelivery adf = new AddDelivery(d);
         adf.setLocationRelativeTo(documentTable);
@@ -123,7 +123,9 @@ public class DeliveryForm extends DocumentForm {
                 dcoSelected();
                 refresh();
                 MainView.refreshTotal();
-            } catch (Exception ex) {
+            }catch (IllegalArgumentException iae) {
+                DocumentForm.errorDialog(iae.getMessage());
+            }catch (Exception ex) {
                 Logger.getLogger(DeliveryForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

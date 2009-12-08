@@ -130,7 +130,7 @@ public class InvoiceOps {
         em.close();
         ExportLine exportLine = ExportLineOps.getExportLineByProductId(
                 il.getProd().getId(), il.getDocument().getClient().getId());
-        ExportLineOps.editExportLine(exportLine, am, 0, il.getPrice());
+        ExportLineOps.editExportLine(exportLine, 0, am, il.getPrice());
         recalculateInvoice(i);
     }
 
@@ -145,7 +145,7 @@ public class InvoiceOps {
                 if (dl.getId() == i) {
                     ExportLine exportLine = ExportLineOps.getExportLineByProductId(
                             dl.getProd().getId(), dl.getDocument().getClient().getId());
-                    ExportLineOps.editExportLine(exportLine, -dl.getAmount(), 0, dl.getPrice());
+                    ExportLineOps.editExportLine(exportLine, 0, -dl.getAmount(), dl.getPrice());
                     em.remove(dl);
                     it.remove();
                     it1.remove();

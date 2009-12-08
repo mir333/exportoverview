@@ -320,12 +320,12 @@ public class DocumentForm extends javax.swing.JFrame {
         return fd.getDirectory() + fd.getFile();
 }
 
-    protected void errorDialog(String mes){
+    protected static void errorDialog(String mes){
     org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
-     JOptionPane.showMessageDialog(this,resourceMap.getString(mes),resourceMap.getString("error.title"),JOptionPane.ERROR_MESSAGE);
+     JOptionPane.showMessageDialog(null,resourceMap.getString(mes),resourceMap.getString("error.title"),JOptionPane.ERROR_MESSAGE);
     }
-    protected int showDialog(String mes) {
+    protected static int showDialog(String mes) {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
-        return JOptionPane.showConfirmDialog(this, resourceMap.getString(mes), resourceMap.getString("delete.title"), JOptionPane.YES_NO_OPTION);
+        return JOptionPane.showConfirmDialog(null, resourceMap.getString(mes), resourceMap.getString("delete.title"), JOptionPane.YES_NO_OPTION);
     }
 }

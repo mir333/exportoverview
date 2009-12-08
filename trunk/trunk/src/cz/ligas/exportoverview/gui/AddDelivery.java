@@ -34,7 +34,9 @@ public class AddDelivery extends AddDocumentLineForm {
         //overenie vyplnenia
         try {
             DeliveryOps.addDeliveryLine(dl);
-        } catch (Exception ex) {
+        }catch (IllegalArgumentException iae) {
+            DocumentForm.errorDialog(iae.getMessage());
+        }catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         MainView.refreshTotal();
