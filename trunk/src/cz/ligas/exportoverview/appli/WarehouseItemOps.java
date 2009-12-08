@@ -28,7 +28,7 @@ public class WarehouseItemOps {
         em.close();
     }
 
-    public static WarehouseItem jgetWarehouseItemById(int id) throws Exception {
+    public static WarehouseItem getWarehouseItemById(int id) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         WarehouseItem c = em.find(WarehouseItem.class, id);
         em.close();
@@ -54,8 +54,19 @@ public class WarehouseItemOps {
         return list;
     }
 
+    public static WarehouseItem getWarehouseItemByProductCode(String code) throws Exception {
+        EntityManager em = emFactory.createEntityManager();
+        Query q = em.createQuery("select whi from WarehouseItem whi where whi.productItem.productCode=:code order by whi.productItem.productCode asc");
+        q.setParameter("code", code);
+        WarehouseItem wh = (WarehouseItem) q.getSingleResult();
+        em.close();
+        return wh;
+    }
+
     public static void editWarehouseItem(WarehouseItem whi, int amount) throws Exception {
-        whi.setProductCount(amount);
+        whi.setProductCount(whi.getProductCount() + amount);
+        if(whi.getProductCount()<0)
+            throw new IllegalArgumentException("error.warehouse.negativeValue");
         EntityManager em = emFactory.createEntityManager();
         em.getTransaction().begin();
         em.merge(whi);

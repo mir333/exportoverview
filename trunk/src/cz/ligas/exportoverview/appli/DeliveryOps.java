@@ -6,6 +6,7 @@ import cz.ligas.exportoverview.db.DeliveryLine;
 import cz.ligas.exportoverview.db.DocumentLine;
 import cz.ligas.exportoverview.db.DocumentLine;
 import cz.ligas.exportoverview.db.ExportLine;
+import cz.ligas.exportoverview.db.WarehouseItem;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -85,6 +86,8 @@ public class DeliveryOps {
     }
 
     public static void addDeliveryLine(DeliveryLine dl) throws Exception {
+        WarehouseItem whitem = WarehouseItemOps.getWarehouseItemByProductCode(dl.getProd().getProductCode());
+        WarehouseItemOps.editWarehouseItem(whitem, -dl.getAmount());
         EntityManager em = emFactory.createEntityManager();
         Delivery delivery = (Delivery) dl.getDocument();
         delivery.getDocumentLine().add(dl);
@@ -118,6 +121,8 @@ public class DeliveryOps {
     }
 
     public static void editDeliveryLine(DeliveryLine dl, int am, float price) throws Exception {
+        WarehouseItem whitem = WarehouseItemOps.getWarehouseItemByProductCode(dl.getProd().getProductCode());
+        WarehouseItemOps.editWarehouseItem(whitem, -am);
         int amount = am + dl.getAmount();
         float total = amount * price;
         int id = dl.getDocument().getId();
@@ -147,6 +152,9 @@ public class DeliveryOps {
             for (Iterator<Integer> it1 = seletedDocs.iterator(); it1.hasNext();) {
                 int i = it1.next();
                 if (dl.getId() == i) {
+                    WarehouseItem whitem = WarehouseItemOps.getWarehouseItemByProductCode(
+                            dl.getProd().getProductCode());
+                    WarehouseItemOps.editWarehouseItem(whitem, dl.getAmount());
                     ExportLine exportLine = ExportLineOps.getExportLineByProductId(
                             dl.getProd().getId(), dl.getDocument().getClient().getId());
                     ExportLineOps.editExportLine(exportLine, -dl.getAmount(), 0, dl.getPrice());
