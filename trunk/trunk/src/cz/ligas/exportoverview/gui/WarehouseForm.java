@@ -9,6 +9,8 @@ import java.beans.Beans;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import org.jdesktop.application.Action;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -202,6 +204,8 @@ public class WarehouseForm extends javax.swing.JFrame {
         bindingGroup.addBinding(warehouseTableBinding);
         warehouseTableBinding.bind();
         bindingGroup.bind();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(warehouseTable.getModel());
+        warehouseTable.setRowSorter(sorter);
     }
 
     @Action

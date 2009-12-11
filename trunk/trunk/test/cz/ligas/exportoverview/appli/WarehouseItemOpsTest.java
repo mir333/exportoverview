@@ -57,7 +57,7 @@ public class WarehouseItemOpsTest {
     @Test
     public void testGetWarehouseItemById() throws Exception {
         System.out.println("getWarehouseItemById");
-        long id = 0L;
+        int id = 1;
         WarehouseItem expResult = null;
         WarehouseItem result = WarehouseItemOps.getWarehouseItemById(id);
         assertEquals(expResult, result);

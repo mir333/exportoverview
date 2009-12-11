@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.ELProperty;
@@ -264,6 +266,8 @@ public class DocumentForm extends javax.swing.JFrame {
         bindingGroup.addBinding(mainTableBinding);
         mainTableBinding.bind();
         bindingGroup.bind();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(documentTable.getModel());
+        documentTable.setRowSorter(sorter);
     }
 
     protected List<Integer> getSeletedDocs() {
