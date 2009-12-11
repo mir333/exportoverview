@@ -112,6 +112,6 @@ public class Document implements Serializable {
 
     @Override
     public String toString() {
-        return "Cislo:" + docNumber ;
+        return docNumber+"  "+editDate ;
     }
 }

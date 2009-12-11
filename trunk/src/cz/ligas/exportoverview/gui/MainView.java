@@ -29,6 +29,8 @@ import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import org.apache.derby.jdbc.ClientBaseDataSource;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -560,6 +562,9 @@ public class MainView extends FrameView {
         bindingGroup.addBinding(mainTableBinding);
         mainTableBinding.bind();
         bindingGroup.bind();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mainTable.getModel());
+        mainTable.setRowSorter(sorter);
+
     }
 
     public static void refreshTotal() {
