@@ -5,7 +5,6 @@ package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
-import cz.ligas.exportoverview.appli.UtilityOps;
 import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.util.logging.Level;
@@ -31,7 +30,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import org.apache.derby.jdbc.ClientBaseDataSource;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.ELProperty;
