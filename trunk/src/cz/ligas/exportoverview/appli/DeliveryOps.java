@@ -27,8 +27,8 @@ public class DeliveryOps {
         EntityManager em = emFactory.createEntityManager();
         java.util.Date today = new java.util.Date();
         delivery.setEditDate(new java.sql.Date(today.getTime()));
-        int number = UtilityOps.getDeliveryCount();
-        delivery.setDocNumber(number+1);
+        int number = UtilityOps.getDeliveryCount()+1;
+        delivery.setDocNumber(number);
         Clients clients = delivery.getClient();
         clients.getDocuments().add(delivery);
         em.getTransaction().begin();
@@ -36,6 +36,7 @@ public class DeliveryOps {
         em.merge(clients);
         em.getTransaction().commit();
         em.close();
+        UtilityOps.setDeliveryCount(number);
     }
 
     public static Delivery getDeliveryById(int id) throws Exception {

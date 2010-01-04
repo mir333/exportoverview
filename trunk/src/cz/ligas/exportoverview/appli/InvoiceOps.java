@@ -25,8 +25,8 @@ public class InvoiceOps {
         EntityManager em = emFactory.createEntityManager();
         java.util.Date today = new java.util.Date();
         invoice.setEditDate(new java.sql.Date(today.getTime()));
-        int number = UtilityOps.getInvoiceCount();
-        invoice.setDocNumber(number+1);
+        int number = UtilityOps.getInvoiceCount()+1;
+        invoice.setDocNumber(number);
         Clients clients = invoice.getClient();
         clients.getDocuments().add(invoice);
         em.getTransaction().begin();
@@ -34,6 +34,7 @@ public class InvoiceOps {
         em.merge(clients);
         em.getTransaction().commit();
         em.close();
+        UtilityOps.setInvoiceCount(number);
     }
 
     public static Invoice getInvoiceById(int id) {

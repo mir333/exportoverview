@@ -77,6 +77,7 @@ public class ExportLineOps {
         em.merge(client);
         em.getTransaction().commit();
         em.close();
+        ClientOps.recalculateExportedProducts(client);
     }
 
     static ExportLine getExportLineByProductId(int pid,int cid) throws Exception {

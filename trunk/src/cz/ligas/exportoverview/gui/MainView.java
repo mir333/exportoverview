@@ -508,7 +508,7 @@ public class MainView extends FrameView {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
     //private BindingGroup bindingGroup;
-    private List<Clients> clientsList;
+    private static List<Clients> clientsList;
     private List<ExportLine> exportLinesList;
     private final Timer messageTimer;
     private final Timer busyIconTimer;
@@ -572,7 +572,7 @@ public class MainView extends FrameView {
 
     }
 
-    protected void clientListRefresh() {
+    protected static void clientListRefresh() {
         clientsList.clear();
         try {
             clientsList.addAll(ClientOps.getClients());
@@ -584,7 +584,7 @@ public class MainView extends FrameView {
 
     public static void refreshTotal() {
         int i = clientsComboBox.getSelectedIndex();
-        clientsComboBox.setSelectedIndex(-1);
+        clientListRefresh();
         clientsComboBox.setSelectedIndex(i);
     }
 
@@ -756,10 +756,11 @@ public class MainView extends FrameView {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
+
     private void testFirstRun() {
-       if(ClientOps.isUserInfoEmpty()){
-        userInfoMangm();
-       }
+        if (ClientOps.isUserInfoEmpty()) {
+            userInfoMangm();
+        }
     }
 }
 // TODO: Dorobit potvrdenie na enter

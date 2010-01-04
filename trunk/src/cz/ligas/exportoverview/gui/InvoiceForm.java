@@ -21,7 +21,7 @@ import org.jdesktop.observablecollections.ObservableList;
 public class InvoiceForm extends DocumentForm {
 
     public InvoiceForm() {
-        super("Invoice","title.invoice");
+        super("Invoice", "title.invoice");
         myInit();
     }
 
@@ -116,9 +116,13 @@ public class InvoiceForm extends DocumentForm {
 
     @Override
     public void deleteSelected() {
+        Invoice i = (Invoice) docComboBox.getSelectedItem();
+        if (i == null) {
+            errorDialog("error.noitemselected");
+            return;
+        }
         if (showDialog("question.delete") == 0) {
             try {
-                Invoice i = (Invoice) docComboBox.getSelectedItem();
                 InvoiceOps.deleteItems(getSeletedDocs(), i.getId());
                 dcoSelected();
                 refresh();
