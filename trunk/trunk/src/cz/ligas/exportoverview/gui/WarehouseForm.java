@@ -86,7 +86,6 @@ public class WarehouseForm extends javax.swing.JFrame {
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(WarehouseForm.class, this);
         editProductbutton.setAction(actionMap.get("editProdut")); // NOI18N
-        editProductbutton.setText("Edit Product");
         editProductbutton.setName("editProductbutton"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

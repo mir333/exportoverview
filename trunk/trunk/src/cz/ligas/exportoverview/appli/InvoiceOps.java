@@ -167,5 +167,6 @@ public class InvoiceOps {
             total += docl.getTotal();
         }
         editInvoice(inv, total);
+        ClientOps.editClientSoldTotal(inv.getClient().getId(),total);
     }
 }

@@ -134,4 +134,14 @@ public class ClientOps {
             return true;
         }
     }
+
+    public static void editClientSoldTotal(int id, float total) {
+        EntityManager em = emFactory.createEntityManager();
+        Clients c = em.find(Clients.class, id);
+        c.setTotalSoldValue(total);
+        em.getTransaction().begin();
+        em.merge(c);
+        em.getTransaction().commit();
+        em.close();
+    }
 }

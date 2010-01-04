@@ -14,24 +14,28 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="776" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="804" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="sentTotalLable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="sentTotalLableOut" min="-2" pref="79" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="sentTotalLableOut" min="-2" pref="55" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="soldTotalLable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="soldTotalLableOut" min="-2" pref="92" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="soldTotalLableOut" min="-2" pref="71" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="sentPriceLable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="sentPriceOut" min="-2" pref="93" max="-2" attributes="0"/>
+                          <Component id="sentPriceOut" min="-2" pref="70" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="soldPriceLable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="soldPriceLableOut" pref="74" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="totalLable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="totalLableOut" min="-2" pref="103" max="-2" attributes="0"/>
-                          <EmptySpace pref="40" max="32767" attributes="0"/>
+                          <Component id="totalLableOut" min="-2" pref="73" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                           <Component id="addProductButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -40,7 +44,7 @@
                           <Component id="newCategoryButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="newProductButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="89" max="32767" attributes="0"/>
+                          <EmptySpace pref="117" max="32767" attributes="0"/>
                           <Component id="clientsL" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="clientsComboBox" min="-2" pref="246" max="-2" attributes="0"/>
@@ -67,18 +71,18 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" pref="431" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="addProductButton" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="totalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="totalLable" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="sentPriceOut" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="sentPriceLable" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="sentTotalLable" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="sentTotalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="soldTotalLable" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="soldTotalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="addProductButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sentTotalLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sentTotalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="totalLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="totalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="soldTotalLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="soldTotalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sentPriceLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sentPriceOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="soldPriceLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="soldPriceLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -187,6 +191,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="totalLableOut">
           <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="totalLableOut.text"/>
             <Property name="name" type="java.lang.String" value="totalLableOut" noResource="true"/>
           </Properties>
           <BindingProperties>
@@ -201,6 +206,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="sentPriceOut">
           <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="sentPriceOut.text"/>
             <Property name="name" type="java.lang.String" value="sentPriceOut" noResource="true"/>
           </Properties>
           <BindingProperties>
@@ -215,6 +221,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="soldTotalLableOut">
           <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="soldTotalLableOut.text"/>
             <Property name="name" type="java.lang.String" value="soldTotalLableOut" noResource="true"/>
           </Properties>
           <BindingProperties>
@@ -229,6 +236,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="sentTotalLableOut">
           <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="sentTotalLableOut.text"/>
             <Property name="name" type="java.lang.String" value="sentTotalLableOut" noResource="true"/>
           </Properties>
           <BindingProperties>
@@ -249,6 +257,21 @@
             <Property name="text" type="java.lang.String" resourceKey="editClient.text"/>
             <Property name="name" type="java.lang.String" value="editClient" noResource="true"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="soldPriceLable">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="soldPriceLable.text"/>
+            <Property name="name" type="java.lang.String" value="soldPriceLable" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="soldPriceLableOut">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="soldPriceLableOut.text"/>
+            <Property name="name" type="java.lang.String" value="soldPriceLableOut" noResource="true"/>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="text" source="clientsComboBox" sourcePath="${selectedItem.totalSoldValue}" target="soldPriceLableOut" targetPath="text" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
         </Component>
       </SubComponents>
     </Container>
@@ -328,6 +351,15 @@
                 <Property name="name" type="java.lang.String" value="jMenuItem1" noResource="true"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="deliveryOverviewMenuitem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="cz.ligas.exportoverview.gui.MainView" id="openDeliveryOverview" methodName="openDeliveryOverview"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="deliveryOverviewMenuitem.text"/>
+                <Property name="name" type="java.lang.String" value="deliveryOverviewMenuitem" noResource="true"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="oepnInvoiceMenuItem">
@@ -355,6 +387,15 @@
                 </Property>
                 <Property name="text" type="java.lang.String" resourceKey="jMenuItem2.text"/>
                 <Property name="name" type="java.lang.String" value="jMenuItem2" noResource="true"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="invoiceOverviewMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="cz.ligas.exportoverview.gui.MainView" id="openInvoiceOverview" methodName="openInvoiceOverview"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="invoiceOverviewMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="invoiceOverviewMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -425,11 +466,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="statusPanelSeparator" alignment="0" pref="796" max="32767" attributes="0"/>
+              <Component id="statusPanelSeparator" alignment="0" pref="824" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="622" max="32767" attributes="0"/>
+                  <EmptySpace pref="650" max="32767" attributes="0"/>
                   <Component id="progressBar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
@@ -502,6 +543,6 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,47,0,0,3,28"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,47,0,0,3,56"/>
   </AuxValues>
 </Form>
