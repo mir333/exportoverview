@@ -33,6 +33,7 @@ h1{
     float:right;
 }
 #docLines{
+    padding-top: 5px;
     width:800px;
     margin-left:auto;
     margin-right:auto;
@@ -47,6 +48,7 @@ h1{
 }
 #tableDoc{
     width:800px;
+    min-height: 300px;
 }
 #bottomDoc{
     margin:5px;

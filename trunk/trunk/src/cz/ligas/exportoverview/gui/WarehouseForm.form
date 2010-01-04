@@ -60,8 +60,9 @@
                       <Component id="categoryComboBox" min="-2" pref="207" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="626" pref="626" max="626" attributes="0"/>
-                      <Component id="showAllWhitemsButton" pref="118" max="32767" attributes="0"/>
+                      <Component id="editProductbutton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="551" max="-2" attributes="0"/>
+                      <Component id="showAllWhitemsButton" pref="100" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -80,7 +81,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="293" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="showAllWhitemsButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="showAllWhitemsButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="editProductbutton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -149,6 +153,18 @@
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="showAllWhitemsButton.AccessibleContext.accessibleName"/>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" resourceKey="showAllWhitemsButton.AccessibleContext.accessibleDescription"/>
+      </AccessibilityProperties>
+    </Component>
+    <Component class="javax.swing.JButton" name="editProductbutton">
+      <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="cz.ligas.exportoverview.gui.WarehouseForm" id="editProdut" methodName="editProdut"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Edit Product"/>
+        <Property name="name" type="java.lang.String" value="editProductbutton" noResource="true"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="editProductbutton.AccessibleContext.accessibleName"/>
       </AccessibilityProperties>
     </Component>
   </SubComponents>

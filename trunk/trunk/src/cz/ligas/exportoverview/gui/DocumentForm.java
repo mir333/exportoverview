@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -41,13 +42,13 @@ import javax.xml.transform.*;
  */
 public class DocumentForm extends javax.swing.JFrame {
 
-    public DocumentForm(String l,String title) {
+    public DocumentForm(String l, String title) {
         actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(DocumentForm.class, this);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
-        this.lable=l;
+        this.lable = l;
         initComponents();
         myInit();
-        dacumentL.setText(resourceMap.getString(title)+":");
+        dacumentL.setText(resourceMap.getString(title) + ":");
         setTitle(resourceMap.getString(title));
 
     }
@@ -279,7 +280,6 @@ public class DocumentForm extends javax.swing.JFrame {
         return list;
     }
 
-    
     @Action
     public void newDocument() {
         System.err.println("Not Overriden");
@@ -303,15 +303,18 @@ public class DocumentForm extends javax.swing.JFrame {
     @Action
     public void printDoc() {
         try {
-            org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(GuiMain.class).getContext().getResourceMap(GuiMain.class);
+
+            String path = saveFile("html.htm");
+            if (path == null) {
+                return;
+            }
             Clients c = (Clients) clientComboBox.getSelectedItem();
             Document d = (Document) docComboBox.getSelectedItem();
-            String path = saveFile("html.htm");
-            if(path==null)return;
-            Source src = GenerateXml.generateDocXml(lable,d, c,documentLinesList);
-            GenerateXml.generateHtml(path, src,resourceMap.getString("files.xslt"));
+            Source src = GenerateXml.generateDocXml(lable, d, c, documentLinesList,optionDialog());
+            org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(GuiMain.class).getContext().getResourceMap(GuiMain.class);
+            GenerateXml.generateHtml(path, src, resourceMap.getString("files.xslt"));
         } catch (Exception e) {
-           Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -320,17 +323,42 @@ public class DocumentForm extends javax.swing.JFrame {
         fd.setFile(fileType);
         fd.setLocationRelativeTo(documentTable);
         fd.setVisible(true);
-        if(fd.getDirectory() == null)return null;
-        if(fd.getFile() == null)return null;
+        if (fd.getDirectory() == null) {
+            return null;
+        }
+        if (fd.getFile() == null) {
+            return null;
+        }
         return fd.getDirectory() + fd.getFile();
-}
-
-    protected static void errorDialog(String mes){
-    org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
-     JOptionPane.showMessageDialog(null,resourceMap.getString(mes),resourceMap.getString("error.title"),JOptionPane.ERROR_MESSAGE);
     }
+
+    protected static void errorDialog(String mes) {
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
+        JOptionPane.showMessageDialog(null, resourceMap.getString(mes), resourceMap.getString("error.title"), JOptionPane.ERROR_MESSAGE);
+    }
+
     protected static int showDialog(String mes) {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
         return JOptionPane.showConfirmDialog(null, resourceMap.getString(mes), resourceMap.getString("delete.title"), JOptionPane.YES_NO_OPTION);
+    }
+
+    protected String optionDialog(){
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
+//            JButton[] option = new JButton[3];
+//            option[0] = new JButton(resourceMap.getString("paymentType.one"));
+//            option[1] = new JButton(resourceMap.getString("paymentType.two"));
+//            option[2] = new JButton(resourceMap.getString("paymentType.three"));
+String[] option = {resourceMap.getString("paymentType.one"),resourceMap.getString("paymentType.two"),resourceMap.getString("paymentType.three")};
+            int result = JOptionPane.showOptionDialog(
+                    null,
+                    resourceMap.getString("paymentType.msg"),
+                    resourceMap.getString("paymentType.lable"),
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    option,
+                    option[0]);
+
+            return option[result];//.getText();
     }
 }

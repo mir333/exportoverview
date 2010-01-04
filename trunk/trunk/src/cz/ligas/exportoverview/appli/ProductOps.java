@@ -43,4 +43,25 @@ public class ProductOps {
         em.close();
         return list;
     }
+
+    public static Products getProductById(int id) {
+        EntityManager em = emFactory.createEntityManager();
+        Products prod = em.find(Products.class, id);
+        em.close();
+        return prod;
+    }
+
+    public static void editProduct(Products p) {
+        EntityManager em = emFactory.createEntityManager();
+        Products prod = em.find(Products.class, p.getId());
+        prod.setProductCategoryId(p.getProductCategoryId());
+        prod.setProductCode(p.getProductCode());
+        prod.setProductDes(p.getProductDes());
+        prod.setProductName(p.getProductName());
+        prod.setProductPrice(p.getProductPrice());
+        em.getTransaction().begin();
+        em.merge(prod);
+        em.getTransaction().commit();
+        em.close();
+    }
 }

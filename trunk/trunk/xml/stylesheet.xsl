@@ -45,6 +45,7 @@
     float:right;
 }
 #docLines{
+    padding-top: 5px;
     width:800px;
     margin-left:auto;
     margin-right:auto;
@@ -59,6 +60,7 @@
 }
 #tableDoc{
     width:800px;
+    min-height: 300px;
 }
 #bottomDoc{
     margin:5px;
@@ -93,20 +95,18 @@
                             <div id="topDoc">
                                 <h1>Delivery</h1>
                                 <div id="suplier">
-                                     Name:
                                     <xsl:value-of select="UserInfo/name"/>
                                     <br />
-                                     Street nad No.:
+                                    Address:
+                                    <br />
                                     <xsl:value-of select="UserInfo/street"/>
                                     <br />
-                                     Zip and city:
                                     <xsl:value-of select="UserInfo/zip"/>
                                     <xsl:value-of select="UserInfo/city"/>
                                     <br />
-                                     Country:
                                     <xsl:value-of select="UserInfo/country"/>
                                     <br />
-                                     CRN
+                                     CRN:
                                     <xsl:value-of select="UserInfo/ico"/>
                                     <br />
                                      DIC:
@@ -118,33 +118,38 @@
                                      Account number:
                                     <xsl:value-of select="UserInfo/bankNo"/>
                                     <br />
+                                    ISBAN:
+                                    <xsl:value-of select="UserInfo/isban"/>
+                                    <br />
+                                    SWIFT:
+                                    <xsl:value-of select="UserInfo/swift"/>
                                 </div>
                                 <div id="customer">
-                                    Name:
                                     <xsl:value-of select="Client/name"/>
                                     <br />
-                                    Street nad No.: 
+                                    Address:
+                                    <br />
                                     <xsl:value-of select="Client/street"/>
                                     <br />
-                                    Zip and city: 
                                     <xsl:value-of select="Client/zip"/>
                                     <xsl:value-of select="Client/city"/>
                                     <br />
-                                    Country: 
                                     <xsl:value-of select="Client/country"/>
                                     <br />
-                                    CRN 
+                                    CRN:
                                     <xsl:value-of select="Client/ico"/>
                                     <br />
                                     DIC: 
                                     <xsl:value-of select="Client/dic"/>
                                 </div>
 
-                                <p class="date">Date of issuance:
-                                    <xsl:value-of select="Totals/date"/>
+                                <p class="date">
+                                    Date of issuance: <xsl:value-of select="Totals/date"/>
+                                    
                                 </p>
-                                <p class="docNo">Document No.:
-                                    <xsl:value-of select="Totals/docNumber"/>
+                                <p class="docNo">
+                                    Document No.: <xsl:value-of select="Totals/docNumber"/><br />
+                                    Payment Type: <xsl:value-of select="Totals/paymentType"/>
                                 </p>
 
                             </div>
@@ -205,7 +210,7 @@
                             <title>Delivery</title>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                                        <style type="text/css">
-            h1{
+              h1{
     text-align:left;
     margin-left:50px;
 }
@@ -233,6 +238,7 @@
     float:right;
 }
 #docLines{
+    padding-top: 5px;
     width:800px;
     margin-left:auto;
     margin-right:auto;
@@ -247,6 +253,7 @@
 }
 #tableDoc{
     width:800px;
+    min-height: 300px;
 }
 #bottomDoc{
     margin:5px;
@@ -281,23 +288,21 @@
                                         <div id="topDoc">
                                             <h1>Invoice</h1>
                                             <div id="suplier">
-                                                Name:
                                                 <xsl:value-of select="UserInfo/name"/>
                                                 <br />
-                                                Street nad No.:
+                                                Address:
+                                                <br />
                                                 <xsl:value-of select="UserInfo/street"/>
                                                 <br />
-                                                Zip and city:
                                                 <xsl:value-of select="UserInfo/zip"/>
                                                 <xsl:value-of select="UserInfo/city"/>
                                                 <br />
-                                                Country:
                                                 <xsl:value-of select="UserInfo/country"/>
                                                 <br />
-                                                CRN
+                                                CRN:
                                                 <xsl:value-of select="UserInfo/ico"/>
                                                 <br />
-                                                DIC:
+                                                DIC: 
                                                 <xsl:value-of select="UserInfo/dic"/>
                                                 <br />
                                                 Banking institution:
@@ -306,33 +311,37 @@
                                                 Account number:
                                                 <xsl:value-of select="UserInfo/bankNo"/>
                                                 <br />
+                                                ISBAN:
+                                                <xsl:value-of select="UserInfo/isban"/>
+                                                <br />
+                                                SWIFT:
+                                                <xsl:value-of select="UserInfo/swift"/>
                                             </div>
                                             <div id="customer">
-                                                Name:
                                                 <xsl:value-of select="Client/name"/>
                                                 <br />
-                                                Street nad No.:
+                                                Address:
+                                                <br />
                                                 <xsl:value-of select="Client/street"/>
                                                 <br />
-                                                Zip and city:
                                                 <xsl:value-of select="Client/zip"/>
                                                 <xsl:value-of select="Client/city"/>
                                                 <br />
-                                                Country:
                                                 <xsl:value-of select="Client/country"/>
                                                 <br />
-                                                CRN
+                                                CRN:
                                                 <xsl:value-of select="Client/ico"/>
                                                 <br />
                                                 DIC:
                                                 <xsl:value-of select="Client/dic"/>
                                             </div>
 
-                                            <p class="date">Date of issuance:
-                                                <xsl:value-of select="Totals/date"/>
+                                            <p class="date">
+                                                Date of issuance: <xsl:value-of select="Totals/date"/>
+                                                Maturity of bond: <xsl:value-of select="Totals/dateTo"/>
                                             </p>
-                                            <p class="docNo">Document No.:
-                                                <xsl:value-of select="Totals/docNumber"/>
+                                            <p class="docNo">
+                                                Document No.: <xsl:value-of select="Totals/docNumber"/>
                                             </p>
 
                                         </div>

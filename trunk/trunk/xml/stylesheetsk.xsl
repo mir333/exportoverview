@@ -45,6 +45,7 @@
     float:right;
 }
 #docLines{
+    padding-top: 5px;
     width:800px;
     margin-left:auto;
     margin-right:auto;
@@ -59,6 +60,7 @@
 }
 #tableDoc{
     width:800px;
+    min-height: 300px;
 }
 #bottomDoc{
     margin:5px;
@@ -93,17 +95,15 @@
                             <div id="topDoc">
                                 <h1>Dodací list</h1>
                                 <div id="suplier">
-                                     Mano:
                                     <xsl:value-of select="UserInfo/name"/>
                                     <br />
                                     Adresa:
+                                    <br />
                                     <xsl:value-of select="UserInfo/street"/>
                                     <br />
-                                    Psč a mesto:
                                     <xsl:value-of select="UserInfo/zip"/>,
                                     <xsl:value-of select="UserInfo/city"/>
                                     <br />
-                                    Kraina:
                                     <xsl:value-of select="UserInfo/country"/>
                                     <br />
                                     IČO
@@ -118,33 +118,37 @@
                                     Číslo účtu:
                                     <xsl:value-of select="UserInfo/bankNo"/>
                                     <br />
+                                    ISBAN:
+                                    <xsl:value-of select="UserInfo/isban"/>
+                                    <br />
+                                    SWIFT:
+                                    <xsl:value-of select="UserInfo/swift"/>
                                 </div>
                                 <div id="customer">
-                                    Mano:
                                     <xsl:value-of select="Client/name"/>
                                     <br />
                                     Adresa:
+                                    <br />
                                     <xsl:value-of select="Client/street"/>
                                     <br />
-                                    Psč a mesto:
                                     <xsl:value-of select="Client/zip"/>
                                     <xsl:value-of select="Client/city"/>
                                     <br />
-                                   Kraina:
                                     <xsl:value-of select="Client/country"/>
                                     <br />
-                                    IČO
+                                    IČO:
                                     <xsl:value-of select="Client/ico"/>
                                     <br />
                                     DIČ:
                                     <xsl:value-of select="Client/dic"/>
                                 </div>
 
-                                <p class="date">Dátum vystavenia:
-                                    <xsl:value-of select="Totals/date"/>
+                                <p class="date">
+                                    Dátum vystavenia: <xsl:value-of select="Totals/date"/>
                                 </p>
-                            <p class="docNo">Číslo dokumentu:
-                                    <xsl:value-of select="Totals/docNumber"/>
+                            <p class="docNo">
+                                Číslo dokumentu: <xsl:value-of select="Totals/docNumber"/><br />
+                                Spôsob pladby: <xsl:value-of select="Totals/paymentType"/>
                                 </p>
 
                             </div>
@@ -205,7 +209,7 @@
                 <title>Faktúra</title>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                             <style type="text/css">
-            h1{
+                     h1{
     text-align:left;
     margin-left:50px;
 }
@@ -233,6 +237,7 @@
     float:right;
 }
 #docLines{
+    padding-top: 5px;
     width:800px;
     margin-left:auto;
     margin-right:auto;
@@ -247,6 +252,7 @@
 }
 #tableDoc{
     width:800px;
+    min-height: 300px;
 }
 #bottomDoc{
     margin:5px;

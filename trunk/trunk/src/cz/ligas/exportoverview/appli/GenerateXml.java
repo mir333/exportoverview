@@ -38,7 +38,7 @@ public class GenerateXml {
         UserInfo ui = ClientOps.getUserInfo();
         Element client = doc.createElement("UserInfo");
         Element childElement = doc.createElement("name");
-        childElement.setTextContent(ui.getClientName());
+        childElement.setTextContent(ui.getCompany());
         client.appendChild(childElement);
         childElement = doc.createElement("street");
         childElement.setTextContent(ui.getClientAddress());
@@ -58,10 +58,22 @@ public class GenerateXml {
         childElement = doc.createElement("dic");
         childElement.setTextContent(ui.getDic());
         client.appendChild(childElement);
+        childElement = doc.createElement("bank");
+        childElement.setTextContent(ui.getBank());
+        client.appendChild(childElement);
+        childElement = doc.createElement("bankNo");
+        childElement.setTextContent(ui.getBankNo());
+        client.appendChild(childElement);
+        childElement = doc.createElement("isban");
+        childElement.setTextContent(ui.getIsban());
+        client.appendChild(childElement);
+        childElement = doc.createElement("swift");
+        childElement.setTextContent(ui.getSwift());
+        client.appendChild(childElement);
         return client;
     }
 
-    public static Source generateDocXml(String docType, Document d, Clients c, List<DocumentLine> documentLinesList)
+    public static Source generateDocXml(String docType, Document d, Clients c, List<DocumentLine> documentLinesList, String paymantType)
             throws ParserConfigurationException, Exception {
         //Create instance of DocumentBuilderFactory
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -73,7 +85,7 @@ public class GenerateXml {
         root.appendChild(generateUserXml(doc));
         Element client = doc.createElement("Client");
         Element childElement = doc.createElement("name");
-        childElement.setTextContent(c.getClientName());
+        childElement.setTextContent(c.getCompany());
         client.appendChild(childElement);
         childElement = doc.createElement("street");
         childElement.setTextContent(c.getClientAddress());
@@ -121,9 +133,16 @@ public class GenerateXml {
         childElement = doc.createElement("sum");
         childElement.setTextContent(d.getTotal() + "");
         totals.appendChild(childElement);
-        childElement = doc.createElement("date");
+        childElement = doc.createElement("paymentType");
+        childElement.setTextContent(paymantType);
+        totals.appendChild(childElement);
         java.util.Date jDate = new Date(d.getEditDate().getTime());
-        SimpleDateFormat sdf = new SimpleDateFormat("d. M. y");
+        SimpleDateFormat sdf = new SimpleDateFormat("d. M. yyyy");
+        childElement = doc.createElement("date");
+        childElement.setTextContent(sdf.format(jDate));
+        totals.appendChild(childElement);
+        sdf = new SimpleDateFormat("30. M. yyyy");
+        childElement = doc.createElement("dateTo");
         childElement.setTextContent(sdf.format(jDate));
         totals.appendChild(childElement);
         childElement = doc.createElement("docNumber");
