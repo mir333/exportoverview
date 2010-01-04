@@ -7,7 +7,6 @@ package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.db.Clients;
-import cz.ligas.exportoverview.db.UserInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;

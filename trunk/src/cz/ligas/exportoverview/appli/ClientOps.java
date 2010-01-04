@@ -37,6 +37,24 @@ public class ClientOps {
         return list;
     }
 
+    public static void editClient(Clients c) {
+        EntityManager em = emFactory.createEntityManager();
+        Clients client = em.find(Clients.class, c.getId());
+        client.setCity(c.getCity());
+        client.setClientAddress(c.getClientAddress());
+        client.setClientName(c.getClientName());
+        client.setClientPhone(c.getClientPhone());
+        client.setCompany(c.getCompany());
+        client.setCountry(c.getCountry());
+        client.setDic(c.getDic());
+        client.setIco(c.getIco());
+        client.setPsc(c.getPsc());
+        em.getTransaction().begin();
+        em.merge(client);
+        em.getTransaction().commit();
+        em.close();
+    }
+
     public static Clients getClientById(int id) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         Clients c = em.find(Clients.class, id);

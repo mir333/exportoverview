@@ -14,30 +14,25 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" alignment="0" pref="776" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jScrollPane1" alignment="0" pref="808" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="sentTotalLable" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="sentTotalLableOut" min="-2" pref="79" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="soldTotalLable" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="soldTotalLableOut" min="-2" pref="92" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Component id="sentPriceLable" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="sentPriceOut" min="-2" pref="93" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="totalLable" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="totalLableOut" min="-2" pref="103" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="addProductButton" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Component id="sentTotalLable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="sentTotalLableOut" min="-2" pref="79" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="soldTotalLable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="soldTotalLableOut" min="-2" pref="92" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="sentPriceLable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="sentPriceOut" min="-2" pref="93" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="totalLable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="totalLableOut" min="-2" pref="103" max="-2" attributes="0"/>
+                          <EmptySpace pref="40" max="32767" attributes="0"/>
+                          <Component id="addProductButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="newClientButton" min="-2" max="-2" attributes="0"/>
@@ -45,13 +40,15 @@
                           <Component id="newCategoryButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="newProductButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="108" max="32767" attributes="0"/>
+                          <EmptySpace pref="89" max="32767" attributes="0"/>
                           <Component id="clientsL" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="clientsComboBox" min="-2" pref="246" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="editClient" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -65,9 +62,10 @@
                       <Component id="newProductButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="clientsComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="clientsL" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="editClient" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="415" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="431" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="addProductButton" min="-2" max="-2" attributes="0"/>
@@ -241,6 +239,15 @@
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="sentTotalLable.text"/>
             <Property name="name" type="java.lang.String" value="sentTotalLable" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="editClient">
+          <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="cz.ligas.exportoverview.gui.MainView" id="editClient" methodName="editClient"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="editClient.text"/>
+            <Property name="name" type="java.lang.String" value="editClient" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -422,7 +429,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="610" max="32767" attributes="0"/>
+                  <EmptySpace pref="622" max="32767" attributes="0"/>
                   <Component id="progressBar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>

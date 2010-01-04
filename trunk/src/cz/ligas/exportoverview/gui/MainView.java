@@ -106,7 +106,7 @@ public class MainView extends FrameView {
                 }
             }
         });
-//        testFirstRun();
+        testFirstRun();
     }
 
     /** This method is called from within the constructor to
@@ -136,6 +136,7 @@ public class MainView extends FrameView {
         soldTotalLable = new javax.swing.JLabel();
         sentTotalLableOut = new javax.swing.JLabel();
         sentTotalLable = new javax.swing.JLabel();
+        editClient = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         printMenuItem = new javax.swing.JMenuItem();
@@ -238,6 +239,11 @@ public class MainView extends FrameView {
         sentTotalLable.setText(resourceMap.getString("sentTotalLable.text")); // NOI18N
         sentTotalLable.setName("sentTotalLable"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(MainView.class, this);
+        editClient.setAction(actionMap.get("editClient")); // NOI18N
+        editClient.setText(resourceMap.getString("editClient.text")); // NOI18N
+        editClient.setName("editClient"); // NOI18N
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -245,28 +251,25 @@ public class MainView extends FrameView {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(sentTotalLable)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sentTotalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(soldTotalLable)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(soldTotalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(sentPriceLable)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sentPriceOut, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(totalLable)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(totalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                                .addComponent(addProductButton)))
-                        .addContainerGap())
+                        .addComponent(sentTotalLable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sentTotalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(soldTotalLable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(soldTotalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(sentPriceLable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sentPriceOut, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalLable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addComponent(addProductButton))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(newClientButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -277,7 +280,9 @@ public class MainView extends FrameView {
                         .addComponent(clientsL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(clientsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editClient, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,7 +293,8 @@ public class MainView extends FrameView {
                     .addComponent(newCategoryButton)
                     .addComponent(newProductButton)
                     .addComponent(clientsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clientsL))
+                    .addComponent(clientsL)
+                    .addComponent(editClient))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -469,6 +475,7 @@ public class MainView extends FrameView {
     private javax.swing.JButton addProductButton;
     private static javax.swing.JComboBox clientsComboBox;
     private javax.swing.JLabel clientsL;
+    private javax.swing.JButton editClient;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -565,6 +572,16 @@ public class MainView extends FrameView {
 
     }
 
+    protected void clientListRefresh() {
+        clientsList.clear();
+        try {
+            clientsList.addAll(ClientOps.getClients());
+            clientsComboBox.updateUI();
+        } catch (Exception ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static void refreshTotal() {
         int i = clientsComboBox.getSelectedIndex();
         clientsComboBox.setSelectedIndex(-1);
@@ -614,13 +631,7 @@ public class MainView extends FrameView {
 
             @Override
             public void windowDeactivated(WindowEvent e) {
-                clientsList.clear();
-                try {
-                    clientsList.addAll(ClientOps.getClients());
-                    clientsComboBox.updateUI();
-                } catch (Exception ex) {
-                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                clientListRefresh();
             }
         });
         cf.setVisible(true);
@@ -655,13 +666,7 @@ public class MainView extends FrameView {
 
             @Override
             public void windowDeactivated(WindowEvent e) {
-                clientsList.clear();
-                try {
-                    clientsList.addAll(ClientOps.getClients());
-                    clientsComboBox.updateUI();
-                } catch (Exception ex) {
-                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                clientListRefresh();
             }
         });
         ef.setVisible(true);
@@ -697,6 +702,23 @@ public class MainView extends FrameView {
     }
 
     @Action
+    public void editClient() {
+        Clients c = (Clients) clientsComboBox.getSelectedItem();
+        if (c != null) {
+            EditClientForm ecf = new EditClientForm(c.getId());
+            ecf.setLocationRelativeTo(mainTable);
+            ecf.addWindowListener(new WindowAdapter() {
+
+                @Override
+                public void windowDeactivated(WindowEvent e) {
+                    clientListRefresh();
+                }
+            });
+            ecf.setVisible(true);
+        }
+    }
+
+    @Action
     public void print() {
         /* Fetch printing properties from the GUI components */
         Clients client = (Clients) clientsComboBox.getSelectedItem();
@@ -725,7 +747,7 @@ public class MainView extends FrameView {
                         "Printing Cancelled",
                         "Printing Result",
                         JOptionPane.INFORMATION_MESSAGE);
-}
+            }
         } catch (PrinterException pe) {
             /* Printing failed, report to the user */
             JOptionPane.showMessageDialog(null,
@@ -734,12 +756,11 @@ public class MainView extends FrameView {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-
-//    private void testFirstRun() {
-//       if(ClientOps.isUserInfoEmpty()){
-//        userInfoMangm();
-//       }
-//    }
+    private void testFirstRun() {
+       if(ClientOps.isUserInfoEmpty()){
+        userInfoMangm();
+       }
+    }
 }
 // TODO: Dorobit potvrdenie na enter
 // TODO: Upravit DB aby potporovala uniqu itemy
@@ -749,3 +770,4 @@ public class MainView extends FrameView {
 // TODO: pridat prvky do kategorie cisla pre produkty
 // TODO: autovytvorenie delivery a invoice ak je prazny na add
 // TODO: prepojit sklad!!!
+

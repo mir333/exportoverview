@@ -25,7 +25,6 @@ public class NewDocumentForm extends javax.swing.JFrame {
 
     /** Creates new form ExportForm */
     public NewDocumentForm() {
-        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(NewDocumentForm.class, this);
         initComponents();
         myInit();
     }
@@ -47,12 +46,14 @@ public class NewDocumentForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(NewDocumentForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setAlwaysOnTop(true);
         setName("Form"); // NOI18N
 
         clientComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         clientComboBox.setName("clientComboBox"); // NOI18N
 
-        createExportButton.setAction(actionMap.get("createDocument"));
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(NewDocumentForm.class, this);
+        createExportButton.setAction(actionMap.get("createDocument")); // NOI18N
         createExportButton.setText(resourceMap.getString("createExportButton.text")); // NOI18N
         createExportButton.setName("createExportButton"); // NOI18N
 
@@ -106,7 +107,6 @@ public class NewDocumentForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private List<Clients> clientsList;
     private BindingGroup bindingGroup;
-    private ActionMap actionMap;
 
     private void myInit() {
         bindingGroup = new BindingGroup();

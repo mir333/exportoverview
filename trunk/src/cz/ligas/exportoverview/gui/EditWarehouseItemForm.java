@@ -44,6 +44,7 @@ public class EditWarehouseItemForm extends javax.swing.JFrame {
         nEditWhItemCountSpinner = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         editWhiItemButton.setText("Save");
         editWhiItemButton.setName("editWhiItemButton"); // NOI18N

@@ -55,6 +55,7 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(AddDocumentLineForm.class);
         setTitle(resourceMap.getString("title")); // NOI18N
+        setAlwaysOnTop(true);
 
         addProductButton.setAction(actionMap.get("addDocumentLine"));
         addProductButton.setText(resourceMap.getString("addProductButton.text")); // NOI18N

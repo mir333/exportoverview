@@ -54,6 +54,7 @@ public class AddProductForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(AddProductForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setAlwaysOnTop(true);
         setName("Form"); // NOI18N
 
         categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -72,7 +73,7 @@ public class AddProductForm extends javax.swing.JFrame {
         nExportLineSoldIn.setText(resourceMap.getString("nExportLineSoldIn.text")); // NOI18N
         nExportLineSoldIn.setName("nExportLineSoldIn"); // NOI18N
 
-	javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(AddProductForm.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(AddProductForm.class, this);
         addExportLineButton.setAction(actionMap.get("addExportLine")); // NOI18N
         addExportLineButton.setText(resourceMap.getString("addExportLineButton.text")); // NOI18N
         addExportLineButton.setName("addExportLineButton"); // NOI18N

@@ -18,7 +18,7 @@
     <properties>
       <property name="toplink.jdbc.user" value="app"/>
       <property name="toplink.jdbc.password" value="app"/>
-      <property name="toplink.jdbc.url" value="jdbc:derby:app;create=true"/>
+      <property name="toplink.jdbc.url" value="jdbc:derby:sample;create=true"/>
       <property name="toplink.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
       <property name="toplink.ddl-generation" value="create-tables"/>
     </properties>
