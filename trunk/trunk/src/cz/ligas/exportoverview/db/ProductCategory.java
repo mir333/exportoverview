@@ -23,7 +23,6 @@ import javax.persistence.Transient;
  * @author xligas
  */
 @Entity
-@Table(name="PRODUCTCATEGORY", schema="APP" )
 public class ProductCategory implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -31,7 +30,7 @@ public class ProductCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    @Column(nullable=false)
+    @Column(nullable=false,unique=true)
     private String categoryCode;
     private String categoryName;
     private int productInCat;

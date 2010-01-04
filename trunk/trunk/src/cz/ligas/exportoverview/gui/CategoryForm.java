@@ -113,7 +113,10 @@ public class CategoryForm extends javax.swing.JFrame {
         //overenie vyplnenia
         try {
             CategoryOps.addCategory(pc);
-        } catch (Exception ex) {
+        }catch (javax.persistence.RollbackException sqlEx){
+            Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, sqlEx);
+            UtilErrorClass.errorDialog("error.sql.rollback");
+        }catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();

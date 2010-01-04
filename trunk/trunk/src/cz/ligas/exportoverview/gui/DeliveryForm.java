@@ -21,7 +21,7 @@ import org.jdesktop.observablecollections.ObservableList;
 public class DeliveryForm extends DocumentForm {
 
     public DeliveryForm() {
-        super("Delivery","title.delivery");
+        super("Delivery", "title.delivery");
         myInit();
     }
 
@@ -116,16 +116,20 @@ public class DeliveryForm extends DocumentForm {
 
     @Override
     public void deleteSelected() {
+        Delivery d = (Delivery) docComboBox.getSelectedItem();
+        if (d == null) {
+            errorDialog("error.noitemselected");
+            return;
+        }
         if (showDialog("question.delete") == 0) {
             try {
-                Delivery d = (Delivery) docComboBox.getSelectedItem();
                 DeliveryOps.deleteItems(getSeletedDocs(), d.getId());
                 dcoSelected();
                 refresh();
                 MainView.refreshTotal();
-            }catch (IllegalArgumentException iae) {
+            } catch (IllegalArgumentException iae) {
                 DocumentForm.errorDialog(iae.getMessage());
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(DeliveryForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
