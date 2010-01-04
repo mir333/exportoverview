@@ -51,6 +51,7 @@ public class WarehouseForm extends javax.swing.JFrame {
         categoryComboBox = new javax.swing.JComboBox();
         categoryL = new javax.swing.JLabel();
         showAllWhitemsButton = new javax.swing.JButton();
+        editProductbutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(WarehouseForm.class);
@@ -83,6 +84,11 @@ public class WarehouseForm extends javax.swing.JFrame {
         showAllWhitemsButton.setText("Show All");
         showAllWhitemsButton.setName("showAllWhitemsButton"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(WarehouseForm.class, this);
+        editProductbutton.setAction(actionMap.get("editProdut")); // NOI18N
+        editProductbutton.setText("Edit Product");
+        editProductbutton.setName("editProductbutton"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,8 +104,9 @@ public class WarehouseForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(626, 626, 626)
-                        .addComponent(showAllWhitemsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)))
+                        .addComponent(editProductbutton)
+                        .addGap(551, 551, 551)
+                        .addComponent(showAllWhitemsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -113,7 +120,9 @@ public class WarehouseForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showAllWhitemsButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showAllWhitemsButton)
+                    .addComponent(editProductbutton))
                 .addGap(12, 12, 12))
         );
 
@@ -121,6 +130,7 @@ public class WarehouseForm extends javax.swing.JFrame {
         categoryL.getAccessibleContext().setAccessibleName(resourceMap.getString("categoryL.AccessibleContext.accessibleName")); // NOI18N
         showAllWhitemsButton.getAccessibleContext().setAccessibleName(resourceMap.getString("showAllWhitemsButton.AccessibleContext.accessibleName")); // NOI18N
         showAllWhitemsButton.getAccessibleContext().setAccessibleDescription(resourceMap.getString("showAllWhitemsButton.AccessibleContext.accessibleDescription")); // NOI18N
+        editProductbutton.getAccessibleContext().setAccessibleName(resourceMap.getString("editProductbutton.AccessibleContext.accessibleName")); // NOI18N
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -160,6 +170,7 @@ public class WarehouseForm extends javax.swing.JFrame {
     private javax.persistence.EntityManager ExportOverviewPUEntityManager;
     private javax.swing.JComboBox categoryComboBox;
     private javax.swing.JLabel categoryL;
+    private javax.swing.JButton editProductbutton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton showAllWhitemsButton;
     private java.util.List<cz.ligas.exportoverview.db.WarehouseItem> warehouseItemList;
@@ -195,11 +206,11 @@ public class WarehouseForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = warehouseTableBinding.addColumnBinding(ELProperty.create("${productItem.productPrice}"));
         columnBinding.setColumnName(resourceMap.getString("warehouseTable.columnModel.productPrice"));
-        columnBinding.setColumnClass(String.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         columnBinding = warehouseTableBinding.addColumnBinding(ELProperty.create("${productCount}"));
         columnBinding.setColumnName(resourceMap.getString("warehouseTable.columnModel.productCount"));
-        columnBinding.setColumnClass(String.class);
+        columnBinding.setColumnClass(Integer.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(warehouseTableBinding);
         warehouseTableBinding.bind();
@@ -228,5 +239,24 @@ public class WarehouseForm extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(WarehouseForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Action
+    public void editProdut() {
+            int index = warehouseTable.convertRowIndexToModel(warehouseTable.getSelectedRow());
+            EditProductForm epf = new EditProductForm(warehouseItemList.get(index).getProductItem().getId());
+            epf.setLocationRelativeTo(warehouseTable);
+            epf.addWindowListener(new WindowAdapter() {
+
+                @Override
+                public void windowDeactivated(WindowEvent evt) {
+                    try {
+                        refresh();
+                    } catch (Exception ex) {
+                        Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            epf.setVisible(true);
     }
 }

@@ -180,18 +180,18 @@ public class ProductForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox categoryComboBox;
-    private javax.swing.JLabel categoryL;
-    private javax.swing.JTextField mProductPriceIn;
-    private javax.swing.JLabel productCodeL;
-    private javax.swing.JLabel productDescL;
-    private javax.swing.JLabel productNameL;
-    private javax.swing.JLabel productPriceL;
-    private javax.swing.JButton saveButton;
-    private javax.swing.JTextField tProductCodeIn;
-    private javax.swing.JTextField tProductDescIn;
-    private javax.swing.JTextField tProductNameIn;
-    private javax.swing.JLabel titleLabel;
+    protected javax.swing.JComboBox categoryComboBox;
+    protected javax.swing.JLabel categoryL;
+    protected javax.swing.JTextField mProductPriceIn;
+    protected javax.swing.JLabel productCodeL;
+    protected javax.swing.JLabel productDescL;
+    protected javax.swing.JLabel productNameL;
+    protected javax.swing.JLabel productPriceL;
+    protected javax.swing.JButton saveButton;
+    protected javax.swing.JTextField tProductCodeIn;
+    protected javax.swing.JTextField tProductDescIn;
+    protected javax.swing.JTextField tProductNameIn;
+    protected javax.swing.JLabel titleLabel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
     private List<ProductCategory> categoryList;
