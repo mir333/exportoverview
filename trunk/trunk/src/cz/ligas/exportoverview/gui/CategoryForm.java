@@ -42,6 +42,7 @@ public class CategoryForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(CategoryForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setAlwaysOnTop(true);
         setName("Form"); // NOI18N
 
         categoryCodeL.setText(resourceMap.getString("categoryCodeL.text")); // NOI18N
@@ -50,9 +51,9 @@ public class CategoryForm extends javax.swing.JFrame {
         categoryNameL.setText(resourceMap.getString("categoryNameL.text")); // NOI18N
         categoryNameL.setName("categoryNameL"); // NOI18N
 
-	javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(CategoryForm.class, this);
-        saveButton.setAction(actionMap.get("saveCategory")); // NOI18N        
-	saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(CategoryForm.class, this);
+        saveButton.setAction(actionMap.get("saveCategory")); // NOI18N
+        saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
         saveButton.setName("saveButton"); // NOI18N
 
         tCategoryCodeIn.setText(resourceMap.getString("tCategoryCodeIn.text")); // NOI18N

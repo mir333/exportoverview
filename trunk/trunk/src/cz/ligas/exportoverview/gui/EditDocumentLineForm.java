@@ -106,7 +106,7 @@ public class EditDocumentLineForm extends javax.swing.JFrame {
     protected javax.swing.JSpinner nAmountIn;
     private javax.swing.JLabel priceL;
     private javax.swing.JButton saveButton;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
     javax.swing.ActionMap actionMap;
     private MyInputVerifier verifier = new MyInputVerifier();
 
@@ -116,6 +116,7 @@ public class EditDocumentLineForm extends javax.swing.JFrame {
         mPriceIn.setInputVerifier(verifier);
         mPriceIn.addActionListener(verifier);
         priceL.setLabelFor(mPriceIn);
+        setAlwaysOnTop(true);
     }
 
     @Action

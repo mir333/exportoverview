@@ -1,13 +1,6 @@
-/*
- * EditExportLineForm.java
- *
- * Created on 9.8.2009, 11:56:22
- */
 package cz.ligas.exportoverview.gui;
 
-import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
-import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +41,7 @@ public class EditExportLineForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(EditExportLineForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setAlwaysOnTop(true);
         setName("Form"); // NOI18N
 
         exportLineSentL.setText(resourceMap.getString("exportLineSentL.text")); // NOI18N
@@ -60,9 +54,9 @@ public class EditExportLineForm extends javax.swing.JFrame {
 
         nExportLineSoldSpinner.setName("nExportLineSoldSpinner"); // NOI18N
 
-	javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(EditExportLineForm.class, this);
-        exportLineSaveButton.setAction(actionMap.get("editExportLineSaveAction")); // NOI18N        
-	exportLineSaveButton.setText(resourceMap.getString("exportLineSaveButton.text")); // NOI18N
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(EditExportLineForm.class, this);
+        exportLineSaveButton.setAction(actionMap.get("editExportLineSaveAction")); // NOI18N
+        exportLineSaveButton.setText(resourceMap.getString("exportLineSaveButton.text")); // NOI18N
         exportLineSaveButton.setName("exportLineSaveButton"); // NOI18N
 
         titleLabel.setText(resourceMap.getString("titleLabel.text")); // NOI18N
@@ -93,7 +87,7 @@ public class EditExportLineForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exportLineSoldL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nExportLineSoldSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                        .addComponent(nExportLineSoldSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
                     .addComponent(exportLineSaveButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );

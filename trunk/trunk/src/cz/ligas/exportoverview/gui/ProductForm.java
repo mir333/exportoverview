@@ -26,7 +26,6 @@ public class ProductForm extends javax.swing.JFrame {
     
     /** Creates new form ProductForm */
     public ProductForm() {
-        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(ProductForm.class, this);
         initComponents();
         myInit();
     }
@@ -57,6 +56,7 @@ public class ProductForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ProductForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setAlwaysOnTop(true);
         setName("Form"); // NOI18N
 
         categoryComboBox.setName("categoryComboBox"); // NOI18N
@@ -90,7 +90,8 @@ public class ProductForm extends javax.swing.JFrame {
         tProductDescIn.setText(resourceMap.getString("tProductDescIn.text")); // NOI18N
         tProductDescIn.setName("tProductDescIn"); // NOI18N
 
-        saveButton.setAction(actionMap.get("saveProduct"));
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(ProductForm.class, this);
+        saveButton.setAction(actionMap.get("saveProduct")); // NOI18N
         saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
         saveButton.setName("saveButton"); // NOI18N
 
@@ -195,7 +196,6 @@ public class ProductForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private List<ProductCategory> categoryList;
     private MyInputVerifier verifier = new MyInputVerifier();
-    javax.swing.ActionMap actionMap;
 
     private void myInit() {
         bindingGroup = new BindingGroup();
