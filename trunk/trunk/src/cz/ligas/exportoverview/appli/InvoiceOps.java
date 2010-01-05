@@ -100,7 +100,7 @@ public class InvoiceOps {
             el.setClient(il.getDocument().getClient());
             el.setProd(il.getProd());
             el.setPrice(il.getPrice());
-            el.setSent(0);
+            el.setSent(-il.getAmount());
             el.setSold(il.getAmount());
             ExportLineOps.addExportLine(el);
         } else {
