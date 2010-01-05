@@ -49,63 +49,6 @@ public class MainView extends FrameView {
         actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(MainView.class, this);
         initComponents();
         myInit();
-
-        // status bar initialization - message timeout, idle icon and busy animation, etc
-        ResourceMap resourceMap = getResourceMap();
-        int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
-        messageTimer = new Timer(messageTimeout, new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                statusMessageLabel.setText("");
-            }
-        });
-        messageTimer.setRepeats(false);
-        int busyAnimationRate = resourceMap.getInteger("StatusBar.busyAnimationRate");
-        for (int i = 0; i < busyIcons.length; i++) {
-            busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
-        }
-        busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                busyIconIndex = (busyIconIndex + 1) % busyIcons.length;
-                statusAnimationLabel.setIcon(busyIcons[busyIconIndex]);
-            }
-        });
-        idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
-        statusAnimationLabel.setIcon(idleIcon);
-        progressBar.setVisible(false);
-
-        // connecting action tasks to status bar via TaskMonitor
-        TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
-        taskMonitor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                String propertyName = evt.getPropertyName();
-                if ("started".equals(propertyName)) {
-                    if (!busyIconTimer.isRunning()) {
-                        statusAnimationLabel.setIcon(busyIcons[0]);
-                        busyIconIndex = 0;
-                        busyIconTimer.start();
-                    }
-                    progressBar.setVisible(true);
-                    progressBar.setIndeterminate(true);
-                } else if ("done".equals(propertyName)) {
-                    busyIconTimer.stop();
-                    statusAnimationLabel.setIcon(idleIcon);
-                    progressBar.setVisible(false);
-                    progressBar.setValue(0);
-                } else if ("message".equals(propertyName)) {
-                    String text = (String) (evt.getNewValue());
-                    statusMessageLabel.setText((text == null) ? "" : text);
-                    messageTimer.restart();
-                } else if ("progress".equals(propertyName)) {
-                    int value = (Integer) (evt.getNewValue());
-                    progressBar.setVisible(true);
-                    progressBar.setIndeterminate(false);
-                    progressBar.setValue(value);
-                }
-            }
-        });
         testFirstRun();
     }
 
@@ -156,11 +99,6 @@ public class MainView extends FrameView {
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         userInfoMenuitem = new javax.swing.JMenuItem();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
-        statusPanel = new javax.swing.JPanel();
-        javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
-        statusMessageLabel = new javax.swing.JLabel();
-        statusAnimationLabel = new javax.swing.JLabel();
-        progressBar = new javax.swing.JProgressBar();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(MainView.class);
         mainPanel.setFont(resourceMap.getFont("mainPanel.font")); // NOI18N
@@ -211,7 +149,6 @@ public class MainView extends FrameView {
         });
         jScrollPane1.setViewportView(mainTable);
 
-        totalLableOut.setText(resourceMap.getString("totalLableOut.text")); // NOI18N
         totalLableOut.setName("totalLableOut"); // NOI18N
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.total}"), totalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
@@ -220,7 +157,6 @@ public class MainView extends FrameView {
         totalLable.setText(resourceMap.getString("totalLable.text")); // NOI18N
         totalLable.setName("totalLable"); // NOI18N
 
-        sentPriceOut.setText(resourceMap.getString("sentPriceOut.text")); // NOI18N
         sentPriceOut.setName("sentPriceOut"); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSendValue}"), sentPriceOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
@@ -229,7 +165,6 @@ public class MainView extends FrameView {
         sentPriceLable.setText(resourceMap.getString("sentPriceLable.text")); // NOI18N
         sentPriceLable.setName("sentPriceLable"); // NOI18N
 
-        soldTotalLableOut.setText(resourceMap.getString("soldTotalLableOut.text")); // NOI18N
         soldTotalLableOut.setName("soldTotalLableOut"); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSold}"), soldTotalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
@@ -238,7 +173,6 @@ public class MainView extends FrameView {
         soldTotalLable.setText(resourceMap.getString("soldTotalLable.text")); // NOI18N
         soldTotalLable.setName("soldTotalLable"); // NOI18N
 
-        sentTotalLableOut.setText(resourceMap.getString("sentTotalLableOut.text")); // NOI18N
         sentTotalLableOut.setName("sentTotalLableOut"); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSent}"), sentTotalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
@@ -255,7 +189,6 @@ public class MainView extends FrameView {
         soldPriceLable.setText(resourceMap.getString("soldPriceLable.text")); // NOI18N
         soldPriceLable.setName("soldPriceLable"); // NOI18N
 
-        soldPriceLableOut.setText(resourceMap.getString("soldPriceLableOut.text")); // NOI18N
         soldPriceLableOut.setName("soldPriceLableOut"); // NOI18N
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSoldValue}"), soldPriceLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
@@ -317,7 +250,7 @@ public class MainView extends FrameView {
                     .addComponent(clientsL)
                     .addComponent(editClient))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addProductButton)
@@ -421,46 +354,8 @@ public class MainView extends FrameView {
 
         menuBar.add(helpMenu);
 
-        statusPanel.setName("statusPanel"); // NOI18N
-
-        statusPanelSeparator.setName("statusPanelSeparator"); // NOI18N
-
-        statusMessageLabel.setName("statusMessageLabel"); // NOI18N
-
-        statusAnimationLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        statusAnimationLabel.setName("statusAnimationLabel"); // NOI18N
-
-        progressBar.setName("progressBar"); // NOI18N
-
-        javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
-        statusPanel.setLayout(statusPanelLayout);
-        statusPanelLayout.setHorizontalGroup(
-            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
-            .addGroup(statusPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 650, Short.MAX_VALUE)
-                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statusAnimationLabel)
-                .addContainerGap())
-        );
-        statusPanelLayout.setVerticalGroup(
-            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(statusPanelLayout.createSequentialGroup()
-                .addComponent(statusPanelSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(statusMessageLabel)
-                    .addComponent(statusAnimationLabel)
-                    .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3))
-        );
-
         setComponent(mainPanel);
         setMenuBar(menuBar);
-        setStatusBar(statusPanel);
 
         bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
@@ -525,7 +420,6 @@ public class MainView extends FrameView {
     private javax.swing.JMenu openDeliveryManuItem;
     private javax.swing.JMenuItem openWarehouseMenuItem;
     private javax.swing.JMenuItem printMenuItem;
-    private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel sentPriceLable;
     private javax.swing.JLabel sentPriceOut;
     private javax.swing.JLabel sentTotalLable;
@@ -534,9 +428,6 @@ public class MainView extends FrameView {
     private javax.swing.JLabel soldPriceLableOut;
     private javax.swing.JLabel soldTotalLable;
     private javax.swing.JLabel soldTotalLableOut;
-    private javax.swing.JLabel statusAnimationLabel;
-    private javax.swing.JLabel statusMessageLabel;
-    private javax.swing.JPanel statusPanel;
     private javax.swing.JLabel totalLable;
     private javax.swing.JLabel totalLableOut;
     private javax.swing.JMenuItem userInfoMenuitem;
@@ -546,11 +437,6 @@ public class MainView extends FrameView {
     //private BindingGroup bindingGroup;
     private static List<Clients> clientsList;
     private List<ExportLine> exportLinesList;
-    private final Timer messageTimer;
-    private final Timer busyIconTimer;
-    private final Icon idleIcon;
-    private final Icon[] busyIcons = new Icon[15];
-    private int busyIconIndex = 0;
     private javax.swing.ActionMap actionMap;
 
     private void myInit() {
