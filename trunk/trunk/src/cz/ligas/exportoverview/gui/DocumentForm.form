@@ -3,14 +3,15 @@
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="diform"/>
+    <Property name="title" type="java.lang.String" resourceKey="Form.title"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="cz/ligas/exportoverview/gui/resources/DocumentForm"/>
     <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
@@ -85,7 +86,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="documentTableL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Document:"/>
+        <Property name="text" type="java.lang.String" resourceKey="documentTableL.text"/>
         <Property name="name" type="java.lang.String" value="documentTableL" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
@@ -150,7 +151,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="clientL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Client:"/>
+        <Property name="text" type="java.lang.String" resourceKey="clientL.text"/>
         <Property name="name" type="java.lang.String" value="clientL" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
@@ -175,7 +176,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="dacumentL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Document:"/>
+        <Property name="text" type="java.lang.String" resourceKey="dacumentL.text"/>
         <Property name="name" type="java.lang.String" value="dacumentL" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
@@ -203,11 +204,12 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="actionMap.get(&quot;newDocument&quot;)" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="text" type="java.lang.String" resourceKey="addLineButton.text"/>
         <Property name="name" type="java.lang.String" value="addLineButton" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="addLineButton.AccessibleContext.accessibleName"/>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="addLineButton.text"/>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" resourceKey="addLineButton.AccessibleContext.accessibleDescription"/>
       </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JButton" name="printButton">
@@ -215,11 +217,12 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="actionMap.get(&quot;printDoc&quot;)" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Print"/>
+        <Property name="text" type="java.lang.String" resourceKey="printButton.text"/>
         <Property name="name" type="java.lang.String" value="printButton" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="printButton.AccessibleContext.accessibleName"/>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="printButton.text"/>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" resourceKey="printButton.AccessibleContext.accessibleDescription"/>
       </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JButton" name="deleteButton">
@@ -233,7 +236,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="tatalL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Total:"/>
+        <Property name="text" type="java.lang.String" resourceKey="tatalL.text"/>
         <Property name="name" type="java.lang.String" value="tatalL" noResource="true"/>
       </Properties>
     </Component>

@@ -141,9 +141,9 @@ public class GenerateXml {
         childElement = doc.createElement("date");
         childElement.setTextContent(sdf.format(jDate));
         totals.appendChild(childElement);
-        sdf = new SimpleDateFormat("30. M. yyyy");
+        sdf = new SimpleDateFormat("M. yyyy");
         childElement = doc.createElement("dateTo");
-        childElement.setTextContent(sdf.format(jDate));
+        childElement.setTextContent("30. "+sdf.format(jDate));
         totals.appendChild(childElement);
         childElement = doc.createElement("docNumber");
         childElement.setTextContent(d.getDocNumber() + "");

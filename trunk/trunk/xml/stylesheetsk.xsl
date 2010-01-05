@@ -67,20 +67,13 @@
                     overflow:auto;
                     }
                     #tot1{
-                    width:150px;
-                    margin-left:130px;
-                    }
-                    #tot2{
-                    width:220px;
-                    position:relative;
-                    top:-36px;
-                    left:330px;
+                    margin-left:30px;
+                    margin-bottom:50px;
                     }
                     #tot3{
-                    width:150px;
-                    position:relative;
-                    top:-72px;
-                    left:600px;
+                    float:right;
+                    margin-right:30px;
+                    margin-bottom:50px;
                     }
                     .total{
                     margin:5px;
@@ -123,8 +116,8 @@
                             <th>Kód produktu</th>
                             <th>Meno produktu</th>
                             <th>Množstvo</th>
-                            <th>Cena za kus</th>
-                            <th>Celkova cena</th>
+                            <th>Cena za kus v EUR</th>
+                            <th>Celkova cena v EUR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -152,13 +145,16 @@
 
             </div>
             <div id="bottomDoc">
-
                 <div class="total" id="tot3">
-                    <b>Spolu:
-                        <xsl:value-of select="Totals/sumVat"/>
+                    <b>
+                        Spolu: <xsl:value-of select="Totals/sum"/> EUR
                     </b>
                 </div>
-                <p class="date" style="border-top:1px solid black;width:150px;text-align:center">Dodávateľ</p>
+                <div id="tot1">
+                    Nie som platca DPH.<br />
+                    Konverzný kurz: 1 EUR = 30.1260 SKK
+                </div>
+                  <p class="date" style="border-top:1px solid black;width:150px;text-align:center">Dodávateľ</p>
                 <p class="docNo" style="border-top:1px solid black;width:150px;text-align:center">Príjemca</p>
             </div>
         </div>
@@ -181,7 +177,8 @@
                 </p>
                 <p class="docNo">
                     Číslo dokumentu: <xsl:value-of select="Totals/docNumber"/><br />
-                    Spôsob pladby: <xsl:value-of select="Totals/paymentType"/>
+                    Spôsob pladby: <xsl:value-of select="Totals/paymentType"/><br />
+                    Konštantný symbol: 201
                 </p>
 
             </div>
@@ -192,8 +189,8 @@
                             <th>Kód produktu</th>
                             <th>Meno produktu</th>
                             <th>Množstvo</th>
-                            <th>Cena za kus</th>
-                            <th>Celkova cena</th>
+                            <th>Cena za kus v EUR</th>
+                            <th>Celkova cena v EUR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -221,11 +218,14 @@
 
             </div>
             <div id="bottomDoc">
-
                 <div class="total" id="tot3">
-                    <b>Spolu:
-                        <xsl:value-of select="Totals/sumVat"/>
+                    <b>
+                        Spolu: <xsl:value-of select="Totals/sum"/> EUR
                     </b>
+                </div>
+                <div id="tot1">
+                    Nie som platca DPH.<br />
+                    Konverzný kurz: 1 EUR = 30.1260 SKK
                 </div>
                 <p class="docNo" style="border-top:1px solid black;width:150px;text-align:center">Príjemca</p>
             </div>

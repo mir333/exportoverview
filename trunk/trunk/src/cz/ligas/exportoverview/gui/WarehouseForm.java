@@ -42,9 +42,6 @@ public class WarehouseForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ExportOverviewPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("ExportOverviewPU").createEntityManager();
-        warehouseItemQuery = java.beans.Beans.isDesignTime() ? null : ExportOverviewPUEntityManager.createQuery("SELECT w FROM WarehouseItem w");
-        warehouseItemList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : warehouseItemQuery.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         warehouseTable = new javax.swing.JTable();
         warehouseTableL = new javax.swing.JLabel();
@@ -67,7 +64,7 @@ public class WarehouseForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(warehouseTable);
 
-        warehouseTableL.setText("Product in the warehouse:");
+        warehouseTableL.setText(resourceMap.getString("warehouseTableL.text")); // NOI18N
         warehouseTableL.setName("warehouseTableL"); // NOI18N
 
         categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -78,10 +75,10 @@ public class WarehouseForm extends javax.swing.JFrame {
             }
         });
 
-        categoryL.setText("Caregory:");
+        categoryL.setText(resourceMap.getString("categoryL.text")); // NOI18N
         categoryL.setName("categoryL"); // NOI18N
 
-        showAllWhitemsButton.setText("Show All");
+        showAllWhitemsButton.setText(resourceMap.getString("showAllWhitemsButton.text")); // NOI18N
         showAllWhitemsButton.setName("showAllWhitemsButton"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(WarehouseForm.class, this);
@@ -166,19 +163,17 @@ public class WarehouseForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_categoryComboBoxActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager ExportOverviewPUEntityManager;
     private javax.swing.JComboBox categoryComboBox;
     private javax.swing.JLabel categoryL;
     private javax.swing.JButton editProductbutton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton showAllWhitemsButton;
-    private java.util.List<cz.ligas.exportoverview.db.WarehouseItem> warehouseItemList;
-    private javax.persistence.Query warehouseItemQuery;
     private javax.swing.JTable warehouseTable;
     private javax.swing.JLabel warehouseTableL;
     // End of variables declaration//GEN-END:variables
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     private java.util.List<cz.ligas.exportoverview.db.ProductCategory> categoryList;
+    private java.util.List<cz.ligas.exportoverview.db.WarehouseItem> warehouseItemList;
 
     private void myInit() {
         bindingGroup = new BindingGroup();

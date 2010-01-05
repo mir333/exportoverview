@@ -72,9 +72,10 @@ public class DocumentForm extends javax.swing.JFrame {
         totalOut = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("diform");
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
 
-        documentTableL.setText("Document:");
+        documentTableL.setText(resourceMap.getString("documentTableL.text")); // NOI18N
         documentTableL.setName("documentTableL"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
@@ -96,14 +97,14 @@ public class DocumentForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(documentTable);
 
-        clientL.setText("Client:");
+        clientL.setText(resourceMap.getString("clientL.text")); // NOI18N
         clientL.setName("clientL"); // NOI18N
 
         clientComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         clientComboBox.setAction(actionMap.get("fillDocComboBox"));
         clientComboBox.setName("clientComboBox"); // NOI18N
 
-        dacumentL.setText("Document:");
+        dacumentL.setText(resourceMap.getString("dacumentL.text")); // NOI18N
         dacumentL.setName("dacumentL"); // NOI18N
 
         docComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -111,19 +112,18 @@ public class DocumentForm extends javax.swing.JFrame {
         docComboBox.setName("docComboBox"); // NOI18N
 
         addLineButton.setAction(actionMap.get("newDocument"));
-        addLineButton.setText("Add");
+        addLineButton.setText(resourceMap.getString("addLineButton.text")); // NOI18N
         addLineButton.setName("addLineButton"); // NOI18N
 
         printButton.setAction(actionMap.get("printDoc"));
-        printButton.setText("Print");
+        printButton.setText(resourceMap.getString("printButton.text")); // NOI18N
         printButton.setName("printButton"); // NOI18N
 
         deleteButton.setAction(actionMap.get("deleteSelected"));
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
         deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
         deleteButton.setName("deleteButton"); // NOI18N
 
-        tatalL.setText("Total:");
+        tatalL.setText(resourceMap.getString("tatalL.text")); // NOI18N
         tatalL.setName("tatalL"); // NOI18N
 
         totalOut.setName("totalOut"); // NOI18N
@@ -187,8 +187,10 @@ public class DocumentForm extends javax.swing.JFrame {
         documentTableL.getAccessibleContext().setAccessibleName(resourceMap.getString("delInvTableL.AccessibleContext.accessibleName")); // NOI18N
         clientL.getAccessibleContext().setAccessibleName(resourceMap.getString("clientL.AccessibleContext.accessibleName")); // NOI18N
         dacumentL.getAccessibleContext().setAccessibleName(resourceMap.getString("dacumentL.AccessibleContext.accessibleName")); // NOI18N
-        addLineButton.getAccessibleContext().setAccessibleName(resourceMap.getString("addLineButton.AccessibleContext.accessibleName")); // NOI18N
-        printButton.getAccessibleContext().setAccessibleName(resourceMap.getString("printButton.AccessibleContext.accessibleName")); // NOI18N
+        addLineButton.getAccessibleContext().setAccessibleName(resourceMap.getString("addLineButton.text")); // NOI18N
+        addLineButton.getAccessibleContext().setAccessibleDescription(resourceMap.getString("addLineButton.AccessibleContext.accessibleDescription")); // NOI18N
+        printButton.getAccessibleContext().setAccessibleName(resourceMap.getString("printButton.text")); // NOI18N
+        printButton.getAccessibleContext().setAccessibleDescription(resourceMap.getString("printButton.AccessibleContext.accessibleDescription")); // NOI18N
 
         bindingGroup.bind();
 

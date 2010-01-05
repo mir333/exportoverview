@@ -3,13 +3,14 @@
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" resourceKey="Form.title"/>
     <Property name="alwaysOnTop" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
@@ -65,7 +66,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="editWhiItemButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="text" type="java.lang.String" resourceKey="editWhiItemButton.text"/>
         <Property name="name" type="java.lang.String" value="editWhiItemButton" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
@@ -75,7 +76,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="editWhItemL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Edit the amount of stored products:"/>
+        <Property name="text" type="java.lang.String" resourceKey="editWhItemL.text"/>
         <Property name="name" type="java.lang.String" value="editWhItemL" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
@@ -84,7 +85,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="editWhItemCountL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Stored products:"/>
+        <Property name="text" type="java.lang.String" resourceKey="editWhItemCountL.text"/>
         <Property name="name" type="java.lang.String" value="editWhItemCountL" noResource="true"/>
       </Properties>
       <AccessibilityProperties>

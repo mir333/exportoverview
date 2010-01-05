@@ -44,15 +44,17 @@ public class EditWarehouseItemForm extends javax.swing.JFrame {
         nEditWhItemCountSpinner = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(EditWarehouseItemForm.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
 
-        editWhiItemButton.setText("Save");
+        editWhiItemButton.setText(resourceMap.getString("editWhiItemButton.text")); // NOI18N
         editWhiItemButton.setName("editWhiItemButton"); // NOI18N
 
-        editWhItemL.setText("Edit the amount of stored products:");
+        editWhItemL.setText(resourceMap.getString("editWhItemL.text")); // NOI18N
         editWhItemL.setName("editWhItemL"); // NOI18N
 
-        editWhItemCountL.setText("Stored products:");
+        editWhItemCountL.setText(resourceMap.getString("editWhItemCountL.text")); // NOI18N
         editWhItemCountL.setName("editWhItemCountL"); // NOI18N
 
         nEditWhItemCountSpinner.setName("nEditWhItemCountSpinner"); // NOI18N
@@ -90,7 +92,6 @@ public class EditWarehouseItemForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(EditWarehouseItemForm.class);
         editWhiItemButton.getAccessibleContext().setAccessibleName(resourceMap.getString("editWhiItemButton.AccessibleContext.accessibleName")); // NOI18N
         editWhiItemButton.getAccessibleContext().setAccessibleDescription(resourceMap.getString("editWhiItemButton.AccessibleContext.accessibleDescription")); // NOI18N
         editWhItemL.getAccessibleContext().setAccessibleName(resourceMap.getString("editWhItemL.AccessibleContext.accessibleName")); // NOI18N

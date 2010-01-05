@@ -67,20 +67,13 @@
                     overflow:auto;
                     }
                     #tot1{
-                    width:150px;
-                    margin-left:130px;
-                    }
-                    #tot2{
-                    width:220px;
-                    position:relative;
-                    top:-36px;
-                    left:330px;
+                    margin-left:30px;
+                    margin-bottom:50px;
                     }
                     #tot3{
-                    width:150px;
-                    position:relative;
-                    top:-72px;
-                    left:600px;
+                    float:right;
+                    margin-right:30px;
+                    margin-bottom:50px;
                     }
                     .total{
                     margin:5px;
@@ -123,8 +116,8 @@
                             <th>Product Code</th>
                             <th>Product Name</th>
                             <th>Amount</th>
-                            <th>Unit price</th>
-                            <th>Total price</th>
+                            <th>Unit price in EUR</th>
+                            <th>Total price in EUR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -152,11 +145,13 @@
 
             </div>
             <div id="bottomDoc">
-
                 <div class="total" id="tot3">
-                    <b>Total:
-                        <xsl:value-of select="Totals/sumVat"/>
+                    <b>
+                        Total: <xsl:value-of select="Totals/sum"/> EUR
                     </b>
+                </div>
+                                <div id="tot1">
+                    I'm not a VAT payer.
                 </div>
                 <p class="date" style="border-top:1px solid black;width:150px;text-align:center">Suplier</p>
                 <p class="docNo" style="border-top:1px solid black;width:150px;text-align:center">Customer</p>
@@ -181,7 +176,8 @@
                 </p>
                 <p class="docNo">
                     Document No.: <xsl:value-of select="Totals/docNumber"/><br />
-                    Payment Type: <xsl:value-of select="Totals/paymentType"/>
+                    Payment Type: <xsl:value-of select="Totals/paymentType"/><br />
+                    Konstant code: 201
                 </p>
 
             </div>
@@ -189,11 +185,11 @@
                 <table border="1" id="tableDoc">
                     <thead>
                         <tr>
-                            <th>Kód produktu</th>
-                            <th>Meno produktu</th>
-                            <th>Množstvo</th>
-                            <th>Cena za kus</th>
-                            <th>Celkova cena</th>
+                            <th>Product Code</th>
+                            <th>Product Name</th>
+                            <th>Amount</th>
+                            <th>Unit price in EUR</th>
+                            <th>Total price in EUR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -221,11 +217,13 @@
 
             </div>
             <div id="bottomDoc">
-
                 <div class="total" id="tot3">
-                    <b>Total:
-                        <xsl:value-of select="Totals/sumVat"/>
+                    <b>
+                        Total: <xsl:value-of select="Totals/sum"/> EUR
                     </b>
+                </div>
+                                <div id="tot1">
+                    I'm not a VAT payer.
                 </div>
                 <p class="docNo" style="border-top:1px solid black;width:150px;text-align:center">Customer</p>
             </div>
