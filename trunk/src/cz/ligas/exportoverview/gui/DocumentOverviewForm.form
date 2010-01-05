@@ -4,21 +4,21 @@
   <NonVisualComponents>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton1"/>
         <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
       </Properties>
     </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" resourceKey="title"/>
+    <Property name="title" type="java.lang.String" resourceKey="Form.title"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
   <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_formBundle" type="java.lang.String" value="cz/ligas/exportoverview/gui/resources/DocumentOverviewForm"/>
     <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
@@ -45,7 +45,7 @@
                       <Component id="totalL" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="totalOut" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="304" max="32767" attributes="0"/>
+                      <EmptySpace pref="266" max="32767" attributes="0"/>
                       <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -59,7 +59,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="topLable" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="279" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="270" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -99,7 +99,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="topLable">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Document overview:"/>
+        <Property name="text" type="java.lang.String" resourceKey="topLable.text"/>
         <Property name="name" type="java.lang.String" value="topLable" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
@@ -111,6 +111,7 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
           <action class="cz.ligas.exportoverview.gui.DocumentOverviewForm" id="refreshTable" methodName="refreshTable"/>
         </Property>
+        <Property name="text" type="java.lang.String" resourceKey="refreshButton.text"/>
         <Property name="name" type="java.lang.String" value="refreshButton" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
@@ -119,7 +120,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="totalL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Total:"/>
+        <Property name="text" type="java.lang.String" resourceKey="totalL.text"/>
         <Property name="name" type="java.lang.String" value="totalL" noResource="true"/>
       </Properties>
       <AccessibilityProperties>

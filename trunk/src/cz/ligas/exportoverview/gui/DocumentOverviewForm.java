@@ -43,12 +43,11 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
         totalL = new javax.swing.JLabel();
         totalOut = new javax.swing.JLabel();
 
-        jButton1.setText("jButton1");
         jButton1.setName("jButton1"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentOverviewForm.class);
-        setTitle(resourceMap.getString("title")); // NOI18N
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
@@ -66,15 +65,15 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
         docsTable.setName("docsTable"); // NOI18N
         jScrollPane1.setViewportView(docsTable);
 
-        topLable.setText("Document overview:");
+        topLable.setText(resourceMap.getString("topLable.text")); // NOI18N
         topLable.setName("topLable"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(DocumentOverviewForm.class, this);
         refreshButton.setAction(actionMap.get("refreshTable")); // NOI18N
-        refreshButton.setText("Refresh");
+        refreshButton.setText(resourceMap.getString("refreshButton.text")); // NOI18N
         refreshButton.setName("refreshButton"); // NOI18N
 
-        totalL.setText("Total:");
+        totalL.setText(resourceMap.getString("totalL.text")); // NOI18N
         totalL.setName("totalL"); // NOI18N
 
         totalOut.setName("totalOut"); // NOI18N
@@ -105,7 +104,7 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(topLable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(refreshButton)
