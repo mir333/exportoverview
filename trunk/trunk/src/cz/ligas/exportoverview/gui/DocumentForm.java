@@ -80,6 +80,7 @@ public class DocumentForm extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
+        documentTable.setAutoCreateRowSorter(true);
         documentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
@@ -252,7 +253,7 @@ public class DocumentForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.productPrice"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Number.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${amount}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.amount"));
@@ -260,17 +261,15 @@ public class DocumentForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.priceS"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Number.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${total}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.total"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Number.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(mainTableBinding);
         mainTableBinding.bind();
         bindingGroup.bind();
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(documentTable.getModel());
-        documentTable.setRowSorter(sorter);
     }
 
     protected List<Integer> getSeletedDocs() {
