@@ -60,6 +60,7 @@
                     }
                     #tableDoc{
                     width:800px;
+                    text-align:center;
                     }
                     #bottomDoc{
                     margin:5px;
@@ -116,8 +117,8 @@
                             <th>Product Code</th>
                             <th>Product Name</th>
                             <th>Amount</th>
-                            <th>Unit price in EUR</th>
-                            <th>Total price in EUR</th>
+                            <th>Unit price</th>
+                            <th>Total price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -133,10 +134,10 @@
                                     <xsl:value-of select="amount"/>
                                 </td>
                                 <td>
-                                    <xsl:value-of select="price"/>
+                                    <xsl:value-of select="price"/> EUR
                                 </td>
                                 <td>
-                                    <xsl:value-of select="total"/>
+                                    <xsl:value-of select="total"/> EUR
                                 </td>
                             </tr>
                         </xsl:for-each>
@@ -188,8 +189,8 @@
                             <th>Product Code</th>
                             <th>Product Name</th>
                             <th>Amount</th>
-                            <th>Unit price in EUR</th>
-                            <th>Total price in EUR</th>
+                            <th>Unit price</th>
+                            <th>Total price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -205,10 +206,10 @@
                                     <xsl:value-of select="amount"/>
                                 </td>
                                 <td>
-                                    <xsl:value-of select="price"/>
+                                    <xsl:value-of select="price"/> EUR
                                 </td>
                                 <td>
-                                    <xsl:value-of select="total"/>
+                                    <xsl:value-of select="total"/> EUR
                                 </td>
                             </tr>
                         </xsl:for-each>

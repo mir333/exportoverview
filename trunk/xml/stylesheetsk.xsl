@@ -60,6 +60,7 @@
                     }
                     #tableDoc{
                     width:800px;
+                    text-align: center;
                     }
                     #bottomDoc{
                     margin:5px;
@@ -116,8 +117,8 @@
                             <th>Kód produktu</th>
                             <th>Meno produktu</th>
                             <th>Množstvo</th>
-                            <th>Cena za kus v EUR</th>
-                            <th>Celkova cena v EUR</th>
+                            <th>Cena za kus</th>
+                            <th>Celkova cena</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -133,10 +134,10 @@
                                     <xsl:value-of select="amount"/>
                                 </td>
                                 <td>
-                                    <xsl:value-of select="price"/>
+                                    <xsl:value-of select="price"/> EUR
                                 </td>
                                 <td>
-                                    <xsl:value-of select="total"/>
+                                    <xsl:value-of select="total"/> EUR
                                 </td>
                             </tr>
                         </xsl:for-each>
