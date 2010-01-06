@@ -51,6 +51,7 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
+        docsTable.setAutoCreateRowSorter(true);
         docsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -159,12 +160,10 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = docsTableBinding.addColumnBinding(ELProperty.create("${total}"));
         columnBinding.setColumnName(resourceMap.getString("docTable.columnModel.total"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Number.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(docsTableBinding);
         docsTableBinding.bind();
         bindingGroup.bind();
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(docsTable.getModel());
-        docsTable.setRowSorter(sorter);
     }
 }

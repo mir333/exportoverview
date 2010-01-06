@@ -79,6 +79,7 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="warehouseTable">
           <Properties>
+            <Property name="autoCreateRowSorter" type="boolean" value="true"/>
             <Property name="name" type="java.lang.String" value="warehouseTable" noResource="true"/>
           </Properties>
           <Events>

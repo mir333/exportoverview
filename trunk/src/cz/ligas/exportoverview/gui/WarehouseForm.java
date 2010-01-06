@@ -56,6 +56,7 @@ public class WarehouseForm extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
+        warehouseTable.setAutoCreateRowSorter(true);
         warehouseTable.setName("warehouseTable"); // NOI18N
         warehouseTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -209,8 +210,6 @@ public class WarehouseForm extends javax.swing.JFrame {
         bindingGroup.addBinding(warehouseTableBinding);
         warehouseTableBinding.bind();
         bindingGroup.bind();
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(warehouseTable.getModel());
-        warehouseTable.setRowSorter(sorter);
     }
 
     @Action

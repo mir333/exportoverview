@@ -123,6 +123,7 @@ public class MainView extends FrameView {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
+        mainTable.setAutoCreateRowSorter(true);
         mainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
@@ -455,11 +456,11 @@ public class MainView extends FrameView {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productPrice"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Number.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.priceS"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Number.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sent}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.send"));
@@ -467,7 +468,7 @@ public class MainView extends FrameView {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sentPrice}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sendPrice"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Number.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sold}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sold"));
@@ -480,9 +481,6 @@ public class MainView extends FrameView {
         bindingGroup.addBinding(mainTableBinding);
         mainTableBinding.bind();
         bindingGroup.bind();
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mainTable.getModel());
-        mainTable.setRowSorter(sorter);
-
     }
 
     protected static void clientListRefresh() {
