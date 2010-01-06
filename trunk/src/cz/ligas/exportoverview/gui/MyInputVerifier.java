@@ -1,19 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.ligas.exportoverview.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.ResourceMap;
@@ -24,15 +17,15 @@ import org.jdesktop.application.ResourceMap;
  */
 public class MyInputVerifier extends InputVerifier implements ActionListener {
 
-    ResourceMap resourceMap = Application.getInstance().getContext().getResourceMap(MyInputVerifier.class);
     String message = null;
 
+    @Override
     public boolean shouldYieldFocus(JComponent input) {
         boolean inputOK = verify(input);
         if (inputOK) {
             return true;
         }
-        showDialog(message);
+        MyUtilErrorClass.errorDialog(message);
         input.setInputVerifier(this);
         return false;
     }
@@ -51,6 +44,13 @@ public class MyInputVerifier extends InputVerifier implements ActionListener {
         return b;
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField source = (JTextField) e.getSource();
+        shouldYieldFocus(source); //ignore return value
+        source.selectAll();
+    }
+    
     public boolean checkNumberField(JComponent inp) {
         NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
         JTextField tf = (JTextField) inp;
@@ -59,9 +59,9 @@ public class MyInputVerifier extends InputVerifier implements ActionListener {
 //            if(tf.getText().length()==0)
 //                return true;
             String s = numberFormat.format(numberFormat.parse(tf.getText()).intValue());
-            //tf.setText(s);
+            tf.setText(s);
         } catch (ParseException pe) {
-            message = resourceMap.getString("validation.error.number");
+            message = "validation.error.number";
             return false;
         }
         return true;
@@ -73,25 +73,12 @@ public class MyInputVerifier extends InputVerifier implements ActionListener {
         try {
 //            if(tf.getText().length()==0)
 //                return true;
-            String s = moneyFormat.format(moneyFormat.parse(tf.getText()).doubleValue());
-            //tf.setText(s);
+            String s = moneyFormat.format(moneyFormat.parse(tf.getText()).floatValue());
+            tf.setText(s);
         } catch (ParseException pe) {
-            message = resourceMap.getString("validation.error.money");
+            message = "validation.error.money";
             return false;
         }
         return true;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        JTextField source = (JTextField) e.getSource();
-        shouldYieldFocus(source); //ignore return value
-        source.selectAll();
-    }
-
-    private void showDialog(String mes) {
-        JOptionPane.showMessageDialog(null, //no owner frame
-                mes, //text to display
-                "Invalid Value", //title
-                JOptionPane.WARNING_MESSAGE);
     }
 }

@@ -165,18 +165,18 @@ public class ProductForm extends javax.swing.JFrame {
     @Action
     public void saveProduct() {
         Products p = new Products();
+        try {
         p.setProductCode(tProductCodeIn.getText());
         p.setProductName(tProductNameIn.getText());
-        p.setProductPrice(Float.parseFloat(mProductPriceIn.getText()));
+        p.setProductPrice(MyParser.paresePrice(mProductPriceIn.getText()));
         p.setProductDes(tProductDescIn.getText());
         p.setProductCategoryId((ProductCategory) categoryComboBox.getSelectedItem());
         //overenie vyplnenia
-        try {
             ProductOps.addProduct(p);
 
         }catch (javax.persistence.RollbackException sqlEx){
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, sqlEx);
-            UtilErrorClass.errorDialog("error.sql.rollback");
+            MyUtilErrorClass.errorDialog("error.sql.rollback");
         }catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }

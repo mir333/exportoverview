@@ -8,7 +8,6 @@ import cz.ligas.exportoverview.db.Products;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author miro
@@ -18,25 +17,23 @@ public class AddDelivery extends AddDocumentLineForm {
     Delivery delivery;
 
     public AddDelivery(Document d) {
-        this.delivery = (Delivery)d;
+        this.delivery = (Delivery) d;
     }
 
     @Override
     public void addDocumentLine() {
         DeliveryLine dl = new DeliveryLine();
-        int i =getnAmountIn();
-        float f = getmPriceIn();
-        dl.setAmount(i);
-        dl.setPrice(f);
-        dl.setDocument(delivery);
-        dl.setProd((Products)getProduct());
-        dl.setTotal(i*f);
-        //overenie vyplnenia
         try {
+            int i = MyParser.pareseIntNumber(nAmountIn.getText());
+            float f = MyParser.paresePrice(mPriceIn.getText());
+            dl.setAmount(i);
+            dl.setPrice(f);
+            dl.setDocument(delivery);
+            dl.setProd((Products) productComboBox.getSelectedItem());
+            dl.setTotal(i * f);
+            //overenie vyplnenia
             DeliveryOps.addDeliveryLine(dl);
-        }catch (IllegalArgumentException iae) {
-            DocumentForm.errorDialog(iae.getMessage());
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         MainView.refreshTotal();

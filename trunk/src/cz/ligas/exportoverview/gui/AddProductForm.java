@@ -1,9 +1,13 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.CategoryOps;
+import cz.ligas.exportoverview.appli.ExportLineOps;
+import cz.ligas.exportoverview.db.Clients;
+import cz.ligas.exportoverview.db.ExportLine;
 import cz.ligas.exportoverview.db.ProductCategory;
 import cz.ligas.exportoverview.db.Products;
 import java.beans.Beans;
+import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,8 +26,10 @@ import org.jdesktop.swingbinding.SwingBindings;
  */
 public class AddProductForm extends javax.swing.JFrame {
 
+    Clients clinets = new Clients();
+
     /** Creates new form AddProductForm */
-    public AddProductForm() {
+    public AddProductForm(Clients c) {
         initComponents();
         myInit();
     }
@@ -204,25 +210,19 @@ public class AddProductForm extends javax.swing.JFrame {
     }
 
     @Action
-    public void addExportLine() {
-    }
-
-    protected Products getSelectedProduct() {
-        return (Products) productComboBox.getSelectedItem();
-    }
-
-    protected float getSpecialPriceIn() {
-        return Float.parseFloat(mExportLineSpecialPriceIn.getText());
-    }
-
-//    protected void setSpecialPriceIn(float sp) {
-//        mExportLineSpecialPriceIn.setText(Float.toString(sp));
-//    }
-    protected int getSendIn() {
-        return Integer.parseInt(nExportLineSendIn.getText());
-    }
-
-    protected int getSoldIn() {
-        return Integer.parseInt(nExportLineSoldIn.getText());
+    public void addExportLine(){
+        try {
+            ExportLine el = new ExportLine();
+            el.setProd((Products) productComboBox.getSelectedItem());
+            el.setClient(clinets);
+            el.setSentPrice(MyParser.paresePrice(mExportLineSpecialPriceIn.getText()));
+            el.setSent(MyParser.pareseIntNumber(nExportLineSendIn.getText()));
+            el.setSold(MyParser.pareseIntNumber(nExportLineSoldIn.getText()));
+            ExportLineOps.addExportLine(el);
+            //ExportOps.recalculateExport(clinets);
+            this.dispose();
+        } catch (Exception ex) {
+            Logger.getLogger(AddProductForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

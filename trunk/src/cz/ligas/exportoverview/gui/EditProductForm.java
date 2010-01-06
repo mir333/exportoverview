@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ProductOps;
@@ -19,7 +15,7 @@ public class EditProductForm extends ProductForm {
     private int productId;
 
     public EditProductForm(int id) {
-        productId=id;
+        productId = id;
         Products prod = ProductOps.getProductById(id);
         tProductCodeIn.setText(prod.getProductCode());
         tProductDescIn.setText(prod.getProductDes());
@@ -31,18 +27,18 @@ public class EditProductForm extends ProductForm {
     @Override
     public void saveProduct() {
         Products p = new Products();
-        p.setId(productId);
-        p.setProductCode(tProductCodeIn.getText());
-        p.setProductName(tProductNameIn.getText());
-        p.setProductPrice(Float.parseFloat(mProductPriceIn.getText()));
-        p.setProductDes(tProductDescIn.getText());
-        p.setProductCategoryId((ProductCategory) categoryComboBox.getSelectedItem());
-        //overenie vyplnenia
         try {
+            p.setId(productId);
+            p.setProductCode(tProductCodeIn.getText());
+            p.setProductName(tProductNameIn.getText());
+            p.setProductPrice(MyParser.paresePrice(mProductPriceIn.getText()));
+            p.setProductDes(tProductDescIn.getText());
+            p.setProductCategoryId((ProductCategory) categoryComboBox.getSelectedItem());
+            //overenie vyplnenia
             ProductOps.editProduct(p);
+             this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.dispose();
     }
 }

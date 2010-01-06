@@ -12,7 +12,6 @@ import org.jdesktop.application.Action;
  */
 public class EditExportLineForm extends javax.swing.JFrame {
 
-
     /** Creates new form EditExportLineForm */
     public EditExportLineForm(ExportLine el) {
         this.exportLine = el;
@@ -129,17 +128,21 @@ public class EditExportLineForm extends javax.swing.JFrame {
     @Action
     public void editExportLineSaveAction() {
         //TODO: ak to bude robit moc bordel zmenit spinre na text
-        int send =0;
-        int sold=0;
-        float price = exportLine.getPrice();
-        if(!nExportLineSentSpinner.getValue().toString().equals(""))
-             send = Integer.parseInt(nExportLineSentSpinner.getValue().toString());
-        if(!nExportLineSoldSpinner.getValue().toString().equals(""))
-            sold = Integer.parseInt(nExportLineSoldSpinner.getValue().toString());
-        if(!mExportLinePriceTextfield.getText().equals(""))
-             price = Float.parseFloat(mExportLinePriceTextfield.getText());
+        int send = 0;
+        int sold = 0;
         try {
+            float price = exportLine.getPrice();
+            if (!nExportLineSentSpinner.getValue().toString().equals("")) {
+                send = MyParser.pareseIntNumber(nExportLineSentSpinner.getValue().toString());
+            }
+            if (!nExportLineSoldSpinner.getValue().toString().equals("")) {
+                sold = MyParser.pareseIntNumber(nExportLineSoldSpinner.getValue().toString());
+            }
+            if (!mExportLinePriceTextfield.getText().equals("")) {
+                price = MyParser.paresePrice(mExportLinePriceTextfield.getText());
+            }
             ExportLineOps.editExportLine(exportLine, send, sold, price);
+            this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }

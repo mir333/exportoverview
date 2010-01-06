@@ -24,15 +24,17 @@ public class EditInvoiceLineForm extends EditDocumentLineForm {
     public void saveDocumentLine() {
         int sold = 0;
         float price = 0;
-        if(!nAmountIn.getValue().toString().equals(""))
-            sold = Integer.parseInt(nAmountIn.getValue().toString());
-        if(!mPriceIn.getText().equals(""))
-            price = Float.parseFloat(mPriceIn.getText());
         try {
+            if (!nAmountIn.getValue().toString().equals("")) {
+                sold = MyParser.pareseIntNumber(nAmountIn.getValue().toString());
+            }
+            if (!mPriceIn.getText().equals("")) {
+                price = MyParser.paresePrice(mPriceIn.getText());
+            }
             InvoiceOps.editInvoiceLine(invLine, sold, price);
+            this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.dispose();
     }
 }
