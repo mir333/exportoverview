@@ -83,14 +83,15 @@ public class DocumentForm extends javax.swing.JFrame {
         documentTable.setAutoCreateRowSorter(true);
         documentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         documentTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         documentTable.setName("documentTable"); // NOI18N
+        documentTable.getTableHeader().setReorderingAllowed(false);
         documentTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 documentTableMouseClicked(evt);
