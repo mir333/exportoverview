@@ -61,7 +61,7 @@ public class DocumentForm extends javax.swing.JFrame {
         printButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         tatalL = new javax.swing.JLabel();
-        totalOut = new javax.swing.JLabel();
+        mTotalOut = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
@@ -120,9 +120,12 @@ public class DocumentForm extends javax.swing.JFrame {
         tatalL.setText(resourceMap.getString("tatalL.text")); // NOI18N
         tatalL.setName("tatalL"); // NOI18N
 
-        totalOut.setName("totalOut"); // NOI18N
+        mTotalOut.setEditable(false);
+        mTotalOut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        mTotalOut.setText(resourceMap.getString("mTotalOut.text")); // NOI18N
+        mTotalOut.setName("mTotalOut"); // NOI18N
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, docComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.total}"), totalOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, docComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.total}"), mTotalOut, org.jdesktop.beansbinding.BeanProperty.create("value"));
         bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,8 +152,8 @@ public class DocumentForm extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addComponent(tatalL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalOut)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                        .addComponent(mTotalOut, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                         .addComponent(addLineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -173,7 +176,7 @@ public class DocumentForm extends javax.swing.JFrame {
                         .addComponent(printButton)
                         .addComponent(deleteButton)
                         .addComponent(tatalL)
-                        .addComponent(totalOut))
+                        .addComponent(mTotalOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(addLineButton))
                 .addContainerGap())
         );
@@ -204,9 +207,9 @@ public class DocumentForm extends javax.swing.JFrame {
     protected javax.swing.JTable documentTable;
     protected javax.swing.JLabel documentTableL;
     protected javax.swing.JScrollPane jScrollPane1;
+    protected javax.swing.JFormattedTextField mTotalOut;
     protected javax.swing.JButton printButton;
     protected javax.swing.JLabel tatalL;
-    protected javax.swing.JLabel totalOut;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
     //private org.jdesktop.beansbinding.BindingGroup bindingGroup;

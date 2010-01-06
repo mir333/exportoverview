@@ -45,8 +45,8 @@
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Component id="tatalL" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="totalOut" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="176" max="32767" attributes="0"/>
+                      <Component id="mTotalOut" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace pref="78" max="32767" attributes="0"/>
                       <Component id="addLineButton" min="-2" pref="66" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -74,7 +74,7 @@
                       <Component id="printButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tatalL" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="totalOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mTotalOut" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="addLineButton" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -236,12 +236,17 @@
         <Property name="name" type="java.lang.String" value="tatalL" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="totalOut">
+    <Component class="javax.swing.JFormattedTextField" name="mTotalOut">
       <Properties>
-        <Property name="name" type="java.lang.String" value="totalOut" noResource="true"/>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="0" type="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" resourceKey="mTotalOut.text"/>
+        <Property name="name" type="java.lang.String" value="mTotalOut" noResource="true"/>
       </Properties>
       <BindingProperties>
-        <BindingProperty name="text" source="docComboBox" sourcePath="${selectedItem.total}" target="totalOut" targetPath="text" updateStrategy="1" immediately="false"/>
+        <BindingProperty name="value" source="docComboBox" sourcePath="${selectedItem.total}" target="mTotalOut" targetPath="value" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
   </SubComponents>

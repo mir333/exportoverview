@@ -14,28 +14,28 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="804" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="840" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="sentTotalLable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="sentTotalLableOut" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="nSentTotalOut" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="soldTotalLable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="soldTotalLableOut" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="nSoldTotalOut" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="sentPriceLable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="sentPriceOut" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="mSentPriceOut" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="soldPriceLable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="soldPriceLableOut" pref="74" max="32767" attributes="0"/>
+                          <Component id="mSoldPriceOut" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="totalLable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="totalLableOut" min="-2" pref="73" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="nTotalOut" min="-2" pref="80" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="addProductButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -44,7 +44,7 @@
                           <Component id="newCategoryButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="newProductButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="117" max="32767" attributes="0"/>
+                          <EmptySpace pref="153" max="32767" attributes="0"/>
                           <Component id="clientsL" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="clientsComboBox" min="-2" pref="246" max="-2" attributes="0"/>
@@ -72,17 +72,17 @@
                   <Component id="jScrollPane1" pref="458" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="addProductButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="sentTotalLable" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="sentTotalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="totalLable" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="totalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="nSentTotalOut" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="soldTotalLable" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="soldTotalLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="nSoldTotalOut" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="sentPriceLable" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="sentPriceOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mSentPriceOut" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="soldPriceLable" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="soldPriceLableOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mSoldPriceOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="addProductButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="totalLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="nTotalOut" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -173,27 +173,11 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="totalLableOut">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="totalLableOut" noResource="true"/>
-          </Properties>
-          <BindingProperties>
-            <BindingProperty name="text" source="clientsComboBox" sourcePath="${selectedItem.total}" target="totalLableOut" targetPath="text" updateStrategy="0" immediately="false"/>
-          </BindingProperties>
-        </Component>
         <Component class="javax.swing.JLabel" name="totalLable">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="totalLable.text"/>
             <Property name="name" type="java.lang.String" value="totalLable" noResource="true"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="sentPriceOut">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="sentPriceOut" noResource="true"/>
-          </Properties>
-          <BindingProperties>
-            <BindingProperty name="text" source="clientsComboBox" sourcePath="${selectedItem.totalSendValue}" target="sentPriceOut" targetPath="text" updateStrategy="0" immediately="false"/>
-          </BindingProperties>
         </Component>
         <Component class="javax.swing.JLabel" name="sentPriceLable">
           <Properties>
@@ -201,27 +185,11 @@
             <Property name="name" type="java.lang.String" value="sentPriceLable" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="soldTotalLableOut">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="soldTotalLableOut" noResource="true"/>
-          </Properties>
-          <BindingProperties>
-            <BindingProperty name="text" source="clientsComboBox" sourcePath="${selectedItem.totalSold}" target="soldTotalLableOut" targetPath="text" updateStrategy="0" immediately="false"/>
-          </BindingProperties>
-        </Component>
         <Component class="javax.swing.JLabel" name="soldTotalLable">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="soldTotalLable.text"/>
             <Property name="name" type="java.lang.String" value="soldTotalLable" noResource="true"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="sentTotalLableOut">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="sentTotalLableOut" noResource="true"/>
-          </Properties>
-          <BindingProperties>
-            <BindingProperty name="text" source="clientsComboBox" sourcePath="${selectedItem.totalSent}" target="sentTotalLableOut" targetPath="text" updateStrategy="0" immediately="false"/>
-          </BindingProperties>
         </Component>
         <Component class="javax.swing.JLabel" name="sentTotalLable">
           <Properties>
@@ -244,12 +212,69 @@
             <Property name="name" type="java.lang.String" value="soldPriceLable" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="soldPriceLableOut">
+        <Component class="javax.swing.JFormattedTextField" name="mSentPriceOut">
           <Properties>
-            <Property name="name" type="java.lang.String" value="soldPriceLableOut" noResource="true"/>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format subtype="0" type="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="mSentPriceOut.text"/>
+            <Property name="name" type="java.lang.String" value="mSentPriceOut" noResource="true"/>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="text" source="clientsComboBox" sourcePath="${selectedItem.totalSoldValue}" target="soldPriceLableOut" targetPath="text" updateStrategy="0" immediately="false"/>
+            <BindingProperty name="value" source="clientsComboBox" sourcePath="${selectedItem.totalSendValue}" target="mSentPriceOut" targetPath="value" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="nSentTotalOut">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format subtype="1" type="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="nSentTotalOut.text"/>
+            <Property name="name" type="java.lang.String" value="nSentTotalOut" noResource="true"/>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="value" source="clientsComboBox" sourcePath="${selectedItem.totalSent}" target="nSentTotalOut" targetPath="value" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="nSoldTotalOut">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format subtype="1" type="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="nSoldTotalOut.text"/>
+            <Property name="name" type="java.lang.String" value="nSoldTotalOut" noResource="true"/>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="value" source="clientsComboBox" sourcePath="${selectedItem.totalSold}" target="nSoldTotalOut" targetPath="value" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="mSoldPriceOut">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format subtype="0" type="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="mSoldPriceOut.text"/>
+            <Property name="name" type="java.lang.String" value="mSoldPriceOut" noResource="true"/>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="value" source="clientsComboBox" sourcePath="${selectedItem.totalSoldValue}" target="mSoldPriceOut" targetPath="value" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="nTotalOut">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format subtype="1" type="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" resourceKey="nTotalOut.text"/>
+            <Property name="name" type="java.lang.String" value="nTotalOut" noResource="true"/>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="value" source="clientsComboBox" sourcePath="${selectedItem.total}" target="nTotalOut" targetPath="value" updateStrategy="0" immediately="false"/>
           </BindingProperties>
         </Component>
       </SubComponents>
@@ -456,6 +481,6 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,47,0,0,3,56"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,47,0,0,3,92"/>
   </AuxValues>
 </Form>

@@ -44,8 +44,8 @@
                       <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
                       <Component id="totalL" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="totalOut" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="266" max="32767" attributes="0"/>
+                      <Component id="mTotalOut" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace pref="168" max="32767" attributes="0"/>
                       <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -64,7 +64,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="totalL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="totalOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mTotalOut" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -126,9 +126,14 @@
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="totalL.AccessibleContext.accessibleName"/>
       </AccessibilityProperties>
     </Component>
-    <Component class="javax.swing.JLabel" name="totalOut">
+    <Component class="javax.swing.JFormattedTextField" name="mTotalOut">
       <Properties>
-        <Property name="name" type="java.lang.String" value="totalOut" noResource="true"/>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="0" type="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" resourceKey="mTotalOut.text"/>
+        <Property name="name" type="java.lang.String" value="mTotalOut" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>
