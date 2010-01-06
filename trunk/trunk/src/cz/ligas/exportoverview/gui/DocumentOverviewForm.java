@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.ligas.exportoverview.gui;
 
 import org.jdesktop.application.Action;
 import java.sql.Date;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.ELProperty;
@@ -158,7 +152,7 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = docsTableBinding.addColumnBinding(ELProperty.create("${total}"));
         columnBinding.setColumnName(resourceMap.getString("docTable.columnModel.total"));
-        columnBinding.setColumnClass(Number.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(docsTableBinding);
         docsTableBinding.bind();

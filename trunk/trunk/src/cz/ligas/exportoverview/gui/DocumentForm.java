@@ -1,8 +1,3 @@
-/*
- * DeliveryInvoiceForm.java
- *
- * Created on 10.10.2009, 11:51:57
- */
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
@@ -18,10 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.ELProperty;
@@ -254,7 +246,7 @@ public class DocumentForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.productPrice"));
-        columnBinding.setColumnClass(Number.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${amount}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.amount"));
@@ -262,11 +254,11 @@ public class DocumentForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.priceS"));
-        columnBinding.setColumnClass(Number.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${total}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.total"));
-        columnBinding.setColumnClass(Number.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(mainTableBinding);
         mainTableBinding.bind();
@@ -312,7 +304,7 @@ public class DocumentForm extends javax.swing.JFrame {
             }
             Clients c = (Clients) clientComboBox.getSelectedItem();
             Document d = (Document) docComboBox.getSelectedItem();
-            Source src = GenerateXml.generateDocXml(lable, d, c, documentLinesList,optionDialog());
+            Source src = GenerateXml.generateDocXml(lable, d, c, documentLinesList, optionDialog());
             org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(GuiMain.class).getContext().getResourceMap(GuiMain.class);
             GenerateXml.generateHtml(path, src, resourceMap.getString("files.xslt"));
         } catch (Exception e) {
@@ -344,23 +336,22 @@ public class DocumentForm extends javax.swing.JFrame {
         return JOptionPane.showConfirmDialog(null, resourceMap.getString(mes), resourceMap.getString("delete.title"), JOptionPane.YES_NO_OPTION);
     }
 
-    protected String optionDialog(){
+    protected String optionDialog() {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
-//            JButton[] option = new JButton[3];
-//            option[0] = new JButton(resourceMap.getString("paymentType.one"));
-//            option[1] = new JButton(resourceMap.getString("paymentType.two"));
-//            option[2] = new JButton(resourceMap.getString("paymentType.three"));
-String[] option = {resourceMap.getString("paymentType.one"),resourceMap.getString("paymentType.two"),resourceMap.getString("paymentType.three")};
-            int result = JOptionPane.showOptionDialog(
-                    null,
-                    resourceMap.getString("paymentType.msg"),
-                    resourceMap.getString("paymentType.lable"),
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    option,
-                    option[0]);
+        String[] option = {
+            resourceMap.getString("paymentType.one"),
+            resourceMap.getString("paymentType.two"),
+            resourceMap.getString("paymentType.three")};
+        int result = JOptionPane.showOptionDialog(
+                null,
+                resourceMap.getString("paymentType.msg"),
+                resourceMap.getString("paymentType.lable"),
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                option,
+                option[0]);
 
-            return option[result];//.getText();
+        return option[result];
     }
 }

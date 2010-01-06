@@ -19,8 +19,6 @@ import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.ELProperty;
@@ -456,11 +454,11 @@ public class MainView extends FrameView {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productPrice"));
-        columnBinding.setColumnClass(Number.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.priceS"));
-        columnBinding.setColumnClass(Number.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sent}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.send"));
@@ -468,7 +466,7 @@ public class MainView extends FrameView {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sentPrice}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sendPrice"));
-        columnBinding.setColumnClass(Number.class);
+        columnBinding.setColumnClass(Float.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sold}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sold"));
@@ -600,7 +598,7 @@ public class MainView extends FrameView {
     @Action
     public void addProduct() {
         final Clients c = (Clients) clientsComboBox.getSelectedItem();
-        AddExportLine ael = new AddExportLine(c);
+        AddProductForm ael = new AddProductForm(c);
         ael.setLocationRelativeTo(mainTable);
         ael.addWindowListener(new WindowAdapter() {
 

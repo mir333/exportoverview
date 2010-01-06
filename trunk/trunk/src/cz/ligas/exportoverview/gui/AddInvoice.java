@@ -22,15 +22,15 @@ public class AddInvoice extends AddDocumentLineForm {
     @Override
     public void addDocumentLine() {
         InvoiceLine il = new InvoiceLine();
-        int i =getnAmountIn();
-        float f = getmPriceIn();
-        il.setAmount(i);
-        il.setPrice(f);
-        il.setDocument(invoice);
-        il.setProd((Products)getProduct());
-        il.setTotal(i*f);
-        //overenie vyplnenia
         try {
+            int i = MyParser.pareseIntNumber(nAmountIn.getText());
+            float f = MyParser.paresePrice(mPriceIn.getText());
+            il.setAmount(i);
+            il.setPrice(f);
+            il.setDocument(invoice);
+            il.setProd((Products) productComboBox.getSelectedItem());
+            il.setTotal(i * f);
+            //overenie vyplnenia
             InvoiceOps.addInvoiceLine(il);
         } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);

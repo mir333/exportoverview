@@ -1,9 +1,3 @@
-/*
- * AddDocumentLine.java
- *
- * Created on Nov 26, 2009, 2:36:26 PM
- */
-
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.CategoryOps;
@@ -26,7 +20,6 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
 
     /** Creates new form AddDocumentLine */
     public AddDocumentLineForm() {
-        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(AddDocumentLineForm.class, this);
         initComponents();
         myInit();
     }
@@ -57,7 +50,8 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
         setTitle(resourceMap.getString("title")); // NOI18N
         setAlwaysOnTop(true);
 
-        addProductButton.setAction(actionMap.get("addDocumentLine"));
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(AddDocumentLineForm.class, this);
+        addProductButton.setAction(actionMap.get("addDocumentLine")); // NOI18N
         addProductButton.setText(resourceMap.getString("addProductButton.text")); // NOI18N
         addProductButton.setName("addProductButton"); // NOI18N
 
@@ -97,21 +91,22 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addDocumentLable)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(productCategoryL)
-                            .addComponent(productL)
-                            .addComponent(amountL)
-                            .addComponent(priceL))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(productComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nAmountIn)
-                            .addComponent(mPriceIn)
-                            .addComponent(productCategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(productCategoryL)
+                    .addComponent(productL)
+                    .addComponent(amountL)
+                    .addComponent(priceL))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(productComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nAmountIn)
+                    .addComponent(mPriceIn)
+                    .addComponent(productCategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addDocumentLable)
+                .addContainerGap(183, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(217, Short.MAX_VALUE)
                 .addComponent(addProductButton)
@@ -119,8 +114,8 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(addDocumentLable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -138,9 +133,9 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mPriceIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(priceL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addProductButton)
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         bindingGroup.bind();
@@ -149,19 +144,18 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel addDocumentLable;
-    private javax.swing.JButton addProductButton;
-    private javax.swing.JLabel amountL;
-    private javax.swing.JTextField mPriceIn;
-    private javax.swing.JTextField nAmountIn;
-    private javax.swing.JLabel priceL;
-    private javax.swing.JComboBox productCategoryComboBox;
-    private javax.swing.JLabel productCategoryL;
-    private javax.swing.JComboBox productComboBox;
-    private javax.swing.JLabel productL;
+    protected javax.swing.JLabel addDocumentLable;
+    protected javax.swing.JButton addProductButton;
+    protected javax.swing.JLabel amountL;
+    protected javax.swing.JTextField mPriceIn;
+    protected javax.swing.JTextField nAmountIn;
+    protected javax.swing.JLabel priceL;
+    protected javax.swing.JComboBox productCategoryComboBox;
+    protected javax.swing.JLabel productCategoryL;
+    protected javax.swing.JComboBox productComboBox;
+    protected javax.swing.JLabel productL;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-        javax.swing.ActionMap actionMap;
     private List<ProductCategory> categoryList;
     private MyInputVerifier verifier = new MyInputVerifier();
 
@@ -187,18 +181,4 @@ public class AddDocumentLineForm extends javax.swing.JFrame {
     public void addDocumentLine() {
         System.err.println("Not Overriden");
     }
-
-    protected float getmPriceIn() {
-        return Float.parseFloat(mPriceIn.getText());
-    }
-
-
-    protected int getnAmountIn() {
-        return Integer.parseInt(nAmountIn.getText());
-    }
-
-    protected Object getProduct() {
-        return productComboBox.getSelectedItem();
-    }
-
 }
