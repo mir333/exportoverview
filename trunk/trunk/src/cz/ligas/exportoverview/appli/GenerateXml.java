@@ -5,9 +5,11 @@ import cz.ligas.exportoverview.db.Document;
 import cz.ligas.exportoverview.db.DocumentLine;
 import cz.ligas.exportoverview.db.UserInfo;
 import java.io.File;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -73,16 +75,7 @@ public class GenerateXml {
         return client;
     }
 
-    public static Source generateDocXml(String docType, Document d, Clients c, List<DocumentLine> documentLinesList, String paymantType)
-            throws ParserConfigurationException, Exception {
-        //Create instance of DocumentBuilderFactory
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = factory.newDocumentBuilder();
-        org.w3c.dom.Document doc = docBuilder.newDocument();
-        //create the root element
-        Element root = doc.createElement(docType);
-        doc.appendChild(root);
-        root.appendChild(generateUserXml(doc));
+    private static Element generateClientXml(org.w3c.dom.Document doc, Clients c) throws Exception {
         Element client = doc.createElement("Client");
         Element childElement = doc.createElement("name");
         childElement.setTextContent(c.getCompany());
@@ -105,8 +98,24 @@ public class GenerateXml {
         childElement = doc.createElement("dic");
         childElement.setTextContent(c.getDic());
         client.appendChild(childElement);
-        root.appendChild(client);
+
+        return client;
+    }
+
+    public static Source generateDocXml(String docType, Document d, Clients c, List<DocumentLine> documentLinesList, String paymantType)
+            throws ParserConfigurationException, Exception {
+        NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
+        //Create instance of DocumentBuilderFactory
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = factory.newDocumentBuilder();
+        org.w3c.dom.Document doc = docBuilder.newDocument();
+        //create the root element
+        Element root = doc.createElement(docType);
+        doc.appendChild(root);
+        root.appendChild(generateUserXml(doc));
+        root.appendChild(generateClientXml(doc, c));
         //create child element
+        Element childElement;
         for (DocumentLine dl : documentLinesList) {
             Element delLine = doc.createElement("DocumentLine");
             childElement = doc.createElement("code");
@@ -119,19 +128,19 @@ public class GenerateXml {
             childElement.setTextContent(dl.getAmount() + "");
             delLine.appendChild(childElement);
             childElement = doc.createElement("price");
-            childElement.setTextContent(dl.getPrice() + "");
+            childElement.setTextContent(numberFormat.format(dl.getPrice()));
             delLine.appendChild(childElement);
             childElement = doc.createElement("vat");
             childElement.setTextContent("19%");
             delLine.appendChild(childElement);
             childElement = doc.createElement("total");
-            childElement.setTextContent(dl.getTotal()+"");
+            childElement.setTextContent(numberFormat.format(dl.getTotal()));
             delLine.appendChild(childElement);
             root.appendChild(delLine);
         }
         Element totals = doc.createElement("Totals");
         childElement = doc.createElement("sum");
-        childElement.setTextContent(d.getTotal() + "");
+        childElement.setTextContent(numberFormat.format(d.getTotal()));
         totals.appendChild(childElement);
         childElement = doc.createElement("paymentType");
         childElement.setTextContent(paymantType);

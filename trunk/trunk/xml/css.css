@@ -49,6 +49,7 @@ h1{
 #tableDoc{
     width:800px;
     min-height: 300px;
+    text-align: center;
 }
 #bottomDoc{
     margin:5px;
