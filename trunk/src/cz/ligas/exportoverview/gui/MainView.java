@@ -60,17 +60,17 @@ public class MainView extends FrameView {
         addProductButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         mainTable = new javax.swing.JTable();
-        totalLableOut = new javax.swing.JLabel();
         totalLable = new javax.swing.JLabel();
-        sentPriceOut = new javax.swing.JLabel();
         sentPriceLable = new javax.swing.JLabel();
-        soldTotalLableOut = new javax.swing.JLabel();
         soldTotalLable = new javax.swing.JLabel();
-        sentTotalLableOut = new javax.swing.JLabel();
         sentTotalLable = new javax.swing.JLabel();
         editClient = new javax.swing.JButton();
         soldPriceLable = new javax.swing.JLabel();
-        soldPriceLableOut = new javax.swing.JLabel();
+        mSentPriceOut = new javax.swing.JFormattedTextField();
+        nSentTotalOut = new javax.swing.JFormattedTextField();
+        nSoldTotalOut = new javax.swing.JFormattedTextField();
+        mSoldPriceOut = new javax.swing.JFormattedTextField();
+        nTotalOut = new javax.swing.JFormattedTextField();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         printMenuItem = new javax.swing.JMenuItem();
@@ -139,34 +139,14 @@ public class MainView extends FrameView {
         });
         jScrollPane1.setViewportView(mainTable);
 
-        totalLableOut.setName("totalLableOut"); // NOI18N
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.total}"), totalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
         totalLable.setText(resourceMap.getString("totalLable.text")); // NOI18N
         totalLable.setName("totalLable"); // NOI18N
-
-        sentPriceOut.setName("sentPriceOut"); // NOI18N
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSendValue}"), sentPriceOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
 
         sentPriceLable.setText(resourceMap.getString("sentPriceLable.text")); // NOI18N
         sentPriceLable.setName("sentPriceLable"); // NOI18N
 
-        soldTotalLableOut.setName("soldTotalLableOut"); // NOI18N
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSold}"), soldTotalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
         soldTotalLable.setText(resourceMap.getString("soldTotalLable.text")); // NOI18N
         soldTotalLable.setName("soldTotalLable"); // NOI18N
-
-        sentTotalLableOut.setName("sentTotalLableOut"); // NOI18N
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSent}"), sentTotalLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
 
         sentTotalLable.setText(resourceMap.getString("sentTotalLable.text")); // NOI18N
         sentTotalLable.setName("sentTotalLable"); // NOI18N
@@ -179,9 +159,44 @@ public class MainView extends FrameView {
         soldPriceLable.setText(resourceMap.getString("soldPriceLable.text")); // NOI18N
         soldPriceLable.setName("soldPriceLable"); // NOI18N
 
-        soldPriceLableOut.setName("soldPriceLableOut"); // NOI18N
+        mSentPriceOut.setEditable(false);
+        mSentPriceOut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        mSentPriceOut.setText(resourceMap.getString("mSentPriceOut.text")); // NOI18N
+        mSentPriceOut.setName("mSentPriceOut"); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSoldValue}"), soldPriceLableOut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSendValue}"), mSentPriceOut, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
+
+        nSentTotalOut.setEditable(false);
+        nSentTotalOut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        nSentTotalOut.setText(resourceMap.getString("nSentTotalOut.text")); // NOI18N
+        nSentTotalOut.setName("nSentTotalOut"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSent}"), nSentTotalOut, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
+
+        nSoldTotalOut.setEditable(false);
+        nSoldTotalOut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        nSoldTotalOut.setText(resourceMap.getString("nSoldTotalOut.text")); // NOI18N
+        nSoldTotalOut.setName("nSoldTotalOut"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSold}"), nSoldTotalOut, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
+
+        mSoldPriceOut.setEditable(false);
+        mSoldPriceOut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        mSoldPriceOut.setText(resourceMap.getString("mSoldPriceOut.text")); // NOI18N
+        mSoldPriceOut.setName("mSoldPriceOut"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.totalSoldValue}"), mSoldPriceOut, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
+
+        nTotalOut.setEditable(false);
+        nTotalOut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        nTotalOut.setText(resourceMap.getString("nTotalOut.text")); // NOI18N
+        nTotalOut.setName("nTotalOut"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientsComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.total}"), nTotalOut, org.jdesktop.beansbinding.BeanProperty.create("value"));
         bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -191,28 +206,28 @@ public class MainView extends FrameView {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addComponent(sentTotalLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sentTotalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nSentTotalOut, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(soldTotalLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(soldTotalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nSoldTotalOut, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sentPriceLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sentPriceOut, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mSentPriceOut, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(soldPriceLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(soldPriceLableOut, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                        .addComponent(mSoldPriceOut, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(totalLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalLableOut, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
+                        .addComponent(nTotalOut, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
                         .addComponent(addProductButton))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(newClientButton)
@@ -220,7 +235,7 @@ public class MainView extends FrameView {
                         .addComponent(newCategoryButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(newProductButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
                         .addComponent(clientsL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(clientsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,17 +258,17 @@ public class MainView extends FrameView {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addProductButton)
                     .addComponent(sentTotalLable)
-                    .addComponent(sentTotalLableOut)
-                    .addComponent(totalLable)
-                    .addComponent(totalLableOut)
+                    .addComponent(nSentTotalOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(soldTotalLable)
-                    .addComponent(soldTotalLableOut)
+                    .addComponent(nSoldTotalOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sentPriceLable)
-                    .addComponent(sentPriceOut)
+                    .addComponent(mSentPriceOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(soldPriceLable)
-                    .addComponent(soldPriceLableOut))
+                    .addComponent(mSoldPriceOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addProductButton)
+                    .addComponent(totalLable)
+                    .addComponent(nTotalOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -400,9 +415,14 @@ public class MainView extends FrameView {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JFormattedTextField mSentPriceOut;
+    private javax.swing.JFormattedTextField mSoldPriceOut;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable mainTable;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JFormattedTextField nSentTotalOut;
+    private javax.swing.JFormattedTextField nSoldTotalOut;
+    private javax.swing.JFormattedTextField nTotalOut;
     private javax.swing.JButton newCategoryButton;
     private javax.swing.JButton newClientButton;
     private javax.swing.JButton newProductButton;
@@ -411,15 +431,10 @@ public class MainView extends FrameView {
     private javax.swing.JMenuItem openWarehouseMenuItem;
     private javax.swing.JMenuItem printMenuItem;
     private javax.swing.JLabel sentPriceLable;
-    private javax.swing.JLabel sentPriceOut;
     private javax.swing.JLabel sentTotalLable;
-    private javax.swing.JLabel sentTotalLableOut;
     private javax.swing.JLabel soldPriceLable;
-    private javax.swing.JLabel soldPriceLableOut;
     private javax.swing.JLabel soldTotalLable;
-    private javax.swing.JLabel soldTotalLableOut;
     private javax.swing.JLabel totalLable;
-    private javax.swing.JLabel totalLableOut;
     private javax.swing.JMenuItem userInfoMenuitem;
     private javax.swing.JMenu warehouseMenu;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

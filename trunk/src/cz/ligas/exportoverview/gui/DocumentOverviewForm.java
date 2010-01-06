@@ -35,7 +35,7 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
         topLable = new javax.swing.JLabel();
         refreshButton = new javax.swing.JButton();
         totalL = new javax.swing.JLabel();
-        totalOut = new javax.swing.JLabel();
+        mTotalOut = new javax.swing.JFormattedTextField();
 
         jButton1.setName("jButton1"); // NOI18N
 
@@ -69,7 +69,10 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
         totalL.setText(resourceMap.getString("totalL.text")); // NOI18N
         totalL.setName("totalL"); // NOI18N
 
-        totalOut.setName("totalOut"); // NOI18N
+        mTotalOut.setEditable(false);
+        mTotalOut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        mTotalOut.setText(resourceMap.getString("mTotalOut.text")); // NOI18N
+        mTotalOut.setName("mTotalOut"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,8 +89,8 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
                         .addGap(187, 187, 187)
                         .addComponent(totalL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalOut)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
+                        .addComponent(mTotalOut, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                         .addComponent(refreshButton)))
                 .addContainerGap())
         );
@@ -102,7 +105,7 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(refreshButton)
                     .addComponent(totalL)
-                    .addComponent(totalOut))
+                    .addComponent(mTotalOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -121,10 +124,10 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
     protected javax.swing.JTable docsTable;
     protected javax.swing.JButton jButton1;
     protected javax.swing.JScrollPane jScrollPane1;
+    protected javax.swing.JFormattedTextField mTotalOut;
     protected javax.swing.JButton refreshButton;
     protected javax.swing.JLabel topLable;
     protected javax.swing.JLabel totalL;
-    protected javax.swing.JLabel totalOut;
     // End of variables declaration//GEN-END:variables
     protected java.util.List<cz.ligas.exportoverview.db.Document> docList;
      private org.jdesktop.beansbinding.BindingGroup bindingGroup;

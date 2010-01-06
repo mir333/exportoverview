@@ -45,6 +45,6 @@ public class DeliveryOverviewForm extends DocumentOverviewForm {
         for (Document delivery : docList) {
             total+=delivery.getTotal();
         }
-        totalOut.setText(total+"");
+        mTotalOut.setValue(total);
     }
 }

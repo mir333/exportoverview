@@ -42,6 +42,6 @@ public class InvoiceOverviewForm extends DocumentOverviewForm{
         for (Document invoice : docList) {
             total+=invoice.getTotal();
         }
-        totalOut.setText(total+"");
+        mTotalOut.setValue(total);
     }
 }
