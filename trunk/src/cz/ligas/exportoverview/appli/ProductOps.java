@@ -20,10 +20,9 @@ public class ProductOps {
 
     public static void addProduct(Products product) throws Exception {
         EntityManager em = emFactory.createEntityManager();
-        ProductCategory products = product.getProductCategoryId();
-        int i = products.getProductInCat()+1;
-        products.setProductInCat(i);
+        ProductCategory products = em.find(ProductCategory.class,product.getProductCategoryId().getId());
         products.getProducts().add(product);
+        products.setProductInCat(Math.max(products.getProductInCat(),products.getProducts().size())+1);
         em.getTransaction().begin();
         em.persist(product);
         em.merge(products);
