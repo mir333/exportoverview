@@ -36,7 +36,10 @@ public class EditProductForm extends ProductForm {
             p.setProductCategoryId((ProductCategory) categoryComboBox.getSelectedItem());
             //overenie vyplnenia
             ProductOps.editProduct(p);
-             this.dispose();
+            this.dispose();
+        } catch (javax.persistence.RollbackException sqlEx) {
+            Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, sqlEx);
+            MyUtilErrorClass.errorDialog("error.sql.rollback");
         } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
