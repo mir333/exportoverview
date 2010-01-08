@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.observablecollections.ObservableList;
 
@@ -19,6 +21,9 @@ import org.jdesktop.observablecollections.ObservableList;
  * @author xligas
  */
 public class DeliveryForm extends DocumentForm {
+
+    private JDialog addDelivery;
+    private JDialog editDeliveryLine;
 
     public DeliveryForm() {
         super("Delivery", "title.delivery");
@@ -57,16 +62,19 @@ public class DeliveryForm extends DocumentForm {
             errorDialog("error.delivery.empty");
             return;
         }
-        AddDelivery adf = new AddDelivery(d);
-        adf.setLocationRelativeTo(documentTable);
-        adf.addWindowListener(new WindowAdapter() {
+        if (addDelivery == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            addDelivery = new AddDelivery(d, mainFrame);
+            addDelivery.setLocationRelativeTo(mainFrame);
+            addDelivery.addWindowListener(new WindowAdapter() {
 
-            @Override
-            public void windowDeactivated(WindowEvent evt) {
-                refresh();
-            }
-        });
-        adf.setVisible(true);
+                @Override
+                public void windowDeactivated(WindowEvent evt) {
+                    refresh();
+                }
+            });
+        }
+        GuiMain.getApplication().show(addDelivery);
     }
 
     @Override
@@ -99,18 +107,21 @@ public class DeliveryForm extends DocumentForm {
     @Override
     public void documentTableMouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getClickCount() > 1) {
-            final int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
-            EditDeliveryLineForm edlf = new EditDeliveryLineForm((DeliveryLine) documentLinesList.get(index));
-            edlf.setLocationRelativeTo(documentTable);
-            edlf.addWindowListener(new WindowAdapter() {
+            if (editDeliveryLine == null) {
+                int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
+                JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+                editDeliveryLine = new EditDeliveryLineForm((DeliveryLine) documentLinesList.get(index), mainFrame);
+                editDeliveryLine.setLocationRelativeTo(mainFrame);
+                editDeliveryLine.addWindowListener(new WindowAdapter() {
 
-                @Override
-                public void windowDeactivated(WindowEvent evt) {
-                    refresh();
-                    MainView.refreshTotal();
-                }
-            });
-            edlf.setVisible(true);
+                    @Override
+                    public void windowDeactivated(WindowEvent evt) {
+                        refresh();
+                        MainView.refreshTotal();
+                    }
+                });
+            }
+            GuiMain.getApplication().show(editDeliveryLine);
         }
     }
 

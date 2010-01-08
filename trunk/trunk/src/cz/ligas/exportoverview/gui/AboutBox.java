@@ -9,7 +9,8 @@ import org.jdesktop.application.Action;
 
 public class AboutBox extends JDialog {
 
-    public AboutBox() {
+    public AboutBox(java.awt.Frame parent) {
+        super(parent);
         initComponents();
         getRootPane().setDefaultButton(closeButton);
     }

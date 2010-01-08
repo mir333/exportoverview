@@ -9,10 +9,15 @@ import java.util.logging.Logger;
  *
  * @author miro
  */
-public class NewDeliveryForm extends NewDocumentForm  {
+public class NewDeliveryForm extends NewDocumentForm {
+
+    public NewDeliveryForm(java.awt.Frame parent) {
+        super(parent);
+    }
+
     @Override
-    public void createDocument(){
-         Delivery del = new Delivery();
+    public void createDocument() {
+        Delivery del = new Delivery();
         del.setClient(getClient());
         try {
             DeliveryOps.addDelivery(del);

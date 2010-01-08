@@ -28,7 +28,8 @@ class UserInfoForm extends ClientForm {
     private javax.swing.JTextField tIsbanIn;
     private javax.swing.JTextField tSwiftIn;
 
-    public UserInfoForm() {
+    public UserInfoForm(java.awt.Frame parent) {
+        super(parent);
         bankNameL = new javax.swing.JLabel();
         tBankNameIn = new javax.swing.JTextField();
         bankNoL = new javax.swing.JLabel();

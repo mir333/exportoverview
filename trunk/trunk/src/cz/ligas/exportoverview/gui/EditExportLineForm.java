@@ -10,10 +10,11 @@ import org.jdesktop.application.Action;
  *
  * @author xligas
  */
-public class EditExportLineForm extends javax.swing.JFrame {
+public class EditExportLineForm extends javax.swing.JDialog {
 
     /** Creates new form EditExportLineForm */
-    public EditExportLineForm(ExportLine el) {
+    public EditExportLineForm(ExportLine el,java.awt.Frame parent) {
+        super(parent);
         this.exportLine = el;
         initComponents();
         myInit();

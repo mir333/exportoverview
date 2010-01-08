@@ -13,7 +13,8 @@ public class EditInvoiceLineForm extends EditDocumentLineForm {
 
     InvoiceLine invLine;
 
-    public EditInvoiceLineForm(InvoiceLine il) {
+    public EditInvoiceLineForm(InvoiceLine il,java.awt.Frame parent) {
+        super(parent);
         this.invLine = il;
         nAmountIn.setValue(0);
         mPriceIn.setText(invLine.getPrice() + "");

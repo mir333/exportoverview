@@ -1,8 +1,3 @@
-/*
- * EditDocumentLineFOrm.java
- *
- * Created on Nov 30, 2009, 10:05:16 AM
- */
 package cz.ligas.exportoverview.gui;
 
 import org.jdesktop.application.Action;
@@ -11,11 +6,11 @@ import org.jdesktop.application.Action;
  *
  * @author miro
  */
-public class EditDocumentLineForm extends javax.swing.JFrame {
+public class EditDocumentLineForm extends javax.swing.JDialog {
 
     /** Creates new form EditDocumentLineFOrm */
-    public EditDocumentLineForm() {
-        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(EditDocumentLineForm.class, this);
+    public EditDocumentLineForm(java.awt.Frame parent) {
+        super(parent);
         initComponents();
         myInit();
     }
@@ -53,7 +48,8 @@ public class EditDocumentLineForm extends javax.swing.JFrame {
 
         nAmountIn.setName("nAmountIn"); // NOI18N
 
-        saveButton.setAction(actionMap.get("saveDocumentLine"));
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(EditDocumentLineForm.class, this);
+        saveButton.setAction(actionMap.get("saveDocumentLine")); // NOI18N
         saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
         saveButton.setName("saveButton"); // NOI18N
 
@@ -99,15 +95,14 @@ public class EditDocumentLineForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 	
-    // Variables declaration - do not modify                     
-    private javax.swing.JLabel amountL;
-    private javax.swing.JLabel editDocumentLineL;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JLabel amountL;
+    protected javax.swing.JLabel editDocumentLineL;
     protected javax.swing.JTextField mPriceIn;
     protected javax.swing.JSpinner nAmountIn;
-    private javax.swing.JLabel priceL;
-    private javax.swing.JButton saveButton;
-    // End of variables declaration                   
-    javax.swing.ActionMap actionMap;
+    protected javax.swing.JLabel priceL;
+    protected javax.swing.JButton saveButton;
+    // End of variables declaration//GEN-END:variables
     private MyInputVerifier verifier = new MyInputVerifier();
 
     private void myInit() {

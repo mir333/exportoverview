@@ -13,7 +13,8 @@ public class EditDeliveryLineForm extends EditDocumentLineForm {
 
     private DeliveryLine docLine;
 
-    public EditDeliveryLineForm(DeliveryLine dl) {
+    public EditDeliveryLineForm(DeliveryLine dl,java.awt.Frame parent) {
+        super(parent);
         this.docLine = dl;
         nAmountIn.setValue(0);
         mPriceIn.setText(dl.getPrice() + "");

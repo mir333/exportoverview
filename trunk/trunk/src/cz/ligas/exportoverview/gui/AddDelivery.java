@@ -16,7 +16,8 @@ public class AddDelivery extends AddDocumentLineForm {
 
     Delivery delivery;
 
-    public AddDelivery(Document d) {
+    public AddDelivery(Document d,java.awt.Frame parent) {
+        super(parent);
         this.delivery = (Delivery) d;
     }
 

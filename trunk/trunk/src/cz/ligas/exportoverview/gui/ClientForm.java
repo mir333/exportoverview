@@ -9,18 +9,18 @@ import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.db.Clients;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import org.jdesktop.application.Action;
 
 /**
  *
  * @author xligas
  */
-public class ClientForm extends JFrame {
+public class ClientForm extends JDialog {
 
     /** Creates new form ClientForm */
-    public ClientForm() {
-        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(ClientForm.class, this);
+    public ClientForm(java.awt.Frame parent) {
+        super(parent);
         initComponents();
         myInit();
     }
@@ -72,7 +72,8 @@ public class ClientForm extends JFrame {
         tClientPhoneIn.setText(resourceMap.getString("tClientPhoneIn.text")); // NOI18N
         tClientPhoneIn.setName("tClientPhoneIn"); // NOI18N
 
-        clientSaveButton.setAction(actionMap.get("clientSaveAction"));
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(ClientForm.class, this);
+        clientSaveButton.setAction(actionMap.get("clientSaveAction")); // NOI18N
         clientSaveButton.setText(resourceMap.getString("clientSaveButton.text")); // NOI18N
         clientSaveButton.setName("clientSaveButton"); // NOI18N
 
@@ -252,7 +253,6 @@ public class ClientForm extends JFrame {
     protected javax.swing.JLabel zipCodeL;
     // End of variables declaration//GEN-END:variables
     protected MyInputVerifier verifier = new MyInputVerifier();
-    private javax.swing.ActionMap actionMap;
 
     private void myInit() {
 

@@ -15,8 +15,10 @@ import java.awt.print.PrinterException;
 import java.beans.Beans;
 import java.text.MessageFormat;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import org.jdesktop.beansbinding.AutoBinding;
@@ -35,7 +37,6 @@ public class MainView extends FrameView {
 
     public MainView(SingleFrameApplication app) {
         super(app);
-        actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(MainView.class, this);
         initComponents();
         myInit();
         testFirstRun();
@@ -100,22 +101,23 @@ public class MainView extends FrameView {
             }
         });
 
-        newClientButton.setAction(actionMap.get("newClient"));
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(MainView.class, this);
+        newClientButton.setAction(actionMap.get("newClient")); // NOI18N
         newClientButton.setText(resourceMap.getString("newClientButton.text")); // NOI18N
         newClientButton.setName("newClientButton"); // NOI18N
 
         clientsL.setText(resourceMap.getString("clientsL.text")); // NOI18N
         clientsL.setName("clientsL"); // NOI18N
 
-        newProductButton.setAction(actionMap.get("newProduct"));
+        newProductButton.setAction(actionMap.get("newProduct")); // NOI18N
         newProductButton.setText(resourceMap.getString("newProductButton.text")); // NOI18N
         newProductButton.setName("newProductButton"); // NOI18N
 
-        newCategoryButton.setAction(actionMap.get("newCategory"));
+        newCategoryButton.setAction(actionMap.get("newCategory")); // NOI18N
         newCategoryButton.setText(resourceMap.getString("newCategoryButton.text")); // NOI18N
         newCategoryButton.setName("newCategoryButton"); // NOI18N
 
-        addProductButton.setAction(actionMap.get("addProduct"));
+        addProductButton.setAction(actionMap.get("addProduct")); // NOI18N
         addProductButton.setText(resourceMap.getString("addProductButton.text")); // NOI18N
         addProductButton.setName("addProductButton"); // NOI18N
 
@@ -151,7 +153,6 @@ public class MainView extends FrameView {
         sentTotalLable.setText(resourceMap.getString("sentTotalLable.text")); // NOI18N
         sentTotalLable.setName("sentTotalLable"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(MainView.class, this);
         editClient.setAction(actionMap.get("editClient")); // NOI18N
         editClient.setText(resourceMap.getString("editClient.text")); // NOI18N
         editClient.setName("editClient"); // NOI18N
@@ -367,10 +368,16 @@ public class MainView extends FrameView {
 
     private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
         if (evt.getClickCount() > 1) {
+
+
             final int index = mainTable.convertRowIndexToModel(mainTable.getSelectedRow());
-            EditExportLineForm eel = new EditExportLineForm(exportLinesList.get(index));
-            eel.setLocationRelativeTo(mainTable);
-            eel.addWindowListener(new WindowAdapter() {
+
+
+                    if (dialogMap.get("EditExportLine") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("EditExportLine", new EditExportLineForm(exportLinesList.get(index),GuiMain.getApplication().getMainFrame()));
+            dialogMap.get("EditExportLine").setLocationRelativeTo(mainFrame);
+            dialogMap.get("EditExportLine").addWindowListener(new WindowAdapter() {
 
                 @Override
                 public void windowDeactivated(WindowEvent evt) {
@@ -385,7 +392,8 @@ public class MainView extends FrameView {
                     }
                 }
             });
-            eel.setVisible(true);
+                    }
+        GuiMain.getApplication().show(dialogMap.get("EditExportLine"));
         }
     }//GEN-LAST:event_mainTableMouseClicked
 
@@ -442,7 +450,7 @@ public class MainView extends FrameView {
     //private BindingGroup bindingGroup;
     private static List<Clients> clientsList;
     private List<ExportLine> exportLinesList;
-    private javax.swing.ActionMap actionMap;
+    private HashMap<String, JDialog> dialogMap = new HashMap<String, JDialog>();
 
     private void myInit() {
         bindingGroup = new BindingGroup();
@@ -514,9 +522,12 @@ public class MainView extends FrameView {
 
     @Action
     public void showAboutBox() {
-        JDialog aboutBox = new AboutBox();
-        aboutBox.setLocationRelativeTo(mainTable);
-        aboutBox.setVisible(true);
+        if (dialogMap.get("AboutBox") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("AboutBox", new AboutBox(GuiMain.getApplication().getMainFrame()));
+            dialogMap.get("AboutBox").setLocationRelativeTo(mainFrame);
+        }
+        GuiMain.getApplication().show(dialogMap.get("AboutBox"));
     }
 
     @Action
@@ -528,9 +539,12 @@ public class MainView extends FrameView {
 
     @Action
     public void newInvoice() {
-        NewInvioceForm invForm = new NewInvioceForm();
-        invForm.setLocationRelativeTo(mainTable);
-        invForm.setVisible(true);
+        if (dialogMap.get("NewInvoice") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("NewInvoice", new NewInvioceForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.get("NewInvoice").setLocationRelativeTo(mainFrame);
+        }
+        GuiMain.getApplication().show(dialogMap.get("NewInvoice"));
     }
 
     @Action
@@ -542,9 +556,12 @@ public class MainView extends FrameView {
 
     @Action
     public void newDelivery() {
-        NewDeliveryForm delivForm = new NewDeliveryForm();
-        delivForm.setLocationRelativeTo(mainTable);
-        delivForm.setVisible(true);
+        if (dialogMap.get("NewDelivery") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("NewDelivery", new NewDeliveryForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.get("NewDelivery").setLocationRelativeTo(mainFrame);
+        }
+        GuiMain.getApplication().show(dialogMap.get("NewDelivery"));
     }
 
     @Action
@@ -563,23 +580,29 @@ public class MainView extends FrameView {
 
     @Action
     public void newClient() {
-        ClientForm cf = new ClientForm();
-        cf.setLocationRelativeTo(mainTable);
-        cf.addWindowListener(new WindowAdapter() {
+        if (dialogMap.get("NewClient") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("NewClient", new ClientForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.get("NewClient").setLocationRelativeTo(mainFrame);
+            dialogMap.get("NewClient").addWindowListener(new WindowAdapter() {
 
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-                clientListRefresh();
-            }
-        });
-        cf.setVisible(true);
+                @Override
+                public void windowDeactivated(WindowEvent e) {
+                    clientListRefresh();
+                }
+            });
+        }
+        GuiMain.getApplication().show(dialogMap.get("NewClient"));
     }
 
     @Action
     public void newCategory() {
-        CategoryForm cf = new CategoryForm();
-        cf.setLocationRelativeTo(mainTable);
-        cf.setVisible(true);
+        if (dialogMap.get("NewCategory") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("NewCategory", new CategoryForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.get("NewCategory").setLocationRelativeTo(mainFrame);
+        }
+        GuiMain.getApplication().show(dialogMap.get("NewCategory"));
     }
 
     @Action
@@ -591,68 +614,76 @@ public class MainView extends FrameView {
 
     @Action
     public void newProduct() {
-        ProductForm pf = new ProductForm();
-        pf.setLocationRelativeTo(mainTable);
-        pf.setVisible(true);
+        if (dialogMap.get("NewProduct") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("NewProduct", new ProductForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.get("NewProduct").setLocationRelativeTo(mainFrame);
+        }
+        GuiMain.getApplication().show(dialogMap.get("NewProduct"));
     }
 
     @Action
     public void newExport() {
-        NewDocumentForm ef = new NewDocumentForm();
-        ef.setLocationRelativeTo(mainTable);
-        ef.addWindowListener(new WindowAdapter() {
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-                clientListRefresh();
-            }
-        });
-        ef.setVisible(true);
-    }
-
-    @Action
-    public void addProduct() {
-        final Clients c = (Clients) clientsComboBox.getSelectedItem();
-        AddProductForm ael = new AddProductForm(c);
-        ael.setLocationRelativeTo(mainTable);
-        ael.addWindowListener(new WindowAdapter() {
-
-            @Override
-            public void windowDeactivated(WindowEvent evt) {
-                exportLinesList.clear();
-                try {
-                    exportLinesList.addAll(ExportLineOps.getExportLinesByClient(c));
-                    refreshTotal();
-                    mainTable.updateUI();
-                } catch (Exception ex) {
-                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        ael.setVisible(true);
-    }
-
-    @Action
-    public void userInfoMangm() {
-        UserInfoForm uif = new UserInfoForm();
-        uif.setLocationRelativeTo(mainTable);
-        uif.setVisible(true);
-    }
-
-    @Action
-    public void editClient() {
-        Clients c = (Clients) clientsComboBox.getSelectedItem();
-        if (c != null) {
-            EditClientForm ecf = new EditClientForm(c.getId());
-            ecf.setLocationRelativeTo(mainTable);
-            ecf.addWindowListener(new WindowAdapter() {
+        if (dialogMap.get("NewExport") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("NewExport", new NewDocumentForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.get("NewExport").setLocationRelativeTo(mainFrame);
+            dialogMap.get("NewExport").addWindowListener(new WindowAdapter() {
 
                 @Override
                 public void windowDeactivated(WindowEvent e) {
                     clientListRefresh();
                 }
             });
-            ecf.setVisible(true);
+        }
+        GuiMain.getApplication().show(dialogMap.get("NewExport"));
+    }
+
+    @Action
+    public void addProduct() {
+        Clients c = (Clients) clientsComboBox.getSelectedItem();
+        if (dialogMap.get("AddProduct") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("AddProduct", new AddProductForm(c, GuiMain.getApplication().getMainFrame()));
+            dialogMap.get("AddProduct").setLocationRelativeTo(mainFrame);
+            dialogMap.get("AddProduct").addWindowListener(new WindowAdapter() {
+
+                @Override
+                public void windowDeactivated(WindowEvent evt) {
+                    clientListRefresh();
+                }
+            });
+        }
+        GuiMain.getApplication().show(dialogMap.get("AddProduct"));
+    }
+
+    @Action
+    public void userInfoMangm() {
+        if (dialogMap.get("UserInfoMangm") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("UserInfoMangm", new UserInfoForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.get("UserInfoMangm").setLocationRelativeTo(mainFrame);
+        }
+        GuiMain.getApplication().show(dialogMap.get("UserInfoMangm"));
+    }
+
+    @Action
+    public void editClient() {
+        Clients c = (Clients) clientsComboBox.getSelectedItem();
+        if (c != null) {
+            if (dialogMap.get("EditClient") == null) {
+                JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+                dialogMap.put("EditClient", new EditClientForm(c.getId(), GuiMain.getApplication().getMainFrame()));
+                dialogMap.get("EditClient").setLocationRelativeTo(mainFrame);
+                dialogMap.get("EditClient").addWindowListener(new WindowAdapter() {
+
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {
+                        clientListRefresh();
+                    }
+                });
+            }
+            GuiMain.getApplication().show(dialogMap.get("EditClient"));
         }
     }
 

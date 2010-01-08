@@ -14,7 +14,8 @@ public class EditProductForm extends ProductForm {
 
     private int productId;
 
-    public EditProductForm(int id) {
+    public EditProductForm(int id,java.awt.Frame parent) {
+        super(parent);
         productId = id;
         Products prod = ProductOps.getProductById(id);
         tProductCodeIn.setText(prod.getProductCode());

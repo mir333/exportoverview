@@ -16,10 +16,11 @@ import org.jdesktop.swingbinding.SwingBindings;
  *
  * @author miro
  */
-public class AddDocumentLineForm extends javax.swing.JFrame {
+public class AddDocumentLineForm extends javax.swing.JDialog {
 
     /** Creates new form AddDocumentLine */
-    public AddDocumentLineForm() {
+    public AddDocumentLineForm(java.awt.Frame parent) {
+        super(parent);
         initComponents();
         myInit();
     }
