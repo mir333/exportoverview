@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ClientOps;
@@ -17,7 +13,8 @@ public class EditClientForm extends ClientForm {
 
     protected int clientId;
 
-    public EditClientForm(int i) {
+    public EditClientForm(int i,java.awt.Frame parent) {
+        super(parent);
         clientId=i;
         try {
             Clients c = ClientOps.getClientById(i);

@@ -1,8 +1,3 @@
-/*
- * CategoryForm.java
- *
- * Created on 4.8.2009, 23:30:00
- */
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.CategoryOps;
@@ -15,10 +10,11 @@ import org.jdesktop.application.Action;
  *
  * @author xligas
  */
-public class CategoryForm extends javax.swing.JFrame {
+public class CategoryForm extends javax.swing.JDialog {
 
     /** Creates new form CategoryForm */
-    public CategoryForm() {
+    public CategoryForm(java.awt.Frame parent) {
+        super(parent);
         initComponents();
         myInit();
     }

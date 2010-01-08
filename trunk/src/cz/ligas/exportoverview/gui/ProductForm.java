@@ -1,8 +1,3 @@
-/*
- * ProductForm.java
- *
- * Created on 4.8.2009, 23:30:13
- */
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.CategoryOps;
@@ -22,10 +17,11 @@ import org.jdesktop.swingbinding.SwingBindings;
  *
  * @author xligas
  */
-public class ProductForm extends javax.swing.JFrame {
+public class ProductForm extends javax.swing.JDialog {
     
     /** Creates new form ProductForm */
-    public ProductForm() {
+    public ProductForm(java.awt.Frame parent) {
+        super(parent);
         initComponents();
         myInit();
     }

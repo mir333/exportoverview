@@ -9,6 +9,8 @@ import java.beans.Beans;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import org.jdesktop.application.Action;
@@ -26,6 +28,9 @@ import org.jdesktop.swingbinding.SwingBindings;
  * @author xligas
  */
 public class WarehouseForm extends javax.swing.JFrame {
+
+    private JDialog editWhItem;
+    private JDialog editProduct;
 
     /** Creates new form WarehouseForm */
     public WarehouseForm() {
@@ -135,21 +140,24 @@ public class WarehouseForm extends javax.swing.JFrame {
 
     private void warehouseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_warehouseTableMouseClicked
         if (evt.getClickCount() > 1) {
-            final int index = warehouseTable.convertRowIndexToModel(warehouseTable.getSelectedRow());
-            EditWarehouseItemForm whie = new EditWarehouseItemForm(warehouseItemList.get(index));
-            whie.setLocationRelativeTo(warehouseTable);
-            whie.addWindowListener(new WindowAdapter() {
+            int index = warehouseTable.convertRowIndexToModel(warehouseTable.getSelectedRow());
+            if (editWhItem == null) {
+                JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+                editWhItem = new EditWarehouseItemForm(warehouseItemList.get(index), mainFrame);
+                editWhItem.setLocationRelativeTo(mainFrame);
+                editWhItem.addWindowListener(new WindowAdapter() {
 
-                @Override
-                public void windowDeactivated(WindowEvent evt) {
-                    try {
-                        refresh();
-                    } catch (Exception ex) {
-                        Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                    @Override
+                    public void windowDeactivated(WindowEvent evt) {
+                        try {
+                            refresh();
+                        } catch (Exception ex) {
+                            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                }
-            });
-            whie.setVisible(true);
+                });
+            }
+            GuiMain.getApplication().show(editWhItem);
         }
     }//GEN-LAST:event_warehouseTableMouseClicked
 
@@ -237,10 +245,12 @@ public class WarehouseForm extends javax.swing.JFrame {
 
     @Action
     public void editProdut() {
-            int index = warehouseTable.convertRowIndexToModel(warehouseTable.getSelectedRow());
-            EditProductForm epf = new EditProductForm(warehouseItemList.get(index).getProductItem().getId());
-            epf.setLocationRelativeTo(warehouseTable);
-            epf.addWindowListener(new WindowAdapter() {
+        int index = warehouseTable.convertRowIndexToModel(warehouseTable.getSelectedRow());
+        if (editProduct == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            editProduct = new EditProductForm(warehouseItemList.get(index).getProductItem().getId(), mainFrame);
+            editProduct.setLocationRelativeTo(mainFrame);
+            editProduct.addWindowListener(new WindowAdapter() {
 
                 @Override
                 public void windowDeactivated(WindowEvent evt) {
@@ -251,6 +261,7 @@ public class WarehouseForm extends javax.swing.JFrame {
                     }
                 }
             });
-            epf.setVisible(true);
+        }
+        GuiMain.getApplication().show(editProduct);
     }
 }

@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * EditWarehouseItemForm.java
- *
- * Created on Oct 8, 2009, 10:10:23 AM
- */
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.WarehouseItemOps;
@@ -20,10 +10,11 @@ import org.jdesktop.application.Action;
  *
  * @author miro
  */
-public class EditWarehouseItemForm extends javax.swing.JFrame {
+public class EditWarehouseItemForm extends javax.swing.JDialog {
 
     /** Creates new form EditWarehouseItemForm */
-    public EditWarehouseItemForm(WarehouseItem whi) {
+    public EditWarehouseItemForm(WarehouseItem whi,java.awt.Frame parent) {
+        super(parent);
         this.warehouseItem = whi;
         initComponents();
         myInit();

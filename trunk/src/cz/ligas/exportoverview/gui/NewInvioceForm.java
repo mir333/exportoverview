@@ -4,15 +4,20 @@ import cz.ligas.exportoverview.appli.InvoiceOps;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import cz.ligas.exportoverview.db.Invoice;
+
 /**
  *
  * @author miro
  */
-public class NewInvioceForm extends NewDocumentForm{
+public class NewInvioceForm extends NewDocumentForm {
+
+    public NewInvioceForm(java.awt.Frame parent) {
+        super(parent);
+    }
 
     @Override
-    public void createDocument(){
-       Invoice inv = new Invoice();
+    public void createDocument() {
+        Invoice inv = new Invoice();
         inv.setClient(getClient());
         try {
             InvoiceOps.addInvoice(inv);

@@ -15,7 +15,8 @@ public class AddInvoice extends AddDocumentLineForm {
 
     Invoice invoice;
 
-    public AddInvoice(Invoice i) {
+    public AddInvoice(Invoice i,java.awt.Frame parent) {
+        super(parent);
         this.invoice = i;
     }
 

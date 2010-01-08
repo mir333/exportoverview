@@ -103,8 +103,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="newClientButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="actionMap.get(&quot;newClient&quot;)" type="code"/>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="cz.ligas.exportoverview.gui.MainView" id="newClient" methodName="newClient"/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="newClientButton.text"/>
             <Property name="name" type="java.lang.String" value="newClientButton" noResource="true"/>
@@ -118,8 +118,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="newProductButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="actionMap.get(&quot;newProduct&quot;)" type="code"/>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="cz.ligas.exportoverview.gui.MainView" id="newProduct" methodName="newProduct"/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="newProductButton.text"/>
             <Property name="name" type="java.lang.String" value="newProductButton" noResource="true"/>
@@ -127,8 +127,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="newCategoryButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="actionMap.get(&quot;newCategory&quot;)" type="code"/>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="cz.ligas.exportoverview.gui.MainView" id="newCategory" methodName="newCategory"/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="newCategoryButton.text"/>
             <Property name="name" type="java.lang.String" value="newCategoryButton" noResource="true"/>
@@ -136,8 +136,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="addProductButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="actionMap.get(&quot;addProduct&quot;)" type="code"/>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="cz.ligas.exportoverview.gui.MainView" id="addProduct" methodName="addProduct"/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="addProductButton.text"/>
             <Property name="name" type="java.lang.String" value="addProductButton" noResource="true"/>

@@ -10,7 +10,6 @@ import cz.ligas.exportoverview.db.Clients;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ActionMap;
 import org.jdesktop.application.Action;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -21,10 +20,11 @@ import org.jdesktop.swingbinding.SwingBindings;
  *
  * @author xligas
  */
-public class NewDocumentForm extends javax.swing.JFrame {
+public class NewDocumentForm extends javax.swing.JDialog {
 
     /** Creates new form ExportForm */
-    public NewDocumentForm() {
+    public NewDocumentForm(java.awt.Frame parent) {
+        super(parent);
         initComponents();
         myInit();
     }

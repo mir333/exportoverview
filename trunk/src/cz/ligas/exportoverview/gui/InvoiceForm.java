@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.observablecollections.ObservableList;
 
@@ -19,6 +21,9 @@ import org.jdesktop.observablecollections.ObservableList;
  * @author xligas
  */
 public class InvoiceForm extends DocumentForm {
+
+    private JDialog addInvoice;
+    private JDialog editInvoice;
 
     public InvoiceForm() {
         super("Invoice", "title.invoice");
@@ -57,16 +62,19 @@ public class InvoiceForm extends DocumentForm {
             errorDialog("error.invoice.empty");
             return;
         }
-        AddInvoice aiv = new AddInvoice(i);
-        aiv.setLocationRelativeTo(documentTable);
-        aiv.addWindowListener(new WindowAdapter() {
+        if (addInvoice == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            addInvoice = new AddInvoice(i, mainFrame);
+            addInvoice.setLocationRelativeTo(mainFrame);
+            addInvoice.addWindowListener(new WindowAdapter() {
 
-            @Override
-            public void windowDeactivated(WindowEvent evt) {
-                refresh();
-            }
-        });
-        aiv.setVisible(true);
+                @Override
+                public void windowDeactivated(WindowEvent evt) {
+                    refresh();
+                }
+            });
+        }
+        GuiMain.getApplication().show(addInvoice);
     }
 
     @Override
@@ -99,18 +107,21 @@ public class InvoiceForm extends DocumentForm {
     @Override
     public void documentTableMouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getClickCount() > 1) {
-            final int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
-            EditInvoiceLineForm edlf = new EditInvoiceLineForm((InvoiceLine) documentLinesList.get(index));
-            edlf.setLocationRelativeTo(documentTable);
-            edlf.addWindowListener(new WindowAdapter() {
+            if (editInvoice == null) {
+                int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
+                JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+                editInvoice = new EditInvoiceLineForm((InvoiceLine) documentLinesList.get(index), mainFrame);
+                editInvoice.setLocationRelativeTo(mainFrame);
+                editInvoice.addWindowListener(new WindowAdapter() {
 
-                @Override
-                public void windowDeactivated(WindowEvent evt) {
-                    refresh();
-                    MainView.refreshTotal();
-                }
-            });
-            edlf.setVisible(true);
+                    @Override
+                    public void windowDeactivated(WindowEvent evt) {
+                        refresh();
+                        MainView.refreshTotal();
+                    }
+                });
+            }
+            GuiMain.getApplication().show(editInvoice);
         }
     }
 

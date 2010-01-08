@@ -24,12 +24,13 @@ import org.jdesktop.swingbinding.SwingBindings;
  *
  * @author xligas
  */
-public class AddProductForm extends javax.swing.JFrame {
+public class AddProductForm extends javax.swing.JDialog {
 
     Clients clinets = new Clients();
 
     /** Creates new form AddProductForm */
-    public AddProductForm(Clients c) {
+    public AddProductForm(Clients c,java.awt.Frame parent) {
+        super(parent);
         initComponents();
         myInit();
     }
