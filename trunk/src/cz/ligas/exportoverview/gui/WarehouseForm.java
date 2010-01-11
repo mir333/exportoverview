@@ -58,6 +58,7 @@ public class WarehouseForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(WarehouseForm.class);
         setTitle(resourceMap.getString("title")); // NOI18N
+        setMinimumSize(new java.awt.Dimension(764, 373));
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 

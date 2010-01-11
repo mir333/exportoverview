@@ -66,6 +66,7 @@ public class DocumentForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setMinimumSize(new java.awt.Dimension(490, 374));
 
         documentTableL.setText(resourceMap.getString("documentTableL.text")); // NOI18N
         documentTableL.setName("documentTableL"); // NOI18N

@@ -524,7 +524,7 @@ public class MainView extends FrameView {
     public void showAboutBox() {
         if (dialogMap.get("AboutBox") == null) {
             JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("AboutBox", new AboutBox(GuiMain.getApplication().getMainFrame()));
+            dialogMap.put("AboutBox", new AboutBox(mainFrame));
             dialogMap.get("AboutBox").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("AboutBox"));
@@ -541,7 +541,7 @@ public class MainView extends FrameView {
     public void newInvoice() {
         if (dialogMap.get("NewInvoice") == null) {
             JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("NewInvoice", new NewInvioceForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.put("NewInvoice", new NewInvioceForm(mainFrame));
             dialogMap.get("NewInvoice").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("NewInvoice"));
@@ -558,7 +558,7 @@ public class MainView extends FrameView {
     public void newDelivery() {
         if (dialogMap.get("NewDelivery") == null) {
             JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("NewDelivery", new NewDeliveryForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.put("NewDelivery", new NewDeliveryForm(mainFrame));
             dialogMap.get("NewDelivery").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("NewDelivery"));
@@ -582,7 +582,7 @@ public class MainView extends FrameView {
     public void newClient() {
         if (dialogMap.get("NewClient") == null) {
             JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("NewClient", new ClientForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.put("NewClient", new ClientForm(mainFrame));
             dialogMap.get("NewClient").setLocationRelativeTo(mainFrame);
             dialogMap.get("NewClient").addWindowListener(new WindowAdapter() {
 
@@ -599,7 +599,7 @@ public class MainView extends FrameView {
     public void newCategory() {
         if (dialogMap.get("NewCategory") == null) {
             JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("NewCategory", new CategoryForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.put("NewCategory", new CategoryForm(mainFrame));
             dialogMap.get("NewCategory").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("NewCategory"));
@@ -616,7 +616,7 @@ public class MainView extends FrameView {
     public void newProduct() {
         if (dialogMap.get("NewProduct") == null) {
             JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("NewProduct", new ProductForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.put("NewProduct", new ProductForm(mainFrame));
             dialogMap.get("NewProduct").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("NewProduct"));
@@ -626,7 +626,7 @@ public class MainView extends FrameView {
     public void newExport() {
         if (dialogMap.get("NewExport") == null) {
             JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("NewExport", new NewDocumentForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.put("NewExport", new NewDocumentForm(mainFrame));
             dialogMap.get("NewExport").setLocationRelativeTo(mainFrame);
             dialogMap.get("NewExport").addWindowListener(new WindowAdapter() {
 
@@ -644,7 +644,7 @@ public class MainView extends FrameView {
         Clients c = (Clients) clientsComboBox.getSelectedItem();
         if (dialogMap.get("AddProduct") == null) {
             JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("AddProduct", new AddProductForm(c, GuiMain.getApplication().getMainFrame()));
+            dialogMap.put("AddProduct", new AddProductForm(c, mainFrame));
             dialogMap.get("AddProduct").setLocationRelativeTo(mainFrame);
             dialogMap.get("AddProduct").addWindowListener(new WindowAdapter() {
 
@@ -661,7 +661,7 @@ public class MainView extends FrameView {
     public void userInfoMangm() {
         if (dialogMap.get("UserInfoMangm") == null) {
             JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("UserInfoMangm", new UserInfoForm(GuiMain.getApplication().getMainFrame()));
+            dialogMap.put("UserInfoMangm", new UserInfoForm(mainFrame));
             dialogMap.get("UserInfoMangm").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("UserInfoMangm"));
@@ -673,7 +673,7 @@ public class MainView extends FrameView {
         if (c != null) {
             if (dialogMap.get("EditClient") == null) {
                 JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-                dialogMap.put("EditClient", new EditClientForm(c.getId(), GuiMain.getApplication().getMainFrame()));
+                dialogMap.put("EditClient", new EditClientForm(c.getId(), mainFrame));
                 dialogMap.get("EditClient").setLocationRelativeTo(mainFrame);
                 dialogMap.get("EditClient").addWindowListener(new WindowAdapter() {
 

@@ -38,6 +38,8 @@ public class EditWarehouseItemForm extends javax.swing.JDialog {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(EditWarehouseItemForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(192, 89));
+        setResizable(false);
 
         editWhiItemButton.setText(resourceMap.getString("editWhiItemButton.text")); // NOI18N
         editWhiItemButton.setName("editWhiItemButton"); // NOI18N

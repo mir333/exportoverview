@@ -50,6 +50,8 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(AddDocumentLineForm.class);
         setTitle(resourceMap.getString("title")); // NOI18N
         setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(280, 173));
+        setResizable(false);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(AddDocumentLineForm.class, this);
         addProductButton.setAction(actionMap.get("addDocumentLine")); // NOI18N

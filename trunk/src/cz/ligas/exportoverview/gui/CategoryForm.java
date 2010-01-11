@@ -39,7 +39,9 @@ public class CategoryForm extends javax.swing.JDialog {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(CategoryForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(367, 122));
         setName("Form"); // NOI18N
+        setResizable(false);
 
         categoryCodeL.setText(resourceMap.getString("categoryCodeL.text")); // NOI18N
         categoryCodeL.setName("categoryCodeL"); // NOI18N
