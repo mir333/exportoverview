@@ -34,6 +34,8 @@ public class EditDocumentLineForm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(EditDocumentLineForm.class);
         setTitle(resourceMap.getString("title")); // NOI18N
+        setMinimumSize(new java.awt.Dimension(162, 115));
+        setResizable(false);
 
         editDocumentLineL.setText(resourceMap.getString("editDocumentLineL.text")); // NOI18N
         editDocumentLineL.setName("editDocumentLineL"); // NOI18N

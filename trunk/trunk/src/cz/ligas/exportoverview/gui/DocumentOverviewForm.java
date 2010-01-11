@@ -42,6 +42,7 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentOverviewForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setMinimumSize(new java.awt.Dimension(570, 341));
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 

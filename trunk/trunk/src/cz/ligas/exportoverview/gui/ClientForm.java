@@ -52,7 +52,9 @@ public class ClientForm extends JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ClientForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setMinimumSize(new java.awt.Dimension(409, 221));
         setName("Form"); // NOI18N
+        setResizable(false);
 
         clientNameL.setText(resourceMap.getString("clientNameL.text")); // NOI18N
         clientNameL.setName("clientNameL"); // NOI18N

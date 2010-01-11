@@ -53,7 +53,9 @@ public class ProductForm extends javax.swing.JDialog {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ProductForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(421, 145));
         setName("Form"); // NOI18N
+        setResizable(false);
 
         categoryComboBox.setName("categoryComboBox"); // NOI18N
 

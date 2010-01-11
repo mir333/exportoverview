@@ -42,7 +42,9 @@ public class EditExportLineForm extends javax.swing.JDialog {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(EditExportLineForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(250, 115));
         setName("Form"); // NOI18N
+        setResizable(false);
 
         exportLineSentL.setText(resourceMap.getString("exportLineSentL.text")); // NOI18N
         exportLineSentL.setName("exportLineSentL"); // NOI18N
