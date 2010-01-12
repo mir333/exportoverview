@@ -2,12 +2,10 @@ package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.CategoryOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
-import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.ExportLine;
 import cz.ligas.exportoverview.db.ProductCategory;
 import cz.ligas.exportoverview.db.Products;
 import java.beans.Beans;
-import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,10 +24,8 @@ import org.jdesktop.swingbinding.SwingBindings;
  */
 public class AddProductForm extends javax.swing.JDialog {
 
-    Clients clinets = new Clients();
-
     /** Creates new form AddProductForm */
-    public AddProductForm(Clients c,java.awt.Frame parent) {
+    public AddProductForm(java.awt.Frame parent) {
         super(parent);
         initComponents();
         myInit();
@@ -63,7 +59,13 @@ public class AddProductForm extends javax.swing.JDialog {
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(413, 209));
+        setModal(true);
         setName("Form"); // NOI18N
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         categoryComboBox.setName("categoryComboBox"); // NOI18N
@@ -172,6 +174,10 @@ public class AddProductForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        fill();
+    }//GEN-LAST:event_formComponentShown
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addExportLineButton;
     private javax.swing.JComboBox categoryComboBox;
@@ -201,22 +207,18 @@ public class AddProductForm extends javax.swing.JDialog {
         mExportLineSpecialPriceIn.setInputVerifier(verifier);
         mExportLineSpecialPriceIn.addActionListener(verifier);
         exportLineCustomPriceL.setLabelFor(mExportLineSpecialPriceIn);
-        try {
-            categoryList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(CategoryOps.getCategories());
-        } catch (Exception ex) {
-            Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        fill();
         JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, categoryList, categoryComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
     }
 
     @Action
-    public void addExportLine(){
+    public void addExportLine() {
         try {
             ExportLine el = new ExportLine();
             el.setProd((Products) productComboBox.getSelectedItem());
-            el.setClient(clinets);
+            el.setClient(MainView.getInstance().getSelectedClient());
             el.setSentPrice(MyParser.paresePrice(mExportLineSpecialPriceIn.getText()));
             el.setSent(MyParser.pareseIntNumber(nExportLineSendIn.getText()));
             el.setSold(MyParser.pareseIntNumber(nExportLineSoldIn.getText()));
@@ -225,6 +227,17 @@ public class AddProductForm extends javax.swing.JDialog {
             this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(AddProductForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void fill() {
+        nExportLineSendIn.setText("");
+        nExportLineSoldIn.setText("");
+        mExportLineSpecialPriceIn.setText("");
+        try {
+            categoryList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(CategoryOps.getCategories());
+        } catch (Exception ex) {
+            Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

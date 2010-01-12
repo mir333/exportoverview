@@ -35,7 +35,13 @@ public class EditDocumentLineForm extends javax.swing.JDialog {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(EditDocumentLineForm.class);
         setTitle(resourceMap.getString("title")); // NOI18N
         setMinimumSize(new java.awt.Dimension(162, 115));
+        setModal(true);
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         editDocumentLineL.setText(resourceMap.getString("editDocumentLineL.text")); // NOI18N
         editDocumentLineL.setName("editDocumentLineL"); // NOI18N
@@ -96,6 +102,10 @@ public class EditDocumentLineForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+       fill();
+    }//GEN-LAST:event_formComponentShown
 	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JLabel amountL;
@@ -118,6 +128,10 @@ public class EditDocumentLineForm extends javax.swing.JDialog {
 
     @Action
     public void saveDocumentLine() {
+        System.err.println("Not overriden");
+    }
+
+    protected void fill() {
         System.err.println("Not overriden");
     }
 }

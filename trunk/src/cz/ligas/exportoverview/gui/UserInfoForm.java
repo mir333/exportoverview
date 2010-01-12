@@ -75,7 +75,7 @@ class UserInfoForm extends ClientForm {
 
         pack();
         setAlwaysOnTop(true);
-        
+
         tBankNameIn.setInputVerifier(verifier);
         tBankNameIn.addActionListener(verifier);
         bankNameL.setLabelFor(tBankNameIn);
@@ -89,14 +89,7 @@ class UserInfoForm extends ClientForm {
         tIsbanIn.addActionListener(verifier);
         isbanL.setLabelFor(tIsbanIn);
 
-        isEmpty = ClientOps.isUserInfoEmpty();
-        if (!isEmpty) {
-            try {
-                setUserInfo(ClientOps.getUserInfo());
-            } catch (Exception ex) {
-                Logger.getLogger(UserInfoForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        fill();
         setFocusable(true);
     }
 
@@ -157,5 +150,17 @@ class UserInfoForm extends ClientForm {
         tBankNoIn.setText(ui.getBankNo());
         tSwiftIn.setText(ui.getSwift());
         tIsbanIn.setText(ui.getIsban());
+    }
+
+    @Override
+    protected void fill() {
+        isEmpty = ClientOps.isUserInfoEmpty();
+        if (!isEmpty) {
+            try {
+                setUserInfo(ClientOps.getUserInfo());
+            } catch (Exception ex) {
+                Logger.getLogger(UserInfoForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }

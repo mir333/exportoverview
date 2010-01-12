@@ -12,24 +12,16 @@ import java.util.logging.Logger;
  */
 public class EditProductForm extends ProductForm {
 
-    private int productId;
 
-    public EditProductForm(int id,java.awt.Frame parent) {
+    public EditProductForm(java.awt.Frame parent) {
         super(parent);
-        productId = id;
-        Products prod = ProductOps.getProductById(id);
-        tProductCodeIn.setText(prod.getProductCode());
-        tProductDescIn.setText(prod.getProductDes());
-        tProductNameIn.setText(prod.getProductName());
-        mProductPriceIn.setText(prod.getProductPrice() + "");
-        categoryComboBox.setSelectedItem(prod.getProductCategoryId());
     }
 
     @Override
     public void saveProduct() {
         Products p = new Products();
         try {
-            p.setId(productId);
+            p.setId(WarehouseForm.getInstance().getSelectedProductId());
             p.setProductCode(tProductCodeIn.getText());
             p.setProductName(tProductNameIn.getText());
             p.setProductPrice(MyParser.paresePrice(mProductPriceIn.getText()));
@@ -44,5 +36,14 @@ public class EditProductForm extends ProductForm {
         } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    protected void fill(){
+        Products prod = ProductOps.getProductById(WarehouseForm.getInstance().getSelectedProductId());
+        tProductCodeIn.setText(prod.getProductCode());
+        tProductDescIn.setText(prod.getProductDes());
+        tProductNameIn.setText(prod.getProductName());
+        mProductPriceIn.setText(prod.getProductPrice() + "");
+        categoryComboBox.setSelectedItem(prod.getProductCategoryId());
     }
 }

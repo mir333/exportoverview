@@ -1,7 +1,6 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.WarehouseItemOps;
-import cz.ligas.exportoverview.db.WarehouseItem;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
@@ -13,9 +12,8 @@ import org.jdesktop.application.Action;
 public class EditWarehouseItemForm extends javax.swing.JDialog {
 
     /** Creates new form EditWarehouseItemForm */
-    public EditWarehouseItemForm(WarehouseItem whi,java.awt.Frame parent) {
+    public EditWarehouseItemForm(java.awt.Frame parent) {
         super(parent);
-        this.warehouseItem = whi;
         initComponents();
         myInit();
     }
@@ -39,8 +37,16 @@ public class EditWarehouseItemForm extends javax.swing.JDialog {
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(192, 89));
+        setModal(true);
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(EditWarehouseItemForm.class, this);
+        editWhiItemButton.setAction(actionMap.get("editExportLineSaveAction")); // NOI18N
         editWhiItemButton.setText(resourceMap.getString("editWhiItemButton.text")); // NOI18N
         editWhiItemButton.setName("editWhiItemButton"); // NOI18N
 
@@ -92,20 +98,24 @@ public class EditWarehouseItemForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        nEditWhItemCountSpinner.setValue(0);
+    }//GEN-LAST:event_formComponentShown
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel editWhItemCountL;
     private javax.swing.JLabel editWhItemL;
     private javax.swing.JButton editWhiItemButton;
     private javax.swing.JSpinner nEditWhItemCountSpinner;
     // End of variables declaration//GEN-END:variables
-    private WarehouseItem warehouseItem;
     private MyInputVerifier verifier = new MyInputVerifier();
 
     @Action
     public void editExportLineSaveAction() {
         int amount = Integer.parseInt(nEditWhItemCountSpinner.getValue().toString());
         try {
-            WarehouseItemOps.editWarehouseItem(warehouseItem,amount);
+            WarehouseItemOps.editWarehouseItem(WarehouseForm.getInstance().getSelectedWhItem(),amount);
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -113,9 +123,6 @@ public class EditWarehouseItemForm extends javax.swing.JDialog {
     }
 
     private void myInit() {
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(EditWarehouseItemForm.class, this);
-        editWhiItemButton.setAction(actionMap.get("editExportLineSaveAction")); // NOI18N
-        nEditWhItemCountSpinner.setValue(warehouseItem.getProductCount());
         nEditWhItemCountSpinner.setInputVerifier(verifier);
         editWhItemCountL.setLabelFor(nEditWhItemCountSpinner);
     }

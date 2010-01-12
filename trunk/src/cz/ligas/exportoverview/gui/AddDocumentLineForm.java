@@ -11,7 +11,6 @@ import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JComboBoxBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
-
 /**
  *
  * @author miro
@@ -51,7 +50,13 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
         setTitle(resourceMap.getString("title")); // NOI18N
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(280, 173));
+        setModal(true);
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(AddDocumentLineForm.class, this);
         addProductButton.setAction(actionMap.get("addDocumentLine")); // NOI18N
@@ -146,6 +151,9 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formComponentShown
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JLabel addDocumentLable;
     protected javax.swing.JButton addProductButton;
@@ -163,18 +171,14 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
     private MyInputVerifier verifier = new MyInputVerifier();
 
     private void myInit() {
-         bindingGroup = new BindingGroup();
+        bindingGroup = new BindingGroup();
         nAmountIn.setInputVerifier(verifier);
         nAmountIn.addActionListener(verifier);
         amountL.setLabelFor(nAmountIn);
         mPriceIn.setInputVerifier(verifier);
         mPriceIn.addActionListener(verifier);
         priceL.setLabelFor(mPriceIn);
-        try {
-            categoryList = CategoryOps.getCategories();
-        } catch (Exception ex) {
-            Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        fill();
         JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, categoryList, productCategoryComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
@@ -183,5 +187,15 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
     @Action
     public void addDocumentLine() {
         System.err.println("Not Overriden");
+    }
+
+    private void fill() {
+        nAmountIn.setText("");
+        mPriceIn.setText("");
+        try {
+            categoryList = CategoryOps.getCategories();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -33,9 +33,22 @@ import org.jdesktop.swingbinding.SwingBindings;
 /**
  * The application's main frame.
  */
-public class MainView extends FrameView {
+public final class MainView extends FrameView {
 
-    public MainView(SingleFrameApplication app) {
+    private static MainView instance = null;
+
+    public static MainView getInstance(SingleFrameApplication app) {
+        if (instance == null) {
+            instance = new MainView(app);
+        }
+        return instance;
+    }
+
+    public static MainView getInstance() {
+        return instance;
+    }
+
+    private MainView(SingleFrameApplication app) {
         super(app);
         initComponents();
         myInit();
@@ -368,32 +381,28 @@ public class MainView extends FrameView {
 
     private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
         if (evt.getClickCount() > 1) {
+            if (dialogMap.get("EditExportLine") == null) {
+                JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+                dialogMap.put("EditExportLine", new EditExportLineForm(GuiMain.getApplication().getMainFrame()));
+                dialogMap.get("EditExportLine").setLocationRelativeTo(mainFrame);
+                dialogMap.get("EditExportLine").addWindowListener(new WindowAdapter() {
 
-
-            final int index = mainTable.convertRowIndexToModel(mainTable.getSelectedRow());
-
-
-                    if (dialogMap.get("EditExportLine") == null) {
-            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("EditExportLine", new EditExportLineForm(exportLinesList.get(index),GuiMain.getApplication().getMainFrame()));
-            dialogMap.get("EditExportLine").setLocationRelativeTo(mainFrame);
-            dialogMap.get("EditExportLine").addWindowListener(new WindowAdapter() {
-
-                @Override
-                public void windowDeactivated(WindowEvent evt) {
-                    try {
-                        ExportLine exp = exportLinesList.get(index);
-                        exp = ExportLineOps.getExportLineById(exp.getId());
-                        exportLinesList.set(index, exp);
-                        refreshTotal();
-                        mainTable.updateUI();
-                    } catch (Exception ex) {
-                        Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                    @Override
+                    public void windowDeactivated(WindowEvent evt) {
+                        try {
+                            int index = mainTable.convertRowIndexToModel(mainTable.getSelectedRow());
+                            ExportLine exp = exportLinesList.get(index);
+                            exp = ExportLineOps.getExportLineById(exp.getId());
+                            exportLinesList.set(index, exp);
+                            refreshTotal();
+                            mainTable.updateUI();
+                        } catch (Exception ex) {
+                            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                }
-            });
-                    }
-        GuiMain.getApplication().show(dialogMap.get("EditExportLine"));
+                });
+            }
+            GuiMain.getApplication().show(dialogMap.get("EditExportLine"));
         }
     }//GEN-LAST:event_mainTableMouseClicked
 
@@ -532,7 +541,7 @@ public class MainView extends FrameView {
 
     @Action
     public void showInvoice() {
-        InvoiceForm invForm = new InvoiceForm();
+        InvoiceForm invForm = InvoiceForm.getInstance();
         invForm.setLocationRelativeTo(mainTable);
         invForm.setVisible(true);
     }
@@ -549,7 +558,7 @@ public class MainView extends FrameView {
 
     @Action
     public void showDelivery() {
-        DeliveryForm delivForm = new DeliveryForm();
+        DeliveryForm delivForm = DeliveryForm.getInstance();
         delivForm.setLocationRelativeTo(mainTable);
         delivForm.setVisible(true);
     }
@@ -566,14 +575,14 @@ public class MainView extends FrameView {
 
     @Action
     public void openDeliveryOverview() {
-        DeliveryOverviewForm delivForm = new DeliveryOverviewForm();
+        DeliveryOverviewForm delivForm = DeliveryOverviewForm.getInstance();
         delivForm.setLocationRelativeTo(mainTable);
         delivForm.setVisible(true);
     }
 
     @Action
     public void openInvoiceOverview() {
-        InvoiceOverviewForm delivForm = new InvoiceOverviewForm();
+        InvoiceOverviewForm delivForm = InvoiceOverviewForm.getInstance();
         delivForm.setLocationRelativeTo(mainTable);
         delivForm.setVisible(true);
     }
@@ -607,7 +616,7 @@ public class MainView extends FrameView {
 
     @Action
     public void openWarehouse() {
-        WarehouseForm whf = new WarehouseForm();
+        WarehouseForm whf = WarehouseForm.getInstance();
         whf.setLocationRelativeTo(mainTable);
         whf.setVisible(true);
     }
@@ -641,10 +650,9 @@ public class MainView extends FrameView {
 
     @Action
     public void addProduct() {
-        Clients c = (Clients) clientsComboBox.getSelectedItem();
         if (dialogMap.get("AddProduct") == null) {
             JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            dialogMap.put("AddProduct", new AddProductForm(c, mainFrame));
+            dialogMap.put("AddProduct", new AddProductForm(mainFrame));
             dialogMap.get("AddProduct").setLocationRelativeTo(mainFrame);
             dialogMap.get("AddProduct").addWindowListener(new WindowAdapter() {
 
@@ -669,22 +677,19 @@ public class MainView extends FrameView {
 
     @Action
     public void editClient() {
-        Clients c = (Clients) clientsComboBox.getSelectedItem();
-        if (c != null) {
-            if (dialogMap.get("EditClient") == null) {
-                JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-                dialogMap.put("EditClient", new EditClientForm(c.getId(), mainFrame));
-                dialogMap.get("EditClient").setLocationRelativeTo(mainFrame);
-                dialogMap.get("EditClient").addWindowListener(new WindowAdapter() {
+        if (dialogMap.get("EditClient") == null) {
+            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
+            dialogMap.put("EditClient", new EditClientForm(mainFrame));
+            dialogMap.get("EditClient").setLocationRelativeTo(mainFrame);
+            dialogMap.get("EditClient").addWindowListener(new WindowAdapter() {
 
-                    @Override
-                    public void windowDeactivated(WindowEvent e) {
-                        clientListRefresh();
-                    }
-                });
-            }
-            GuiMain.getApplication().show(dialogMap.get("EditClient"));
+                @Override
+                public void windowDeactivated(WindowEvent e) {
+                    clientListRefresh();
+                }
+            });
         }
+        GuiMain.getApplication().show(dialogMap.get("EditClient"));
     }
 
     @Action
@@ -730,6 +735,20 @@ public class MainView extends FrameView {
         if (ClientOps.isUserInfoEmpty()) {
             userInfoMangm();
         }
+    }
+
+    public Clients getSelectedClient() {
+        Clients c = (Clients) clientsComboBox.getSelectedItem();
+        if (c == null) {
+            MyUtilErrorClass.errorDialog("error.imput.novalue");
+            throw new IllegalArgumentException();
+        }
+        return c;
+    }
+
+    public ExportLine getSelectedExportLine(){
+        int index = mainTable.convertRowIndexToModel(mainTable.getSelectedRow());
+        return exportLinesList.get(index);
     }
 }
 // TODO: Dorobit potvrdenie na enter

@@ -20,12 +20,20 @@ import org.jdesktop.observablecollections.ObservableList;
  *
  * @author xligas
  */
-public class InvoiceForm extends DocumentForm {
+public final class InvoiceForm extends DocumentForm {
 
     private JDialog addInvoice;
     private JDialog editInvoice;
+    private static InvoiceForm instance = null;
 
-    public InvoiceForm() {
+    public static InvoiceForm getInstance() {
+        if (instance == null) {
+            instance = new InvoiceForm();
+        }
+        return instance;
+    }
+
+    private InvoiceForm() {
         super("Invoice", "title.invoice");
         myInit();
     }
@@ -57,15 +65,10 @@ public class InvoiceForm extends DocumentForm {
 
     @Override
     public void newDocument() {
-        Invoice i = (Invoice) docComboBox.getSelectedItem();
-        if (i == null) {
-            errorDialog("error.invoice.empty");
-            return;
-        }
+
         if (addInvoice == null) {
-            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            addInvoice = new AddInvoice(i, mainFrame);
-            addInvoice.setLocationRelativeTo(mainFrame);
+            addInvoice = new AddInvoice(this);
+            addInvoice.setLocationRelativeTo(this);
             addInvoice.addWindowListener(new WindowAdapter() {
 
                 @Override
@@ -108,10 +111,8 @@ public class InvoiceForm extends DocumentForm {
     public void documentTableMouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getClickCount() > 1) {
             if (editInvoice == null) {
-                int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
-                JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-                editInvoice = new EditInvoiceLineForm((InvoiceLine) documentLinesList.get(index), mainFrame);
-                editInvoice.setLocationRelativeTo(mainFrame);
+                editInvoice = new EditInvoiceLineForm(this);
+                editInvoice.setLocationRelativeTo(this);
                 editInvoice.addWindowListener(new WindowAdapter() {
 
                     @Override
@@ -144,6 +145,20 @@ public class InvoiceForm extends DocumentForm {
 
         }
     }
+
+    public Invoice getSelectedInvoice() {
+        Invoice i = (Invoice) docComboBox.getSelectedItem();
+        if (i == null) {
+            errorDialog("error.invoice.empty");
+        }
+        return i;
+    }
+
+    public InvoiceLine getSelectedInvoiceLine() {
+        int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
+        return (InvoiceLine) documentLinesList.get(index);
+    }
+
 
     private void refresh() {
         try {

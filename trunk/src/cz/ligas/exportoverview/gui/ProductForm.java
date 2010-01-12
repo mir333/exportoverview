@@ -18,7 +18,7 @@ import org.jdesktop.swingbinding.SwingBindings;
  * @author xligas
  */
 public class ProductForm extends javax.swing.JDialog {
-    
+
     /** Creates new form ProductForm */
     public ProductForm(java.awt.Frame parent) {
         super(parent);
@@ -54,8 +54,14 @@ public class ProductForm extends javax.swing.JDialog {
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(421, 145));
+        setModal(true);
         setName("Form"); // NOI18N
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         categoryComboBox.setName("categoryComboBox"); // NOI18N
 
@@ -160,27 +166,36 @@ public class ProductForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        fill();
+        try {
+            categoryList = CategoryOps.getCategories();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_formComponentShown
+
     @Action
     public void saveProduct() {
         Products p = new Products();
         try {
-        p.setProductCode(tProductCodeIn.getText());
-        p.setProductName(tProductNameIn.getText());
-        p.setProductPrice(MyParser.paresePrice(mProductPriceIn.getText()));
-        p.setProductDes(tProductDescIn.getText());
-        p.setProductCategoryId((ProductCategory) categoryComboBox.getSelectedItem());
-        //overenie vyplnenia
+            p.setProductCode(tProductCodeIn.getText());
+            p.setProductName(tProductNameIn.getText());
+            p.setProductPrice(MyParser.paresePrice(mProductPriceIn.getText()));
+            p.setProductDes(tProductDescIn.getText());
+            p.setProductCategoryId((ProductCategory) categoryComboBox.getSelectedItem());
+            //overenie vyplnenia
             ProductOps.addProduct(p);
 
-        }catch (javax.persistence.RollbackException sqlEx){
+        } catch (javax.persistence.RollbackException sqlEx) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, sqlEx);
             MyUtilErrorClass.errorDialog("error.sql.rollback");
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JComboBox categoryComboBox;
     protected javax.swing.JLabel categoryL;
@@ -221,5 +236,12 @@ public class ProductForm extends javax.swing.JDialog {
         JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, categoryList, categoryComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
+    }
+
+    protected void fill() {
+        tProductCodeIn.setText("");
+        tProductDescIn.setText("");
+        tProductNameIn.setText("");
+        mProductPriceIn.setText("");
     }
 }

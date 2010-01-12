@@ -53,8 +53,14 @@ public class ClientForm extends JDialog {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ClientForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setMinimumSize(new java.awt.Dimension(409, 221));
+        setModal(true);
         setName("Form"); // NOI18N
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         clientNameL.setText(resourceMap.getString("clientNameL.text")); // NOI18N
         clientNameL.setName("clientNameL"); // NOI18N
@@ -212,6 +218,10 @@ public class ClientForm extends JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        fill();
+    }//GEN-LAST:event_formComponentShown
+
     @Action
     public void clientSaveAction() {
         Clients c = new Clients();
@@ -282,5 +292,16 @@ public class ClientForm extends JDialog {
         tClientPhoneIn.setInputVerifier(verifier);
         tClientPhoneIn.addActionListener(verifier);
         clientPhoneL.setLabelFor(tClientPhoneIn);
+    }
+
+    protected void fill() {
+        tClientNameIn.setText("");
+        tClientAddressIn.setText("");
+        tClienCompanyIn.setText("");
+        tCountryIn.setText("");
+        tZipCodeIn.setText("");
+        tDICIn.setText("");
+        tICOIn.setText("");
+        tClientPhoneIn.setText("");
     }
 }

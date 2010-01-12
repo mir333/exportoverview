@@ -1,9 +1,7 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.DeliveryOps;
-import cz.ligas.exportoverview.db.Delivery;
 import cz.ligas.exportoverview.db.DeliveryLine;
-import cz.ligas.exportoverview.db.Document;
 import cz.ligas.exportoverview.db.Products;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,11 +12,9 @@ import java.util.logging.Logger;
  */
 public class AddDelivery extends AddDocumentLineForm {
 
-    Delivery delivery;
 
-    public AddDelivery(Document d,java.awt.Frame parent) {
+    public AddDelivery(java.awt.Frame parent) {
         super(parent);
-        this.delivery = (Delivery) d;
     }
 
     @Override
@@ -29,7 +25,7 @@ public class AddDelivery extends AddDocumentLineForm {
             float f = MyParser.paresePrice(mPriceIn.getText());
             dl.setAmount(i);
             dl.setPrice(f);
-            dl.setDocument(delivery);
+            dl.setDocument(DeliveryForm.getInstance().getSelectedDelviery());
             dl.setProd((Products) productComboBox.getSelectedItem());
             dl.setTotal(i * f);
             //overenie vyplnenia
