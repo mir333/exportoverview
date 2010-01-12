@@ -13,11 +13,18 @@ import org.jdesktop.observablecollections.ObservableList;
  *
  * @author miro
  */
-public class DeliveryOverviewForm extends DocumentOverviewForm {
+public final class DeliveryOverviewForm extends DocumentOverviewForm {
 
+    private static DeliveryOverviewForm instance = null;
 
+    public static DeliveryOverviewForm getInstance() {
+        if (instance == null) {
+            instance = new DeliveryOverviewForm();
+        }
+        return instance;
+    }
 
-    public DeliveryOverviewForm() {
+    private DeliveryOverviewForm() {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DocumentOverviewForm.class);
         topLable.setText(resourceMap.getString("delivery.title"));
         bindingMethod();
@@ -32,18 +39,19 @@ public class DeliveryOverviewForm extends DocumentOverviewForm {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @Override
-    public void refreshTable(){
-         try {
+    public void refreshTable() {
+        try {
             docList.clear();
             docList.addAll(DeliveryOps.getDeliveries());
         } catch (Exception ex) {
             Logger.getLogger(WarehouseForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         docsTable.updateUI();
-        float total=0;
+        float total = 0;
         for (Document delivery : docList) {
-            total+=delivery.getTotal();
+            total += delivery.getTotal();
         }
         mTotalOut.setValue(total);
     }

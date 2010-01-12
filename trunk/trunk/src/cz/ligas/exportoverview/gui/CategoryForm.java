@@ -40,8 +40,14 @@ public class CategoryForm extends javax.swing.JDialog {
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(367, 122));
+        setModal(true);
         setName("Form"); // NOI18N
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         categoryCodeL.setText(resourceMap.getString("categoryCodeL.text")); // NOI18N
         categoryCodeL.setName("categoryCodeL"); // NOI18N
@@ -103,6 +109,10 @@ public class CategoryForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        fill();
+    }//GEN-LAST:event_formComponentShown
+
     @Action
     public void saveCategory() {
         ProductCategory pc = new ProductCategory();
@@ -111,10 +121,10 @@ public class CategoryForm extends javax.swing.JDialog {
         //overenie vyplnenia
         try {
             CategoryOps.addCategory(pc);
-        }catch (javax.persistence.RollbackException sqlEx){
+        } catch (javax.persistence.RollbackException sqlEx) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, sqlEx);
             MyUtilErrorClass.errorDialog("error.sql.rollback");
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
@@ -136,5 +146,10 @@ public class CategoryForm extends javax.swing.JDialog {
         tCategoryNameIn.setInputVerifier(verifier);
         tCategoryNameIn.addActionListener(verifier);
         categoryNameL.setLabelFor(tCategoryNameIn);
+    }
+
+    private void fill() {
+        tCategoryCodeIn.setText("");
+        tCategoryNameIn.setText("");
     }
 }

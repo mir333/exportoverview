@@ -1,7 +1,6 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ExportLineOps;
-import cz.ligas.exportoverview.db.ExportLine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
@@ -13,9 +12,8 @@ import org.jdesktop.application.Action;
 public class EditExportLineForm extends javax.swing.JDialog {
 
     /** Creates new form EditExportLineForm */
-    public EditExportLineForm(ExportLine el,java.awt.Frame parent) {
+    public EditExportLineForm(java.awt.Frame parent) {
         super(parent);
-        this.exportLine = el;
         initComponents();
         myInit();
     }
@@ -43,8 +41,14 @@ public class EditExportLineForm extends javax.swing.JDialog {
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(250, 115));
+        setModal(true);
         setName("Form"); // NOI18N
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         exportLineSentL.setText(resourceMap.getString("exportLineSentL.text")); // NOI18N
         exportLineSentL.setName("exportLineSentL"); // NOI18N
@@ -115,6 +119,10 @@ public class EditExportLineForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        fill();
+    }//GEN-LAST:event_formComponentShown
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel exportLinePriceL;
     private javax.swing.JButton exportLineSaveButton;
@@ -125,7 +133,6 @@ public class EditExportLineForm extends javax.swing.JDialog {
     private javax.swing.JSpinner nExportLineSoldSpinner;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
-    private ExportLine exportLine;
     private MyInputVerifier verifier = new MyInputVerifier();
 
     @Action
@@ -134,7 +141,7 @@ public class EditExportLineForm extends javax.swing.JDialog {
         int send = 0;
         int sold = 0;
         try {
-            float price = exportLine.getPrice();
+            float price = MainView.getInstance().getSelectedExportLine().getPrice();
             if (!nExportLineSentSpinner.getValue().toString().equals("")) {
                 send = MyParser.pareseIntNumber(nExportLineSentSpinner.getValue().toString());
             }
@@ -144,7 +151,7 @@ public class EditExportLineForm extends javax.swing.JDialog {
             if (!mExportLinePriceTextfield.getText().equals("")) {
                 price = MyParser.paresePrice(mExportLinePriceTextfield.getText());
             }
-            ExportLineOps.editExportLine(exportLine, send, sold, price);
+            ExportLineOps.editExportLine(MainView.getInstance().getSelectedExportLine(), send, sold, price);
             this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,15 +160,18 @@ public class EditExportLineForm extends javax.swing.JDialog {
     }
 
     private void myInit() {
-        mExportLinePriceTextfield.setText(exportLine.getPrice() + "");
         mExportLinePriceTextfield.setInputVerifier(verifier);
         exportLinePriceL.setLabelFor(mExportLinePriceTextfield);
-        nExportLineSentSpinner.setValue(0);
         nExportLineSentSpinner.setInputVerifier(verifier);
         exportLineSentL.setLabelFor(nExportLineSentSpinner);
-        nExportLineSoldSpinner.setValue(0);
         nExportLineSoldSpinner.setInputVerifier(verifier);
         exportLineSoldL.setLabelFor(nExportLineSoldSpinner);
+        fill();
+    }
 
+    private void fill() {
+        mExportLinePriceTextfield.setText(MainView.getInstance().getSelectedExportLine().getPrice() + "");
+        nExportLineSentSpinner.setValue(0);
+        nExportLineSoldSpinner.setValue(0);
     }
 }

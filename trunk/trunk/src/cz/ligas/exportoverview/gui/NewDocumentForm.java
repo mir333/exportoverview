@@ -48,8 +48,14 @@ public class NewDocumentForm extends javax.swing.JDialog {
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(354, 93));
+        setModal(true);
         setName("Form"); // NOI18N
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         clientComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         clientComboBox.setName("clientComboBox"); // NOI18N
@@ -101,6 +107,10 @@ public class NewDocumentForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        fill();
+    }//GEN-LAST:event_formComponentShown
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox clientComboBox;
     private javax.swing.JLabel clientL;
@@ -112,12 +122,7 @@ public class NewDocumentForm extends javax.swing.JDialog {
 
     private void myInit() {
         bindingGroup = new BindingGroup();
-        try {
-            clientsList = ClientOps.getClients();
-        } catch (Exception ex) {
-            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        fill();
         JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, clientsList, clientComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
         bindingGroup.bind();
@@ -129,5 +134,13 @@ public class NewDocumentForm extends javax.swing.JDialog {
 
     protected Clients getClient() {
         return (Clients) clientComboBox.getSelectedItem();
+    }
+
+    protected void fill() {
+        try {
+            clientsList = ClientOps.getClients();
+        } catch (Exception ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -11,13 +11,36 @@ import java.util.logging.Logger;
  */
 public class EditClientForm extends ClientForm {
 
-    protected int clientId;
-
-    public EditClientForm(int i,java.awt.Frame parent) {
+    public EditClientForm(java.awt.Frame parent) {
         super(parent);
-        clientId=i;
+        setAlwaysOnTop(true);
+    }
+
+    @Override
+    public void clientSaveAction() {
+        Clients c = new Clients();
         try {
-            Clients c = ClientOps.getClientById(i);
+            c.setId(MainView.getInstance().getSelectedClient().getId());
+            c.setClientName(tClientNameIn.getText());
+            c.setCompany(tClienCompanyIn.getText());
+            c.setClientAddress(tClientAddressIn.getText());
+            c.setClientPhone(tClientPhoneIn.getText());
+            c.setPsc(tZipCodeIn.getText());
+            c.setCity(tCityIn.getText());
+            c.setCountry(tCountryIn.getText());
+            c.setIco(tICOIn.getText());
+            c.setDic(tDICIn.getText());
+            ClientOps.editClient(c);
+        } catch (Exception ex) {
+            Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }
+
+    @Override
+    protected void fill(){
+            try {
+            Clients c = ClientOps.getClientById(MainView.getInstance().getSelectedClient().getId());
             tCityIn.setText(c.getCity());
             tClienCompanyIn.setText(c.getCompany());
             tClientAddressIn.setText(c.getClientAddress());
@@ -30,28 +53,5 @@ public class EditClientForm extends ClientForm {
         } catch (Exception ex) {
             Logger.getLogger(EditClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        setAlwaysOnTop(true);
-    }
-
-     @Override
-     public void clientSaveAction() {
-        Clients c = new Clients();
-        c.setId(clientId);
-        c.setClientName(tClientNameIn.getText());
-        c.setCompany(tClienCompanyIn.getText());
-        c.setClientAddress(tClientAddressIn.getText());
-        c.setClientPhone(tClientPhoneIn.getText());
-        c.setPsc(tZipCodeIn.getText());
-        c.setCity(tCityIn.getText());
-        c.setCountry(tCountryIn.getText());
-        c.setIco(tICOIn.getText());
-        c.setDic(tDICIn.getText());
-
-        try {
-            ClientOps.editClient(c);
-        } catch (Exception ex) {
-            Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.dispose();
     }
 }

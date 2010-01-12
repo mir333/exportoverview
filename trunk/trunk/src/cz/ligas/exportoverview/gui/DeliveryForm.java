@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.observablecollections.ObservableList;
 
@@ -20,12 +19,20 @@ import org.jdesktop.observablecollections.ObservableList;
  *
  * @author xligas
  */
-public class DeliveryForm extends DocumentForm {
+public final class DeliveryForm extends DocumentForm {
 
     private JDialog addDelivery;
     private JDialog editDeliveryLine;
+    private static DeliveryForm instance = null;
 
-    public DeliveryForm() {
+    public static DeliveryForm getInstance() {
+        if (instance == null) {
+            instance = new DeliveryForm();
+        }
+        return instance;
+    }
+
+    private DeliveryForm() {
         super("Delivery", "title.delivery");
         myInit();
     }
@@ -57,15 +64,9 @@ public class DeliveryForm extends DocumentForm {
 
     @Override
     public void newDocument() {
-        Delivery d = (Delivery) docComboBox.getSelectedItem();
-        if (d == null) {
-            errorDialog("error.delivery.empty");
-            return;
-        }
         if (addDelivery == null) {
-            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            addDelivery = new AddDelivery(d, mainFrame);
-            addDelivery.setLocationRelativeTo(mainFrame);
+            addDelivery = new AddDelivery(this);
+            addDelivery.setLocationRelativeTo(this);
             addDelivery.addWindowListener(new WindowAdapter() {
 
                 @Override
@@ -108,10 +109,9 @@ public class DeliveryForm extends DocumentForm {
     public void documentTableMouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getClickCount() > 1) {
             if (editDeliveryLine == null) {
-                int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
-                JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-                editDeliveryLine = new EditDeliveryLineForm((DeliveryLine) documentLinesList.get(index), mainFrame);
-                editDeliveryLine.setLocationRelativeTo(mainFrame);
+
+                editDeliveryLine = new EditDeliveryLineForm(this);
+                editDeliveryLine.setLocationRelativeTo(this);
                 editDeliveryLine.addWindowListener(new WindowAdapter() {
 
                     @Override
@@ -144,6 +144,19 @@ public class DeliveryForm extends DocumentForm {
                 Logger.getLogger(DeliveryForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public Delivery getSelectedDelviery() {
+        Delivery d = (Delivery) docComboBox.getSelectedItem();
+        if (d == null) {
+            errorDialog("error.delivery.empty");
+        }
+        return d;
+    }
+
+    public DeliveryLine getSelectedDelvieryLine() {
+        int index = documentTable.convertRowIndexToModel(documentTable.getSelectedRow());
+        return (DeliveryLine) documentLinesList.get(index);
     }
 
     private void refresh() {

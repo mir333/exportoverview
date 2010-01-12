@@ -1,7 +1,6 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.DeliveryOps;
-import cz.ligas.exportoverview.db.DeliveryLine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,13 +10,9 @@ import java.util.logging.Logger;
  */
 public class EditDeliveryLineForm extends EditDocumentLineForm {
 
-    private DeliveryLine docLine;
 
-    public EditDeliveryLineForm(DeliveryLine dl,java.awt.Frame parent) {
+    public EditDeliveryLineForm(java.awt.Frame parent) {
         super(parent);
-        this.docLine = dl;
-        nAmountIn.setValue(0);
-        mPriceIn.setText(dl.getPrice() + "");
     }
 
     @Override
@@ -31,11 +26,16 @@ public class EditDeliveryLineForm extends EditDocumentLineForm {
             if (!mPriceIn.getText().equals("")) {
                 price = MyParser.paresePrice(mPriceIn.getText());
             }
-            DeliveryOps.editDeliveryLine(docLine, sold, price);
+            DeliveryOps.editDeliveryLine(DeliveryForm.getInstance().getSelectedDelvieryLine(), sold, price);
             this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+    }
+
+    @Override
+    protected void fill(){
+        nAmountIn.setValue(0);
+        mPriceIn.setText(DeliveryForm.getInstance().getSelectedDelvieryLine().getPrice() + "");
     }
 }

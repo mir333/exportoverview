@@ -3,6 +3,7 @@ package cz.ligas.exportoverview.gui;
 import cz.ligas.exportoverview.appli.CategoryOps;
 import cz.ligas.exportoverview.appli.WarehouseItemOps;
 import cz.ligas.exportoverview.db.ProductCategory;
+import cz.ligas.exportoverview.db.WarehouseItem;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.Beans;
@@ -10,9 +11,6 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import org.jdesktop.application.Action;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -27,13 +25,21 @@ import org.jdesktop.swingbinding.SwingBindings;
  *
  * @author xligas
  */
-public class WarehouseForm extends javax.swing.JFrame {
+public final class WarehouseForm extends javax.swing.JFrame {
 
     private JDialog editWhItem;
     private JDialog editProduct;
+    private static WarehouseForm instance = null;
+
+    public static WarehouseForm getInstance() {
+        if (instance == null) {
+            instance = new WarehouseForm();
+        }
+        return instance;
+    }
 
     /** Creates new form WarehouseForm */
-    public WarehouseForm() {
+    private WarehouseForm() {
         initComponents();
         myInit();
     }
@@ -68,6 +74,11 @@ public class WarehouseForm extends javax.swing.JFrame {
         warehouseTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 warehouseTableMouseClicked(evt);
+            }
+        });
+        warehouseTable.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                warehouseTableComponentShown(evt);
             }
         });
         jScrollPane1.setViewportView(warehouseTable);
@@ -141,11 +152,9 @@ public class WarehouseForm extends javax.swing.JFrame {
 
     private void warehouseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_warehouseTableMouseClicked
         if (evt.getClickCount() > 1) {
-            int index = warehouseTable.convertRowIndexToModel(warehouseTable.getSelectedRow());
             if (editWhItem == null) {
-                JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-                editWhItem = new EditWarehouseItemForm(warehouseItemList.get(index), mainFrame);
-                editWhItem.setLocationRelativeTo(mainFrame);
+                editWhItem = new EditWarehouseItemForm(this);
+                editWhItem.setLocationRelativeTo(this);
                 editWhItem.addWindowListener(new WindowAdapter() {
 
                     @Override
@@ -173,6 +182,11 @@ public class WarehouseForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_categoryComboBoxActionPerformed
+
+    private void warehouseTableComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_warehouseTableComponentShown
+        fill();
+    }//GEN-LAST:event_warehouseTableComponentShown
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox categoryComboBox;
     private javax.swing.JLabel categoryL;
@@ -189,12 +203,7 @@ public class WarehouseForm extends javax.swing.JFrame {
     private void myInit() {
         bindingGroup = new BindingGroup();
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getResourceMap(WarehouseForm.class);
-        try {
-            warehouseItemList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(WarehouseItemOps.getWarehouseItems());
-            categoryList = CategoryOps.getCategories();
-        } catch (Exception ex) {
-            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        fill();
         JComboBoxBinding jComboBoxBinding = SwingBindings.createJComboBoxBinding(AutoBinding.UpdateStrategy.READ_WRITE, categoryList, categoryComboBox);
         bindingGroup.addBinding(jComboBoxBinding);
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(cz.ligas.exportoverview.gui.GuiMain.class).getContext().getActionMap(WarehouseForm.class, this);
@@ -248,9 +257,8 @@ public class WarehouseForm extends javax.swing.JFrame {
     public void editProdut() {
         int index = warehouseTable.convertRowIndexToModel(warehouseTable.getSelectedRow());
         if (editProduct == null) {
-            JFrame mainFrame = GuiMain.getApplication().getMainFrame();
-            editProduct = new EditProductForm(warehouseItemList.get(index).getProductItem().getId(), mainFrame);
-            editProduct.setLocationRelativeTo(mainFrame);
+            editProduct = new EditProductForm(this);
+            editProduct.setLocationRelativeTo(this);
             editProduct.addWindowListener(new WindowAdapter() {
 
                 @Override
@@ -264,5 +272,24 @@ public class WarehouseForm extends javax.swing.JFrame {
             });
         }
         GuiMain.getApplication().show(editProduct);
+    }
+
+    public WarehouseItem getSelectedWhItem() {
+        int index = warehouseTable.convertRowIndexToModel(warehouseTable.getSelectedRow());
+        return (WarehouseItem) warehouseItemList.get(index);
+    }
+    
+    public int getSelectedProductId() {
+        int index = warehouseTable.convertRowIndexToModel(warehouseTable.getSelectedRow());
+        return warehouseItemList.get(index).getProductItem().getId();
+    }
+
+    private void fill() {
+        try {
+            warehouseItemList = Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(WarehouseItemOps.getWarehouseItems());
+            categoryList = CategoryOps.getCategories();
+        } catch (Exception ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
