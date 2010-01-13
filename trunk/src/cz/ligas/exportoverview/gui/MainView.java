@@ -52,7 +52,6 @@ public final class MainView extends FrameView {
         super(app);
         initComponents();
         myInit();
-        testFirstRun();
     }
 
     /** This method is called from within the constructor to
@@ -731,7 +730,7 @@ public final class MainView extends FrameView {
         }
     }
 
-    private void testFirstRun() {
+    public void testFirstRun() {
         if (ClientOps.isUserInfoEmpty()) {
             userInfoMangm();
         }
