@@ -38,18 +38,17 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
         productCategoryComboBox = new javax.swing.JComboBox();
         productComboBox = new javax.swing.JComboBox();
         nAmountIn = new javax.swing.JTextField();
-        mPriceIn = new javax.swing.JTextField();
         productCategoryL = new javax.swing.JLabel();
         productL = new javax.swing.JLabel();
         amountL = new javax.swing.JLabel();
         priceL = new javax.swing.JLabel();
         addDocumentLable = new javax.swing.JLabel();
+        mPriceIn = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(AddDocumentLineForm.class);
         setTitle(resourceMap.getString("title")); // NOI18N
         setAlwaysOnTop(true);
-        setMinimumSize(new java.awt.Dimension(280, 173));
         setModal(true);
         setResizable(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -73,11 +72,6 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
 
         nAmountIn.setName("nAmountIn"); // NOI18N
 
-        mPriceIn.setName("mPriceIn"); // NOI18N
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.productPrice}"), mPriceIn, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
         productCategoryL.setText(resourceMap.getString("productCategoryL.text")); // NOI18N
         productCategoryL.setName("productCategoryL"); // NOI18N
 
@@ -93,31 +87,33 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
         addDocumentLable.setText("Add produt to list:");
         addDocumentLable.setName("addDocumentLable"); // NOI18N
 
+        mPriceIn.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        mPriceIn.setName("mPriceIn"); // NOI18N
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.productPrice}"), mPriceIn, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(productCategoryL)
-                    .addComponent(productL)
-                    .addComponent(amountL)
-                    .addComponent(priceL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(productComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nAmountIn)
-                    .addComponent(mPriceIn)
-                    .addComponent(productCategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(addDocumentLable)
-                .addContainerGap(183, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(217, Short.MAX_VALUE)
-                .addComponent(addProductButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(productCategoryL)
+                            .addComponent(productL)
+                            .addComponent(amountL)
+                            .addComponent(priceL))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(productComboBox, 0, 171, Short.MAX_VALUE)
+                            .addComponent(nAmountIn, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                            .addComponent(productCategoryComboBox, 0, 171, Short.MAX_VALUE)
+                            .addComponent(mPriceIn, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)))
+                    .addComponent(addDocumentLable)
+                    .addComponent(addProductButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -139,8 +135,8 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
                     .addComponent(amountL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mPriceIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(priceL))
+                    .addComponent(priceL)
+                    .addComponent(mPriceIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addProductButton)
                 .addContainerGap())
@@ -158,7 +154,7 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
     protected javax.swing.JLabel addDocumentLable;
     protected javax.swing.JButton addProductButton;
     protected javax.swing.JLabel amountL;
-    protected javax.swing.JTextField mPriceIn;
+    protected javax.swing.JFormattedTextField mPriceIn;
     protected javax.swing.JTextField nAmountIn;
     protected javax.swing.JLabel priceL;
     protected javax.swing.JComboBox productCategoryComboBox;

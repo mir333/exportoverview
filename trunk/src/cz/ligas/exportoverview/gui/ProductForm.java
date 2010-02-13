@@ -169,7 +169,8 @@ public class ProductForm extends javax.swing.JDialog {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         fill();
         try {
-            categoryList = CategoryOps.getCategories();
+            categoryList.clear();
+            categoryList.addAll(CategoryOps.getCategories());
         } catch (Exception ex) {
             Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -5,9 +5,6 @@
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" resourceKey="title"/>
     <Property name="alwaysOnTop" type="boolean" value="true"/>
-    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[280, 173]"/>
-    </Property>
     <Property name="modal" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
@@ -34,29 +31,25 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="productCategoryL" min="-2" max="-2" attributes="0"/>
-                  <Component id="productL" min="-2" max="-2" attributes="0"/>
-                  <Component id="amountL" min="-2" max="-2" attributes="0"/>
-                  <Component id="priceL" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="productCategoryL" min="-2" max="-2" attributes="0"/>
+                          <Component id="productL" min="-2" max="-2" attributes="0"/>
+                          <Component id="amountL" min="-2" max="-2" attributes="0"/>
+                          <Component id="priceL" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="productComboBox" alignment="0" pref="171" max="32767" attributes="2"/>
+                          <Component id="nAmountIn" alignment="0" pref="171" max="32767" attributes="2"/>
+                          <Component id="productCategoryComboBox" alignment="0" pref="171" max="32767" attributes="3"/>
+                          <Component id="mPriceIn" alignment="0" pref="171" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="addDocumentLable" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="addProductButton" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="productComboBox" alignment="0" max="32767" attributes="1"/>
-                  <Component id="nAmountIn" alignment="0" max="32767" attributes="1"/>
-                  <Component id="mPriceIn" alignment="0" max="32767" attributes="1"/>
-                  <Component id="productCategoryComboBox" alignment="0" min="-2" pref="171" max="-2" attributes="1"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="addDocumentLable" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="183" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="217" max="32767" attributes="0"/>
-              <Component id="addProductButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -83,8 +76,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="mPriceIn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="priceL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mPriceIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="addProductButton" min="-2" max="-2" attributes="0"/>
@@ -127,16 +120,6 @@
         <Property name="name" type="java.lang.String" value="nAmountIn" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="mPriceIn">
-      <Properties>
-        <Property name="name" type="java.lang.String" value="mPriceIn" noResource="true"/>
-      </Properties>
-      <BindingProperties>
-        <BindingProperty name="text" source="productComboBox" sourcePath="${selectedItem.productPrice}" target="mPriceIn" targetPath="text" updateStrategy="0" immediately="false">
-          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-        </BindingProperty>
-      </BindingProperties>
-    </Component>
     <Component class="javax.swing.JLabel" name="productCategoryL">
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="productCategoryL.text"/>
@@ -166,6 +149,17 @@
         <Property name="text" type="java.lang.String" value="Add produt to list:"/>
         <Property name="name" type="java.lang.String" value="addDocumentLable" noResource="true"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="mPriceIn">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="0" type="0"/>
+        </Property>
+        <Property name="name" type="java.lang.String" value="mPriceIn" noResource="true"/>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="value" source="productComboBox" sourcePath="${selectedItem.productPrice}" target="mPriceIn" targetPath="value" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
   </SubComponents>
 </Form>

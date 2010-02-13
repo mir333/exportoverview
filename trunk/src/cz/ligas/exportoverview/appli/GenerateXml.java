@@ -104,7 +104,7 @@ public class GenerateXml {
 
     public static Source generateDocXml(String docType, Document d, Clients c, List<DocumentLine> documentLinesList, String paymantType)
             throws ParserConfigurationException, Exception {
-        NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
+        //NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
         //Create instance of DocumentBuilderFactory
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = factory.newDocumentBuilder();
@@ -128,19 +128,19 @@ public class GenerateXml {
             childElement.setTextContent(dl.getAmount() + "");
             delLine.appendChild(childElement);
             childElement = doc.createElement("price");
-            childElement.setTextContent(numberFormat.format(dl.getPrice()));
+            childElement.setTextContent(dl.getPrice()+"");
             delLine.appendChild(childElement);
             childElement = doc.createElement("vat");
             childElement.setTextContent("19%");
             delLine.appendChild(childElement);
             childElement = doc.createElement("total");
-            childElement.setTextContent(numberFormat.format(dl.getTotal()));
+            childElement.setTextContent(dl.getTotal()+"");
             delLine.appendChild(childElement);
             root.appendChild(delLine);
         }
         Element totals = doc.createElement("Totals");
         childElement = doc.createElement("sum");
-        childElement.setTextContent(numberFormat.format(d.getTotal()));
+        childElement.setTextContent(d.getTotal()+"");
         totals.appendChild(childElement);
         childElement = doc.createElement("paymentType");
         childElement.setTextContent(paymantType);
