@@ -50,15 +50,14 @@ public class AddProductForm extends javax.swing.JDialog {
         productL = new javax.swing.JLabel();
         exportLineSendL = new javax.swing.JLabel();
         exportLineSoldL = new javax.swing.JLabel();
-        mExportLineSpecialPriceIn = new javax.swing.JTextField();
         exportLineCustomPriceL = new javax.swing.JLabel();
         titleLabel = new javax.swing.JLabel();
+        mExportLineSpecialPriceIn = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(AddProductForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
-        setMinimumSize(new java.awt.Dimension(413, 209));
         setModal(true);
         setName("Form"); // NOI18N
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -100,16 +99,17 @@ public class AddProductForm extends javax.swing.JDialog {
         exportLineSoldL.setText(resourceMap.getString("exportLineSoldL.text")); // NOI18N
         exportLineSoldL.setName("exportLineSoldL"); // NOI18N
 
-        mExportLineSpecialPriceIn.setName("mExportLineSpecialPriceIn"); // NOI18N
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.productPrice}"), mExportLineSpecialPriceIn, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
         exportLineCustomPriceL.setText(resourceMap.getString("exportLineCustomPriceL.text")); // NOI18N
         exportLineCustomPriceL.setName("exportLineCustomPriceL"); // NOI18N
 
         titleLabel.setText(resourceMap.getString("titleLabel.text")); // NOI18N
         titleLabel.setName("titleLabel"); // NOI18N
+
+        mExportLineSpecialPriceIn.setText(resourceMap.getString("mExportLineSpecialPriceIn.text")); // NOI18N
+        mExportLineSpecialPriceIn.setName("mExportLineSpecialPriceIn"); // NOI18N
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productComboBox, org.jdesktop.beansbinding.ELProperty.create("${selectedItem.productPrice}"), mExportLineSpecialPriceIn, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,7 +136,7 @@ public class AddProductForm extends javax.swing.JDialog {
                             .addComponent(productComboBox, 0, 309, Short.MAX_VALUE)
                             .addComponent(nExportLineSendIn, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                             .addComponent(nExportLineSoldIn, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                            .addComponent(mExportLineSpecialPriceIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)))
+                            .addComponent(mExportLineSpecialPriceIn, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)))
                     .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -155,8 +155,8 @@ public class AddProductForm extends javax.swing.JDialog {
                     .addComponent(productComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mExportLineSpecialPriceIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exportLineCustomPriceL))
+                    .addComponent(exportLineCustomPriceL)
+                    .addComponent(mExportLineSpecialPriceIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nExportLineSendIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,7 +185,7 @@ public class AddProductForm extends javax.swing.JDialog {
     private javax.swing.JLabel exportLineCustomPriceL;
     private javax.swing.JLabel exportLineSendL;
     private javax.swing.JLabel exportLineSoldL;
-    private javax.swing.JTextField mExportLineSpecialPriceIn;
+    private javax.swing.JFormattedTextField mExportLineSpecialPriceIn;
     private javax.swing.JTextField nExportLineSendIn;
     private javax.swing.JTextField nExportLineSoldIn;
     private javax.swing.JComboBox productComboBox;
