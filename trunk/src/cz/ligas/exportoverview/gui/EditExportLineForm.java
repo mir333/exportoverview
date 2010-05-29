@@ -141,7 +141,7 @@ public class EditExportLineForm extends javax.swing.JDialog {
         int send = 0;
         int sold = 0;
         try {
-            float price = MainView.getInstance().getSelectedExportLine().getPrice();
+            double price = MainView.getInstance().getSelectedExportLine().getPrice();
             if (!nExportLineSentSpinner.getValue().toString().equals("")) {
                 send = MyParser.pareseIntNumber(nExportLineSentSpinner.getValue().toString());
             }

@@ -66,7 +66,7 @@ public class ClientOps {
         int total = 0;
         int totalSold = 0;
         int totalSent = 0;
-        float totalSendValue = 0;
+        double totalSendValue = 0;
         try {
             List<ExportLine> ls = ExportLineOps.getExportLinesByClient(client);
             for (ExportLine el : ls) {
@@ -135,7 +135,7 @@ public class ClientOps {
         }
     }
 
-    public static void editClientSoldTotal(int id, float total) {
+    public static void editClientSoldTotal(int id, double total) {
         EntityManager em = emFactory.createEntityManager();
         Clients c = em.find(Clients.class, id);
         c.setTotalSoldValue(total);

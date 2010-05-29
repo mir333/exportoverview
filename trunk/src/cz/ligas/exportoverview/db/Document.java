@@ -26,7 +26,7 @@ public class Document implements Serializable {
     private int id;
     private Date editDate;
     private int docNumber;
-    private float total;
+    private double total;
     private boolean lock;
     @ManyToOne
     private Clients client;
@@ -65,11 +65,11 @@ public class Document implements Serializable {
         this.editDate = editDate;
     }
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 

@@ -73,7 +73,7 @@ public class MyInputVerifier extends InputVerifier implements ActionListener {
         try {
 //            if(tf.getText().length()==0)
 //                return true;
-            String s = moneyFormat.format(moneyFormat.parse(tf.getText()).floatValue());
+            String s = moneyFormat.format(moneyFormat.parse(tf.getText()).doubleValue());
             tf.setText(s);
         } catch (ParseException pe) {
             message = "validation.error.money";

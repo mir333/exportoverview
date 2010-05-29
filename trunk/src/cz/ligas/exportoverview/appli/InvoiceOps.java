@@ -44,7 +44,7 @@ public class InvoiceOps {
         return il;
     }
 
-    public static void editInvoice(Invoice invoice, float total) throws Exception {
+    public static void editInvoice(Invoice invoice, double total) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         java.util.Date today = new java.util.Date();
         invoice.setEditDate(new java.sql.Date(today.getTime()));
@@ -116,9 +116,9 @@ public class InvoiceOps {
         return il;
     }
 
-    public static void editInvoiceLine(InvoiceLine il, int am, float price) throws Exception {
+    public static void editInvoiceLine(InvoiceLine il, int am, double price) throws Exception {
         int amount = am + il.getAmount();
-        float total = amount * price;
+        double total = amount * price;
         EntityManager em = emFactory.createEntityManager();
         Invoice i = em.find(Invoice.class, il.getDocument().getId());
         il.setAmount(amount);
@@ -161,7 +161,7 @@ public class InvoiceOps {
     }
 
     public static void recalculateInvoice(Invoice inv) throws Exception {
-        float total = 0L;
+        double total = 0L;
         inv = getInvoiceById(inv.getId());
         for (DocumentLine docl : inv.getDocumentLine()) {
             total += docl.getTotal();

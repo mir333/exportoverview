@@ -84,7 +84,7 @@ public class ExportLineOpsTest {
         em.close();
         int sent = 4;
         int sold = 5;
-        float price = 1000.0F;
+        double price = 1000.0;
         try {
             List result = ExportLineOps.getExportLinesByClient(c);
             assertTrue("list is empty", result.size() != 0);

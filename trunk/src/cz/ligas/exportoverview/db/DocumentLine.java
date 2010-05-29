@@ -25,9 +25,9 @@ public class DocumentLine implements Serializable {
     @Column(nullable=false)
     private int amount;
     @Column(nullable=false)
-    private float price;
+    private double price;
     @Column(nullable=false)
-    private float total;
+    private double total;
     @ManyToOne
     private Document document;
     @ManyToOne
@@ -57,11 +57,11 @@ public class DocumentLine implements Serializable {
         this.document = document;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -73,11 +73,11 @@ public class DocumentLine implements Serializable {
         this.prod = prod;
     }
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 

@@ -38,7 +38,7 @@ public class DocumentLineTest {
         em.getTransaction().begin();
         DeliveryLine dl = new DeliveryLine();
         dl.setAmount(35);
-        dl.setPrice(new Float("55.5"));
+        dl.setPrice(Double.valueOf("55.5"));
         dl.setDocument(del);
         del.getDocumentLine().add(dl);
         em.persist(dl);
@@ -65,7 +65,7 @@ public class DocumentLineTest {
         em.getTransaction().begin();
         InvoiceLine il = new InvoiceLine();
         il.setAmount(35);
-        il.setPrice(new Float("55.5"));
+        il.setPrice(Double.valueOf("55.5"));
         il.setDocument(i);
         i.getDocumentLine().add(il);
         em.persist(il);

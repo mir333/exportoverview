@@ -30,9 +30,9 @@ public class ExportLine implements Serializable {
     @Column(nullable=false)
     private int sold;
     @Column(nullable=false)
-    private float  price;
+    private double  price;
     @Column(nullable=false)
-    private float  sentPrice;
+    private double  sentPrice;
     @Column(nullable=false)
     private int total;
     @ManyToOne
@@ -70,19 +70,19 @@ public class ExportLine implements Serializable {
         changeSupport.firePropertyChange("sold", oldSold, sold);
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public float getSentPrice() {
+    public double getSentPrice() {
         return sentPrice;
     }
 
-    public void setSentPrice(float sentPrice) {
+    public void setSentPrice(double sentPrice) {
         this.sentPrice = sentPrice;
     }
 

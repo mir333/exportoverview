@@ -22,7 +22,7 @@ public class AddInvoice extends AddDocumentLineForm {
         InvoiceLine il = new InvoiceLine();
         try {
             int i = MyParser.pareseIntNumber(nAmountIn.getText());
-            float f = MyParser.paresePrice(mPriceIn.getText());
+            double f = MyParser.paresePrice(mPriceIn.getText());
             il.setAmount(i);
             il.setPrice(f);
             il.setDocument(InvoiceForm.getInstance().getSelectedInvoice());

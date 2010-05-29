@@ -16,8 +16,8 @@ public class Clients extends AbstractUser {
     private int total;
     private int totalSold;
     private int totalSent;
-    private float totalSendValue;
-    private float totalSoldValue;
+    private double totalSendValue;
+    private double totalSoldValue;
     @OneToMany(mappedBy = "client")
     private List<Document> documents;
     @OneToMany(mappedBy="client")
@@ -65,11 +65,11 @@ public class Clients extends AbstractUser {
         this.total = total;
     }
 
-    public float getTotalSendValue() {
+    public double getTotalSendValue() {
         return totalSendValue;
     }
 
-    public void setTotalSendValue(float totalSendValue) {
+    public void setTotalSendValue(double totalSendValue) {
         this.totalSendValue = totalSendValue;
     }
 
@@ -89,11 +89,11 @@ public class Clients extends AbstractUser {
         this.totalSold = totalSold;
     }
 
-    public float getTotalSoldValue() {
+    public double getTotalSoldValue() {
         return totalSoldValue;
     }
 
-    public void setTotalSoldValue(float totalSoldValue) {
+    public void setTotalSoldValue(double totalSoldValue) {
         this.totalSoldValue = totalSoldValue;
     }
 }

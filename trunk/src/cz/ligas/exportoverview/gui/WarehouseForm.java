@@ -220,7 +220,7 @@ public final class WarehouseForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = warehouseTableBinding.addColumnBinding(ELProperty.create("${productItem.productPrice}"));
         columnBinding.setColumnName(resourceMap.getString("warehouseTable.columnModel.productPrice"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Double.class);
         columnBinding.setEditable(false);
         columnBinding = warehouseTableBinding.addColumnBinding(ELProperty.create("${productCount}"));
         columnBinding.setColumnName(resourceMap.getString("warehouseTable.columnModel.productCount"));

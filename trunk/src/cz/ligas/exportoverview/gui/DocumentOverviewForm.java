@@ -156,7 +156,7 @@ public class DocumentOverviewForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = docsTableBinding.addColumnBinding(ELProperty.create("${total}"));
         columnBinding.setColumnName(resourceMap.getString("docTable.columnModel.total"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Double.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(docsTableBinding);
         docsTableBinding.bind();
