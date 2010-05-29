@@ -49,7 +49,7 @@ public final class InvoiceOverviewForm extends DocumentOverviewForm {
             Logger.getLogger(WarehouseForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         docsTable.updateUI();
-        float total = 0;
+        double total = 0;
         for (Document invoice : docList) {
             total += invoice.getTotal();
         }

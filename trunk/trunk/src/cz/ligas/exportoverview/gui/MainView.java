@@ -485,11 +485,11 @@ public final class MainView extends FrameView {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.productPrice"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Double.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.priceS"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Double.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sent}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.send"));
@@ -497,7 +497,7 @@ public final class MainView extends FrameView {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sentPrice}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sendPrice"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Double.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${sold}"));
         columnBinding.setColumnName(resourceMap.getString("mainTable.columnModel.sold"));

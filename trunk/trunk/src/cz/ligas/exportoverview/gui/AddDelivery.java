@@ -22,7 +22,7 @@ public class AddDelivery extends AddDocumentLineForm {
         DeliveryLine dl = new DeliveryLine();
         try {
             int i = MyParser.pareseIntNumber(nAmountIn.getText());
-            float f = MyParser.paresePrice(mPriceIn.getText());
+            double f = MyParser.paresePrice(mPriceIn.getText());
             dl.setAmount(i);
             dl.setPrice(f);
             dl.setDocument(DeliveryForm.getInstance().getSelectedDelviery());

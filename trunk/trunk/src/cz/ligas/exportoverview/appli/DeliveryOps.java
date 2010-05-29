@@ -46,7 +46,7 @@ public class DeliveryOps {
         return dl;
     }
 
-    public static void editDelivery(Delivery delivery, float total) throws Exception {
+    public static void editDelivery(Delivery delivery, double total) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         java.util.Date today = new java.util.Date();
         delivery.setEditDate(new java.sql.Date(today.getTime()));
@@ -121,11 +121,11 @@ public class DeliveryOps {
         return dl;
     }
 
-    public static void editDeliveryLine(DeliveryLine dl, int am, float price) throws Exception {
+    public static void editDeliveryLine(DeliveryLine dl, int am, double price) throws Exception {
         WarehouseItem whitem = WarehouseItemOps.getWarehouseItemByProductCode(dl.getProd().getProductCode());
         WarehouseItemOps.editWarehouseItem(whitem, -am);
         int amount = am + dl.getAmount();
-        float total = amount * price;
+        double total = amount * price;
         int id = dl.getDocument().getId();
         EntityManager em = emFactory.createEntityManager();
         Delivery d = em.find(Delivery.class, id);
@@ -173,7 +173,7 @@ public class DeliveryOps {
     }
 
     public static void recalculateDelivery(Delivery del) throws Exception {
-        float total = 0L;
+        double total = 0;
         del = getDeliveryById(del.getId());
         for (DocumentLine docl : del.getDocumentLine()) {
             total += docl.getTotal();

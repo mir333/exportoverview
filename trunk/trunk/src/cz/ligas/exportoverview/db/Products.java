@@ -36,7 +36,7 @@ public class Products implements Serializable {
     @Column(nullable=false)
     private String productName;
     @Column(nullable=false)
-    private float productPrice;
+    private double productPrice;
     private String productDes;
     @ManyToOne
     private ProductCategory productCategoryId;
@@ -82,12 +82,12 @@ public class Products implements Serializable {
         changeSupport.firePropertyChange("productName", oldProductName, productName);
     }
 
-    public float getProductPrice() {
+    public double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(float productPrice) {
-        float oldProductPrice = this.productPrice;
+    public void setProductPrice(double productPrice) {
+        double oldProductPrice = this.productPrice;
         this.productPrice = productPrice;
         changeSupport.firePropertyChange("productPrice", oldProductPrice, productPrice);
     }

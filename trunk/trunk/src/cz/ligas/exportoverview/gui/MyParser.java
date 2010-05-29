@@ -10,9 +10,9 @@ import java.util.Locale;
  */
 public class MyParser {
 
-    public static float paresePrice(String imput) throws ParseException{
+    public static double paresePrice(String imput) throws ParseException{
         NumberFormat moneyFormat = NumberFormat.getNumberInstance(Locale.getDefault());
-        return moneyFormat.parse(imput).floatValue();
+        return moneyFormat.parse(imput).doubleValue();
     }
 
     public static int pareseIntNumber(String imput) throws ParseException{

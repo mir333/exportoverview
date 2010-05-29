@@ -246,7 +246,7 @@ public class DocumentForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${prod.productPrice}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.productPrice"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Double.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${amount}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.amount"));
@@ -254,11 +254,11 @@ public class DocumentForm extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${price}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.priceS"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Double.class);
         columnBinding.setEditable(false);
         columnBinding = mainTableBinding.addColumnBinding(ELProperty.create("${total}"));
         columnBinding.setColumnName(resourceMap1.getString("mainTable.columnModel.total"));
-        columnBinding.setColumnClass(Float.class);
+        columnBinding.setColumnClass(Double.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(mainTableBinding);
         mainTableBinding.bind();

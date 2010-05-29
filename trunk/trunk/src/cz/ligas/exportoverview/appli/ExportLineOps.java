@@ -58,7 +58,7 @@ public class ExportLineOps {
         return list;
     }
 
-    public static void editExportLine(ExportLine exportLine, int sent, int sold, float price) throws Exception {
+    public static void editExportLine(ExportLine exportLine, int sent, int sold, double price) throws Exception {
         EntityManager em = emFactory.createEntityManager();
         Clients client = em.find(Clients.class, exportLine.getClient().getId());
         exportLine.setPrice(price);

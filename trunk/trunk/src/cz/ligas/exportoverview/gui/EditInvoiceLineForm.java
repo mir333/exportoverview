@@ -20,7 +20,7 @@ public class EditInvoiceLineForm extends EditDocumentLineForm {
     @Override
     public void saveDocumentLine() {
         int sold = 0;
-        float price = 0;
+        double price = 0;
         try {
             if (!nAmountIn.getValue().toString().equals("")) {
                 sold = MyParser.pareseIntNumber(nAmountIn.getValue().toString());
