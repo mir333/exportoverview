@@ -3,6 +3,7 @@ package cz.ligas.exportoverview.gui;
 import cz.ligas.exportoverview.appli.DeliveryOps;
 import cz.ligas.exportoverview.db.DeliveryLine;
 import cz.ligas.exportoverview.db.Products;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +31,8 @@ public class AddDelivery extends AddDocumentLineForm {
             dl.setTotal(i * f);
             //overenie vyplnenia
             DeliveryOps.addDeliveryLine(dl);
+        } catch (ParseException ex) {
+            MyUtilErrorClass.errorDialog("validation.error.field");
         } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }

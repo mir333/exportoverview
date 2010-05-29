@@ -1,6 +1,7 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.ExportLineOps;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
@@ -153,6 +154,8 @@ public class EditExportLineForm extends javax.swing.JDialog {
             }
             ExportLineOps.editExportLine(MainView.getInstance().getSelectedExportLine(), send, sold, price);
             this.dispose();
+        } catch (ParseException ex) {
+            MyUtilErrorClass.errorDialog("validation.error.field");
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }

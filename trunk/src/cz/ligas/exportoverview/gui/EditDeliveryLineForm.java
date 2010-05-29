@@ -1,6 +1,7 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.DeliveryOps;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +29,8 @@ public class EditDeliveryLineForm extends EditDocumentLineForm {
             }
             DeliveryOps.editDeliveryLine(DeliveryForm.getInstance().getSelectedDelvieryLine(), sold, price);
             this.dispose();
+        } catch (ParseException ex) {
+            MyUtilErrorClass.errorDialog("validation.error.field");
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }

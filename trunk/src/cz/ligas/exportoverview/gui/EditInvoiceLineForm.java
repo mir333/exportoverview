@@ -1,6 +1,7 @@
 package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.InvoiceOps;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +31,8 @@ public class EditInvoiceLineForm extends EditDocumentLineForm {
             }
             InvoiceOps.editInvoiceLine(InvoiceForm.getInstance().getSelectedInvoiceLine(), sold, price);
             this.dispose();
+        } catch (ParseException ex) {
+            MyUtilErrorClass.errorDialog("validation.error.field");
         } catch (Exception ex) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, ex);
         }
