@@ -8,8 +8,6 @@ import java.util.Locale;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
-import org.jdesktop.application.Application;
-import org.jdesktop.application.ResourceMap;
 
 /**
  *

@@ -6,6 +6,7 @@ import cz.ligas.exportoverview.db.ExportLine;
 import cz.ligas.exportoverview.db.ProductCategory;
 import cz.ligas.exportoverview.db.Products;
 import java.beans.Beans;
+import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -225,6 +226,8 @@ public class AddProductForm extends javax.swing.JDialog {
             ExportLineOps.addExportLine(el);
             //ExportOps.recalculateExport(clinets);
             this.dispose();
+        } catch (ParseException ex) {
+            MyUtilErrorClass.errorDialog("validation.error.field");
         } catch (Exception ex) {
             Logger.getLogger(AddProductForm.class.getName()).log(Level.SEVERE, null, ex);
         }

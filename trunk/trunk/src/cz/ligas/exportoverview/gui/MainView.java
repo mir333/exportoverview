@@ -536,6 +536,7 @@ public final class MainView extends FrameView {
             dialogMap.get("AboutBox").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("AboutBox"));
+        dialogMap.get("AboutBox").toFront();
     }
 
     @Action
@@ -553,6 +554,7 @@ public final class MainView extends FrameView {
             dialogMap.get("NewInvoice").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("NewInvoice"));
+        dialogMap.get("NewInvoice").toFront();
     }
 
     @Action
@@ -570,6 +572,7 @@ public final class MainView extends FrameView {
             dialogMap.get("NewDelivery").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("NewDelivery"));
+        dialogMap.get("NewDelivery").toFront();
     }
 
     @Action
@@ -601,6 +604,7 @@ public final class MainView extends FrameView {
             });
         }
         GuiMain.getApplication().show(dialogMap.get("NewClient"));
+        dialogMap.get("NewClient").toFront();
     }
 
     @Action
@@ -611,6 +615,7 @@ public final class MainView extends FrameView {
             dialogMap.get("NewCategory").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("NewCategory"));
+        dialogMap.get("NewCategory").toFront();
     }
 
     @Action
@@ -628,6 +633,7 @@ public final class MainView extends FrameView {
             dialogMap.get("NewProduct").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("NewProduct"));
+        dialogMap.get("NewProduct").toFront();
     }
 
     @Action
@@ -645,6 +651,7 @@ public final class MainView extends FrameView {
             });
         }
         GuiMain.getApplication().show(dialogMap.get("NewExport"));
+        dialogMap.get("NewExport").toFront();
     }
 
     @Action
@@ -662,6 +669,7 @@ public final class MainView extends FrameView {
             });
         }
         GuiMain.getApplication().show(dialogMap.get("AddProduct"));
+        dialogMap.get("AddProduct").toFront();
     }
 
     @Action
@@ -672,6 +680,7 @@ public final class MainView extends FrameView {
             dialogMap.get("UserInfoMangm").setLocationRelativeTo(mainFrame);
         }
         GuiMain.getApplication().show(dialogMap.get("UserInfoMangm"));
+        dialogMap.get("UserInfoMangm").toFront();
     }
 
     @Action
@@ -689,6 +698,7 @@ public final class MainView extends FrameView {
             });
         }
         GuiMain.getApplication().show(dialogMap.get("EditClient"));
+        dialogMap.get("EditClient").toFront();
     }
 
     @Action

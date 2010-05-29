@@ -3,6 +3,7 @@ package cz.ligas.exportoverview.gui;
 import cz.ligas.exportoverview.appli.ProductOps;
 import cz.ligas.exportoverview.db.ProductCategory;
 import cz.ligas.exportoverview.db.Products;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,6 +34,8 @@ public class EditProductForm extends ProductForm {
         } catch (javax.persistence.RollbackException sqlEx) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, sqlEx);
             MyUtilErrorClass.errorDialog("error.sql.rollback");
+        } catch (ParseException ex) {
+            MyUtilErrorClass.errorDialog("validation.error.field");
         } catch (Exception ex) {
             Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
         }
