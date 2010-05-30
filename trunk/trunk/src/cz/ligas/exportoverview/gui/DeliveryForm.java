@@ -21,7 +21,7 @@ import org.jdesktop.observablecollections.ObservableList;
  */
 public final class DeliveryForm extends DocumentForm {
 
-    private JDialog addDelivery;
+    private AddDelivery addDelivery;
     private JDialog editDeliveryLine;
     private static DeliveryForm instance = null;
 
@@ -76,6 +76,8 @@ public final class DeliveryForm extends DocumentForm {
                     refresh();
                 }
             });
+        }else{
+            addDelivery.fill();
         }
         GuiMain.getApplication().show(addDelivery);
     }
