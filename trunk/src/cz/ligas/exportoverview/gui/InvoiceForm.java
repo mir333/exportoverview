@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.observablecollections.ObservableList;
 
@@ -22,7 +21,7 @@ import org.jdesktop.observablecollections.ObservableList;
  */
 public final class InvoiceForm extends DocumentForm {
 
-    private JDialog addInvoice;
+    private AddInvoice addInvoice;
     private JDialog editInvoice;
     private static InvoiceForm instance = null;
 
@@ -78,6 +77,8 @@ public final class InvoiceForm extends DocumentForm {
                     refresh();
                 }
             });
+        }else{
+            addInvoice.fill();
         }
         GuiMain.getApplication().show(addInvoice);
     }

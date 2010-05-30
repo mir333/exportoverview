@@ -2,12 +2,16 @@ package cz.ligas.exportoverview.gui;
 
 import cz.ligas.exportoverview.appli.CategoryOps;
 import cz.ligas.exportoverview.db.ProductCategory;
+import java.beans.Beans;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdesktop.application.Action;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.observablecollections.ObservableCollections;
+import org.jdesktop.observablecollections.ObservableList;
 import org.jdesktop.swingbinding.JComboBoxBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
@@ -163,7 +167,7 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
     protected javax.swing.JLabel productL;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-    private List<ProductCategory> categoryList;
+    private List<ProductCategory> categoryList = null;
     private MyInputVerifier verifier = new MyInputVerifier();
 
     private void myInit() {
@@ -185,11 +189,16 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
         System.err.println("Not Overriden");
     }
 
-    private void fill() {
+    protected void fill() {
         nAmountIn.setText("");
         mPriceIn.setText("");
         try {
-            categoryList = CategoryOps.getCategories();
+            if(categoryList == null)
+                categoryList =  Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(CategoryOps.getCategories());
+            else{
+                categoryList.clear();
+                categoryList.addAll(CategoryOps.getCategories());
+            }
         } catch (Exception ex) {
             Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
         }

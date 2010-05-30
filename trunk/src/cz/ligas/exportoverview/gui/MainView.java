@@ -760,6 +760,8 @@ public final class MainView extends FrameView {
         return exportLinesList.get(index);
     }
 }
+// TODO: Vytvaranie produktov do skladu 
+// TODO: preklikavanie z prehladu k documentom
 // TODO: Dorobit potvrdenie na enter
 // TODO: Upravit DB aby potporovala uniqu itemy
 // TODO: include inheritance in entity classes
