@@ -46,7 +46,8 @@ public class EditProductForm extends ProductForm {
         tProductCodeIn.setText(prod.getProductCode());
         tProductDescIn.setText(prod.getProductDes());
         tProductNameIn.setText(prod.getProductName());
-        mProductPriceIn.setText(prod.getProductPrice() + "");
+        double price = prod.getProductPrice();
+        mProductPriceIn.setText(MyFormater.priceFormater(price));
         categoryComboBox.setSelectedItem(prod.getProductCategoryId());
     }
 }

@@ -173,7 +173,8 @@ public class EditExportLineForm extends javax.swing.JDialog {
     }
 
     private void fill() {
-        mExportLinePriceTextfield.setText(MainView.getInstance().getSelectedExportLine().getPrice() + "");
+        double price =MainView.getInstance().getSelectedExportLine().getPrice();
+        mExportLinePriceTextfield.setText(MyFormater.priceFormater(price));
         nExportLineSentSpinner.setValue(0);
         nExportLineSoldSpinner.setValue(0);
     }

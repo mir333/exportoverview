@@ -39,6 +39,7 @@ public class EditDeliveryLineForm extends EditDocumentLineForm {
     @Override
     protected void fill(){
         nAmountIn.setValue(0);
-        mPriceIn.setText(DeliveryForm.getInstance().getSelectedDelvieryLine().getPrice() + "");
+        double price = DeliveryForm.getInstance().getSelectedDelvieryLine().getPrice();
+        mPriceIn.setText(MyFormater.priceFormater(price));
     }
 }
