@@ -28,6 +28,8 @@ public final class DeliveryForm extends DocumentForm {
     public static DeliveryForm getInstance() {
         if (instance == null) {
             instance = new DeliveryForm();
+        }else{
+            instance.fillDocComboBox();
         }
         return instance;
     }
