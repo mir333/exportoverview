@@ -1,6 +1,8 @@
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.util.MyInputVerifier;
 import cz.ligas.exportoverview.appli.CategoryOps;
+import cz.ligas.exportoverview.db.Document;
 import cz.ligas.exportoverview.db.ProductCategory;
 import java.beans.Beans;
 import java.util.Collections;
@@ -21,6 +23,7 @@ import org.jdesktop.swingbinding.SwingBindings;
  */
 public class AddDocumentLineForm extends javax.swing.JDialog {
 
+    protected Document doc=null;
     /** Creates new form AddDocumentLine */
     public AddDocumentLineForm(java.awt.Frame parent) {
         super(parent);
@@ -202,5 +205,13 @@ public class AddDocumentLineForm extends javax.swing.JDialog {
         } catch (Exception ex) {
             Logger.getLogger(ProductForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    protected Document getDoc() {
+        return doc;
+    }
+
+    protected void setDoc(Document doc) {
+        this.doc = doc;
     }
 }

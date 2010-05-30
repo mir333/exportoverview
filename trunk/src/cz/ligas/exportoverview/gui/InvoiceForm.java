@@ -80,6 +80,7 @@ public final class InvoiceForm extends DocumentForm {
         }else{
             addInvoice.fill();
         }
+        addInvoice.setDoc(getSelectedInvoice());
         GuiMain.getApplication().show(addInvoice);
     }
 

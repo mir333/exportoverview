@@ -1,5 +1,6 @@
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.util.MyUtilErrorClass;
 import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.appli.ExportLineOps;
 import cz.ligas.exportoverview.db.Clients;

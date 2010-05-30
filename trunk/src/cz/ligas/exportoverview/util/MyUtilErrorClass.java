@@ -1,4 +1,4 @@
-package cz.ligas.exportoverview.gui;
+package cz.ligas.exportoverview.util;
 
 import javax.swing.JOptionPane;
 

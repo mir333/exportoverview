@@ -1,4 +1,4 @@
-package cz.ligas.exportoverview.gui;
+package cz.ligas.exportoverview.util;
 
 import java.text.NumberFormat;
 import java.util.Locale;

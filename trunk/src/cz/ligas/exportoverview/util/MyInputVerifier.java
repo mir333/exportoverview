@@ -1,4 +1,4 @@
-package cz.ligas.exportoverview.gui;
+package cz.ligas.exportoverview.util;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
