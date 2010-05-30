@@ -1,5 +1,7 @@
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.util.MyInputVerifier;
+import cz.ligas.exportoverview.util.MyUtilErrorClass;
 import cz.ligas.exportoverview.appli.CategoryOps;
 import cz.ligas.exportoverview.db.ProductCategory;
 import java.util.logging.Level;

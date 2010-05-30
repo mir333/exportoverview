@@ -1,5 +1,6 @@
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.util.MyInputVerifier;
 import org.jdesktop.application.Action;
 
 /**

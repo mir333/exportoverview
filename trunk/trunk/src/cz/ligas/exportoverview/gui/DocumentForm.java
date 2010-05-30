@@ -297,16 +297,25 @@ public class DocumentForm extends javax.swing.JFrame {
     @Action
     public void printDoc() {
         try {
-
-            String path = saveFile("html.htm");
+            String path = saveFile("page_.htm");
             if (path == null) {
                 return;
             }
+            path = path.split("\\.")[0];
+            int pageSize = 25;
+            int size = documentLinesList.size();
+            
             Clients c = (Clients) clientComboBox.getSelectedItem();
             Document d = (Document) docComboBox.getSelectedItem();
-            Source src = GenerateXml.generateDocXml(lable, d, c, documentLinesList, optionDialog());
-            org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(GuiMain.class).getContext().getResourceMap(GuiMain.class);
-            GenerateXml.generateHtml(path, src, resourceMap.getString("files.xslt"));
+            String paimentType =  optionDialog();
+            for(int i = 0;i < (size % pageSize);i++){
+                int from = (pageSize+1)*i;
+                int to = from+pageSize;
+                to = to > size ? size : to;
+                Source src = GenerateXml.generateDocXml(lable, d, c, documentLinesList.subList(from, to),paimentType);
+                org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(GuiMain.class).getContext().getResourceMap(GuiMain.class);
+                GenerateXml.generateHtml(path+i+".htm", src, resourceMap.getString("files.xslt"));
+            }
         } catch (Exception e) {
             Logger.getLogger(EditExportLineForm.class.getName()).log(Level.SEVERE, null, e);
         }

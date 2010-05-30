@@ -79,6 +79,7 @@ public final class DeliveryForm extends DocumentForm {
         }else{
             addDelivery.fill();
         }
+        addDelivery.setDoc(getSelectedDelviery());
         GuiMain.getApplication().show(addDelivery);
     }
 
@@ -86,7 +87,6 @@ public final class DeliveryForm extends DocumentForm {
     public void fillDocComboBox() {
         if (docList != null) {
             try {
-
                 docList.clear();
                 Clients cl = (Clients) clientComboBox.getSelectedItem();
                 docList.addAll(Beans.isDesignTime() ? (ObservableList) Collections.emptyList() : ObservableCollections.observableList(DeliveryOps.getDeliveriesFromClient(cl)));

@@ -1,5 +1,6 @@
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.util.MyInputVerifier;
 import cz.ligas.exportoverview.appli.WarehouseItemOps;
 import java.util.logging.Level;
 import java.util.logging.Logger;

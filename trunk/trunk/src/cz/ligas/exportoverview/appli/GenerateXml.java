@@ -4,7 +4,7 @@ import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Document;
 import cz.ligas.exportoverview.db.DocumentLine;
 import cz.ligas.exportoverview.db.UserInfo;
-import cz.ligas.exportoverview.gui.MyFormater;
+import cz.ligas.exportoverview.util.MyFormater;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -5,6 +5,7 @@
 package cz.ligas.exportoverview.appli;
 
 import cz.ligas.exportoverview.db.WarehouseItem;
+import cz.ligas.exportoverview.exceptoions.NoProductsInWarehouseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -64,9 +65,10 @@ public class WarehouseItemOps {
     }
 
     public static void editWarehouseItem(WarehouseItem whi, int amount) throws Exception {
-        whi.setProductCount(whi.getProductCount() + amount);
-        if(whi.getProductCount()<0)
-            throw new IllegalArgumentException("error.warehouse.negativeValue");
+        int productCount = whi.getProductCount() + amount;
+        if(productCount < 0)
+            throw new NoProductsInWarehouseException("validation.error.warehouseNegativeValue");
+        whi.setProductCount(productCount);
         EntityManager em = emFactory.createEntityManager();
         em.getTransaction().begin();
         em.merge(whi);

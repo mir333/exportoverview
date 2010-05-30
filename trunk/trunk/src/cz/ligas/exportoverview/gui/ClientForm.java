@@ -5,6 +5,7 @@
  */
 package cz.ligas.exportoverview.gui;
 
+import cz.ligas.exportoverview.util.MyInputVerifier;
 import cz.ligas.exportoverview.appli.ClientOps;
 import cz.ligas.exportoverview.db.Clients;
 import java.util.logging.Level;
