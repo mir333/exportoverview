@@ -4,12 +4,11 @@ import cz.ligas.exportoverview.db.Clients;
 import cz.ligas.exportoverview.db.Document;
 import cz.ligas.exportoverview.db.DocumentLine;
 import cz.ligas.exportoverview.db.UserInfo;
+import cz.ligas.exportoverview.gui.MyFormater;
 import java.io.File;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -104,7 +103,6 @@ public class GenerateXml {
 
     public static Source generateDocXml(String docType, Document d, Clients c, List<DocumentLine> documentLinesList, String paymantType)
             throws ParserConfigurationException, Exception {
-        //NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
         //Create instance of DocumentBuilderFactory
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = factory.newDocumentBuilder();
@@ -128,19 +126,19 @@ public class GenerateXml {
             childElement.setTextContent(dl.getAmount() + "");
             delLine.appendChild(childElement);
             childElement = doc.createElement("price");
-            childElement.setTextContent(dl.getPrice()+"");
+            childElement.setTextContent(MyFormater.priceFormater(dl.getPrice()));
             delLine.appendChild(childElement);
             childElement = doc.createElement("vat");
             childElement.setTextContent("19%");
             delLine.appendChild(childElement);
             childElement = doc.createElement("total");
-            childElement.setTextContent(dl.getTotal()+"");
+            childElement.setTextContent(MyFormater.priceFormater(dl.getTotal()));
             delLine.appendChild(childElement);
             root.appendChild(delLine);
         }
         Element totals = doc.createElement("Totals");
         childElement = doc.createElement("sum");
-        childElement.setTextContent(d.getTotal()+"");
+        childElement.setTextContent(MyFormater.priceFormater(d.getTotal()));
         totals.appendChild(childElement);
         childElement = doc.createElement("paymentType");
         childElement.setTextContent(paymantType);

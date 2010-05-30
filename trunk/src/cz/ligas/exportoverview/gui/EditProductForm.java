@@ -41,6 +41,7 @@ public class EditProductForm extends ProductForm {
         }
     }
     
+    @Override
     protected void fill(){
         Products prod = ProductOps.getProductById(WarehouseForm.getInstance().getSelectedProductId());
         tProductCodeIn.setText(prod.getProductCode());

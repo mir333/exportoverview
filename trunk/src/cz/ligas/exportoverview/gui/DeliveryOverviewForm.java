@@ -16,7 +16,7 @@ import org.jdesktop.observablecollections.ObservableList;
 public final class DeliveryOverviewForm extends DocumentOverviewForm {
 
     private static DeliveryOverviewForm instance = null;
-
+    
     public static DeliveryOverviewForm getInstance() {
         if (instance == null) {
             instance = new DeliveryOverviewForm();

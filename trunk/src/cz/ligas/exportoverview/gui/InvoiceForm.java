@@ -29,6 +29,8 @@ public final class InvoiceForm extends DocumentForm {
     public static InvoiceForm getInstance() {
         if (instance == null) {
             instance = new InvoiceForm();
+        }else{
+            instance.fillDocComboBox();
         }
         return instance;
     }
