@@ -14,7 +14,8 @@ public class EditInvoiceLineForm extends EditDocumentLineForm {
     public EditInvoiceLineForm(java.awt.Frame parent) {
         super(parent);
         nAmountIn.setValue(0);
-        mPriceIn.setText(InvoiceForm.getInstance().getSelectedInvoiceLine().getPrice() + "");
+        double price = InvoiceForm.getInstance().getSelectedInvoiceLine().getPrice();
+        mPriceIn.setText(MyFormater.priceFormater(price));
 
     }
 
