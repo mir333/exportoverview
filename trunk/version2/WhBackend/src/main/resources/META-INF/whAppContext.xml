@@ -5,8 +5,6 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd"
       >
 
-      <import resource="calendar-dao.xml" />
-      <import resource="calendar-service.xml" />
-      <import resource="calendar-hibernate.xml" />
+
 
 </beans>

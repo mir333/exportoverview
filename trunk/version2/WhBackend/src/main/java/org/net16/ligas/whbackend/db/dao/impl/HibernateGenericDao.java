@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.net16.ligas.whbackend.db.dao.GenericDao;
+import org.net16.ligas.whbackend.db.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -66,7 +67,7 @@ public abstract class HibernateGenericDao<T, ID extends Serializable> implements
 
     @Override
     public T findById(ID id) {
-        T entity = (T) template.get(clazz, id);
+        T entity = template.get(clazz, id);
         if (entity == null) {
             throw new EntityNotFoundException(clazz, id);
         }
