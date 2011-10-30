@@ -1,4 +1,4 @@
-package org.net16.ligas.whbackend.db.dao.impl;
+package org.net16.ligas.whbackend.db.exceptions;
 
 import java.io.Serializable;
 
