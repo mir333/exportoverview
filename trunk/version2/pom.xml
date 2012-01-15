@@ -1,0 +1,175 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.net16.ligas</groupId>
+    <artifactId>wh-app</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Warehouse application</name>
+    <url>http://ligas.net16.net</url>
+
+
+    <modules>
+        <module>WhAPI</module>
+        <module>WhBackend</module>
+    </modules>
+
+    <scm>
+        <connection>scm:svn:https://exportoverview.googlecode.com/svn/trunk/trunk/version2</connection>
+        <developerConnection>scm:svn:https://exportoverview.googlecode.com/svn/trunk/trunk/version2
+        </developerConnection>
+        <url>https://exportoverview.googlecode.com/svn/trunk/trunk/version2</url>
+    </scm>
+
+    <!--<organization>-->
+    <!--<name>MaIRosoft, s. r. o.</name>-->
+    <!--<url>http://ligas.net16.net</url>-->
+    <!--</organization>-->
+
+    <properties>
+        <spring-version>3.1.0.RELEASE</spring-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--<issueManagement>-->
+    <!--<system>Jira</system>-->
+    <!--<url></url>-->
+    <!--</issueManagement>-->
+    <developers>
+        <developer>
+            <id>miroslav.ligas</id>
+            <name>Miroslav Ligas</name>
+            <email>miroslav.ligas@google.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.0-api</artifactId>
+                <version>1.0.0.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>3.3.0.GA</version>
+                <scope>compile</scope>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-api</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.5</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.16</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8.2</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <finalName>${pom.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <scmCommentPrefix>Release management:</scmCommentPrefix>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>com.springsource.repository.bundles.release
+            </id>
+            <name>SpringSource Enterprise Bundle Repository -
+                SpringSource Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/release
+            </url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+        </repository>
+        <repository>
+            <id>com.springsource.repository.bundles.external
+            </id>
+            <name>SpringSource Enterprise Bundle Repository -
+                External Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/external
+            </url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+        </repository>
+        <repository>
+            <id>com.springsource.repository.libraries.release
+            </id>
+            <name>SpringSource Enterprise Bundle Repository -
+                SpringSource Library Releases</name>
+            <url>http://repository.springsource.com/maven/libraries/release
+            </url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+        </repository>
+        <repository>
+            <id>com.springsource.repository.libraries.external
+            </id>
+            <name>SpringSource Enterprise Bundle Repository -
+                External Library Releases</name>
+            <url>http://repository.springsource.com/maven/libraries/external
+            </url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
+</project>
