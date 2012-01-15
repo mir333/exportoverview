@@ -20,7 +20,7 @@ public class WarehouseItem extends BaseEntity<Long> {
     private int productCount;
 
     @ManyToOne
-    private Products productItem;
+    private Product productItem;
 
     @ManyToOne
     private Warehouse warehouse;
@@ -42,11 +42,11 @@ public class WarehouseItem extends BaseEntity<Long> {
         this.productCount = productCount;
     }
 
-    public Products getProductItem() {
+    public Product getProductItem() {
         return productItem;
     }
 
-    public void setProductItem(Products productItem) {
+    public void setProductItem(Product productItem) {
         this.productItem = productItem;
     }
 

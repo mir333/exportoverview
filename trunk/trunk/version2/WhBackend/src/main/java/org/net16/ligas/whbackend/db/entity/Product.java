@@ -1,20 +1,16 @@
 package org.net16.ligas.whbackend.db.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
  * @author Miroslav Ligas <miroslav.ligas@gmail.com>
  */
 @Entity
-@Table(name="PRODUCTS")
-public class Products extends BaseEntity<Long>{
+@Table(name="PRODUCT")
+public class Product extends BaseEntity<Long>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -32,6 +28,13 @@ public class Products extends BaseEntity<Long>{
     private String description;
 
     private boolean archived;
+
+    @ManyToOne
+    private ProductCategory productCategory;
+
+    @OneToMany(mappedBy = "productItem",fetch = FetchType.LAZY)
+    private List<WarehouseItem> warehouseItems;
+
 
     @Override
     public Long getId() {
@@ -80,5 +83,21 @@ public class Products extends BaseEntity<Long>{
 
     public void setArchived(boolean archived) {
         this.archived = archived;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public List<WarehouseItem> getWarehouseItems() {
+        return warehouseItems;
+    }
+
+    public void setWarehouseItems(List<WarehouseItem> warehouseItems) {
+        this.warehouseItems = warehouseItems;
     }
 }
